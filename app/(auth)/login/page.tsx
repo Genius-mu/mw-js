@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Card, Form, Input, Button, Alert, Divider } from "antd";
+import { Card, Form, Input, Button, Divider } from "antd";
 import { MailOutlined, LockOutlined, UserOutlined, RocketOutlined } from "@ant-design/icons";
 import { useLearning } from "@/context/LearningContext";
 
@@ -35,41 +35,41 @@ export default function LoginPage() {
 
   return (
     <Card
-      className={`shadow-2xl border ${
-        isDark ? "bg-slate-900 border-slate-800" : "bg-white border-slate-200"
+      className={`shadow-lg border ${
+        isDark ? "bg-[#241909] border-[#755C1B]" : "bg-white border-[#D7BE82]"
       }`}
       title={
         <div className="text-center py-2">
-          <h2 className="text-xl font-bold m-0">Student Sign In</h2>
-          <p className="text-xs text-slate-400 font-normal m-0 mt-1">Access your 100+ Days JS Learning Dashboard</p>
+          <h2 className="text-xl font-bold m-0 text-[#00F6ED]">Student Sign In</h2>
+          <p className="text-xs text-[#D7BE82] font-normal m-0 mt-1">Access your 100+ Days JS Learning Dashboard</p>
         </div>
       }
     >
       <Form name="login_form" layout="vertical" onFinish={onFinish} requiredMark={false} size="large">
         <Form.Item
           name="email"
-          label={<span className="text-xs font-semibold">Email Address</span>}
+          label={<span className="text-xs font-semibold text-[#D7BE82]">Email Address</span>}
           rules={[
             { required: true, message: "Please input your email address!" },
             { type: "email", message: "Please enter a valid email address!" }
           ]}
         >
-          <Input prefix={<MailOutlined className="text-slate-400" />} placeholder="student@example.com" />
+          <Input prefix={<MailOutlined className="text-[#755C1B]" />} placeholder="student@example.com" />
         </Form.Item>
 
         <Form.Item
           name="name"
-          label={<span className="text-xs font-semibold">Your Name (Optional)</span>}
+          label={<span className="text-xs font-semibold text-[#D7BE82]">Your Name (Optional)</span>}
         >
-          <Input prefix={<UserOutlined className="text-slate-400" />} placeholder="Alex Johnson" />
+          <Input prefix={<UserOutlined className="text-[#755C1B]" />} placeholder="Alex Johnson" />
         </Form.Item>
 
         <Form.Item
           name="password"
-          label={<span className="text-xs font-semibold">Password</span>}
+          label={<span className="text-xs font-semibold text-[#D7BE82]">Password</span>}
           rules={[{ required: true, message: "Please input your password!" }]}
         >
-          <Input.Password prefix={<LockOutlined className="text-slate-400" />} placeholder="••••••••" />
+          <Input.Password prefix={<LockOutlined className="text-[#755C1B]" />} placeholder="••••••••" />
         </Form.Item>
 
         <Form.Item className="mb-2">
@@ -79,14 +79,14 @@ export default function LoginPage() {
             loading={loading}
             block
             icon={<RocketOutlined />}
-            className="bg-amber-500 hover:bg-amber-600 border-none font-semibold h-11"
+            className="bg-[#00F6ED] text-[#0F1108] hover:bg-[#33F8F0] border-none font-bold h-11"
           >
             Sign In & Continue Learning
           </Button>
         </Form.Item>
       </Form>
 
-      <Divider plain className="text-xs text-slate-400 my-4">
+      <Divider plain className="text-xs text-[#755C1B] my-4">
         OR
       </Divider>
 
@@ -95,15 +95,13 @@ export default function LoginPage() {
         size="large"
         onClick={handleDemoLogin}
         loading={loading}
-        className={`font-semibold h-11 ${
-          isDark ? "bg-slate-800 text-slate-200 border-slate-700 hover:border-slate-500" : "bg-slate-100 text-slate-800 border-slate-300 hover:border-slate-400"
-        }`}
+        className="font-bold h-11 bg-[#7A4419] text-[#D7BE82] border-none hover:bg-[#755C1B]"
       >
         ⚡ Instant Quick Demo Login
       </Button>
 
-      <div className="text-center mt-6 text-xs text-slate-400">
-        Back to <Link href="/" className="text-amber-500 font-semibold no-underline">Home Landing Page</Link>
+      <div className="text-center mt-6 text-xs text-[#755C1B]">
+        Back to <Link href="/" className="text-[#00F6ED] font-semibold no-underline">Home Landing Page</Link>
       </div>
     </Card>
   );

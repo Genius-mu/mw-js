@@ -35,7 +35,7 @@ import {
   SyncOutlined,
   MenuOutlined
 } from "@ant-design/icons";
-import { MODULES_DATA, CURRICULUM_DATA, LessonDay } from "@/lib/curriculum";
+import { MODULES_DATA } from "@/lib/curriculum";
 import { useLearning } from "@/context/LearningContext";
 
 const { Header, Sider, Content } = Layout;
@@ -98,7 +98,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
   const menuItems = filteredModules.map((module) => ({
     key: module.id,
     icon: getModuleIcon(module.icon),
-    label: <span className="font-semibold text-xs uppercase tracking-wider">{module.title}</span>,
+    label: <span className="font-semibold text-xs uppercase tracking-wider text-[#D7BE82]">{module.title}</span>,
     children: module.days.map((day) => {
       const isCompleted = completedDays.includes(day.id);
       const isCurrent = day.id === currentDayId;
@@ -106,15 +106,15 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
       return {
         key: `/learn/day/${day.id}`,
         icon: isCompleted ? (
-          <CheckCircleFilled className="text-emerald-500 text-sm" />
+          <CheckCircleFilled className="text-[#00F6ED] text-sm" />
         ) : isCurrent ? (
-          <PlayCircleOutlined className="text-amber-500 animate-pulse text-sm" />
+          <PlayCircleOutlined className="text-[#00F6ED] text-sm" />
         ) : (
-          <span className="text-xs font-bold text-slate-400">{day.day}</span>
+          <span className="text-xs font-bold text-[#755C1B]">{day.day}</span>
         ),
         label: (
           <div className="flex items-center justify-between text-xs py-1">
-            <span className={`truncate ${isCurrent ? "font-bold text-amber-500" : ""}`}>
+            <span className={`truncate ${isCurrent ? "font-bold text-[#00F6ED]" : "text-[#D7BE82]"}`}>
               {day.title}
             </span>
           </div>
@@ -133,8 +133,8 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
       key: "user-info",
       label: (
         <div className="px-2 py-1">
-          <div className="font-bold text-sm">{user?.name || "Student"}</div>
-          <div className="text-xs text-slate-400">{user?.email || "student@example.com"}</div>
+          <div className="font-bold text-sm text-[#0F1108]">{user?.name || "Student"}</div>
+          <div className="text-xs text-[#755C1B]">{user?.email || "student@example.com"}</div>
         </div>
       )
     },
@@ -147,8 +147,8 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
     },
     {
       key: "logout",
-      icon: <LogoutOutlined className="text-red-500" />,
-      label: <span className="text-red-500">Sign Out</span>,
+      icon: <LogoutOutlined className="text-[#400406]" />,
+      label: <span className="text-[#400406] font-bold">Sign Out</span>,
       onClick: () => {
         logout();
         router.push("/");
@@ -157,33 +157,33 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
   ];
 
   const SiderContent = (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full bg-[#0F1108]">
       {/* Sider Header */}
-      <div className="p-4 border-b border-slate-200 dark:border-slate-800">
+      <div className="p-4 border-b border-[#755C1B]">
         <Link href="/" className="flex items-center gap-2.5 no-underline mb-4">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 via-orange-500 to-yellow-400 flex items-center justify-center text-white text-lg font-bold shadow-md shadow-amber-500/20">
+          <div className="w-9 h-9 rounded-xl bg-[#7A4419] text-[#D7BE82] flex items-center justify-center text-lg font-bold">
             ⚡
           </div>
           {!collapsed && (
             <div>
-              <div className="font-extrabold text-base tracking-tight leading-none text-slate-900 dark:text-white">
-                JS Learning <span className="text-amber-500">Hub</span>
+              <div className="font-extrabold text-base tracking-tight leading-none text-[#D7BE82]">
+                JS Learning <span className="text-[#00F6ED]">Hub</span>
               </div>
-              <p className="text-[10px] text-slate-400 m-0 font-medium tracking-wide">100+ DAYS CHALLENGE</p>
+              <p className="text-[10px] text-[#755C1B] m-0 font-medium tracking-wide">100+ DAYS CHALLENGE</p>
             </div>
           )}
         </Link>
 
         {!collapsed && (
-          <div className="bg-slate-100 dark:bg-slate-900/80 p-3 rounded-xl border border-slate-200 dark:border-slate-800 space-y-2">
+          <div className="bg-[#241909] p-3 rounded-xl border border-[#755C1B] space-y-2">
             <div className="flex items-center justify-between text-xs font-semibold">
-              <span className="text-slate-500 dark:text-slate-400">Course Completion</span>
-              <span className="text-amber-500">{progressPercent}%</span>
+              <span className="text-[#D7BE82]">Course Completion</span>
+              <span className="text-[#00F6ED] font-bold">{progressPercent}%</span>
             </div>
-            <Progress percent={progressPercent} strokeColor="#f59e0b" showInfo={false} size="small" />
-            <div className="text-[11px] text-slate-400 flex justify-between">
+            <Progress percent={progressPercent} strokeColor="#00F6ED" showInfo={false} size="small" />
+            <div className="text-[11px] text-[#D7BE82] flex justify-between">
               <span>{completedCount} of {totalDays} completed</span>
-              <span className="text-emerald-500 font-medium">Keep going!</span>
+              <span className="text-[#00F6ED] font-medium">Keep going!</span>
             </div>
           </div>
         )}
@@ -191,15 +191,15 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
 
       {/* Search Input */}
       {!collapsed && (
-        <div className="p-3 border-b border-slate-200 dark:border-slate-800">
+        <div className="p-3 border-b border-[#755C1B]">
           <Input
             placeholder="Search chapters..."
-            prefix={<SearchOutlined className="text-slate-400" />}
+            prefix={<SearchOutlined className="text-[#755C1B]" />}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             allowClear
             size="small"
-            className="rounded-lg"
+            className="rounded-lg bg-[#241909] text-[#D7BE82] border-[#755C1B]"
           />
         </div>
       )}
@@ -209,7 +209,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
         <Menu
           mode="inline"
           selectedKeys={[`/learn/day/${currentDayId}`]}
-          defaultOpenKeys={[MODULES_DATA[0].id, MODULES_DATA[1].id, MODULES_DATA[2].id]}
+          defaultOpenKeys={["basics-data-types", "arrays-logic", "functions-scope"]}
           items={menuItems}
           onClick={handleMenuClick}
           className="border-none bg-transparent"
@@ -219,15 +219,15 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
   );
 
   return (
-    <Layout className="min-h-screen">
+    <Layout className="min-h-screen bg-[#0F1108]">
       {/* Desktop Sider */}
       <Sider
         collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
         width={320}
-        theme={isDark ? "dark" : "light"}
-        className="hidden md:block border-r border-slate-200 dark:border-slate-800 shadow-sm"
+        theme="dark"
+        className="hidden md:block border-r border-[#755C1B]"
         style={{
           position: "sticky",
           top: 0,
@@ -250,51 +250,51 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
         {SiderContent}
       </Drawer>
 
-      <Layout className="flex-1 flex flex-col min-w-0">
+      <Layout className="flex-1 flex flex-col min-w-0 bg-[#0F1108]">
         {/* Dashboard Top Header */}
         <Header
-          className={`sticky top-0 z-40 px-4 md:px-6 h-16 flex items-center justify-between border-b transition-colors ${
-            isDark ? "bg-slate-900/90 border-slate-800" : "bg-white/90 border-slate-200"
-          } backdrop-blur-md`}
+          className={`sticky top-0 z-40 px-4 md:px-6 h-16 flex items-center justify-between border-b ${
+            isDark ? "bg-[#241909] border-[#755C1B]" : "bg-[#D7BE82] border-[#7A4419]"
+          }`}
         >
           <div className="flex items-center gap-3">
             <Button
               type="text"
               icon={<MenuOutlined />}
               onClick={() => setMobileDrawerOpen(true)}
-              className="md:hidden"
+              className="md:hidden text-[#D7BE82]"
             />
             <Button
               type="text"
               icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
               onClick={() => setCollapsed(!collapsed)}
-              className="hidden md:flex items-center"
+              className="hidden md:flex items-center text-[#D7BE82]"
             />
-            <div className="hidden sm:flex items-center gap-2 text-xs font-semibold text-slate-400">
-              <Link href="/" className="hover:text-amber-500 no-underline text-slate-400">Home</Link>
-              <span>/</span>
-              <span className="text-slate-800 dark:text-slate-200">Learn Dashboard</span>
-              <span>/</span>
-              <Tag color="amber" className="font-semibold m-0">Day {currentDayId}</Tag>
+            <div className="hidden sm:flex items-center gap-2 text-xs font-semibold">
+              <Link href="/" className="no-underline text-[#D7BE82] hover:text-[#00F6ED]">Home</Link>
+              <span className="text-[#755C1B]">/</span>
+              <span className="text-[#00F6ED]">Learn Dashboard</span>
+              <span className="text-[#755C1B]">/</span>
+              <Tag color="#7A4419" className="font-semibold m-0 text-[#D7BE82] border-none">Day {currentDayId}</Tag>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
             <Tooltip title={`Switch to ${isDark ? "Light" : "Dark"} Mode`}>
-              <div className="flex items-center gap-2 text-xs font-semibold text-slate-400">
-                <BulbOutlined className={isDark ? "text-amber-400" : "text-slate-500"} />
+              <div className="flex items-center gap-2 text-xs font-semibold">
+                <BulbOutlined className={isDark ? "text-[#00F6ED]" : "text-[#7A4419]"} />
                 <Switch checked={isDark} onChange={toggleTheme} size="small" />
               </div>
             </Tooltip>
 
             <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
               <div className="flex items-center gap-2.5 cursor-pointer hover:opacity-80 transition-opacity">
-                <Avatar className="bg-amber-500 font-bold" icon={<UserOutlined />}>
+                <Avatar className="bg-[#7A4419] text-[#D7BE82] font-bold" icon={<UserOutlined />}>
                   {user?.name?.[0]?.toUpperCase() || "S"}
                 </Avatar>
                 <div className="hidden sm:block text-left">
-                  <div className="text-xs font-bold leading-tight">{user?.name || "Student"}</div>
-                  <div className="text-[10px] text-slate-400 leading-tight">Student</div>
+                  <div className="text-xs font-bold leading-tight text-[#D7BE82]">{user?.name || "Student"}</div>
+                  <div className="text-[10px] text-[#00F6ED] leading-tight">Student</div>
                 </div>
               </div>
             </Dropdown>

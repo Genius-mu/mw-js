@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+:root {
+  --ebony: #515a47;
+  --soft-fawn: #d7be82;
+  --saddle-brown: #7a4419;
+  --olive-bark: #755c1b;
+  --rich-mahogany: #400406;
+  --pitch-black: #0f1108;
+  --dark-coffee: #241909;
+  --neon-ice: #00f6ed;
+}
+
 @layer utilities {
   .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
@@ -9,11 +20,11 @@
     background: transparent;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(156, 163, 175, 0.4);
+    background: #515a47;
     border-radius: 9999px;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgba(156, 163, 175, 0.7);
+    background: #755c1b;
   }
 }
 
@@ -22,23 +33,30 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: #0f1108;
+  color: #d7be82;
 }
 
-/* Ant Design Menu Overrides for Dark Mode integration */
+/* Ant Design Menu & Layout Overrides - Flat Solid Theme */
 .dark .ant-layout-sider {
-  background-color: #0f172a !important;
+  background-color: #0f1108 !important;
 }
 
 .dark .ant-menu {
   background-color: transparent !important;
-  color: #94a3b8 !important;
+  color: #d7be82 !important;
 }
 
 .dark .ant-menu-item-selected {
-  background-color: rgba(245, 158, 11, 0.15) !important;
-  color: #f59e0b !important;
+  background-color: #241909 !important;
+  color: #00f6ed !important;
 }
 
 .dark .ant-menu-submenu-title {
-  color: #cbd5e1 !important;
+  color: #d7be82 !important;
+}
+
+/* Remove all unwanted blur and gradient overlays */
+* {
+  background-image: none !important;
 }
