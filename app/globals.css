@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(156, 163, 175, 0.4);
+    border-radius: 9999px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(156, 163, 175, 0.7);
+  }
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Ant Design Menu Overrides for Dark Mode integration */
+.dark .ant-layout-sider {
+  background-color: #0f172a !important;
+}
+
+.dark .ant-menu {
+  background-color: transparent !important;
+  color: #94a3b8 !important;
+}
+
+.dark .ant-menu-item-selected {
+  background-color: rgba(245, 158, 11, 0.15) !important;
+  color: #f59e0b !important;
+}
+
+.dark .ant-menu-submenu-title {
+  color: #cbd5e1 !important;
+}
