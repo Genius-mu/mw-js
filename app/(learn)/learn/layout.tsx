@@ -98,7 +98,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
   const menuItems = filteredModules.map((module) => ({
     key: module.id,
     icon: getModuleIcon(module.icon),
-    label: <span className="font-semibold text-xs uppercase tracking-wider text-[#D7BE82]">{module.title}</span>,
+    label: <span className="font-semibold text-xs uppercase tracking-wider text-white">{module.title}</span>,
     children: module.days.map((day) => {
       const isCompleted = completedDays.includes(day.id);
       const isCurrent = day.id === currentDayId;
@@ -106,15 +106,15 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
       return {
         key: `/learn/day/${day.id}`,
         icon: isCompleted ? (
-          <CheckCircleFilled className="text-[#E5C989] text-sm" />
+          <CheckCircleFilled className="text-[#ff63f9] text-sm" />
         ) : isCurrent ? (
-          <PlayCircleOutlined className="text-[#E5C989] text-sm" />
+          <PlayCircleOutlined className="text-[#ff63f9] text-sm" />
         ) : (
-          <span className="text-xs font-bold text-[#755C1B]">{day.day}</span>
+          <span className="text-xs font-bold text-white/40">{day.day}</span>
         ),
         label: (
           <div className="flex items-center justify-between text-xs py-1">
-            <span className={`truncate ${isCurrent ? "font-bold text-[#E5C989]" : "text-[#D7BE82]"}`}>
+            <span className={`truncate ${isCurrent ? "font-bold text-[#ff63f9]" : "text-white"}`}>
               {day.title}
             </span>
           </div>
@@ -133,8 +133,8 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
       key: "user-info",
       label: (
         <div className="px-2 py-1">
-          <div className="font-bold text-sm text-[#1A120B]">{user?.name || "Student"}</div>
-          <div className="text-xs text-[#755C1B]">{user?.email || "student@example.com"}</div>
+          <div className="font-bold text-sm text-black dark:text-white">{user?.name || "Student"}</div>
+          <div className="text-xs text-slate-400">{user?.email || "student@example.com"}</div>
         </div>
       )
     },
@@ -147,8 +147,8 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
     },
     {
       key: "logout",
-      icon: <LogoutOutlined className="text-[#400406]" />,
-      label: <span className="text-[#400406] font-bold">Sign Out</span>,
+      icon: <LogoutOutlined className="text-[#ff63f9]" />,
+      label: <span className="text-[#ff63f9] font-bold">Sign Out</span>,
       onClick: () => {
         logout();
         router.push("/");
@@ -157,33 +157,33 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
   ];
 
   const SiderContent = (
-    <div className="flex flex-col h-full bg-[#1A120B]">
+    <div className="flex flex-col h-full bg-[#000000]">
       {/* Sider Header */}
-      <div className="p-4 border-b border-[#755C1B]">
+      <div className="p-4 border-b border-[#ffffff15]">
         <Link href="/" className="flex items-center gap-2.5 no-underline mb-4">
-          <div className="w-9 h-9 rounded-xl bg-[#7A4419] text-[#D7BE82] flex items-center justify-center text-lg font-bold border border-[#755C1B]">
+          <div className="w-9 h-9 rounded-lg bg-[#ff63f9] text-black flex items-center justify-center text-lg font-bold">
             ⚡
           </div>
           {!collapsed && (
             <div>
-              <div className="font-extrabold text-base tracking-tight leading-none text-[#D7BE82]">
-                JS Learning <span className="text-[#E5C989]">Hub</span>
+              <div className="font-extrabold text-base tracking-tight leading-none text-white">
+                JS Learning <span className="text-[#ff63f9]">Hub</span>
               </div>
-              <p className="text-[10px] text-[#755C1B] m-0 font-medium tracking-wide">100+ DAYS CHALLENGE</p>
+              <p className="text-[10px] text-white/50 m-0 font-medium tracking-wide">100+ DAYS CHALLENGE</p>
             </div>
           )}
         </Link>
 
         {!collapsed && (
-          <div className="bg-[#2B1D0E] p-3 rounded-xl border border-[#755C1B] space-y-2">
+          <div className="bg-[#211327] p-3 rounded-[19.2px] border border-[#ffffff15] space-y-2">
             <div className="flex items-center justify-between text-xs font-semibold">
-              <span className="text-[#D7BE82]">Course Completion</span>
-              <span className="text-[#E5C989] font-bold">{progressPercent}%</span>
+              <span className="text-white">Course Completion</span>
+              <span className="text-[#ff63f9] font-bold">{progressPercent}%</span>
             </div>
-            <Progress percent={progressPercent} strokeColor="#E5C989" showInfo={false} size="small" />
-            <div className="text-[11px] text-[#D7BE82] flex justify-between">
+            <Progress percent={progressPercent} strokeColor="#ff63f9" showInfo={false} size="small" />
+            <div className="text-[11px] text-white/70 flex justify-between">
               <span>{completedCount} of {totalDays} completed</span>
-              <span className="text-[#E5C989] font-medium">Keep going!</span>
+              <span className="text-[#ff63f9] font-medium">Keep going!</span>
             </div>
           </div>
         )}
@@ -191,15 +191,15 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
 
       {/* Search Input */}
       {!collapsed && (
-        <div className="p-3 border-b border-[#755C1B]">
+        <div className="p-3 border-b border-[#ffffff15]">
           <Input
             placeholder="Search chapters..."
-            prefix={<SearchOutlined className="text-[#755C1B]" />}
+            prefix={<SearchOutlined className="text-white/40" />}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             allowClear
             size="small"
-            className="rounded-lg bg-[#2B1D0E] text-[#D7BE82] border-[#755C1B]"
+            className="rounded-lg bg-[#211327] text-white border-[#ffffff15]"
           />
         </div>
       )}
@@ -219,7 +219,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
   );
 
   return (
-    <Layout className="min-h-screen bg-[#1A120B]">
+    <Layout className="min-h-screen bg-[#000000]">
       {/* Desktop Sider */}
       <Sider
         collapsible
@@ -227,7 +227,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
         onCollapse={(value) => setCollapsed(value)}
         width={320}
         theme="dark"
-        className="hidden md:block border-r border-[#755C1B]"
+        className="hidden md:block border-r border-[#ffffff15]"
         style={{
           position: "sticky",
           top: 0,
@@ -250,11 +250,11 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
         {SiderContent}
       </Drawer>
 
-      <Layout className="flex-1 flex flex-col min-w-0 bg-[#1A120B]">
+      <Layout className="flex-1 flex flex-col min-w-0 bg-[#000000]">
         {/* Dashboard Top Header */}
         <Header
           className={`sticky top-0 z-40 px-4 md:px-6 h-16 flex items-center justify-between border-b ${
-            isDark ? "bg-[#2B1D0E] border-[#755C1B]" : "bg-[#D7BE82] border-[#7A4419]"
+            isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"
           }`}
         >
           <div className="flex items-center gap-3">
@@ -262,39 +262,39 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
               type="text"
               icon={<MenuOutlined />}
               onClick={() => setMobileDrawerOpen(true)}
-              className="md:hidden text-[#D7BE82]"
+              className="md:hidden text-white"
             />
             <Button
               type="text"
               icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
               onClick={() => setCollapsed(!collapsed)}
-              className="hidden md:flex items-center text-[#D7BE82]"
+              className="hidden md:flex items-center text-white"
             />
             <div className="hidden sm:flex items-center gap-2 text-xs font-semibold">
-              <Link href="/" className="no-underline text-[#D7BE82] hover:text-[#E5C989]">Home</Link>
-              <span className="text-[#755C1B]">/</span>
-              <span className="text-[#E5C989]">Learn Dashboard</span>
-              <span className="text-[#755C1B]">/</span>
-              <Tag color="#7A4419" className="font-semibold m-0 text-[#D7BE82] border-none">Day {currentDayId}</Tag>
+              <Link href="/" className="no-underline text-white hover:text-[#ff63f9]">Home</Link>
+              <span className="text-white/30">/</span>
+              <span className="text-[#ff63f9]">Learn Dashboard</span>
+              <span className="text-white/30">/</span>
+              <Tag color="#ff63f9" className="font-semibold m-0 text-black border-none">Day {currentDayId}</Tag>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
             <Tooltip title={`Switch to ${isDark ? "Light" : "Dark"} Mode`}>
               <div className="flex items-center gap-2 text-xs font-semibold">
-                <BulbOutlined className={isDark ? "text-[#E5C989]" : "text-[#7A4419]"} />
+                <BulbOutlined className={isDark ? "text-[#ff63f9]" : "text-[#9333ea]"} />
                 <Switch checked={isDark} onChange={toggleTheme} size="small" />
               </div>
             </Tooltip>
 
             <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
               <div className="flex items-center gap-2.5 cursor-pointer hover:opacity-80 transition-opacity">
-                <Avatar className="bg-[#7A4419] text-[#D7BE82] font-bold" icon={<UserOutlined />}>
+                <Avatar className="bg-[#ff63f9] text-black font-bold" icon={<UserOutlined />}>
                   {user?.name?.[0]?.toUpperCase() || "S"}
                 </Avatar>
                 <div className="hidden sm:block text-left">
-                  <div className="text-xs font-bold leading-tight text-[#D7BE82]">{user?.name || "Student"}</div>
-                  <div className="text-[10px] text-[#E5C989] leading-tight">Student</div>
+                  <div className="text-xs font-bold leading-tight text-white">{user?.name || "Student"}</div>
+                  <div className="text-[10px] text-[#ff63f9] leading-tight">Student</div>
                 </div>
               </div>
             </Dropdown>

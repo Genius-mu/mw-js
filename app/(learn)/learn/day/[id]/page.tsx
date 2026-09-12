@@ -185,20 +185,20 @@ export default function DayLearningPage() {
 
   return (
     <div className="space-y-6 pb-12">
-      {/* Header Banner - Pure Brown Palette */}
-      <div className={`p-6 rounded-2xl border ${isDark ? "bg-[#2B1D0E] border-[#755C1B]" : "bg-white border-[#D7BE82]"} shadow-sm`}>
+      {/* Header Banner - Space Purple Theme */}
+      <div className={`p-6 rounded-[19.2px] border ${isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"}`}>
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <Tag color="#7A4419" className="font-semibold m-0 text-[#D7BE82] border-none">{lesson.module}</Tag>
-              <Tag color={isCompleted ? "#755C1B" : "#400406"} className="font-semibold m-0 border-none text-[#E5C989]">
-                {isCompleted ? <span className="flex items-center gap-1"><CheckCircleFilled /> Completed</span> : "In Progress"}
+              <Tag color="#ff63f9" className="font-semibold m-0 text-black border-none">{lesson.module}</Tag>
+              <Tag color={isCompleted ? "#ff63f9" : "#211327"} className="font-semibold m-0 border border-[#ffffff25] text-white">
+                {isCompleted ? <span className="flex items-center gap-1 text-black"><CheckCircleFilled /> Completed</span> : "In Progress"}
               </Tag>
             </div>
-            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight m-0 text-[#E5C989]">
+            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight m-0 text-[#ff63f9]">
               Day {lesson.day}: {lesson.title}
             </h1>
-            <p className={`text-sm mt-1 m-0 ${isDark ? "text-[#D7BE82]" : "text-[#1A120B]"}`}>
+            <p className={`text-sm mt-1 m-0 ${isDark ? "text-white/80" : "text-[#211327]"}`}>
               {lesson.description}
             </p>
           </div>
@@ -207,9 +207,9 @@ export default function DayLearningPage() {
             <Button
               type={isCompleted ? "default" : "primary"}
               size="large"
-              icon={isCompleted ? <CheckCircleFilled className="text-[#E5C989]" /> : <CheckCircleOutlined />}
+              icon={isCompleted ? <CheckCircleFilled className="text-[#ff63f9]" /> : <CheckCircleOutlined />}
               onClick={handleToggleComplete}
-              className={!isCompleted ? "bg-[#7A4419] text-[#D7BE82] hover:bg-[#93521E] border-none font-bold" : "font-bold border-[#755C1B] text-[#D7BE82]"}
+              className={!isCompleted ? "bg-white text-black hover:bg-[#ff63f9] hover:text-black border-none font-bold rounded-md" : "font-bold border-[#ffffff25] text-white rounded-md"}
             >
               {isCompleted ? "Marked Completed" : "Mark as Completed"}
             </Button>
@@ -221,10 +221,7 @@ export default function DayLearningPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* YouTube Video Player (Col-span 2) */}
         <div className="lg:col-span-2 space-y-4">
-          <Card
-            className={`border shadow-sm overflow-hidden ${isDark ? "bg-[#2B1D0E] border-[#755C1B]" : "bg-white border-[#D7BE82]"}`}
-            bodyStyle={{ padding: 0 }}
-          >
+          <div className={`rounded-[19.2px] border overflow-hidden ${isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"}`}>
             {/* Embed Video Iframe */}
             <div className="relative w-full aspect-video bg-black">
               <iframe
@@ -237,9 +234,9 @@ export default function DayLearningPage() {
             </div>
 
             {/* Video Control & Timestamp Footer */}
-            <div className="p-4 flex flex-wrap items-center justify-between gap-3 bg-[#1A120B] border-t border-[#755C1B] text-xs text-[#D7BE82]">
+            <div className="p-4 flex flex-wrap items-center justify-between gap-3 bg-[#000000] border-t border-[#ffffff15] text-xs text-white">
               <div className="flex items-center gap-2 font-semibold">
-                <FieldTimeOutlined className="text-[#E5C989] text-sm" />
+                <FieldTimeOutlined className="text-[#ff63f9] text-sm" />
                 <span>Timestamp: {formatTime(lesson.videoStartTime)} - {formatTime(lesson.videoEndTime)} ({durationSeconds} seconds)</span>
               </div>
 
@@ -247,83 +244,81 @@ export default function DayLearningPage() {
                 href={`https://www.youtube.com/watch?v=${YOUTUBE_VIDEO_ID}&t=${lesson.videoStartTime}s`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="no-underline text-[#E5C989] hover:underline font-bold flex items-center gap-1"
+                className="no-underline text-[#ff63f9] hover:underline font-bold flex items-center gap-1"
               >
                 Watch on YouTube <ExportOutlined />
               </a>
             </div>
-          </Card>
+          </div>
         </div>
 
         {/* Quick Lesson Specs Sidebar (Col-span 1) */}
         <div className="space-y-4">
-          <Card
-            className={`border shadow-sm ${isDark ? "bg-[#2B1D0E] border-[#755C1B]" : "bg-white border-[#D7BE82]"}`}
-            title={<span className="font-bold text-sm flex items-center gap-2 text-[#E5C989]"><BookOutlined /> Lesson Specs</span>}
-          >
+          <div className={`p-6 rounded-[19.2px] border ${isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"}`}>
+            <span className="font-bold text-sm flex items-center gap-2 text-[#ff63f9] mb-4"><BookOutlined /> Lesson Specs</span>
             <div className="space-y-3 text-xs">
               <div>
-                <span className="text-[#755C1B] font-semibold">Lesson Concept:</span>
-                <div className="font-bold text-sm text-[#D7BE82] mt-0.5">{lesson.title}</div>
+                <span className="text-white/50 font-semibold">Lesson Concept:</span>
+                <div className="font-bold text-sm text-white mt-0.5">{lesson.title}</div>
               </div>
 
               <div>
-                <span className="text-[#755C1B] font-semibold">Module Group:</span>
-                <div className="font-medium text-[#D7BE82] mt-0.5">{lesson.module}</div>
+                <span className="text-white/50 font-semibold">Module Group:</span>
+                <div className="font-medium text-white mt-0.5">{lesson.module}</div>
               </div>
 
               <div>
-                <span className="text-[#755C1B] font-semibold">Documentation Reference:</span>
+                <span className="text-white/50 font-semibold">Documentation Reference:</span>
                 <div className="mt-1">
                   <a
                     href={lesson.w3SchoolsLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="no-underline inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#7A4419] text-[#D7BE82] font-bold hover:bg-[#755C1B] transition-colors"
+                    className="no-underline inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#ff63f9]/20 text-[#ff63f9] font-bold hover:bg-[#ff63f9] hover:text-black transition-colors"
                   >
                     W3Schools Docs <ExportOutlined />
                   </a>
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-[#755C1B]">
+              <div className="pt-2 border-t border-[#ffffff15]">
                 <Button
                   block
                   type="primary"
                   icon={<RocketOutlined />}
                   onClick={handleNextDay}
-                  className="bg-[#7A4419] text-[#D7BE82] hover:bg-[#93521E] border-none font-bold h-10"
+                  className="bg-white text-black hover:bg-[#ff63f9] hover:text-black border-none font-bold h-10 rounded-md"
                 >
                   {dayId < totalDays ? "Complete & Go to Next Day" : "Claim Certificate 🎉"}
                 </Button>
               </div>
             </div>
-          </Card>
+          </div>
         </div>
       </div>
 
       {/* Tabs: Documentation, Interactive Code Practice & Personal Notes */}
-      <Card className={`border shadow-sm ${isDark ? "bg-[#2B1D0E] border-[#755C1B]" : "bg-white border-[#D7BE82]"}`}>
+      <div className={`p-6 rounded-[19.2px] border ${isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"}`}>
         <Tabs
           defaultActiveKey="docs"
           items={[
             {
               key: "docs",
               label: (
-                <span className="font-semibold text-sm flex items-center gap-2 text-[#D7BE82]">
-                  <BookOutlined className="text-[#E5C989]" /> W3Schools Documentation & Notes
+                <span className="font-semibold text-sm flex items-center gap-2 text-white">
+                  <BookOutlined className="text-[#ff63f9]" /> W3Schools Documentation & Notes
                 </span>
               ),
               children: (
                 <div className="space-y-6 pt-2">
                   {/* Summary Notes */}
                   <div>
-                    <h3 className="text-base font-bold mb-3 flex items-center gap-2 text-[#E5C989]">
+                    <h3 className="text-base font-bold mb-3 flex items-center gap-2 text-[#ff63f9]">
                       <BulbOutlined /> Key Concept Takeaways
                     </h3>
                     <ul className="space-y-2 text-sm list-disc pl-5">
                       {lesson.summaryNotes.map((note, i) => (
-                        <li key={i} className={isDark ? "text-[#D7BE82]" : "text-[#1A120B]"}>
+                        <li key={i} className={isDark ? "text-white" : "text-[#211327]"}>
                           {note}
                         </li>
                       ))}
@@ -333,19 +328,19 @@ export default function DayLearningPage() {
                   {/* Code Snippet Box */}
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-base font-bold m-0 flex items-center gap-2 text-[#E5C989]">
+                      <h3 className="text-base font-bold m-0 flex items-center gap-2 text-[#ff63f9]">
                         <CodeOutlined /> Syntax & Code Example
                       </h3>
                       <Button
                         size="small"
                         icon={<CopyOutlined />}
                         onClick={handleCopySnippet}
-                        className="text-xs font-medium bg-[#7A4419] text-[#D7BE82] border-none"
+                        className="text-xs font-medium bg-[#000000] text-white border border-[#ffffff25] rounded-md"
                       >
                         {copied ? "Copied!" : "Copy Snippet"}
                       </Button>
                     </div>
-                    <pre className="p-4 rounded-xl bg-[#1A120B] text-[#E5C989] font-mono text-sm overflow-x-auto border border-[#755C1B] leading-relaxed">
+                    <pre className="p-4 rounded-xl bg-[#000000] text-[#ff63f9] font-mono text-sm overflow-x-auto border border-[#ffffff15] leading-relaxed">
                       <code>{lesson.codeSnippet}</code>
                     </pre>
                   </div>
@@ -355,23 +350,23 @@ export default function DayLearningPage() {
                     type="info"
                     showIcon
                     icon={<BookOutlined />}
-                    message={<span className="font-bold text-[#1A120B]">Official W3Schools Documentation Link</span>}
+                    message={<span className="font-bold text-white">Official W3Schools Documentation Link</span>}
                     description={
                       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mt-1">
-                        <span className="text-xs text-[#1A120B]">
+                        <span className="text-xs text-white/80">
                           Deepen your knowledge by reading the full documentation, parameters, and browser compatibility on W3Schools.
                         </span>
                         <a
                           href={lesson.w3SchoolsLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="no-underline inline-flex items-center gap-1 px-4 py-1.5 rounded-lg bg-[#7A4419] text-[#D7BE82] font-bold text-xs hover:bg-[#755C1B] transition-colors shrink-0"
+                          className="no-underline inline-flex items-center gap-1 px-4 py-1.5 rounded-md bg-white text-black font-bold text-xs hover:bg-[#ff63f9] hover:text-black transition-colors shrink-0"
                         >
                           Open W3Schools Topic <ExportOutlined />
                         </a>
                       </div>
                     }
-                    className="bg-[#D7BE82] border-[#7A4419]"
+                    className="bg-[#000000] border-[#ffffff25]"
                   />
                 </div>
               )
@@ -379,8 +374,8 @@ export default function DayLearningPage() {
             {
               key: "sandbox",
               label: (
-                <span className="font-semibold text-sm flex items-center gap-2 text-[#D7BE82]">
-                  <CodeOutlined className="text-[#E5C989]" /> Interactive Exercise & Sandbox
+                <span className="font-semibold text-sm flex items-center gap-2 text-white">
+                  <CodeOutlined className="text-[#ff63f9]" /> Interactive Exercise & Sandbox
                 </span>
               ),
               children: (
@@ -390,9 +385,9 @@ export default function DayLearningPage() {
                     type="warning"
                     showIcon
                     icon={<TrophyOutlined />}
-                    message={<span className="font-bold text-[#D7BE82]">Micro-Exercise</span>}
-                    description={<p className="text-sm m-0 mt-1 text-[#D7BE82]">{lesson.exercise.prompt}</p>}
-                    className="bg-[#2B1D0E] border-[#755C1B]"
+                    message={<span className="font-bold text-white">Micro-Exercise</span>}
+                    description={<p className="text-sm m-0 mt-1 text-white/80">{lesson.exercise.prompt}</p>}
+                    className="bg-[#000000] border-[#ffffff15]"
                   />
 
                   {/* Code Textarea & Console Output Grid */}
@@ -400,16 +395,16 @@ export default function DayLearningPage() {
                     {/* Code Editor Area */}
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-[#D7BE82] flex items-center gap-1.5">
+                        <span className="text-xs font-bold text-white flex items-center gap-1.5">
                           <span>JavaScript Editor</span>
-                          <span className="text-[10px] text-[#E5C989] font-semibold bg-[#755C1B] px-2 py-0.5 rounded">Ctrl + Enter to run</span>
+                          <span className="text-[10px] text-[#ff63f9] font-semibold bg-[#ff63f9]/20 px-2 py-0.5 rounded">Ctrl + Enter to run</span>
                         </span>
                         <div className="flex items-center gap-2">
                           <Button
                             size="small"
                             icon={<ReloadOutlined />}
                             onClick={() => setUserCode(lesson.exercise.starterCode)}
-                            className="text-xs bg-[#7A4419] text-[#D7BE82] border-none"
+                            className="text-xs bg-[#000000] text-white border border-[#ffffff25] rounded-md"
                           >
                             Reset Code
                           </Button>
@@ -417,7 +412,7 @@ export default function DayLearningPage() {
                             size="small"
                             icon={<BulbOutlined />}
                             onClick={() => setShowHint(!showHint)}
-                            className="text-xs bg-[#7A4419] text-[#D7BE82] border-none"
+                            className="text-xs bg-[#000000] text-white border border-[#ffffff25] rounded-md"
                           >
                             {showHint ? "Hide Hint" : "Show Hint"}
                           </Button>
@@ -427,15 +422,15 @@ export default function DayLearningPage() {
                       <textarea
                         value={userCode}
                         onChange={(e) => setUserCode(e.target.value)}
-                        className="w-full h-56 p-3 rounded-xl bg-[#1A120B] text-[#E5C989] font-mono text-sm border border-[#755C1B] focus:outline-none focus:ring-2 focus:ring-[#E5C989] resize-none leading-relaxed"
+                        className="w-full h-56 p-3 rounded-xl bg-[#000000] text-[#ff63f9] font-mono text-sm border border-[#ffffff25] focus:outline-none focus:ring-2 focus:ring-[#ff63f9] resize-none leading-relaxed"
                         placeholder="Write your JavaScript code here..."
                       />
 
                       {showHint && (
                         <Alert
                           type="info"
-                          message={<span className="text-xs font-semibold text-[#D7BE82]">Hint: {lesson.exercise.hint}</span>}
-                          className="py-1 px-3 bg-[#2B1D0E] border-[#755C1B]"
+                          message={<span className="text-xs font-semibold text-white">Hint: {lesson.exercise.hint}</span>}
+                          className="py-1 px-3 bg-[#000000] border-[#ffffff25]"
                         />
                       )}
 
@@ -444,14 +439,14 @@ export default function DayLearningPage() {
                           type="primary"
                           icon={<PlayCircleOutlined />}
                           onClick={handleRunCode}
-                          className="bg-[#7A4419] text-[#D7BE82] hover:bg-[#93521E] border-none font-bold h-10 px-6"
+                          className="bg-white text-black hover:bg-[#ff63f9] hover:text-black border-none font-bold h-10 px-6 rounded-md"
                         >
                           Run Code & Test Output
                         </Button>
                         <Button
                           icon={<CodeOutlined />}
                           onClick={() => setSolutionModalOpen(true)}
-                          className="text-xs font-bold bg-[#755C1B] text-[#D7BE82] border-none"
+                          className="text-xs font-bold bg-[#000000] text-white border border-[#ffffff25] rounded-md"
                         >
                           View Solution
                         </Button>
@@ -460,20 +455,20 @@ export default function DayLearningPage() {
 
                     {/* Terminal Console Output */}
                     <div className="space-y-2">
-                      <span className="text-xs font-bold text-[#D7BE82]">Terminal Output (console.log)</span>
-                      <div className="w-full h-56 p-3 rounded-xl bg-[#1A120B] text-[#D7BE82] font-mono text-xs border border-[#755C1B] overflow-y-auto space-y-1">
+                      <span className="text-xs font-bold text-white">Terminal Output (console.log)</span>
+                      <div className="w-full h-56 p-3 rounded-xl bg-[#000000] text-white font-mono text-xs border border-[#ffffff25] overflow-y-auto space-y-1">
                         {consoleOutput.length === 0 ? (
-                          <span className="text-[#755C1B] italic">Click "Run Code" or press Ctrl+Enter to view console output here...</span>
+                          <span className="text-white/40 italic">Click "Run Code" or press Ctrl+Enter to view console output here...</span>
                         ) : (
                           consoleOutput.map((line, idx) => (
                             <div
                               key={idx}
                               className={
                                 line.startsWith("[ERROR]")
-                                  ? "text-[#400406] font-bold"
+                                  ? "text-red-400 font-bold"
                                   : line.startsWith("=>")
-                                  ? "text-[#755C1B] italic"
-                                  : "text-[#E5C989]"
+                                  ? "text-white/40 italic"
+                                  : "text-[#ff63f9]"
                               }
                             >
                               {line}
@@ -489,24 +484,24 @@ export default function DayLearningPage() {
             {
               key: "notes",
               label: (
-                <span className="font-semibold text-sm flex items-center gap-2 text-[#D7BE82]">
-                  <FileTextOutlined className="text-[#E5C989]" /> Personal Study Notes
+                <span className="font-semibold text-sm flex items-center gap-2 text-white">
+                  <FileTextOutlined className="text-[#ff63f9]" /> Personal Study Notes
                 </span>
               ),
               children: (
                 <div className="space-y-4 pt-2">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-base font-bold m-0 flex items-center gap-2 text-[#E5C989]">
+                      <h3 className="text-base font-bold m-0 flex items-center gap-2 text-[#ff63f9]">
                         <FileTextOutlined /> Personal Notes for Day {lesson.day}
                       </h3>
-                      <p className="text-xs text-[#755C1B] m-0">Write down key observations or code snippets. Saved to browser localStorage.</p>
+                      <p className="text-xs text-white/50 m-0">Write down key observations or code snippets. Saved to browser localStorage.</p>
                     </div>
                     <Button
                       type="primary"
                       icon={<SaveOutlined />}
                       onClick={handleSaveNote}
-                      className="bg-[#7A4419] text-[#D7BE82] hover:bg-[#755C1B] border-none font-bold text-xs"
+                      className="bg-white text-black hover:bg-[#ff63f9] hover:text-black border-none font-bold text-xs rounded-md"
                     >
                       {noteSaved ? "Saved!" : "Save Notes"}
                     </Button>
@@ -517,28 +512,28 @@ export default function DayLearningPage() {
                     value={noteText}
                     onChange={(e) => setNoteText(e.target.value)}
                     placeholder="Write your study notes here..."
-                    className="font-sans text-sm rounded-xl p-3 bg-[#1A120B] text-[#D7BE82] border-[#755C1B]"
+                    className="font-sans text-sm rounded-xl p-3 bg-[#000000] text-white border-[#ffffff25]"
                   />
                 </div>
               )
             }
           ]}
         />
-      </Card>
+      </div>
 
       {/* Navigation Footer */}
-      <div className={`p-4 rounded-xl border flex items-center justify-between gap-4 ${isDark ? "bg-[#2B1D0E] border-[#755C1B]" : "bg-white border-[#D7BE82]"}`}>
+      <div className={`p-4 rounded-[19.2px] border flex items-center justify-between gap-4 ${isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"}`}>
         <Button
           size="large"
           icon={<LeftOutlined />}
           disabled={dayId <= 1}
           onClick={handlePrevDay}
-          className="font-bold bg-[#755C1B] text-[#D7BE82] border-none disabled:opacity-40"
+          className="font-bold bg-[#000000] text-white border border-[#ffffff25] rounded-md disabled:opacity-40"
         >
           Previous Day
         </Button>
 
-        <div className="text-xs text-[#D7BE82] font-medium hidden sm:block">
+        <div className="text-xs text-white font-medium hidden sm:block">
           Day {dayId} of {totalDays}
         </div>
 
@@ -547,7 +542,7 @@ export default function DayLearningPage() {
           size="large"
           icon={<RightOutlined />}
           onClick={handleNextDay}
-          className="bg-[#7A4419] text-[#D7BE82] hover:bg-[#93521E] border-none font-bold"
+          className="bg-white text-black hover:bg-[#ff63f9] hover:text-black border-none font-bold rounded-md"
         >
           {dayId < totalDays ? "Next Day" : "Claim Certificate 🎉"}
         </Button>
@@ -565,7 +560,7 @@ export default function DayLearningPage() {
           <Button
             key="apply"
             type="primary"
-            className="bg-[#7A4419] text-[#D7BE82] border-none font-bold"
+            className="bg-white text-black hover:bg-[#ff63f9] border-none font-bold"
             onClick={() => {
               setUserCode(lesson.exercise.solutionCode);
               setSolutionModalOpen(false);
@@ -575,12 +570,12 @@ export default function DayLearningPage() {
           </Button>
         ]}
       >
-        <pre className="p-3 rounded-lg bg-[#1A120B] text-[#E5C989] font-mono text-xs overflow-x-auto border border-[#755C1B]">
+        <pre className="p-3 rounded-lg bg-[#000000] text-[#ff63f9] font-mono text-xs overflow-x-auto border border-[#ffffff15]">
           <code>{lesson.exercise.solutionCode}</code>
         </pre>
       </Modal>
 
-      {/* Certificate of Completion Modal - Pure Brown Palette */}
+      {/* Certificate of Completion Modal - Space Magenta Theme */}
       <Modal
         open={certModalOpen}
         onCancel={() => setCertModalOpen(false)}
@@ -588,35 +583,35 @@ export default function DayLearningPage() {
         width={650}
         centered
       >
-        <div className="text-center py-6 px-4 space-y-6 bg-[#2B1D0E] text-[#D7BE82] rounded-xl border border-[#755C1B]">
-          <div className="w-20 h-20 mx-auto rounded-full bg-[#7A4419] text-[#E5C989] flex items-center justify-center text-4xl shadow-md border border-[#755C1B]">
+        <div className="text-center py-6 px-4 space-y-6 bg-[#211327] text-white rounded-[24px] border border-[#ffffff25]">
+          <div className="w-20 h-20 mx-auto rounded-full bg-[#ff63f9] text-black flex items-center justify-center text-4xl shadow-[0_0_34px_rgba(255,99,249,0.3)]">
             🏆
           </div>
 
           <div>
-            <Tag color="#7A4419" className="font-extrabold px-3 py-1 text-xs uppercase mb-2 text-[#D7BE82] border-none">OFFICIAL CERTIFICATE OF COMPLETION</Tag>
-            <h2 className="text-2xl font-extrabold text-[#E5C989]">100+ Days JavaScript Challenge Completed!</h2>
-            <p className="text-sm text-[#D7BE82] max-w-md mx-auto">
-              This certifies that <strong className="text-[#E5C989]">{user?.name || "Student"}</strong> has successfully mastered all 43+ micro-concepts and 6 modules in JavaScript based on freeCodeCamp & W3Schools documentation.
+            <Tag color="#ff63f9" className="font-extrabold px-3 py-1 text-xs uppercase mb-2 text-black border-none">OFFICIAL CERTIFICATE OF COMPLETION</Tag>
+            <h2 className="text-2xl font-extrabold text-[#ff63f9]">100+ Days JavaScript Challenge Completed!</h2>
+            <p className="text-sm text-white/80 max-w-md mx-auto">
+              This certifies that <strong className="text-[#ff63f9]">{user?.name || "Student"}</strong> has successfully mastered all 43+ micro-concepts and 6 modules in JavaScript based on freeCodeCamp & W3Schools documentation.
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-[#1A120B] border border-[#755C1B] text-left space-y-3 text-xs">
-            <div className="flex justify-between border-b border-[#755C1B] pb-2">
-              <span className="text-[#755C1B] font-semibold">Student Name:</span>
-              <span className="font-bold text-[#D7BE82]">{user?.name || "JS Student"}</span>
+          <div className="p-6 rounded-[19.2px] bg-[#000000] border border-[#ffffff15] text-left space-y-3 text-xs">
+            <div className="flex justify-between border-b border-[#ffffff15] pb-2">
+              <span className="text-white/50 font-semibold">Student Name:</span>
+              <span className="font-bold text-white">{user?.name || "JS Student"}</span>
             </div>
-            <div className="flex justify-between border-b border-[#755C1B] pb-2">
-              <span className="text-[#755C1B] font-semibold">Curriculum:</span>
-              <span className="font-bold text-[#E5C989]">100+ Days JavaScript Micro-Learning</span>
+            <div className="flex justify-between border-b border-[#ffffff15] pb-2">
+              <span className="text-white/50 font-semibold">Curriculum:</span>
+              <span className="font-bold text-[#ff63f9]">100+ Days JavaScript Micro-Learning</span>
             </div>
-            <div className="flex justify-between border-b border-[#755C1B] pb-2">
-              <span className="text-[#755C1B] font-semibold">Total Modules Completed:</span>
-              <span className="font-bold text-[#D7BE82]">6 Core Modules ({totalDays} Lessons)</span>
+            <div className="flex justify-between border-b border-[#ffffff15] pb-2">
+              <span className="text-white/50 font-semibold">Total Modules Completed:</span>
+              <span className="font-bold text-white">6 Core Modules ({totalDays} Lessons)</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#755C1B] font-semibold">Completion Date:</span>
-              <span className="font-bold text-[#E5C989]">{new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
+              <span className="text-white/50 font-semibold">Completion Date:</span>
+              <span className="font-bold text-[#ff63f9]">{new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
             </div>
           </div>
 
@@ -632,11 +627,11 @@ export default function DayLearningPage() {
                   placement: "bottomRight"
                 });
               }}
-              className="bg-[#7A4419] text-[#D7BE82] hover:bg-[#93521E] border-none font-bold"
+              className="bg-white text-black hover:bg-[#ff63f9] border-none font-bold rounded-md"
             >
               Share Certificate
             </Button>
-            <Button size="large" onClick={() => setCertModalOpen(false)} className="bg-[#755C1B] text-[#D7BE82] border-none">
+            <Button size="large" onClick={() => setCertModalOpen(false)} className="bg-[#000000] text-white border border-[#ffffff25] rounded-md">
               Close
             </Button>
           </div>

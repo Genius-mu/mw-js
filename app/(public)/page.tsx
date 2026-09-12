@@ -24,109 +24,113 @@ export default function LandingPage() {
 
   return (
     <div className="space-y-20 pb-16">
-      {/* HERO SECTION - Pure Brown Palette */}
-      <section className="relative pt-12 md:pt-20 pb-12 px-4 max-w-6xl mx-auto text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#755C1B] bg-[#2B1D0E] text-[#E5C989] text-xs font-semibold mb-6">
-          <ThunderboltOutlined className="text-[#E5C989]" />
-          <span>Interactive 100+ Days JavaScript Micro-Learning Platform</span>
+      {/* HERO SECTION - Space Tech Theme */}
+      <section className="relative pt-12 md:pt-24 pb-12 px-4 max-w-5xl mx-auto text-center">
+        {/* Soft Pink Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[#ff63f9]/10 blur-[100px] rounded-full pointer-events-none -z-10" />
+
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#ffffff25] bg-[#211327] text-[#ff63f9] text-xs font-semibold mb-8 shadow-[0_0_34px_rgba(255,99,249,0.08)]">
+          <ThunderboltOutlined className="text-[#ff63f9]" />
+          <span>100+ DAYS JAVASCRIPT DEVELOPER PLATFORM</span>
         </div>
 
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight max-w-4xl mx-auto mb-6">
+        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight max-w-4xl mx-auto mb-6">
           Break Down JavaScript into <br />
-          <span className="text-[#E5C989]">
+          <span className="text-[#ff63f9]">
             Bite-Sized Daily Habits
           </span>
         </h1>
 
-        <p className={`text-lg sm:text-xl max-w-2xl mx-auto mb-8 font-normal leading-relaxed ${isDark ? "text-[#D7BE82]" : "text-[#1A120B]"}`}>
+        <p className={`text-lg sm:text-xl max-w-2xl mx-auto mb-10 font-medium leading-relaxed ${isDark ? "text-white/80" : "text-[#211327]"}`}>
           Learn JavaScript step-by-step with Beau Carnes’ 3.5-hour freeCodeCamp course. 
           Split into 100+ daily micro-concepts with timestamped videos, W3Schools documentation, and instant progress tracking.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+        {/* Paired CTAs Spec */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
           <Link href={`/learn/day/${nextDay}`}>
             <Button
               type="primary"
               size="large"
               icon={<RocketOutlined />}
-              className="h-14 px-8 text-base font-bold bg-[#7A4419] text-[#D7BE82] hover:bg-[#93521E] border-none shadow-md rounded-xl"
+              className="h-12 px-8 text-sm font-semibold bg-white text-black hover:bg-[#ff63f9] hover:text-black border-none rounded-md shadow-none min-w-[140px]"
             >
-              {user ? `Continue Learning (Day ${nextDay})` : "Start Learning Free"}
+              {user ? `Resume Day ${nextDay}` : "Get Started Free"}
             </Button>
           </Link>
           <a href="#curriculum">
             <Button
               size="large"
               icon={<BookOutlined />}
-              className={`h-14 px-8 text-base font-semibold rounded-xl border-[#755C1B] ${
-                isDark ? "bg-[#2B1D0E] text-[#D7BE82] hover:border-[#E5C989]" : "bg-white text-[#1A120B] hover:border-[#7A4419]"
+              className={`h-12 px-8 text-sm font-semibold rounded-md border min-w-[140px] ${
+                isDark ? "bg-[#000000] text-white border-[#ffffff25] hover:border-[#ff63f9]" : "bg-[#faf5ff] text-[#211327] border-[#e9d5ff] hover:border-[#9333ea]"
               }`}
             >
-              Explore 6 Modules
+              View Curriculum
             </Button>
           </a>
         </div>
 
-        {/* Stats Grid - Solid Brown Cards */}
+        {/* Stats Grid - Soft Purple Glass Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-          <Card className={`text-center border shadow-sm ${isDark ? "bg-[#2B1D0E] border-[#755C1B]" : "bg-white border-[#D7BE82]"}`}>
-            <div className="text-3xl font-extrabold text-[#E5C989] mb-1">102</div>
-            <div className="text-xs text-[#D7BE82] font-medium uppercase tracking-wider">Micro Concepts</div>
-          </Card>
-          <Card className={`text-center border shadow-sm ${isDark ? "bg-[#2B1D0E] border-[#755C1B]" : "bg-white border-[#D7BE82]"}`}>
-            <div className="text-3xl font-extrabold text-[#D7BE82] mb-1">6</div>
-            <div className="text-xs text-[#D7BE82] font-medium uppercase tracking-wider">Core Modules</div>
-          </Card>
-          <Card className={`text-center border shadow-sm ${isDark ? "bg-[#2B1D0E] border-[#755C1B]" : "bg-white border-[#D7BE82]"}`}>
-            <div className="text-3xl font-extrabold text-[#7A4419] mb-1">3.5h</div>
-            <div className="text-xs text-[#D7BE82] font-medium uppercase tracking-wider">freeCodeCamp Video</div>
-          </Card>
-          <Card className={`text-center border shadow-sm ${isDark ? "bg-[#2B1D0E] border-[#755C1B]" : "bg-white border-[#D7BE82]"}`}>
-            <div className="text-3xl font-extrabold text-[#755C1B] mb-1">100%</div>
-            <div className="text-xs text-[#D7BE82] font-medium uppercase tracking-wider">Free & Interactive</div>
-          </Card>
+          <div className={`p-6 rounded-[19.2px] border text-center ${isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"}`}>
+            <div className="text-3xl font-extrabold text-[#ff63f9] mb-1">102</div>
+            <div className={`text-xs font-medium uppercase tracking-wider ${isDark ? "text-white/70" : "text-[#211327]"}`}>Micro Concepts</div>
+          </div>
+          <div className={`p-6 rounded-[19.2px] border text-center ${isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"}`}>
+            <div className="text-3xl font-extrabold text-white mb-1">6</div>
+            <div className={`text-xs font-medium uppercase tracking-wider ${isDark ? "text-white/70" : "text-[#211327]"}`}>Core Modules</div>
+          </div>
+          <div className={`p-6 rounded-[19.2px] border text-center ${isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"}`}>
+            <div className="text-3xl font-extrabold text-white mb-1">3.5h</div>
+            <div className={`text-xs font-medium uppercase tracking-wider ${isDark ? "text-white/70" : "text-[#211327]"}`}>freeCodeCamp Video</div>
+          </div>
+          <div className={`p-6 rounded-[19.2px] border text-center ${isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"}`}>
+            <div className="text-3xl font-extrabold text-[#ff63f9] mb-1">100%</div>
+            <div className={`text-xs font-medium uppercase tracking-wider ${isDark ? "text-white/70" : "text-[#211327]"}`}>Free & Interactive</div>
+          </div>
         </div>
       </section>
 
       {/* FEATURES SECTION */}
       <section id="features" className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-3 text-[#E5C989]">Designed for Stress-Free Daily Consistency</h2>
-          <p className={`text-base ${isDark ? "text-[#D7BE82]" : "text-[#7A4419]"}`}>
+          <h2 className="text-3xl font-bold mb-3">Designed for Daily Tech Consistency</h2>
+          <p className={`text-base ${isDark ? "text-white/70" : "text-[#211327]"}`}>
             No long overwhelming lectures. Focus on one single concept each day with immediate visual feedback.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className={`border shadow-sm ${isDark ? "bg-[#2B1D0E] border-[#755C1B]" : "bg-white border-[#D7BE82]"}`}>
-            <div className="w-12 h-12 rounded-xl bg-[#7A4419] text-[#D7BE82] flex items-center justify-center text-2xl mb-4 font-bold border border-[#755C1B]">
+          <div className={`p-6 rounded-[19.2px] border ${isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"}`}>
+            <div className="w-10 h-10 rounded-lg bg-[#ff63f9]/20 text-[#ff63f9] flex items-center justify-center text-xl mb-4 font-bold">
               <PlayCircleOutlined />
             </div>
-            <h3 className="text-lg font-bold mb-2 text-[#E5C989]">Automated Video Timestamps</h3>
-            <p className={`text-sm leading-relaxed ${isDark ? "text-[#D7BE82]" : "text-[#1A120B]"}`}>
+            <h3 className="text-lg font-bold mb-2">Automated Video Timestamps</h3>
+            <p className={`text-sm leading-relaxed ${isDark ? "text-white/70" : "text-[#211327]"}`}>
               Each daily lesson embeds the freeCodeCamp tutorial automatically pre-configured to start and end at the exact video segment.
             </p>
-          </Card>
+          </div>
 
-          <Card className={`border shadow-sm ${isDark ? "bg-[#2B1D0E] border-[#755C1B]" : "bg-white border-[#D7BE82]"}`}>
-            <div className="w-12 h-12 rounded-xl bg-[#755C1B] text-[#D7BE82] flex items-center justify-center text-2xl mb-4 font-bold border border-[#7A4419]">
+          <div className={`p-6 rounded-[19.2px] border ${isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"}`}>
+            <div className="w-10 h-10 rounded-lg bg-white/10 text-white flex items-center justify-center text-xl mb-4 font-bold">
               <BookOutlined />
             </div>
-            <h3 className="text-lg font-bold mb-2 text-[#E5C989]">W3Schools Documentation</h3>
-            <p className={`text-sm leading-relaxed ${isDark ? "text-[#D7BE82]" : "text-[#1A120B]"}`}>
+            <h3 className="text-lg font-bold mb-2">W3Schools Documentation</h3>
+            <p className={`text-sm leading-relaxed ${isDark ? "text-white/70" : "text-[#211327]"}`}>
               Direct links and structured cards mapping to official W3Schools documentation with syntax guides and code examples.
             </p>
-          </Card>
+          </div>
 
-          <Card className={`border shadow-sm ${isDark ? "bg-[#2B1D0E] border-[#755C1B]" : "bg-white border-[#D7BE82]"}`}>
-            <div className="w-12 h-12 rounded-xl bg-[#400406] text-[#D7BE82] flex items-center justify-center text-2xl mb-4 font-bold border border-[#755C1B]">
+          <div className={`p-6 rounded-[19.2px] border ${isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"}`}>
+            <div className="w-10 h-10 rounded-lg bg-[#ff63f9]/20 text-[#ff63f9] flex items-center justify-center text-xl mb-4 font-bold">
               <TrophyOutlined />
             </div>
-            <h3 className="text-lg font-bold mb-2 text-[#E5C989]">Ant Design Dashboard</h3>
-            <p className={`text-sm leading-relaxed ${isDark ? "text-[#D7BE82]" : "text-[#1A120B]"}`}>
-              Track your progress visually. Completed chapters turn green in the Ant Design sidebar with instant progress updates.
+            <h3 className="text-lg font-bold mb-2">Ant Design Dashboard</h3>
+            <p className={`text-sm leading-relaxed ${isDark ? "text-white/70" : "text-[#211327]"}`}>
+              Track your progress visually. Completed chapters turn pink in the Ant Design sidebar with instant progress updates.
             </p>
-          </Card>
+          </div>
         </div>
       </section>
 
@@ -134,32 +138,32 @@ export default function LandingPage() {
       <section id="curriculum" className="max-w-6xl mx-auto px-4">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
           <div>
-            <Tag color="#7A4419" className="font-semibold mb-2 text-[#D7BE82] border-none">COMPLETE ROADMAP</Tag>
-            <h2 className="text-3xl font-bold text-[#E5C989]">JavaScript Curriculum Modules</h2>
+            <Tag color="#ff63f9" className="font-semibold mb-2 text-black border-none">COMPLETE ROADMAP</Tag>
+            <h2 className="text-3xl font-bold">JavaScript Curriculum Modules</h2>
           </div>
           <Link href={`/learn/day/${nextDay}`}>
-            <Button type="primary" icon={<CodeOutlined />} className="bg-[#7A4419] text-[#D7BE82] hover:bg-[#93521E] border-none font-bold">
-              Open Learning Dashboard
+            <Button type="primary" icon={<CodeOutlined />} className="bg-white text-black hover:bg-[#ff63f9] hover:text-black border-none font-bold rounded-md">
+              Open Learning Workspace
             </Button>
           </Link>
         </div>
 
         <div className="space-y-6">
           {MODULES_DATA.map((module, idx) => (
-            <Card
+            <div
               key={module.id}
-              className={`border transition-all ${
-                isDark ? "bg-[#2B1D0E] border-[#755C1B]" : "bg-white border-[#D7BE82]"
+              className={`p-6 rounded-[19.2px] border transition-all ${
+                isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"
               }`}
             >
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#755C1B] mb-4">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#ffffff15] mb-4">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[#E5C989] font-extrabold text-sm">MODULE 0{idx + 1}</span>
-                    <Badge count={`${module.days.length} Lessons`} style={{ backgroundColor: "#7A4419", color: "#D7BE82" }} />
+                    <span className="text-[#ff63f9] font-extrabold text-sm">MODULE 0{idx + 1}</span>
+                    <Badge count={`${module.days.length} Lessons`} style={{ backgroundColor: "#ff63f9", color: "#000000" }} />
                   </div>
-                  <h3 className="text-xl font-bold mt-1 mb-1 text-[#E5C989]">{module.title.replace(/^Module \d+:\s*/, "")}</h3>
-                  <p className={`text-xs m-0 ${isDark ? "text-[#D7BE82]" : "text-[#7A4419]"}`}>{module.description}</p>
+                  <h3 className="text-xl font-bold mt-1 mb-1">{module.title.replace(/^Module \d+:\s*/, "")}</h3>
+                  <p className={`text-xs m-0 ${isDark ? "text-white/70" : "text-[#211327]"}`}>{module.description}</p>
                 </div>
               </div>
 
@@ -173,46 +177,46 @@ export default function LandingPage() {
                         className={`p-3 rounded-lg border text-sm flex items-center justify-between transition-all group ${
                           isCompleted
                             ? isDark
-                              ? "bg-[#7A4419] border-[#7A4419] text-[#E5C989]"
-                              : "bg-[#D7BE82] border-[#7A4419] text-[#1A120B]"
+                              ? "bg-[#ff63f9]/20 border-[#ff63f9] text-[#ff63f9]"
+                              : "bg-[#9333ea]/10 border-[#9333ea] text-[#9333ea]"
                             : isDark
-                            ? "bg-[#1A120B] border-[#755C1B] text-[#D7BE82] hover:border-[#E5C989]"
-                            : "bg-[#FAF4E8] border-[#D7BE82] text-[#1A120B] hover:border-[#7A4419]"
+                            ? "bg-[#000000] border-[#ffffff15] text-white hover:border-[#ff63f9]"
+                            : "bg-white border-[#e9d5ff] text-[#211327] hover:border-[#9333ea]"
                         }`}
                       >
                         <div className="flex items-center gap-2.5 truncate">
                           {isCompleted ? (
-                            <CheckCircleFilled className="text-[#E5C989] text-base shrink-0" />
+                            <CheckCircleFilled className="text-[#ff63f9] text-base shrink-0" />
                           ) : (
-                            <span className="w-5 h-5 rounded-full bg-[#7A4419] text-[#D7BE82] font-bold text-[11px] flex items-center justify-center shrink-0">
+                            <span className="w-5 h-5 rounded-full bg-[#ff63f9]/20 text-[#ff63f9] font-bold text-[11px] flex items-center justify-center shrink-0">
                               {day.day}
                             </span>
                           )}
-                          <span className="truncate font-medium group-hover:text-[#E5C989] transition-colors">
+                          <span className="truncate font-medium group-hover:text-[#ff63f9] transition-colors">
                             {day.title}
                           </span>
                         </div>
-                        <FieldTimeOutlined className="text-[#755C1B] text-xs shrink-0 ml-2" />
+                        <FieldTimeOutlined className="text-white/40 text-xs shrink-0 ml-2" />
                       </div>
                     </Link>
                   );
                 })}
               </div>
-            </Card>
+            </div>
           ))}
         </div>
       </section>
 
-      {/* CTA CARD - Solid Brown Palette */}
+      {/* CTA CARD - Purple Glass Spec */}
       <section className="max-w-4xl mx-auto px-4">
-        <div className="rounded-3xl bg-[#2B1D0E] text-[#D7BE82] p-8 md:p-12 text-center shadow-xl relative overflow-hidden border border-[#755C1B]">
+        <div className="rounded-[24px] bg-[#211327] text-white p-8 md:p-12 text-center shadow-none relative overflow-hidden border border-[#ffffff25]">
           <div className="relative z-10">
-            <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-[#E5C989]">Ready to Start Your 100 Days JS Challenge?</h2>
-            <p className="text-[#D7BE82] max-w-xl mx-auto mb-8 text-base font-medium">
+            <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-white">Ready to Start Your 100 Days JS Challenge?</h2>
+            <p className="text-white/80 max-w-xl mx-auto mb-8 text-base font-medium">
               Join students mastering JavaScript one daily micro-concept at a time. Free, structured, and interactive.
             </p>
             <Link href={`/learn/day/${nextDay}`}>
-              <Button size="large" className="h-14 px-10 text-lg font-bold bg-[#7A4419] text-[#D7BE82] hover:bg-[#93521E] border-none shadow-md rounded-xl">
+              <Button size="large" className="h-12 px-10 text-sm font-bold bg-white text-black hover:bg-[#ff63f9] hover:text-black border-none rounded-md">
                 Launch Learning Workspace Now
               </Button>
             </Link>

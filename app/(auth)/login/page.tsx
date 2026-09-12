@@ -35,41 +35,41 @@ export default function LoginPage() {
 
   return (
     <Card
-      className={`shadow-lg border ${
-        isDark ? "bg-[#2B1D0E] border-[#755C1B]" : "bg-white border-[#D7BE82]"
+      className={`shadow-none border rounded-[19.2px] ${
+        isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"
       }`}
       title={
         <div className="text-center py-2">
-          <h2 className="text-xl font-bold m-0 text-[#E5C989]">Student Sign In</h2>
-          <p className="text-xs text-[#D7BE82] font-normal m-0 mt-1">Access your 100+ Days JS Learning Dashboard</p>
+          <h2 className="text-xl font-bold m-0 text-[#ff63f9]">Student Sign In</h2>
+          <p className="text-xs text-white/70 font-normal m-0 mt-1">Access your 100+ Days JS Learning Dashboard</p>
         </div>
       }
     >
       <Form name="login_form" layout="vertical" onFinish={onFinish} requiredMark={false} size="large">
         <Form.Item
           name="email"
-          label={<span className="text-xs font-semibold text-[#D7BE82]">Email Address</span>}
+          label={<span className="text-xs font-semibold text-white/90">Email Address</span>}
           rules={[
             { required: true, message: "Please input your email address!" },
             { type: "email", message: "Please enter a valid email address!" }
           ]}
         >
-          <Input prefix={<MailOutlined className="text-[#755C1B]" />} placeholder="student@example.com" />
+          <Input prefix={<MailOutlined className="text-white/40" />} placeholder="student@example.com" />
         </Form.Item>
 
         <Form.Item
           name="name"
-          label={<span className="text-xs font-semibold text-[#D7BE82]">Your Name (Optional)</span>}
+          label={<span className="text-xs font-semibold text-white/90">Your Name (Optional)</span>}
         >
-          <Input prefix={<UserOutlined className="text-[#755C1B]" />} placeholder="Alex Johnson" />
+          <Input prefix={<UserOutlined className="text-white/40" />} placeholder="Alex Johnson" />
         </Form.Item>
 
         <Form.Item
           name="password"
-          label={<span className="text-xs font-semibold text-[#D7BE82]">Password</span>}
+          label={<span className="text-xs font-semibold text-white/90">Password</span>}
           rules={[{ required: true, message: "Please input your password!" }]}
         >
-          <Input.Password prefix={<LockOutlined className="text-[#755C1B]" />} placeholder="••••••••" />
+          <Input.Password prefix={<LockOutlined className="text-white/40" />} placeholder="••••••••" />
         </Form.Item>
 
         <Form.Item className="mb-2">
@@ -79,14 +79,14 @@ export default function LoginPage() {
             loading={loading}
             block
             icon={<RocketOutlined />}
-            className="bg-[#7A4419] text-[#D7BE82] hover:bg-[#93521E] border-none font-bold h-11"
+            className="bg-white text-black hover:bg-[#ff63f9] hover:text-black border-none font-bold h-11 rounded-md"
           >
             Sign In & Continue Learning
           </Button>
         </Form.Item>
       </Form>
 
-      <Divider plain className="text-xs text-[#755C1B] my-4">
+      <Divider plain className="text-xs text-white/30 my-4">
         OR
       </Divider>
 
@@ -95,13 +95,13 @@ export default function LoginPage() {
         size="large"
         onClick={handleDemoLogin}
         loading={loading}
-        className="font-bold h-11 bg-[#755C1B] text-[#D7BE82] border-none hover:bg-[#7A4419]"
+        className="font-bold h-11 bg-[#000000] text-white border border-[#ffffff25] hover:border-[#ff63f9] rounded-md"
       >
         ⚡ Instant Quick Demo Login
       </Button>
 
-      <div className="text-center mt-6 text-xs text-[#755C1B]">
-        Back to <Link href="/" className="text-[#E5C989] font-semibold no-underline">Home Landing Page</Link>
+      <div className="text-center mt-6 text-xs text-white/60">
+        Back to <Link href="/" className="text-[#ff63f9] font-semibold no-underline">Home Landing Page</Link>
       </div>
     </Card>
   );
