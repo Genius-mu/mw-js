@@ -106,15 +106,15 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
       return {
         key: `/learn/day/${day.id}`,
         icon: isCompleted ? (
-          <CheckCircleFilled className="text-[#00F6ED] text-sm" />
+          <CheckCircleFilled className="text-[#E5C989] text-sm" />
         ) : isCurrent ? (
-          <PlayCircleOutlined className="text-[#00F6ED] text-sm" />
+          <PlayCircleOutlined className="text-[#E5C989] text-sm" />
         ) : (
           <span className="text-xs font-bold text-[#755C1B]">{day.day}</span>
         ),
         label: (
           <div className="flex items-center justify-between text-xs py-1">
-            <span className={`truncate ${isCurrent ? "font-bold text-[#00F6ED]" : "text-[#D7BE82]"}`}>
+            <span className={`truncate ${isCurrent ? "font-bold text-[#E5C989]" : "text-[#D7BE82]"}`}>
               {day.title}
             </span>
           </div>
@@ -133,7 +133,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
       key: "user-info",
       label: (
         <div className="px-2 py-1">
-          <div className="font-bold text-sm text-[#0F1108]">{user?.name || "Student"}</div>
+          <div className="font-bold text-sm text-[#1A120B]">{user?.name || "Student"}</div>
           <div className="text-xs text-[#755C1B]">{user?.email || "student@example.com"}</div>
         </div>
       )
@@ -157,17 +157,17 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
   ];
 
   const SiderContent = (
-    <div className="flex flex-col h-full bg-[#0F1108]">
+    <div className="flex flex-col h-full bg-[#1A120B]">
       {/* Sider Header */}
       <div className="p-4 border-b border-[#755C1B]">
         <Link href="/" className="flex items-center gap-2.5 no-underline mb-4">
-          <div className="w-9 h-9 rounded-xl bg-[#7A4419] text-[#D7BE82] flex items-center justify-center text-lg font-bold">
+          <div className="w-9 h-9 rounded-xl bg-[#7A4419] text-[#D7BE82] flex items-center justify-center text-lg font-bold border border-[#755C1B]">
             ⚡
           </div>
           {!collapsed && (
             <div>
               <div className="font-extrabold text-base tracking-tight leading-none text-[#D7BE82]">
-                JS Learning <span className="text-[#00F6ED]">Hub</span>
+                JS Learning <span className="text-[#E5C989]">Hub</span>
               </div>
               <p className="text-[10px] text-[#755C1B] m-0 font-medium tracking-wide">100+ DAYS CHALLENGE</p>
             </div>
@@ -175,15 +175,15 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
         </Link>
 
         {!collapsed && (
-          <div className="bg-[#241909] p-3 rounded-xl border border-[#755C1B] space-y-2">
+          <div className="bg-[#2B1D0E] p-3 rounded-xl border border-[#755C1B] space-y-2">
             <div className="flex items-center justify-between text-xs font-semibold">
               <span className="text-[#D7BE82]">Course Completion</span>
-              <span className="text-[#00F6ED] font-bold">{progressPercent}%</span>
+              <span className="text-[#E5C989] font-bold">{progressPercent}%</span>
             </div>
-            <Progress percent={progressPercent} strokeColor="#00F6ED" showInfo={false} size="small" />
+            <Progress percent={progressPercent} strokeColor="#E5C989" showInfo={false} size="small" />
             <div className="text-[11px] text-[#D7BE82] flex justify-between">
               <span>{completedCount} of {totalDays} completed</span>
-              <span className="text-[#00F6ED] font-medium">Keep going!</span>
+              <span className="text-[#E5C989] font-medium">Keep going!</span>
             </div>
           </div>
         )}
@@ -199,7 +199,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
             onChange={(e) => setSearchQuery(e.target.value)}
             allowClear
             size="small"
-            className="rounded-lg bg-[#241909] text-[#D7BE82] border-[#755C1B]"
+            className="rounded-lg bg-[#2B1D0E] text-[#D7BE82] border-[#755C1B]"
           />
         </div>
       )}
@@ -219,7 +219,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
   );
 
   return (
-    <Layout className="min-h-screen bg-[#0F1108]">
+    <Layout className="min-h-screen bg-[#1A120B]">
       {/* Desktop Sider */}
       <Sider
         collapsible
@@ -250,11 +250,11 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
         {SiderContent}
       </Drawer>
 
-      <Layout className="flex-1 flex flex-col min-w-0 bg-[#0F1108]">
+      <Layout className="flex-1 flex flex-col min-w-0 bg-[#1A120B]">
         {/* Dashboard Top Header */}
         <Header
           className={`sticky top-0 z-40 px-4 md:px-6 h-16 flex items-center justify-between border-b ${
-            isDark ? "bg-[#241909] border-[#755C1B]" : "bg-[#D7BE82] border-[#7A4419]"
+            isDark ? "bg-[#2B1D0E] border-[#755C1B]" : "bg-[#D7BE82] border-[#7A4419]"
           }`}
         >
           <div className="flex items-center gap-3">
@@ -271,9 +271,9 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
               className="hidden md:flex items-center text-[#D7BE82]"
             />
             <div className="hidden sm:flex items-center gap-2 text-xs font-semibold">
-              <Link href="/" className="no-underline text-[#D7BE82] hover:text-[#00F6ED]">Home</Link>
+              <Link href="/" className="no-underline text-[#D7BE82] hover:text-[#E5C989]">Home</Link>
               <span className="text-[#755C1B]">/</span>
-              <span className="text-[#00F6ED]">Learn Dashboard</span>
+              <span className="text-[#E5C989]">Learn Dashboard</span>
               <span className="text-[#755C1B]">/</span>
               <Tag color="#7A4419" className="font-semibold m-0 text-[#D7BE82] border-none">Day {currentDayId}</Tag>
             </div>
@@ -282,7 +282,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
           <div className="flex items-center gap-4">
             <Tooltip title={`Switch to ${isDark ? "Light" : "Dark"} Mode`}>
               <div className="flex items-center gap-2 text-xs font-semibold">
-                <BulbOutlined className={isDark ? "text-[#00F6ED]" : "text-[#7A4419]"} />
+                <BulbOutlined className={isDark ? "text-[#E5C989]" : "text-[#7A4419]"} />
                 <Switch checked={isDark} onChange={toggleTheme} size="small" />
               </div>
             </Tooltip>
@@ -294,7 +294,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
                 </Avatar>
                 <div className="hidden sm:block text-left">
                   <div className="text-xs font-bold leading-tight text-[#D7BE82]">{user?.name || "Student"}</div>
-                  <div className="text-[10px] text-[#00F6ED] leading-tight">Student</div>
+                  <div className="text-[10px] text-[#E5C989] leading-tight">Student</div>
                 </div>
               </div>
             </Dropdown>

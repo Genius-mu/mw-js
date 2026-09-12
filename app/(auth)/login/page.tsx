@@ -36,11 +36,11 @@ export default function LoginPage() {
   return (
     <Card
       className={`shadow-lg border ${
-        isDark ? "bg-[#241909] border-[#755C1B]" : "bg-white border-[#D7BE82]"
+        isDark ? "bg-[#2B1D0E] border-[#755C1B]" : "bg-white border-[#D7BE82]"
       }`}
       title={
         <div className="text-center py-2">
-          <h2 className="text-xl font-bold m-0 text-[#00F6ED]">Student Sign In</h2>
+          <h2 className="text-xl font-bold m-0 text-[#E5C989]">Student Sign In</h2>
           <p className="text-xs text-[#D7BE82] font-normal m-0 mt-1">Access your 100+ Days JS Learning Dashboard</p>
         </div>
       }
@@ -79,7 +79,7 @@ export default function LoginPage() {
             loading={loading}
             block
             icon={<RocketOutlined />}
-            className="bg-[#00F6ED] text-[#0F1108] hover:bg-[#33F8F0] border-none font-bold h-11"
+            className="bg-[#7A4419] text-[#D7BE82] hover:bg-[#93521E] border-none font-bold h-11"
           >
             Sign In & Continue Learning
           </Button>
@@ -95,13 +95,13 @@ export default function LoginPage() {
         size="large"
         onClick={handleDemoLogin}
         loading={loading}
-        className="font-bold h-11 bg-[#7A4419] text-[#D7BE82] border-none hover:bg-[#755C1B]"
+        className="font-bold h-11 bg-[#755C1B] text-[#D7BE82] border-none hover:bg-[#7A4419]"
       >
         ⚡ Instant Quick Demo Login
       </Button>
 
       <div className="text-center mt-6 text-xs text-[#755C1B]">
-        Back to <Link href="/" className="text-[#00F6ED] font-semibold no-underline">Home Landing Page</Link>
+        Back to <Link href="/" className="text-[#E5C989] font-semibold no-underline">Home Landing Page</Link>
       </div>
     </Card>
   );
