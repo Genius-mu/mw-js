@@ -11,11 +11,11 @@ export function AntdProvider({ children }: { children: React.ReactNode }) {
         theme={{
           algorithm: antdTheme.darkAlgorithm,
           token: {
-            colorPrimary: "#ff63f9",
-            colorSuccess: "#ff63f9",
-            colorWarning: "#ff63f9",
+            colorPrimary: "#ffffff",
+            colorSuccess: "#ffffff",
+            colorWarning: "#ffffff",
             colorError: "#ff63f9",
-            borderRadius: 19,
+            borderRadius: 9,
             fontFamily: "Satoshi, 'Cabinet Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
             colorBgBase: "#000000",
             colorTextBase: "#e2e2e2"
@@ -32,11 +32,15 @@ export function AntdProvider({ children }: { children: React.ReactNode }) {
             },
             Card: {
               colorBgContainer: "#08080c",
-              colorBorderSecondary: "rgba(255, 255, 255, 0.1)"
+              colorBorderSecondary: "rgba(255, 255, 255, 0.1)",
+              borderRadiusLG: 12
             },
             Button: {
-              colorPrimary: "rgba(255, 255, 255, 0.75)",
-              colorTextLightSolid: "#000000"
+              colorPrimary: "#ffffff",
+              colorTextLightSolid: "#000000",
+              borderRadius: 9,
+              borderRadiusSM: 7,
+              borderRadiusLG: 9
             }
           }
         }}

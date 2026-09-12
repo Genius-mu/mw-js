@@ -18,50 +18,65 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
 
   return (
     <div className="min-h-screen flex flex-col justify-between bg-[#000000] text-[#e2e2e2] relative bg-grid-pattern">
-      {/* Floating Bordered Navbar Container (pxxl.app style) */}
-      <div className="p-4 max-w-5xl mx-auto w-full sticky top-0 z-50">
-        <header className="rounded-2xl border border-white/10 bg-[#08080c]/80 backdrop-blur-md px-5 py-3 flex items-center justify-between shadow-sm">
-          <Link href="/" className="flex items-center gap-2.5 no-underline group">
-            <div className="w-7 h-7 rounded-md bg-[#ff63f9] text-black flex items-center justify-center text-sm font-extrabold">
-              ⚡
-            </div>
-            <div>
-              <div className="font-bold text-xs tracking-tight flex items-center gap-1.5">
-                <span className="text-white">JS Learning</span>
+      {/* ReactBits Style Header Navigation Bar */}
+      <div className="sticky top-0 z-50 bg-[#000000]/90 backdrop-blur-md border-b border-white/10">
+        <div className="max-w-6xl mx-auto px-4 py-2.5 flex items-center justify-between gap-3 text-xs">
+          {/* Brand & Core Section Links */}
+          <div className="flex items-center gap-6">
+            <Link href="/" className="flex items-center gap-2 no-underline group">
+              <div className="w-7 h-7 rounded-[9px] bg-white text-black flex items-center justify-center text-xs font-black shadow-sm">
+                ⚡
+              </div>
+              <div className="font-bold text-xs tracking-tight text-white flex items-center gap-1">
+                <span>JS Learning</span>
                 <span className="text-[#ff63f9]">Hub</span>
               </div>
-              <p className="text-[9px] m-0 font-medium tracking-wider text-white/40">
-                100+ DAYS OF JAVASCRIPT
-              </p>
-            </div>
-          </Link>
+            </Link>
 
-          {/* Navigation Links - Curriculum & Features only (no video/docs, no green) */}
-          <nav className="hidden md:flex items-center gap-6 text-xs font-medium">
-            <a
-              href="#curriculum"
-              className="no-underline text-white/70 hover:text-white transition-colors"
-            >
-              Curriculum
-            </a>
-            <a
-              href="#features"
-              className="no-underline text-white/70 hover:text-white transition-colors"
-            >
-              Features
-            </a>
-          </nav>
+            <nav className="hidden lg:flex items-center gap-4 text-xs font-medium text-white/70">
+              <a href="#curriculum" className="no-underline text-white/80 hover:text-white transition-colors">Docs</a>
+              <a href="#features" className="no-underline text-white/70 hover:text-white transition-colors">Tools</a>
+              <span className="no-underline text-[#ff63f9] font-semibold flex items-center gap-1">
+                Pro <span className="text-[9px] bg-[#ff63f9]/20 text-[#ff63f9] px-1.5 py-0.2 rounded font-mono">NEW</span>
+              </span>
+              <a href="#sponsors" className="no-underline text-white/70 hover:text-white transition-colors">Sponsors</a>
+            </nav>
+          </div>
 
-          {/* Action CTA - Feint Soft White Button */}
+          {/* Center Search Input Bar (ReactBits Style) */}
+          <div className="flex-1 max-w-xs hidden md:block">
+            <button
+              onClick={() => {
+                const el = document.getElementById("search-input");
+                if (el) el.focus();
+              }}
+              className="w-full bg-[#08080c] border border-white/10 hover:border-white/20 text-white/40 text-xs px-3 py-1.5 rounded-[9px] flex items-center justify-between cursor-pointer transition-colors"
+            >
+              <span>Search lessons & docs...</span>
+              <span className="text-[10px] font-mono bg-white/10 text-white/70 px-1.5 py-0.5 rounded">/</span>
+            </button>
+          </div>
+
+          {/* Right Action Controls: Github Stars & Pro CTA */}
           <div className="flex items-center gap-3">
+            <a
+              href="https://github.com/Genius-mu/mw-js"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="no-underline inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[9px] bg-white/5 border border-white/10 text-white/80 hover:text-white text-xs font-medium transition-colors"
+            >
+              <span className="text-yellow-400">⭐</span>
+              <span>47.1K</span>
+            </a>
+
             {user ? (
               <Link href={`/learn/day/${nextDay}`}>
                 <Button
                   type="primary"
                   icon={<RocketOutlined />}
-                  className="bg-white/75 text-black hover:bg-white/90 border-none font-medium text-xs h-8 px-3.5 rounded-md shadow-none"
+                  className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs h-8 px-3.5 rounded-[9px] shadow-sm"
                 >
-                  Resume Day {nextDay} ({progressPercent}%)
+                  Resume Day {nextDay}
                 </Button>
               </Link>
             ) : (
@@ -69,14 +84,34 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
                 <Button
                   type="primary"
                   icon={<UserOutlined />}
-                  className="bg-white/75 text-black hover:bg-white/90 border-none font-medium text-xs h-8 px-3.5 rounded-md shadow-none"
+                  className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs h-8 px-3.5 rounded-[9px] shadow-sm"
                 >
-                  Sign In
+                  Get JS Hub Pro
                 </Button>
               </Link>
             )}
           </div>
-        </header>
+        </div>
+
+        {/* Sub-Navigation Category Ribbon (ReactBits Style) */}
+        <div className="border-t border-white/5 bg-[#08080c]/60 overflow-x-auto custom-scrollbar px-4 py-1.5 text-[11px] text-white/60">
+          <div className="max-w-6xl mx-auto flex items-center gap-4 whitespace-nowrap font-medium">
+            <span className="text-[#ff63f9] font-semibold">Introduction</span>
+            <a href="#curriculum" className="no-underline text-white/70 hover:text-white">Installation</a>
+            <span className="text-white/40">MCP</span>
+            <a href="#curriculum" className="no-underline text-white/70 hover:text-white">Index</a>
+            <span className="text-white/40">Favorites</span>
+            <span className="text-white/30">•</span>
+            <a href="#curriculum" className="no-underline text-white/70 hover:text-white">Components</a>
+            <a href="#curriculum" className="no-underline text-white/70 hover:text-white">Blocks</a>
+            <span className="text-[#ff63f9] font-medium">App UI</span>
+            <span className="text-white/30">•</span>
+            <span className="text-white/70">Background Studio</span>
+            <span className="text-white/70">Text Animations</span>
+            <span className="text-white/70">Animations</span>
+            <span className="text-white/70">Backgrounds</span>
+          </div>
+        </div>
       </div>
 
       {/* Main Public Content */}
