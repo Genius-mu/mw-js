@@ -207,7 +207,7 @@ export default function DayLearningPage() {
               size="medium"
               icon={isCompleted ? <CheckCircleFilled className="text-white" /> : <CheckCircleOutlined />}
               onClick={handleToggleComplete}
-              className={!isCompleted ? "bg-white/75 text-black hover:bg-white/90 border-none font-medium text-xs rounded-md" : "font-medium border-white/10 text-white/80 rounded-md text-xs"}
+              className={!isCompleted ? "bg-white text-black hover:bg-white/90 border-none font-semibold text-xs rounded-[9px]" : "font-semibold border-white/10 text-white/80 rounded-[9px] text-xs"}
             >
               {isCompleted ? "Marked Completed" : "Mark as Completed"}
             </Button>
@@ -272,7 +272,7 @@ export default function DayLearningPage() {
                     href={lesson.docsLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="no-underline inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-white font-medium text-xs hover:bg-white/20 transition-colors"
+                    className="no-underline inline-flex items-center gap-1.5 px-3 py-1 rounded-[9px] bg-white/10 text-white font-medium text-xs hover:bg-white/20 transition-colors"
                   >
                     MDN Documentation <ExportOutlined />
                   </a>
@@ -285,7 +285,7 @@ export default function DayLearningPage() {
                   type="primary"
                   icon={<RocketOutlined />}
                   onClick={handleNextDay}
-                  className="bg-white/75 text-black hover:bg-white/90 border-none font-medium h-9 text-xs rounded-md"
+                  className="bg-white text-black hover:bg-white/90 border-none font-semibold h-9 text-xs rounded-[9px] shadow-sm"
                 >
                   {dayId < totalDays ? "Complete & Go to Next Day" : "Claim Certificate 🎉"}
                 </Button>
@@ -333,7 +333,7 @@ export default function DayLearningPage() {
                         size="small"
                         icon={<CopyOutlined />}
                         onClick={handleCopySnippet}
-                        className="text-[11px] font-medium bg-[#000000] text-white/80 border border-white/10 rounded-md"
+                        className="text-[11px] font-medium bg-[#000000] text-white/80 border border-white/10 rounded-[7px]"
                       >
                         {copied ? "Copied!" : "Copy Snippet"}
                       </Button>
@@ -358,7 +358,7 @@ export default function DayLearningPage() {
                           href={lesson.docsLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="no-underline inline-flex items-center gap-1 px-3 py-1 rounded-md bg-white/75 text-black font-medium text-xs hover:bg-white/90 transition-colors shrink-0"
+                          className="no-underline inline-flex items-center gap-1 px-3 py-1 rounded-[9px] bg-white text-black font-semibold text-xs hover:bg-white/90 transition-colors shrink-0 shadow-sm"
                         >
                           Open MDN Documentation <ExportOutlined />
                         </a>
@@ -402,7 +402,7 @@ export default function DayLearningPage() {
                             size="small"
                             icon={<ReloadOutlined />}
                             onClick={() => setUserCode(lesson.exercise.starterCode)}
-                            className="text-[11px] bg-[#000000] text-white/80 border border-white/10 rounded-md"
+                            className="text-[11px] bg-[#000000] text-white/80 border border-white/10 rounded-[7px]"
                           >
                             Reset Code
                           </Button>
@@ -410,7 +410,7 @@ export default function DayLearningPage() {
                             size="small"
                             icon={<BulbOutlined />}
                             onClick={() => setShowHint(!showHint)}
-                            className="text-[11px] bg-[#000000] text-white/80 border border-white/10 rounded-md"
+                            className="text-[11px] bg-[#000000] text-white/80 border border-white/10 rounded-[7px]"
                           >
                             {showHint ? "Hide Hint" : "Show Hint"}
                           </Button>
@@ -437,14 +437,14 @@ export default function DayLearningPage() {
                           type="primary"
                           icon={<PlayCircleOutlined />}
                           onClick={handleRunCode}
-                          className="bg-white/75 text-black hover:bg-white/90 border-none font-medium h-8 px-4 text-xs rounded-md"
+                          className="bg-white text-black hover:bg-white/90 border-none font-semibold h-8 px-4 text-xs rounded-[9px] shadow-sm"
                         >
                           Run Code & Test Output
                         </Button>
                         <Button
                           icon={<CodeOutlined />}
                           onClick={() => setSolutionModalOpen(true)}
-                          className="text-xs font-medium bg-[#000000] text-white/80 border border-white/10 rounded-md h-8"
+                          className="text-xs font-medium bg-[#000000] text-white/80 border border-white/10 rounded-[9px] h-8"
                         >
                           View Solution
                         </Button>
@@ -499,7 +499,7 @@ export default function DayLearningPage() {
                       type="primary"
                       icon={<SaveOutlined />}
                       onClick={handleSaveNote}
-                      className="bg-white/75 text-black hover:bg-white/90 border-none font-medium text-xs h-8 rounded-md"
+                      className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs h-8 rounded-[9px] shadow-sm"
                     >
                       {noteSaved ? "Saved!" : "Save Notes"}
                     </Button>
@@ -526,7 +526,7 @@ export default function DayLearningPage() {
           icon={<LeftOutlined />}
           disabled={dayId <= 1}
           onClick={handlePrevDay}
-          className="font-medium bg-[#000000] text-white/80 border border-white/10 rounded-md text-xs disabled:opacity-30"
+          className="font-medium bg-[#000000] text-white/80 border border-white/10 rounded-[9px] text-xs disabled:opacity-30"
         >
           Previous Day
         </Button>
@@ -540,7 +540,7 @@ export default function DayLearningPage() {
           size="medium"
           icon={<RightOutlined />}
           onClick={handleNextDay}
-          className="bg-white/75 text-black hover:bg-white/90 border-none font-medium text-xs rounded-md"
+          className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs rounded-[9px] shadow-sm"
         >
           {dayId < totalDays ? "Next Day" : "Claim Certificate 🎉"}
         </Button>
@@ -552,13 +552,13 @@ export default function DayLearningPage() {
         open={solutionModalOpen}
         onCancel={() => setSolutionModalOpen(false)}
         footer={[
-          <Button key="close" onClick={() => setSolutionModalOpen(false)} className="text-xs bg-[#000000] text-white border-white/10">
+          <Button key="close" onClick={() => setSolutionModalOpen(false)} className="text-xs bg-[#000000] text-white border-white/10 rounded-[7px]">
             Close
           </Button>,
           <Button
             key="apply"
             type="primary"
-            className="bg-white/75 text-black hover:bg-white/90 border-none font-medium text-xs"
+            className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs rounded-[7px]"
             onClick={() => {
               setUserCode(lesson.exercise.solutionCode);
               setSolutionModalOpen(false);
@@ -625,11 +625,11 @@ export default function DayLearningPage() {
                   placement: "bottomRight"
                 });
               }}
-              className="bg-white/75 text-black hover:bg-white/90 border-none font-medium text-xs rounded-md h-9 px-4"
+              className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs rounded-[9px] h-9 px-4 shadow-sm"
             >
               Share Certificate
             </Button>
-            <Button size="medium" onClick={() => setCertModalOpen(false)} className="bg-[#000000] text-white/80 border border-white/10 rounded-md text-xs h-9 px-4">
+            <Button size="medium" onClick={() => setCertModalOpen(false)} className="bg-[#000000] text-white/80 border border-white/10 rounded-[9px] text-xs h-9 px-4">
               Close
             </Button>
           </div>
