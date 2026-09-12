@@ -45,7 +45,6 @@ export default function DayLearningPage() {
     markDayCompleted,
     markDayUncompleted,
     isDayCompleted,
-    themeMode,
     totalDays,
     getUserNote,
     saveUserNote,
@@ -57,7 +56,6 @@ export default function DayLearningPage() {
   const lesson = CURRICULUM_DATA.find((d) => d.id === dayId) || CURRICULUM_DATA[0];
 
   const isCompleted = isDayCompleted(lesson.id);
-  const isDark = themeMode === "dark";
 
   // Code runner state
   const [userCode, setUserCode] = useState(lesson.exercise.starterCode);
@@ -184,21 +182,21 @@ export default function DayLearningPage() {
   const durationSeconds = lesson.videoEndTime - lesson.videoStartTime;
 
   return (
-    <div className="space-y-6 pb-12">
-      {/* Header Banner - Space Purple Theme */}
-      <div className={`p-6 rounded-[19.2px] border ${isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"}`}>
+    <div className="space-y-5 pb-12">
+      {/* Header Banner */}
+      <div className="p-5 rounded-2xl border bg-[#08080c] border-white/10">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2 mb-2">
-              <Tag color="#ff63f9" className="font-semibold m-0 text-black border-none">{lesson.module}</Tag>
-              <Tag color={isCompleted ? "#ff63f9" : "#211327"} className="font-semibold m-0 border border-[#ffffff25] text-white">
-                {isCompleted ? <span className="flex items-center gap-1 text-black"><CheckCircleFilled /> Completed</span> : "In Progress"}
+            <div className="flex items-center gap-2 mb-1.5">
+              <Tag color="rgba(255, 255, 255, 0.15)" className="font-semibold m-0 text-white border-none text-[10px]">{lesson.module}</Tag>
+              <Tag color={isCompleted ? "rgba(255, 255, 255, 0.15)" : "#000000"} className="font-semibold m-0 border border-white/10 text-white/80 text-[10px]">
+                {isCompleted ? <span className="flex items-center gap-1 text-white"><CheckCircleFilled /> Completed</span> : "In Progress"}
               </Tag>
             </div>
-            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight m-0 text-[#ff63f9]">
+            <h1 className="text-xl md:text-2xl font-bold tracking-tight m-0 text-white">
               Day {lesson.day}: {lesson.title}
             </h1>
-            <p className={`text-sm mt-1 m-0 ${isDark ? "text-white/80" : "text-[#211327]"}`}>
+            <p className="text-xs mt-1 m-0 text-white/60">
               {lesson.description}
             </p>
           </div>
@@ -206,10 +204,10 @@ export default function DayLearningPage() {
           <div className="flex items-center gap-3 shrink-0">
             <Button
               type={isCompleted ? "default" : "primary"}
-              size="large"
-              icon={isCompleted ? <CheckCircleFilled className="text-[#ff63f9]" /> : <CheckCircleOutlined />}
+              size="medium"
+              icon={isCompleted ? <CheckCircleFilled className="text-white" /> : <CheckCircleOutlined />}
               onClick={handleToggleComplete}
-              className={!isCompleted ? "bg-white text-black hover:bg-[#ff63f9] hover:text-black border-none font-bold rounded-md" : "font-bold border-[#ffffff25] text-white rounded-md"}
+              className={!isCompleted ? "bg-white/75 text-black hover:bg-white/90 border-none font-medium text-xs rounded-md" : "font-medium border-white/10 text-white/80 rounded-md text-xs"}
             >
               {isCompleted ? "Marked Completed" : "Mark as Completed"}
             </Button>
@@ -217,11 +215,11 @@ export default function DayLearningPage() {
         </div>
       </div>
 
-      {/* Main Grid: YouTube Video + Sidebar Info */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* YouTube Video Player (Col-span 2) */}
+      {/* Main Grid: Video + Sidebar Info */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        {/* Video Player (Col-span 2) */}
         <div className="lg:col-span-2 space-y-4">
-          <div className={`rounded-[19.2px] border overflow-hidden ${isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"}`}>
+          <div className="rounded-2xl border overflow-hidden bg-[#08080c] border-white/10">
             {/* Embed Video Iframe */}
             <div className="relative w-full aspect-video bg-black">
               <iframe
@@ -234,9 +232,9 @@ export default function DayLearningPage() {
             </div>
 
             {/* Video Control & Timestamp Footer */}
-            <div className="p-4 flex flex-wrap items-center justify-between gap-3 bg-[#000000] border-t border-[#ffffff15] text-xs text-white">
-              <div className="flex items-center gap-2 font-semibold">
-                <FieldTimeOutlined className="text-[#ff63f9] text-sm" />
+            <div className="p-3.5 flex flex-wrap items-center justify-between gap-3 bg-[#000000] border-t border-white/10 text-xs text-white/80">
+              <div className="flex items-center gap-2 font-medium text-[11px]">
+                <FieldTimeOutlined className="text-white/60 text-xs" />
                 <span>Timestamp: {formatTime(lesson.videoStartTime)} - {formatTime(lesson.videoEndTime)} ({durationSeconds} seconds)</span>
               </div>
 
@@ -244,7 +242,7 @@ export default function DayLearningPage() {
                 href={`https://www.youtube.com/watch?v=${YOUTUBE_VIDEO_ID}&t=${lesson.videoStartTime}s`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="no-underline text-[#ff63f9] hover:underline font-bold flex items-center gap-1"
+                className="no-underline text-white/80 hover:text-white font-medium text-[11px] flex items-center gap-1"
               >
                 Watch on YouTube <ExportOutlined />
               </a>
@@ -254,40 +252,40 @@ export default function DayLearningPage() {
 
         {/* Quick Lesson Specs Sidebar (Col-span 1) */}
         <div className="space-y-4">
-          <div className={`p-6 rounded-[19.2px] border ${isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"}`}>
-            <span className="font-bold text-sm flex items-center gap-2 text-[#ff63f9] mb-4"><BookOutlined /> Lesson Specs</span>
+          <div className="p-5 rounded-2xl border bg-[#08080c] border-white/10">
+            <span className="font-bold text-xs flex items-center gap-2 text-white mb-3.5"><BookOutlined /> Lesson Specs</span>
             <div className="space-y-3 text-xs">
               <div>
-                <span className="text-white/50 font-semibold">Lesson Concept:</span>
-                <div className="font-bold text-sm text-white mt-0.5">{lesson.title}</div>
+                <span className="text-white/40 font-medium text-[11px]">Lesson Concept:</span>
+                <div className="font-semibold text-xs text-white mt-0.5">{lesson.title}</div>
               </div>
 
               <div>
-                <span className="text-white/50 font-semibold">Module Group:</span>
-                <div className="font-medium text-white mt-0.5">{lesson.module}</div>
+                <span className="text-white/40 font-medium text-[11px]">Module Group:</span>
+                <div className="font-medium text-xs text-white/80 mt-0.5">{lesson.module}</div>
               </div>
 
               <div>
-                <span className="text-white/50 font-semibold">Documentation Reference:</span>
+                <span className="text-white/40 font-medium text-[11px]">Documentation Reference:</span>
                 <div className="mt-1">
                   <a
-                    href={lesson.w3SchoolsLink}
+                    href={lesson.docsLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="no-underline inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-[#ff63f9]/20 text-[#ff63f9] font-bold hover:bg-[#ff63f9] hover:text-black transition-colors"
+                    className="no-underline inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 text-white font-medium text-xs hover:bg-white/20 transition-colors"
                   >
-                    W3Schools Docs <ExportOutlined />
+                    MDN Documentation <ExportOutlined />
                   </a>
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-[#ffffff15]">
+              <div className="pt-2 border-t border-white/10">
                 <Button
                   block
                   type="primary"
                   icon={<RocketOutlined />}
                   onClick={handleNextDay}
-                  className="bg-white text-black hover:bg-[#ff63f9] hover:text-black border-none font-bold h-10 rounded-md"
+                  className="bg-white/75 text-black hover:bg-white/90 border-none font-medium h-9 text-xs rounded-md"
                 >
                   {dayId < totalDays ? "Complete & Go to Next Day" : "Claim Certificate 🎉"}
                 </Button>
@@ -298,27 +296,27 @@ export default function DayLearningPage() {
       </div>
 
       {/* Tabs: Documentation, Interactive Code Practice & Personal Notes */}
-      <div className={`p-6 rounded-[19.2px] border ${isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"}`}>
+      <div className="p-5 rounded-2xl border bg-[#08080c] border-white/10">
         <Tabs
           defaultActiveKey="docs"
           items={[
             {
               key: "docs",
               label: (
-                <span className="font-semibold text-sm flex items-center gap-2 text-white">
-                  <BookOutlined className="text-[#ff63f9]" /> W3Schools Documentation & Notes
+                <span className="font-medium text-xs flex items-center gap-2 text-white">
+                  <BookOutlined className="text-white/60" /> Lesson Documentation & Notes
                 </span>
               ),
               children: (
-                <div className="space-y-6 pt-2">
+                <div className="space-y-5 pt-2">
                   {/* Summary Notes */}
                   <div>
-                    <h3 className="text-base font-bold mb-3 flex items-center gap-2 text-[#ff63f9]">
+                    <h3 className="text-sm font-bold mb-2 flex items-center gap-2 text-white">
                       <BulbOutlined /> Key Concept Takeaways
                     </h3>
-                    <ul className="space-y-2 text-sm list-disc pl-5">
+                    <ul className="space-y-1.5 text-xs list-disc pl-5 text-white/80">
                       {lesson.summaryNotes.map((note, i) => (
-                        <li key={i} className={isDark ? "text-white" : "text-[#211327]"}>
+                        <li key={i} className="text-white/70">
                           {note}
                         </li>
                       ))}
@@ -328,45 +326,45 @@ export default function DayLearningPage() {
                   {/* Code Snippet Box */}
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-base font-bold m-0 flex items-center gap-2 text-[#ff63f9]">
+                      <h3 className="text-sm font-bold m-0 flex items-center gap-2 text-white">
                         <CodeOutlined /> Syntax & Code Example
                       </h3>
                       <Button
                         size="small"
                         icon={<CopyOutlined />}
                         onClick={handleCopySnippet}
-                        className="text-xs font-medium bg-[#000000] text-white border border-[#ffffff25] rounded-md"
+                        className="text-[11px] font-medium bg-[#000000] text-white/80 border border-white/10 rounded-md"
                       >
                         {copied ? "Copied!" : "Copy Snippet"}
                       </Button>
                     </div>
-                    <pre className="p-4 rounded-xl bg-[#000000] text-[#ff63f9] font-mono text-sm overflow-x-auto border border-[#ffffff15] leading-relaxed">
+                    <pre className="p-3.5 rounded-xl bg-[#000000] text-white/90 font-mono text-xs overflow-x-auto border border-white/10 leading-relaxed">
                       <code>{lesson.codeSnippet}</code>
                     </pre>
                   </div>
 
-                  {/* W3Schools Documentation Banner */}
+                  {/* Documentation Banner */}
                   <Alert
                     type="info"
                     showIcon
                     icon={<BookOutlined />}
-                    message={<span className="font-bold text-white">Official W3Schools Documentation Link</span>}
+                    message={<span className="font-semibold text-xs text-white">Official MDN Documentation Guide</span>}
                     description={
                       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mt-1">
-                        <span className="text-xs text-white/80">
-                          Deepen your knowledge by reading the full documentation, parameters, and browser compatibility on W3Schools.
+                        <span className="text-[11px] text-white/60">
+                          Deepen your knowledge by exploring full documentation, parameters, and code examples.
                         </span>
                         <a
-                          href={lesson.w3SchoolsLink}
+                          href={lesson.docsLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="no-underline inline-flex items-center gap-1 px-4 py-1.5 rounded-md bg-white text-black font-bold text-xs hover:bg-[#ff63f9] hover:text-black transition-colors shrink-0"
+                          className="no-underline inline-flex items-center gap-1 px-3 py-1 rounded-md bg-white/75 text-black font-medium text-xs hover:bg-white/90 transition-colors shrink-0"
                         >
-                          Open W3Schools Topic <ExportOutlined />
+                          Open MDN Documentation <ExportOutlined />
                         </a>
                       </div>
                     }
-                    className="bg-[#000000] border-[#ffffff25]"
+                    className="bg-[#000000] border-white/10"
                   />
                 </div>
               )
@@ -374,20 +372,20 @@ export default function DayLearningPage() {
             {
               key: "sandbox",
               label: (
-                <span className="font-semibold text-sm flex items-center gap-2 text-white">
-                  <CodeOutlined className="text-[#ff63f9]" /> Interactive Exercise & Sandbox
+                <span className="font-medium text-xs flex items-center gap-2 text-white">
+                  <CodeOutlined className="text-white/60" /> Interactive Exercise & Sandbox
                 </span>
               ),
               children: (
-                <div className="space-y-6 pt-2">
+                <div className="space-y-5 pt-2">
                   {/* Exercise Prompt */}
                   <Alert
                     type="warning"
                     showIcon
                     icon={<TrophyOutlined />}
-                    message={<span className="font-bold text-white">Micro-Exercise</span>}
-                    description={<p className="text-sm m-0 mt-1 text-white/80">{lesson.exercise.prompt}</p>}
-                    className="bg-[#000000] border-[#ffffff15]"
+                    message={<span className="font-semibold text-xs text-white">Micro-Exercise</span>}
+                    description={<p className="text-xs m-0 mt-1 text-white/70">{lesson.exercise.prompt}</p>}
+                    className="bg-[#000000] border-white/10"
                   />
 
                   {/* Code Textarea & Console Output Grid */}
@@ -395,16 +393,16 @@ export default function DayLearningPage() {
                     {/* Code Editor Area */}
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-white flex items-center gap-1.5">
+                        <span className="text-xs font-semibold text-white flex items-center gap-1.5">
                           <span>JavaScript Editor</span>
-                          <span className="text-[10px] text-[#ff63f9] font-semibold bg-[#ff63f9]/20 px-2 py-0.5 rounded">Ctrl + Enter to run</span>
+                          <span className="text-[9px] text-white/70 font-mono bg-white/10 px-1.5 py-0.5 rounded">Ctrl + Enter to run</span>
                         </span>
                         <div className="flex items-center gap-2">
                           <Button
                             size="small"
                             icon={<ReloadOutlined />}
                             onClick={() => setUserCode(lesson.exercise.starterCode)}
-                            className="text-xs bg-[#000000] text-white border border-[#ffffff25] rounded-md"
+                            className="text-[11px] bg-[#000000] text-white/80 border border-white/10 rounded-md"
                           >
                             Reset Code
                           </Button>
@@ -412,7 +410,7 @@ export default function DayLearningPage() {
                             size="small"
                             icon={<BulbOutlined />}
                             onClick={() => setShowHint(!showHint)}
-                            className="text-xs bg-[#000000] text-white border border-[#ffffff25] rounded-md"
+                            className="text-[11px] bg-[#000000] text-white/80 border border-white/10 rounded-md"
                           >
                             {showHint ? "Hide Hint" : "Show Hint"}
                           </Button>
@@ -422,31 +420,31 @@ export default function DayLearningPage() {
                       <textarea
                         value={userCode}
                         onChange={(e) => setUserCode(e.target.value)}
-                        className="w-full h-56 p-3 rounded-xl bg-[#000000] text-[#ff63f9] font-mono text-sm border border-[#ffffff25] focus:outline-none focus:ring-2 focus:ring-[#ff63f9] resize-none leading-relaxed"
+                        className="w-full h-52 p-3 rounded-xl bg-[#000000] text-white font-mono text-xs border border-white/10 focus:outline-none focus:ring-1 focus:ring-white/30 resize-none leading-relaxed"
                         placeholder="Write your JavaScript code here..."
                       />
 
                       {showHint && (
                         <Alert
                           type="info"
-                          message={<span className="text-xs font-semibold text-white">Hint: {lesson.exercise.hint}</span>}
-                          className="py-1 px-3 bg-[#000000] border-[#ffffff25]"
+                          message={<span className="text-[11px] font-normal text-white/80">Hint: {lesson.exercise.hint}</span>}
+                          className="py-1 px-3 bg-[#000000] border-white/10"
                         />
                       )}
 
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2.5">
                         <Button
                           type="primary"
                           icon={<PlayCircleOutlined />}
                           onClick={handleRunCode}
-                          className="bg-white text-black hover:bg-[#ff63f9] hover:text-black border-none font-bold h-10 px-6 rounded-md"
+                          className="bg-white/75 text-black hover:bg-white/90 border-none font-medium h-8 px-4 text-xs rounded-md"
                         >
                           Run Code & Test Output
                         </Button>
                         <Button
                           icon={<CodeOutlined />}
                           onClick={() => setSolutionModalOpen(true)}
-                          className="text-xs font-bold bg-[#000000] text-white border border-[#ffffff25] rounded-md"
+                          className="text-xs font-medium bg-[#000000] text-white/80 border border-white/10 rounded-md h-8"
                         >
                           View Solution
                         </Button>
@@ -455,20 +453,20 @@ export default function DayLearningPage() {
 
                     {/* Terminal Console Output */}
                     <div className="space-y-2">
-                      <span className="text-xs font-bold text-white">Terminal Output (console.log)</span>
-                      <div className="w-full h-56 p-3 rounded-xl bg-[#000000] text-white font-mono text-xs border border-[#ffffff25] overflow-y-auto space-y-1">
+                      <span className="text-xs font-semibold text-white">Terminal Output (console.log)</span>
+                      <div className="w-full h-52 p-3 rounded-xl bg-[#000000] text-white/90 font-mono text-xs border border-white/10 overflow-y-auto space-y-1">
                         {consoleOutput.length === 0 ? (
-                          <span className="text-white/40 italic">Click "Run Code" or press Ctrl+Enter to view console output here...</span>
+                          <span className="text-white/30 italic">Click "Run Code" or press Ctrl+Enter to view console output here...</span>
                         ) : (
                           consoleOutput.map((line, idx) => (
                             <div
                               key={idx}
                               className={
                                 line.startsWith("[ERROR]")
-                                  ? "text-red-400 font-bold"
+                                  ? "text-red-400 font-medium"
                                   : line.startsWith("=>")
                                   ? "text-white/40 italic"
-                                  : "text-[#ff63f9]"
+                                  : "text-white/90"
                               }
                             >
                               {line}
@@ -484,35 +482,35 @@ export default function DayLearningPage() {
             {
               key: "notes",
               label: (
-                <span className="font-semibold text-sm flex items-center gap-2 text-white">
-                  <FileTextOutlined className="text-[#ff63f9]" /> Personal Study Notes
+                <span className="font-medium text-xs flex items-center gap-2 text-white">
+                  <FileTextOutlined className="text-white/60" /> Personal Study Notes
                 </span>
               ),
               children: (
                 <div className="space-y-4 pt-2">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-base font-bold m-0 flex items-center gap-2 text-[#ff63f9]">
+                      <h3 className="text-sm font-bold m-0 flex items-center gap-2 text-white">
                         <FileTextOutlined /> Personal Notes for Day {lesson.day}
                       </h3>
-                      <p className="text-xs text-white/50 m-0">Write down key observations or code snippets. Saved to browser localStorage.</p>
+                      <p className="text-[11px] text-white/50 m-0">Write down key observations or code snippets. Saved to browser localStorage.</p>
                     </div>
                     <Button
                       type="primary"
                       icon={<SaveOutlined />}
                       onClick={handleSaveNote}
-                      className="bg-white text-black hover:bg-[#ff63f9] hover:text-black border-none font-bold text-xs rounded-md"
+                      className="bg-white/75 text-black hover:bg-white/90 border-none font-medium text-xs h-8 rounded-md"
                     >
                       {noteSaved ? "Saved!" : "Save Notes"}
                     </Button>
                   </div>
 
                   <TextArea
-                    rows={8}
+                    rows={7}
                     value={noteText}
                     onChange={(e) => setNoteText(e.target.value)}
                     placeholder="Write your study notes here..."
-                    className="font-sans text-sm rounded-xl p-3 bg-[#000000] text-white border-[#ffffff25]"
+                    className="font-sans text-xs rounded-xl p-3 bg-[#000000] text-white border-white/10"
                   />
                 </div>
               )
@@ -522,27 +520,27 @@ export default function DayLearningPage() {
       </div>
 
       {/* Navigation Footer */}
-      <div className={`p-4 rounded-[19.2px] border flex items-center justify-between gap-4 ${isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"}`}>
+      <div className="p-3.5 rounded-2xl border flex items-center justify-between gap-4 bg-[#08080c] border-white/10">
         <Button
-          size="large"
+          size="medium"
           icon={<LeftOutlined />}
           disabled={dayId <= 1}
           onClick={handlePrevDay}
-          className="font-bold bg-[#000000] text-white border border-[#ffffff25] rounded-md disabled:opacity-40"
+          className="font-medium bg-[#000000] text-white/80 border border-white/10 rounded-md text-xs disabled:opacity-30"
         >
           Previous Day
         </Button>
 
-        <div className="text-xs text-white font-medium hidden sm:block">
+        <div className="text-xs text-white/50 font-medium hidden sm:block">
           Day {dayId} of {totalDays}
         </div>
 
         <Button
           type="primary"
-          size="large"
+          size="medium"
           icon={<RightOutlined />}
           onClick={handleNextDay}
-          className="bg-white text-black hover:bg-[#ff63f9] hover:text-black border-none font-bold rounded-md"
+          className="bg-white/75 text-black hover:bg-white/90 border-none font-medium text-xs rounded-md"
         >
           {dayId < totalDays ? "Next Day" : "Claim Certificate 🎉"}
         </Button>
@@ -554,13 +552,13 @@ export default function DayLearningPage() {
         open={solutionModalOpen}
         onCancel={() => setSolutionModalOpen(false)}
         footer={[
-          <Button key="close" onClick={() => setSolutionModalOpen(false)}>
+          <Button key="close" onClick={() => setSolutionModalOpen(false)} className="text-xs bg-[#000000] text-white border-white/10">
             Close
           </Button>,
           <Button
             key="apply"
             type="primary"
-            className="bg-white text-black hover:bg-[#ff63f9] border-none font-bold"
+            className="bg-white/75 text-black hover:bg-white/90 border-none font-medium text-xs"
             onClick={() => {
               setUserCode(lesson.exercise.solutionCode);
               setSolutionModalOpen(false);
@@ -570,55 +568,55 @@ export default function DayLearningPage() {
           </Button>
         ]}
       >
-        <pre className="p-3 rounded-lg bg-[#000000] text-[#ff63f9] font-mono text-xs overflow-x-auto border border-[#ffffff15]">
+        <pre className="p-3 rounded-lg bg-[#000000] text-white/90 font-mono text-xs overflow-x-auto border border-white/10">
           <code>{lesson.exercise.solutionCode}</code>
         </pre>
       </Modal>
 
-      {/* Certificate of Completion Modal - Space Magenta Theme */}
+      {/* Certificate of Completion Modal */}
       <Modal
         open={certModalOpen}
         onCancel={() => setCertModalOpen(false)}
         footer={null}
-        width={650}
+        width={600}
         centered
       >
-        <div className="text-center py-6 px-4 space-y-6 bg-[#211327] text-white rounded-[24px] border border-[#ffffff25]">
-          <div className="w-20 h-20 mx-auto rounded-full bg-[#ff63f9] text-black flex items-center justify-center text-4xl shadow-[0_0_34px_rgba(255,99,249,0.3)]">
+        <div className="text-center py-5 px-3 space-y-5 bg-[#08080c] text-white rounded-2xl border border-white/10">
+          <div className="w-16 h-16 mx-auto rounded-full bg-white/15 text-white flex items-center justify-center text-3xl">
             🏆
           </div>
 
           <div>
-            <Tag color="#ff63f9" className="font-extrabold px-3 py-1 text-xs uppercase mb-2 text-black border-none">OFFICIAL CERTIFICATE OF COMPLETION</Tag>
-            <h2 className="text-2xl font-extrabold text-[#ff63f9]">100+ Days JavaScript Challenge Completed!</h2>
-            <p className="text-sm text-white/80 max-w-md mx-auto">
-              This certifies that <strong className="text-[#ff63f9]">{user?.name || "Student"}</strong> has successfully mastered all 43+ micro-concepts and 6 modules in JavaScript based on freeCodeCamp & W3Schools documentation.
+            <Tag color="rgba(255,255,255,0.15)" className="font-semibold px-2.5 py-0.5 text-[10px] uppercase mb-2 text-white border-none">OFFICIAL CERTIFICATE OF COMPLETION</Tag>
+            <h2 className="text-xl font-bold text-white">100+ Days JavaScript Challenge Completed!</h2>
+            <p className="text-xs text-white/60 max-w-sm mx-auto mt-1">
+              This certifies that <strong className="text-white">{user?.name || "Student"}</strong> has successfully mastered all 43+ micro-concepts and 6 modules in modern JavaScript core concepts and ES6 standards.
             </p>
           </div>
 
-          <div className="p-6 rounded-[19.2px] bg-[#000000] border border-[#ffffff15] text-left space-y-3 text-xs">
-            <div className="flex justify-between border-b border-[#ffffff15] pb-2">
-              <span className="text-white/50 font-semibold">Student Name:</span>
-              <span className="font-bold text-white">{user?.name || "JS Student"}</span>
+          <div className="p-4 rounded-xl bg-[#000000] border border-white/10 text-left space-y-2.5 text-xs">
+            <div className="flex justify-between border-b border-white/10 pb-2">
+              <span className="text-white/40 font-medium">Student Name:</span>
+              <span className="font-semibold text-white">{user?.name || "JS Student"}</span>
             </div>
-            <div className="flex justify-between border-b border-[#ffffff15] pb-2">
-              <span className="text-white/50 font-semibold">Curriculum:</span>
-              <span className="font-bold text-[#ff63f9]">100+ Days JavaScript Micro-Learning</span>
+            <div className="flex justify-between border-b border-white/10 pb-2">
+              <span className="text-white/40 font-medium">Curriculum:</span>
+              <span className="font-semibold text-white">100+ Days JavaScript Micro-Learning</span>
             </div>
-            <div className="flex justify-between border-b border-[#ffffff15] pb-2">
-              <span className="text-white/50 font-semibold">Total Modules Completed:</span>
-              <span className="font-bold text-white">6 Core Modules ({totalDays} Lessons)</span>
+            <div className="flex justify-between border-b border-white/10 pb-2">
+              <span className="text-white/40 font-medium">Total Modules Completed:</span>
+              <span className="font-semibold text-white">6 Core Modules ({totalDays} Lessons)</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-white/50 font-semibold">Completion Date:</span>
-              <span className="font-bold text-[#ff63f9]">{new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
+              <span className="text-white/40 font-medium">Completion Date:</span>
+              <span className="font-semibold text-white">{new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
             </div>
           </div>
 
           <div className="flex items-center justify-center gap-3">
             <Button
               type="primary"
-              size="large"
+              size="medium"
               icon={<ShareAltOutlined />}
               onClick={() => {
                 notification.success({
@@ -627,11 +625,11 @@ export default function DayLearningPage() {
                   placement: "bottomRight"
                 });
               }}
-              className="bg-white text-black hover:bg-[#ff63f9] border-none font-bold rounded-md"
+              className="bg-white/75 text-black hover:bg-white/90 border-none font-medium text-xs rounded-md h-9 px-4"
             >
               Share Certificate
             </Button>
-            <Button size="large" onClick={() => setCertModalOpen(false)} className="bg-[#000000] text-white border border-[#ffffff25] rounded-md">
+            <Button size="medium" onClick={() => setCertModalOpen(false)} className="bg-[#000000] text-white/80 border border-white/10 rounded-md text-xs h-9 px-4">
               Close
             </Button>
           </div>

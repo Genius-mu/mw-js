@@ -18,30 +18,30 @@ export function AntdProvider({ children }: { children: React.ReactNode }) {
             borderRadius: 19,
             fontFamily: "Satoshi, 'Cabinet Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
             colorBgBase: "#000000",
-            colorTextBase: "#ffffff"
+            colorTextBase: "#e2e2e2"
           },
           components: {
             Layout: {
               bodyBg: "#000000",
-              headerBg: "#211327",
+              headerBg: "#000000",
               siderBg: "#000000"
             },
             Menu: {
               darkItemBg: "#000000",
-              darkSubMenuItemBg: "#211327"
+              darkSubMenuItemBg: "#08080c"
             },
             Card: {
-              colorBgContainer: "#211327",
-              colorBorderSecondary: "#ffffff15"
+              colorBgContainer: "#08080c",
+              colorBorderSecondary: "rgba(255, 255, 255, 0.1)"
             },
             Button: {
-              colorPrimary: "#ffffff",
+              colorPrimary: "rgba(255, 255, 255, 0.75)",
               colorTextLightSolid: "#000000"
             }
           }
         }}
       >
-        <div className="dark bg-[#000000] text-[#ffffff] min-h-screen">
+        <div className="dark bg-[#000000] text-[#e2e2e2] min-h-screen">
           {children}
         </div>
       </ConfigProvider>

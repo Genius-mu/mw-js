@@ -168,15 +168,15 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
         </Link>
 
         {!collapsed && (
-          <div className="bg-[#211327] p-3 rounded-[19.2px] border border-[#ffffff15] space-y-2">
+          <div className="bg-[#08080c] p-3 rounded-xl border border-white/10 space-y-2">
             <div className="flex items-center justify-between text-xs font-semibold">
               <span className="text-white">Course Completion</span>
-              <span className="text-[#ff63f9] font-bold">{progressPercent}%</span>
+              <span className="text-white font-bold">{progressPercent}%</span>
             </div>
             <Progress percent={progressPercent} strokeColor="#ff63f9" showInfo={false} size="small" />
-            <div className="text-[11px] text-white/70 flex justify-between">
+            <div className="text-[11px] text-white/60 flex justify-between">
               <span>{completedCount} of {totalDays} completed</span>
-              <span className="text-[#ff63f9] font-medium">Keep going!</span>
+              <span className="text-white/80 font-medium">Keep going!</span>
             </div>
           </div>
         )}
@@ -184,7 +184,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
 
       {/* Search Input */}
       {!collapsed && (
-        <div className="p-3 border-b border-[#ffffff15]">
+        <div className="p-3 border-b border-white/10">
           <Input
             placeholder="Search chapters..."
             prefix={<SearchOutlined className="text-white/40" />}
@@ -192,7 +192,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
             onChange={(e) => setSearchQuery(e.target.value)}
             allowClear
             size="small"
-            className="rounded-lg bg-[#211327] text-white border-[#ffffff15]"
+            className="rounded-lg bg-[#08080c] text-white border-white/10"
           />
         </div>
       )}
@@ -220,7 +220,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
         onCollapse={(value) => setCollapsed(value)}
         width={320}
         theme="dark"
-        className="hidden md:block border-r border-[#ffffff15]"
+        className="hidden md:block border-r border-white/10"
         style={{
           position: "sticky",
           top: 0,
@@ -245,7 +245,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
 
       <Layout className="flex-1 flex flex-col min-w-0 bg-[#000000]">
         {/* Dashboard Top Header */}
-        <Header className="sticky top-0 z-40 px-4 md:px-6 h-16 flex items-center justify-between border-b bg-[#211327] border-[#ffffff15]">
+        <Header className="sticky top-0 z-40 px-4 md:px-6 h-14 flex items-center justify-between border-b bg-[#08080c] border-white/10">
           <div className="flex items-center gap-3">
             <Button
               type="text"
@@ -260,23 +260,23 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
               className="hidden md:flex items-center text-white"
             />
             <div className="hidden sm:flex items-center gap-2 text-xs font-semibold">
-              <Link href="/" className="no-underline text-white hover:text-[#ff63f9]">Home</Link>
+              <Link href="/" className="no-underline text-white/70 hover:text-white">Home</Link>
               <span className="text-white/30">/</span>
-              <span className="text-[#ff63f9]">Learn Dashboard</span>
+              <span className="text-white">Learn Dashboard</span>
               <span className="text-white/30">/</span>
-              <Tag color="#ff63f9" className="font-semibold m-0 text-black border-none">Day {currentDayId}</Tag>
+              <Tag color="rgba(255,255,255,0.15)" className="font-semibold m-0 text-white border-none">Day {currentDayId}</Tag>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
             <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
               <div className="flex items-center gap-2.5 cursor-pointer hover:opacity-80 transition-opacity">
-                <Avatar className="bg-[#ff63f9] text-black font-bold" icon={<UserOutlined />}>
+                <Avatar className="bg-white/20 text-white font-bold" icon={<UserOutlined />}>
                   {user?.name?.[0]?.toUpperCase() || "S"}
                 </Avatar>
                 <div className="hidden sm:block text-left">
                   <div className="text-xs font-bold leading-tight text-white">{user?.name || "Student"}</div>
-                  <div className="text-[10px] text-[#ff63f9] leading-tight">Student</div>
+                  <div className="text-[10px] text-white/50 leading-tight">Student</div>
                 </div>
               </div>
             </Dropdown>

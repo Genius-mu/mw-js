@@ -7,7 +7,7 @@ export interface LessonDay {
   description: string;
   videoStartTime: number; // in seconds
   videoEndTime: number; // in seconds
-  w3SchoolsLink: string;
+  docsLink: string;
   codeSnippet: string;
   summaryNotes: string[];
   exercise: {
@@ -26,7 +26,7 @@ export interface ModuleGroup {
   days: LessonDay[];
 }
 
-export const YOUTUBE_VIDEO_ID = "PkZNo7MFNFg"; // Beau Carnes 3.5h freeCodeCamp JS Course
+export const YOUTUBE_VIDEO_ID = "PkZNo7MFNFg"; // Interactive JavaScript Video Course
 
 export const CURRICULUM_DATA: LessonDay[] = [
   // MODULE 1: Basics & Data Types
@@ -39,7 +39,7 @@ export const CURRICULUM_DATA: LessonDay[] = [
     description: "Learn how to write single-line and multi-line comments in JavaScript to explain your code.",
     videoStartTime: 84,
     videoEndTime: 170,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_comments.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#comments",
     codeSnippet: `// This is an inline single-line comment
 
 /* 
@@ -69,7 +69,7 @@ console.log(greeting);`,
     description: "Understand JavaScript's 7 fundamental data types and how to declare variables using var, let, and const.",
     videoStartTime: 170,
     videoEndTime: 275,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_datatypes.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures",
     codeSnippet: `// 7 Data Types: undefined, null, boolean, string, symbol, number, object
 
 var myName = "Beau"; // string
@@ -98,7 +98,7 @@ let emptyValue = null; // null`,
     description: "Learn how the assignment operator (=) assigns values from right to left.",
     videoStartTime: 275,
     videoEndTime: 380,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_assignment.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Assignment",
     codeSnippet: `var a;
 var b = 2;
 console.log(a); // undefined
@@ -129,7 +129,7 @@ console.log(b); // 7`,
     description: "Understand uninitialized variables resulting in NaN and camelCase naming conventions.",
     videoStartTime: 460,
     videoEndTime: 620,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_conventions.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#declarations",
     codeSnippet: `// Variable declarations
 var studlyCapVar;
 var properCamelCase;
@@ -162,7 +162,7 @@ console.log(studlyCapVar, properCamelCase, titleCaseOver);`,
     description: "Perform addition, subtraction, multiplication, division, incrementing, and decrementing.",
     videoStartTime: 620,
     videoEndTime: 1040,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_arithmetic.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators#arithmetic_operators",
     codeSnippet: `let sum = 10 + 10;      // 20
 let difference = 45 - 33; // 12
 let product = 8 * 10;     // 80
@@ -192,7 +192,7 @@ myVar--; // Decrement by 1 -> 87`,
     description: "Work with float numbers, modulo operator (%), and shortcut operators (+=, -=, *=, /=).",
     videoStartTime: 1040,
     videoEndTime: 1660,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_operators.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_operators",
     codeSnippet: `let remainder = 11 % 3; // 2 (11 divided by 3 has remainder 2)
 
 let a = 3;
@@ -223,7 +223,7 @@ c *= 5;  // c = c * 5  (60)`,
     description: "Create string literals, escape special characters, and join strings together.",
     videoStartTime: 1660,
     videoEndTime: 2360,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_strings.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
     codeSnippet: `var myFirstName = "Alan";
 var myLastName = "Turing";
 
@@ -258,7 +258,7 @@ myStr += "Second part.";`,
     description: "Access individual characters in strings using zero-indexed bracket notation and .length.",
     videoStartTime: 2360,
     videoEndTime: 3080,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_string_methods.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
     codeSnippet: `let firstName = "Ada";
 let nameLength = firstName.length; // 3
 
@@ -294,7 +294,7 @@ str = "Hello World"; // Must reassign entire string`,
     description: "Store sequential items and nested (multi-dimensional) lists with JavaScript Arrays.",
     videoStartTime: 3080,
     videoEndTime: 3260,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_arrays.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
     codeSnippet: `// Simple Array
 let ourArray = ["John", 23];
 
@@ -321,7 +321,7 @@ console.log(teams[0]); // ["Bulls", 23]`,
     description: "Access and mutate elements in single and multi-dimensional arrays using index brackets.",
     videoStartTime: 3260,
     videoEndTime: 3550,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_array_methods.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
     codeSnippet: `let ourData = [50, 60, 70];
 let data = ourData[0]; // 50
 
@@ -351,7 +351,7 @@ let item = matrix[1][2]; // 6 (2nd sub-array, 3rd element)`,
     description: "Master basic array manipulation methods to add and remove items from ends and beginnings of arrays.",
     videoStartTime: 3550,
     videoEndTime: 4050,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_array_methods.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
     codeSnippet: `let arr = ["Stimpy", "J", "cat"];
 
 // push(): Append to end
@@ -387,7 +387,7 @@ arr.unshift("Happy");`,
     description: "Control program flow using true/false booleans and conditional if blocks.",
     videoStartTime: 5160,
     videoEndTime: 5380,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_if_else.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else",
     codeSnippet: `function welcomeToBooleans() {
   return true; // Booleans are true or false (no quotes)
 }
@@ -420,7 +420,7 @@ console.log(ourTrueOrFalse(true));`,
     description: "Understand the difference between loose equality (==) with type conversion and strict equality (===).",
     videoStartTime: 5380,
     videoEndTime: 5760,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_comparisons.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality",
     codeSnippet: `// Equality Operator (==) - coerces types
 3 == '3'; // true
 
@@ -451,7 +451,7 @@ console.log(ourTrueOrFalse(true));`,
     description: "Combine multiple boolean conditions with logical AND (&&) and logical OR (||).",
     videoStartTime: 6380,
     videoEndTime: 6620,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_comparisons.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality",
     codeSnippet: `// Logical AND (&&): Both conditions must be true
 function testLogicalAnd(val) {
   if (val >= 25 && val <= 50) {
@@ -487,7 +487,7 @@ function testLogicalOr(val) {
     description: "Chain conditional logic with else and else if blocks in correct logical sequence.",
     videoStartTime: 6620,
     videoEndTime: 7250,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_if_else.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else",
     codeSnippet: `function testElseIf(val) {
   if (val > 10) {
     return "Greater than 10";
@@ -521,7 +521,7 @@ console.log(testElseIf(7));`,
     description: "Replace long if-else chains with clear switch cases and default fallbacks.",
     videoStartTime: 7250,
     videoEndTime: 7850,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_switch.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch",
     codeSnippet: `function caseInSwitch(val) {
   let answer = "";
   switch (val) {
@@ -563,7 +563,7 @@ console.log(testElseIf(7));`,
     description: "Define reusable blocks of code using function declarations and execute them.",
     videoStartTime: 4050,
     videoEndTime: 4180,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_functions.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions",
     codeSnippet: `function ourReusableFunction() {
   console.log("Heyya, World!");
 }
@@ -591,7 +591,7 @@ ourReusableFunction();`,
     description: "Pass dynamic inputs to functions via parameters and process them.",
     videoStartTime: 4180,
     videoEndTime: 4290,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_functions.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions",
     codeSnippet: `function functionWithArgs(a, b) {
   console.log(a + b);
 }
@@ -618,7 +618,7 @@ functionWithArgs(7, 9);  // Outputs 16`,
     description: "Understand variable visibility, global scope, block/function scope, and local variable shadowing.",
     videoStartTime: 4290,
     videoEndTime: 4660,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_scope.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Glossary/Scope",
     codeSnippet: `var outerOutfit = "T-Shirt"; // Global variable
 
 function myOutfit() {
@@ -649,7 +649,7 @@ console.log(outerOutfit);    // "T-Shirt"`,
     description: "Pass computed outputs back from functions using the return keyword.",
     videoStartTime: 4660,
     videoEndTime: 4980,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_functions.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions",
     codeSnippet: `function minusSeven(num) {
   return num - 7;
 }
@@ -682,7 +682,7 @@ console.log(addFive(5)); // undefined`,
     description: "Build a queue data structure simulation using array push() and shift() in a function.",
     videoStartTime: 4980,
     videoEndTime: 5160,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_array_methods.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
     codeSnippet: `function nextInLine(arr, item) {
   arr.push(item);      // Add item to end of queue
   return arr.shift();  // Remove and return item from front
@@ -713,7 +713,7 @@ console.log("After: " + JSON.stringify(testArr));`,
     description: "Simplify conditional boolean returns and exit functions early on invalid conditions.",
     videoStartTime: 7850,
     videoEndTime: 8120,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_functions.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions",
     codeSnippet: `// Anti-pattern:
 function isLessOld(a, b) {
   if (a < b) return true;
@@ -754,7 +754,7 @@ function abTest(a, b) {
     description: "Represent structured real-world data using JavaScript Objects, dot notation, and bracket notation.",
     videoStartTime: 8400,
     videoEndTime: 8800,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_objects.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects",
     codeSnippet: `let ourDog = {
   "name": "Camper",
   "legs": 4,
@@ -792,7 +792,7 @@ let entreeValue = myObj["an entree"];`,
     description: "Mutate existing properties, insert new key-value pairs, and remove keys with delete keyword.",
     videoStartTime: 8920,
     videoEndTime: 9220,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_object_properties.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects",
     codeSnippet: `let ourDog = {
   "name": "Camper",
   "legs": 4,
@@ -830,7 +830,7 @@ console.log(ourDog);`,
     description: "Use objects as fast key-value lookup dictionaries and check key existence with hasOwnProperty.",
     videoStartTime: 9220,
     videoEndTime: 9520,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_object_properties.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects",
     codeSnippet: `// Replacing Switch with Object Lookup
 function phoneticLookup(val) {
   let lookup = {
@@ -872,7 +872,7 @@ console.log(checkObj("top")); // "hat"`,
     description: "Work with complex JSON-like nested objects containing arrays and sub-objects.",
     videoStartTime: 9520,
     videoEndTime: 9960,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_object_display.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects",
     codeSnippet: `let myStorage = {
   "car": {
     "inside": {
@@ -913,7 +913,7 @@ let secondTree = myPlants[1].list[1]; // "pine"`,
     description: "Build a record collection updater function handling nested object mutations.",
     videoStartTime: 9960,
     videoEndTime: 10300,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_objects.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects",
     codeSnippet: `let collection = {
   2548: { album: "Slippery When Wet", artist: "Bon Jovi", tracks: ["Let It Rock"] },
   2468: { album: "1999", artist: "Prince", tracks: ["1999", "Little Red Corvette"] }
@@ -954,7 +954,7 @@ updateRecords(2548, "artist", "Bon Jovi");`,
     description: "Run code repeatedly while a specified boolean condition evaluates to true.",
     videoStartTime: 10300,
     videoEndTime: 10450,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_loop_while.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/while",
     codeSnippet: `let myArray = [];
 let i = 0;
 
@@ -984,7 +984,7 @@ console.log(myArray); // [0, 1, 2, 3, 4]`,
     description: "Execute loops with precise initialization, condition, and increment expressions.",
     videoStartTime: 10450,
     videoEndTime: 10890,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_loop_for.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for",
     codeSnippet: `// Standard For Loop: for (initialization; condition; final-expression)
 let ourArray = [];
 for (let i = 1; i <= 5; i++) {
@@ -1022,7 +1022,7 @@ for (let i = 10; i > 0; i -= 2) {
     description: "Traverse array elements using array.length and for loops.",
     videoStartTime: 10890,
     videoEndTime: 11050,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_loop_for.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for",
     codeSnippet: `let myArr = [2, 3, 4, 5, 6];
 let total = 0;
 
@@ -1051,7 +1051,7 @@ console.log(total); // 20`,
     description: "Process multi-dimensional arrays with nested loops and understand do...while guaranteed execution.",
     videoStartTime: 11050,
     videoEndTime: 11420,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_loop_while.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/while",
     codeSnippet: `// Nesting For Loops
 function multiplyAll(arr) {
   let product = 1;
@@ -1094,7 +1094,7 @@ console.log(myArray); // [10]`,
     description: "Generate pseudo-random decimal fractions, integers, and numbers within min/max bounds.",
     videoStartTime: 11750,
     videoEndTime: 12150,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_random.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random",
     codeSnippet: `// Random fraction [0, 1)
 let randFraction = Math.random(); 
 
@@ -1128,7 +1128,7 @@ console.log(randomRange(5, 15));`,
     description: "Parse string inputs into numeric integers with standard decimal and binary radices.",
     videoStartTime: 12150,
     videoEndTime: 12420,
-    w3SchoolsLink: "https://www.w3schools.com/jsref/jsref_parseint.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt",
     codeSnippet: `// Standard parseInt
 let num1 = parseInt("007"); // 7
 
@@ -1156,7 +1156,7 @@ console.log(num2);`,
     description: "Write concise one-line conditional expressions using condition ? exprIfTrue : exprIfFalse.",
     videoStartTime: 12420,
     videoEndTime: 12720,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_comparisons.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality",
     codeSnippet: `// Single Ternary Operator
 function checkEqual(a, b) {
   return a === b ? "Equal" : "Not Equal";
@@ -1188,7 +1188,7 @@ console.log(checkSign(-5)); // "negative"`,
     description: "Compare scopes of var and let, declare constants, and prevent object mutations with Object.freeze.",
     videoStartTime: 12720,
     videoEndTime: 13560,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_let.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let",
     codeSnippet: `// let & const are block-scoped ({})
 function checkScope() {
   let i = "function scope";
@@ -1228,7 +1228,7 @@ Object.freeze(MATH_CONSTANTS);
     description: "Write concise ES6 arrow functions, single-expression returns, and default parameters.",
     videoStartTime: 13560,
     videoEndTime: 14050,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_arrow_function.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions",
     codeSnippet: `// Anonymous function
 const magic = () => new Date();
 
@@ -1260,7 +1260,7 @@ console.log(greeting()); // "Hello Developer"`,
     description: "Gather variable function arguments with Rest (...args) and unpack arrays with Spread (...arr).",
     videoStartTime: 14050,
     videoEndTime: 14350,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_es6.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
     codeSnippet: `// Rest Operator: Gathers parameters into an array
 const sum = (...args) => {
   return args.reduce((a, b) => a + b, 0);
@@ -1292,7 +1292,7 @@ console.log(arr2); // ['JAN', 'FEB', 'MAR']`,
     description: "Unpack values cleanly from objects and arrays into distinct variables.",
     videoStartTime: 14350,
     videoEndTime: 15300,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_destructuring.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment",
     codeSnippet: `const voxel = { x: 3.6, y: 7.4, z: 6.54 };
 
 // Object Destructuring with custom variable names
@@ -1328,7 +1328,7 @@ let [x, y] = [10, 20];
     description: "Create multi-line strings and interpolate variables cleanly using backticks (`...`).",
     videoStartTime: 15300,
     videoEndTime: 15480,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_string_templates.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals",
     codeSnippet: `const person = {
   name: "Zodiac Hasbro",
   age: 56
@@ -1360,7 +1360,7 @@ console.log(greeting);`,
     description: "Use ES6 object literal shorthand for properties and concise function declarations.",
     videoStartTime: 15480,
     videoEndTime: 15760,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_object_definition.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_objects",
     codeSnippet: `// Property Shorthand
 const createPerson = (name, age, gender) => ({ name, age, gender });
 console.log(createPerson("Zodiac", 56, "male"));
@@ -1394,7 +1394,7 @@ console.log(bicycle.gear); // 3`,
     description: "Instantiate object prototypes using modern ES6 class syntax and constructor methods.",
     videoStartTime: 15760,
     videoEndTime: 15920,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_classes.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes",
     codeSnippet: `class SpaceShuttle {
   constructor(targetPlanet) {
     this.targetPlanet = targetPlanet;
@@ -1431,7 +1431,7 @@ console.log(carrot.name); // "carrot"`,
     description: "Encapsulate private object state and control access with getter and setter methods.",
     videoStartTime: 15920,
     videoEndTime: 16120,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_object_accessors.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get",
     codeSnippet: `class Thermostat {
   constructor(tempFahrenheit) {
     this._tempFahrenheit = tempFahrenheit;
@@ -1471,7 +1471,7 @@ console.log(thermos.temperature); // 26`,
     description: "Share code across files using ES6 module exports, named imports, and default exports.",
     videoStartTime: 16120,
     videoEndTime: 16900,
-    w3SchoolsLink: "https://www.w3schools.com/js/js_modules.asp",
+    docsLink: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules",
     codeSnippet: `// --- string_functions.js ---
 export const capitalizeString = str => str.toUpperCase();
 export const lowercaseString = str => str.toLowerCase();

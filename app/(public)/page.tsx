@@ -11,120 +11,114 @@ import {
   CodeOutlined,
   TrophyOutlined,
   ThunderboltOutlined,
-  FieldTimeOutlined,
-  ApiOutlined,
-  SafetyCertificateOutlined,
-  DatabaseOutlined,
-  CodeFilled,
-  AimOutlined
+  FieldTimeOutlined
 } from "@ant-design/icons";
 import { MODULES_DATA } from "@/lib/curriculum";
 import { useLearning } from "@/context/LearningContext";
 
 export default function LandingPage() {
-  const { user, progressPercent, getNextUncompletedDay, completedDays } = useLearning();
+  const { user, getNextUncompletedDay, completedDays } = useLearning();
 
   const nextDay = getNextUncompletedDay();
 
   return (
-    <div className="space-y-24 pb-20">
-      {/* HERO SECTION - pxxl.app Centered & Space-Tech Style */}
-      <section className="relative pt-16 md:pt-28 pb-12 px-4 max-w-5xl mx-auto text-center">
-        {/* Soft Magenta Ambient Glow Background */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#ff63f9]/15 blur-[120px] rounded-full pointer-events-none -z-10 animate-glow" />
+    <div className="space-y-16 pb-16">
+      {/* HERO SECTION - pxxl.app Typography & Spacing */}
+      <section className="relative pt-10 md:pt-16 pb-8 px-4 max-w-4xl mx-auto text-center">
+        {/* Soft Ambient Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] bg-[#ff63f9]/5 blur-[120px] rounded-full pointer-events-none -z-10 animate-glow" />
 
-        {/* Top Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#ffffff25] bg-[#211327] text-[#ff63f9] text-xs font-semibold mb-8 shadow-[0_0_34px_rgba(255,99,249,0.08)]">
+        {/* Top Tag */}
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-white/10 bg-[#08080c] text-white/80 text-[10px] font-medium mb-5">
           <ThunderboltOutlined className="text-[#ff63f9]" />
           <span>100+ DAYS JAVASCRIPT DEVELOPER PLATFORM</span>
         </div>
 
-        {/* Headline Display */}
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] max-w-4xl mx-auto mb-6 text-white">
+        {/* Headline - Sized precisely for pxxl.app spec */}
+        <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight max-w-2xl mx-auto mb-3 text-white">
           Master JavaScript with <br />
           <span className="text-[#ff63f9]">
             Daily Micro-Habits
           </span>
         </h1>
 
-        {/* Supporting Copy */}
-        <p className="text-lg sm:text-xl max-w-2xl mx-auto mb-10 font-medium leading-relaxed text-white/80">
-          Learn JavaScript step-by-step with Beau Carnes’ 3.5-hour freeCodeCamp course. 
-          Split into 100+ daily micro-concepts with timestamped videos, W3Schools documentation, and instant progress tracking.
+        {/* Subtitle - compact body size */}
+        <p className="text-xs sm:text-xs max-w-lg mx-auto mb-6 font-normal leading-relaxed text-white/60">
+          Learn JavaScript step-by-step with 100+ daily micro-concepts, timestamped video lessons, interactive documentation guides, and instant progress tracking.
         </p>
 
-        {/* Paired Contrast CTAs */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
+        {/* Feint Contrast Buttons */}
+        <div className="flex flex-row items-center justify-center gap-3 mb-12">
           <Link href={`/learn/day/${nextDay}`}>
             <Button
               type="primary"
               size="large"
               icon={<RocketOutlined />}
-              className="h-12 px-8 text-sm font-semibold bg-white text-black hover:bg-[#ff63f9] hover:text-black border-none rounded-md min-w-[150px] shadow-none"
+              className="h-9 px-5 text-xs font-medium bg-white/75 text-black hover:bg-white/90 border-none rounded-md min-w-[120px] shadow-none"
             >
-              {user ? `Resume Day ${nextDay}` : "Get Started Free"}
+              {user ? `Resume Day ${nextDay}` : "Get Started"}
             </Button>
           </Link>
           <a href="#curriculum">
             <Button
               size="large"
               icon={<BookOutlined />}
-              className="h-12 px-8 text-sm font-semibold rounded-md border border-[#ffffff25] bg-[#000000] text-white hover:border-[#ff63f9] hover:text-[#ff63f9] min-w-[150px]"
+              className="h-9 px-5 text-xs font-medium rounded-md border border-white/10 bg-[#08080c] text-white/75 hover:text-white hover:border-white/25 min-w-[120px]"
             >
-              View Curriculum
+              Curriculum
             </Button>
           </a>
         </div>
 
-        {/* Connected Node Showcase Diagram (pxxl.app Product Diagram Canvas) */}
-        <div className="p-6 md:p-10 rounded-[24px] bg-[#211327]/60 border border-[#ffffff15] relative overflow-hidden backdrop-blur-xl">
-          <div className="flex items-center justify-between border-b border-[#ffffff15] pb-4 mb-6 text-xs text-white/60">
-            <div className="flex items-center gap-2 font-mono">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#ff63f9] animate-ping" />
-              <span>LIVE LEARNING WORKSPACE DIAGRAM</span>
+        {/* Product Diagram Showcase Grid - Dark Obsidian Panels with Thin Borders & Grid Lines */}
+        <div className="p-4 md:p-6 rounded-2xl bg-[#08080c] border border-white/10 relative overflow-hidden text-left">
+          <div className="flex items-center justify-between border-b border-white/10 pb-2.5 mb-4 text-[10px] text-white/40 font-mono">
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#ff63f9] animate-pulse" />
+              <span>LEARNING SYSTEM DIAGRAM</span>
             </div>
-            <div className="font-mono text-white/40">SYSTEM STATUS: OPTIMAL</div>
+            <div>STATUS: ACTIVE</div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-            {/* Connected Node 1 */}
-            <div className="glass-card p-6 text-left relative group">
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-10 h-10 rounded-lg bg-[#ff63f9]/20 text-[#ff63f9] flex items-center justify-center text-xl font-bold">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+            {/* Diagram Card 1 */}
+            <div className="glass-card p-3.5">
+              <div className="flex items-center justify-between mb-2.5">
+                <div className="w-7 h-7 rounded-md bg-white/10 text-white flex items-center justify-center text-xs font-bold">
                   <PlayCircleOutlined />
                 </div>
-                <Tag color="#ff63f9" className="font-mono text-[10px] text-black font-bold m-0 border-none">01 TIMESTAMPED</Tag>
+                <Tag color="#ffffff15" className="font-mono text-[9px] text-white/80 font-semibold m-0 border-none">TIMESTAMPED</Tag>
               </div>
-              <h3 className="text-base font-bold text-white mb-2">Automated Video Segments</h3>
-              <p className="text-xs text-white/70 m-0 leading-relaxed">
-                Pre-configured YouTube timestamp playback starting and ending at exact micro-concept seconds.
+              <h3 className="text-xs font-bold text-white mb-1">Automated Video Segments</h3>
+              <p className="text-[11px] text-white/50 m-0 leading-relaxed">
+                Pre-configured video playback starting and ending at exact micro-concept seconds.
               </p>
             </div>
 
-            {/* Connected Node 2 */}
-            <div className="glass-card p-6 text-left relative group">
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-10 h-10 rounded-lg bg-white/10 text-white flex items-center justify-center text-xl font-bold">
+            {/* Diagram Card 2 */}
+            <div className="glass-card p-3.5">
+              <div className="flex items-center justify-between mb-2.5">
+                <div className="w-7 h-7 rounded-md bg-white/10 text-white flex items-center justify-center text-xs font-bold">
                   <BookOutlined />
                 </div>
-                <Tag color="#ffffff25" className="font-mono text-[10px] text-white font-bold m-0 border-none">02 DOCS</Tag>
+                <Tag color="#ffffff15" className="font-mono text-[9px] text-white/80 font-semibold m-0 border-none">DOCS</Tag>
               </div>
-              <h3 className="text-base font-bold text-white mb-2">W3Schools Integration</h3>
-              <p className="text-xs text-white/70 m-0 leading-relaxed">
-                Direct reference cards, syntax guides, and outbound documentation for deeper comprehension.
+              <h3 className="text-xs font-bold text-white mb-1">Structured Documentation</h3>
+              <p className="text-[11px] text-white/50 m-0 leading-relaxed">
+                Direct reference cards, syntax guides, and documentation for deeper comprehension.
               </p>
             </div>
 
-            {/* Connected Node 3 */}
-            <div className="glass-card p-6 text-left relative group">
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-10 h-10 rounded-lg bg-[#ff63f9]/20 text-[#ff63f9] flex items-center justify-center text-xl font-bold">
+            {/* Diagram Card 3 */}
+            <div className="glass-card p-3.5">
+              <div className="flex items-center justify-between mb-2.5">
+                <div className="w-7 h-7 rounded-md bg-white/10 text-white flex items-center justify-center text-xs font-bold">
                   <CodeOutlined />
                 </div>
-                <Tag color="#ff63f9" className="font-mono text-[10px] text-black font-bold m-0 border-none">03 SANDBOX</Tag>
+                <Tag color="#ffffff15" className="font-mono text-[9px] text-white/80 font-semibold m-0 border-none">SANDBOX</Tag>
               </div>
-              <h3 className="text-base font-bold text-white mb-2">Interactive Code Runner</h3>
-              <p className="text-xs text-white/70 m-0 leading-relaxed">
+              <h3 className="text-xs font-bold text-white mb-1">Interactive Code Runner</h3>
+              <p className="text-[11px] text-white/50 m-0 leading-relaxed">
                 Evaluate JavaScript code directly in-browser with live console output and solution hints.
               </p>
             </div>
@@ -133,62 +127,62 @@ export default function LandingPage() {
       </section>
 
       {/* CURRICULUM SECTION */}
-      <section id="curriculum" className="max-w-6xl mx-auto px-4">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+      <section id="curriculum" className="max-w-4xl mx-auto px-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 gap-3">
           <div>
-            <Tag color="#ff63f9" className="font-semibold mb-2 text-black border-none font-mono">ROADMAP</Tag>
-            <h2 className="text-3xl font-bold text-white">JavaScript Curriculum Modules</h2>
+            <Tag color="#ffffff15" className="font-semibold mb-1 text-white/80 border-none font-mono text-[9px]">ROADMAP</Tag>
+            <h2 className="text-xl font-bold text-white">JavaScript Curriculum Modules</h2>
           </div>
           <Link href={`/learn/day/${nextDay}`}>
-            <Button type="primary" icon={<CodeOutlined />} className="bg-white text-black hover:bg-[#ff63f9] hover:text-black border-none font-bold rounded-md">
-              Launch Dashboard
+            <Button type="primary" icon={<CodeOutlined />} className="bg-white/75 text-black hover:bg-white/90 border-none font-medium text-xs h-8 px-3.5 rounded-md">
+              Launch Workspace
             </Button>
           </Link>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-3.5">
           {MODULES_DATA.map((module, idx) => (
             <div
               key={module.id}
-              className="glass-card p-6 md:p-8"
+              className="glass-card p-4"
             >
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#ffffff15] mb-6">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-2.5 border-b border-white/10 mb-3">
                 <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[#ff63f9] font-mono font-extrabold text-xs">MODULE 0{idx + 1}</span>
-                    <Badge count={`${module.days.length} Lessons`} style={{ backgroundColor: "#ff63f9", color: "#000000", fontWeight: "bold" }} />
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <span className="text-white/60 font-mono font-semibold text-[10px]">MODULE 0{idx + 1}</span>
+                    <Badge count={`${module.days.length} Lessons`} style={{ backgroundColor: "rgba(255, 255, 255, 0.15)", color: "#ffffff", fontWeight: "bold", fontSize: "9px" }} />
                   </div>
-                  <h3 className="text-xl font-bold text-white m-0">{module.title.replace(/^Module \d+:\s*/, "")}</h3>
-                  <p className="text-xs text-white/60 m-0 mt-1">{module.description}</p>
+                  <h3 className="text-xs font-bold text-white m-0">{module.title.replace(/^Module \d+:\s*/, "")}</h3>
+                  <p className="text-[11px] text-white/40 m-0 mt-0.5">{module.description}</p>
                 </div>
               </div>
 
               {/* Day Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
                 {module.days.map((day) => {
                   const isCompleted = completedDays.includes(day.id);
                   return (
                     <Link key={day.id} href={`/learn/day/${day.id}`} className="no-underline">
                       <div
-                        className={`p-3.5 rounded-xl border text-xs flex items-center justify-between transition-all group ${
+                        className={`p-2 rounded-lg border text-xs flex items-center justify-between transition-all group ${
                           isCompleted
-                            ? "bg-[#ff63f9]/15 border-[#ff63f9] text-[#ff63f9]"
-                            : "bg-[#000000]/60 border-[#ffffff15] text-white hover:border-[#ff63f9]"
+                            ? "bg-white/10 border-white/20 text-white font-semibold"
+                            : "bg-[#000000]/60 border-white/10 text-white/70 hover:border-white/25 hover:text-white"
                         }`}
                       >
-                        <div className="flex items-center gap-2.5 truncate">
+                        <div className="flex items-center gap-2 truncate">
                           {isCompleted ? (
-                            <CheckCircleFilled className="text-[#ff63f9] text-base shrink-0" />
+                            <CheckCircleFilled className="text-white text-xs shrink-0" />
                           ) : (
-                            <span className="w-5 h-5 rounded-full bg-[#ff63f9]/20 text-[#ff63f9] font-bold text-[10px] flex items-center justify-center shrink-0 font-mono">
+                            <span className="w-3.5 h-3.5 rounded-full bg-white/10 text-white/70 font-bold text-[8px] flex items-center justify-center shrink-0 font-mono">
                               {day.day}
                             </span>
                           )}
-                          <span className="truncate font-medium group-hover:text-[#ff63f9] transition-colors">
+                          <span className="truncate font-medium group-hover:text-white transition-colors text-[11px]">
                             {day.title}
                           </span>
                         </div>
-                        <FieldTimeOutlined className="text-white/40 text-xs shrink-0 ml-2" />
+                        <FieldTimeOutlined className="text-white/30 text-[9px] shrink-0 ml-1.5" />
                       </div>
                     </Link>
                   );
@@ -200,17 +194,17 @@ export default function LandingPage() {
       </section>
 
       {/* LOWER CTA SHOWCASE CONTAINER */}
-      <section className="max-w-4xl mx-auto px-4">
-        <div className="rounded-[24px] bg-[#211327] text-white p-8 md:p-14 text-center border border-[#ffffff25] relative overflow-hidden shadow-[0_0_50px_rgba(255,99,249,0.08)]">
-          <div className="relative z-10 space-y-4">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white">Ready to Start Your 100 Days JS Challenge?</h2>
-            <p className="text-white/80 max-w-xl mx-auto text-sm font-medium leading-relaxed">
+      <section className="max-w-3xl mx-auto px-4">
+        <div className="rounded-2xl bg-[#08080c] text-white p-6 md:p-8 text-center border border-white/10 relative overflow-hidden">
+          <div className="relative z-10 space-y-2.5">
+            <h2 className="text-xl md:text-2xl font-bold text-white">Ready to Start Your 100 Days JS Challenge?</h2>
+            <p className="text-white/60 max-w-sm mx-auto text-xs font-normal leading-relaxed">
               Join students mastering JavaScript one daily micro-concept at a time. Free, structured, and interactive.
             </p>
             <div className="pt-2">
               <Link href={`/learn/day/${nextDay}`}>
-                <Button size="large" className="h-12 px-10 text-sm font-bold bg-white text-black hover:bg-[#ff63f9] hover:text-black border-none rounded-md">
-                  Launch Learning Workspace Now
+                <Button size="large" className="h-9 px-6 text-xs font-semibold bg-white/75 text-black hover:bg-white/90 border-none rounded-md">
+                  Launch Workspace Now
                 </Button>
               </Link>
             </div>
