@@ -16,33 +16,32 @@ export function AntdProvider({ children }: { children: React.ReactNode }) {
         theme={{
           algorithm: isDark ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
           token: {
-            colorPrimary: "#D7BE82",
-            colorSuccess: "#755C1B",
-            colorWarning: "#E5C989",
-            colorError: "#400406",
-            borderRadius: 8,
-            fontFamily: "var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-            colorBgBase: isDark ? "#1A120B" : "#FAF4E8",
-            colorTextBase: isDark ? "#D7BE82" : "#1A120B"
+            colorPrimary: isDark ? "#ff63f9" : "#9333ea",
+            colorSuccess: "#ff63f9",
+            colorWarning: "#ff63f9",
+            colorError: "#ff63f9",
+            borderRadius: 19,
+            fontFamily: "Satoshi, 'Cabinet Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+            colorBgBase: isDark ? "#000000" : "#ffffff",
+            colorTextBase: isDark ? "#ffffff" : "#211327"
           },
           components: {
             Layout: {
-              bodyBg: isDark ? "#1A120B" : "#FAF4E8",
-              headerBg: isDark ? "#2B1D0E" : "#D7BE82",
-              siderBg: isDark ? "#1A120B" : "#FAF4E8"
+              bodyBg: isDark ? "#000000" : "#ffffff",
+              headerBg: isDark ? "#211327" : "#faf5ff",
+              siderBg: isDark ? "#000000" : "#ffffff"
             },
             Menu: {
-              darkItemBg: "#1A120B",
-              darkSubMenuItemBg: "#2B1D0E"
+              darkItemBg: "#000000",
+              darkSubMenuItemBg: "#211327"
             },
             Card: {
-              colorBgContainer: isDark ? "#2B1D0E" : "#FFFFFF",
-              colorBorderSecondary: isDark ? "#755C1B" : "#D7BE82"
+              colorBgContainer: isDark ? "#211327" : "#faf5ff",
+              colorBorderSecondary: isDark ? "#ffffff15" : "#e9d5ff"
             },
             Button: {
-              colorPrimary: "#7A4419",
-              colorPrimaryHover: "#93521E",
-              colorTextLightSolid: "#D7BE82"
+              colorPrimary: isDark ? "#ffffff" : "#211327",
+              colorTextLightSolid: isDark ? "#000000" : "#ffffff"
             }
           }
         }}
@@ -50,8 +49,8 @@ export function AntdProvider({ children }: { children: React.ReactNode }) {
         <div
           className={
             isDark
-              ? "dark bg-[#1A120B] text-[#D7BE82] min-h-screen"
-              : "bg-[#FAF4E8] text-[#1A120B] min-h-screen"
+              ? "dark bg-[#000000] text-[#ffffff] min-h-screen"
+              : "bg-[#ffffff] text-[#211327] min-h-screen"
           }
         >
           {children}
