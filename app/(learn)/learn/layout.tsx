@@ -10,17 +10,14 @@ import {
   Button,
   Avatar,
   Dropdown,
-  Switch,
   Input,
   Tag,
-  Tooltip,
   Drawer
 } from "antd";
 import {
   CodeOutlined,
   CheckCircleFilled,
   PlayCircleOutlined,
-  BulbOutlined,
   UserOutlined,
   LogoutOutlined,
   HomeOutlined,
@@ -46,8 +43,6 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
   const {
     user,
     logout,
-    themeMode,
-    toggleTheme,
     completedDays,
     progressPercent,
     completedCount,
@@ -57,8 +52,6 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
   const [collapsed, setCollapsed] = useState(false);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-
-  const isDark = themeMode === "dark";
 
   // Match current day ID from URL
   const currentDayMatch = pathname.match(/\/learn\/day\/(\d+)/);
@@ -133,7 +126,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
       key: "user-info",
       label: (
         <div className="px-2 py-1">
-          <div className="font-bold text-sm text-black dark:text-white">{user?.name || "Student"}</div>
+          <div className="font-bold text-sm text-white">{user?.name || "Student"}</div>
           <div className="text-xs text-slate-400">{user?.email || "student@example.com"}</div>
         </div>
       )
@@ -252,11 +245,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
 
       <Layout className="flex-1 flex flex-col min-w-0 bg-[#000000]">
         {/* Dashboard Top Header */}
-        <Header
-          className={`sticky top-0 z-40 px-4 md:px-6 h-16 flex items-center justify-between border-b ${
-            isDark ? "bg-[#211327] border-[#ffffff15]" : "bg-[#faf5ff] border-[#e9d5ff]"
-          }`}
-        >
+        <Header className="sticky top-0 z-40 px-4 md:px-6 h-16 flex items-center justify-between border-b bg-[#211327] border-[#ffffff15]">
           <div className="flex items-center gap-3">
             <Button
               type="text"
@@ -280,13 +269,6 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
           </div>
 
           <div className="flex items-center gap-4">
-            <Tooltip title={`Switch to ${isDark ? "Light" : "Dark"} Mode`}>
-              <div className="flex items-center gap-2 text-xs font-semibold">
-                <BulbOutlined className={isDark ? "text-[#ff63f9]" : "text-[#9333ea]"} />
-                <Switch checked={isDark} onChange={toggleTheme} size="small" />
-              </div>
-            </Tooltip>
-
             <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
               <div className="flex items-center gap-2.5 cursor-pointer hover:opacity-80 transition-opacity">
                 <Avatar className="bg-[#ff63f9] text-black font-bold" icon={<UserOutlined />}>

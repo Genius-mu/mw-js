@@ -6,11 +6,6 @@
   --primary-magenta: #ff63f9;
   --secondary-white: #ffffff;
   --border-dark: #ffffff25;
-  
-  --bg-light: #ffffff;
-  --surface-light: #faf5ff;
-  --primary-purple: #9333ea;
-  --border-light: #e9d5ff;
 }
 
 @layer utilities {
@@ -40,28 +35,50 @@ body {
   color: #ffffff;
 }
 
-/* Ant Design Menu & Layout Overrides - Dark Purple & Space Theme */
-.dark .ant-layout-sider {
+/* Ant Design Menu & Layout Overrides */
+.ant-layout-sider {
   background-color: #000000 !important;
 }
 
-.dark .ant-menu {
+.ant-menu {
   background-color: transparent !important;
   color: #ffffff !important;
 }
 
-.dark .ant-menu-item-selected {
+.ant-menu-item-selected {
   background-color: #211327 !important;
   color: #ff63f9 !important;
 }
 
-.dark .ant-menu-submenu-title {
+.ant-menu-submenu-title {
   color: #ffffff !important;
 }
 
-/* Glass Card Shell */
+/* pxxl.app animations & depth */
+@keyframes ambientGlow {
+  0%, 100% {
+    opacity: 0.12;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.22;
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+}
+
+.animate-glow {
+  animation: ambientGlow 8s ease-in-out infinite;
+}
+
 .glass-card {
   background-color: #211327;
   border: 1px solid #ffffff15;
   border-radius: 19.2px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 99, 249, 0.4);
+  box-shadow: 0 0 34px rgba(255, 99, 249, 0.12);
+  transform: translateY(-2px);
 }

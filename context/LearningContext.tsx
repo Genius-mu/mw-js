@@ -11,7 +11,7 @@ export interface User {
 interface LearningContextType {
   user: User | null;
   completedDays: number[];
-  themeMode: "light" | "dark";
+  themeMode: "dark";
   userNotes: Record<number, string>;
   login: (email: string, name?: string) => void;
   logout: () => void;
@@ -21,7 +21,6 @@ interface LearningContextType {
   isDayCompleted: (dayId: number) => boolean;
   saveUserNote: (dayId: number, note: string) => void;
   getUserNote: (dayId: number) => string;
-  toggleTheme: () => void;
   progressPercent: number;
   totalDays: number;
   completedCount: number;
@@ -32,7 +31,6 @@ interface LearningContextType {
 const STORAGE_KEYS = {
   USER: "js_hub_user",
   COMPLETED_DAYS: "js_hub_completed_days",
-  THEME: "js_hub_theme",
   NOTES: "js_hub_user_notes"
 };
 
@@ -41,7 +39,6 @@ const LearningContext = createContext<LearningContextType | undefined>(undefined
 export function LearningProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [completedDays, setCompletedDays] = useState<number[]>([]);
-  const [themeMode, setThemeMode] = useState<"light" | "dark">("light");
   const [userNotes, setUserNotes] = useState<Record<number, string>>({});
   const [isInitialized, setIsInitialized] = useState(false);
 
@@ -63,11 +60,6 @@ export function LearningProvider({ children }: { children: React.ReactNode }) {
         const initialCompleted = [1];
         setCompletedDays(initialCompleted);
         localStorage.setItem(STORAGE_KEYS.COMPLETED_DAYS, JSON.stringify(initialCompleted));
-      }
-
-      const storedTheme = localStorage.getItem(STORAGE_KEYS.THEME) as "light" | "dark";
-      if (storedTheme) {
-        setThemeMode(storedTheme);
       }
 
       const storedNotes = localStorage.getItem(STORAGE_KEYS.NOTES);
@@ -132,14 +124,6 @@ export function LearningProvider({ children }: { children: React.ReactNode }) {
 
   const getUserNote = (dayId: number) => userNotes[dayId] || "";
 
-  const toggleTheme = () => {
-    setThemeMode((prev) => {
-      const next = prev === "light" ? "dark" : "light";
-      localStorage.setItem(STORAGE_KEYS.THEME, next);
-      return next;
-    });
-  };
-
   const resetProgress = () => {
     setCompletedDays([1]);
     localStorage.setItem(STORAGE_KEYS.COMPLETED_DAYS, JSON.stringify([1]));
@@ -159,7 +143,7 @@ export function LearningProvider({ children }: { children: React.ReactNode }) {
       value={{
         user,
         completedDays,
-        themeMode,
+        themeMode: "dark",
         userNotes,
         login,
         logout,
@@ -169,7 +153,6 @@ export function LearningProvider({ children }: { children: React.ReactNode }) {
         isDayCompleted,
         saveUserNote,
         getUserNote,
-        toggleTheme,
         progressPercent,
         totalDays,
         completedCount,
