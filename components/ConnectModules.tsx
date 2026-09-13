@@ -8,7 +8,8 @@ import {
   AppstoreOutlined,
   SyncOutlined,
   RocketOutlined,
-  ThunderboltOutlined
+  ThunderboltOutlined,
+  BulbFilled
 } from "@ant-design/icons";
 import { MODULES_DATA } from "@/lib/curriculum";
 
@@ -125,7 +126,7 @@ export default function ConnectModules() {
         <div className="z-20 mt-4 sm:mt-0 relative group">
           <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-[#0a0a0d] border border-[#ff63f9]/40 shadow-[0_0_35px_rgba(255,99,249,0.35)] flex flex-col items-center justify-center text-center p-3 transition-transform duration-300 group-hover:scale-105">
             <div className="w-10 h-10 rounded-xl bg-[#ff63f9] text-black flex items-center justify-center text-xl font-black shadow-[0_0_15px_rgba(255,99,249,0.5)] mb-1.5">
-              ⚡
+              <BulbFilled className="text-black text-xl" />
             </div>
             <span className="text-xs font-black tracking-tight text-white leading-tight">
               JS V8 CORE

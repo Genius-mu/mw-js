@@ -16,8 +16,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
     >
       <div className="mb-6">
         <Link href="/" className="flex items-center gap-3 no-underline">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-500 via-orange-500 to-yellow-400 flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-amber-500/30">
-            ⚡
+          <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-white text-2xl font-bold border border-white/15 shadow-[0_0_18px_rgba(255,99,249,0.35)]">
+            💡
           </div>
           <div className="text-left">
             <div className="font-extrabold text-xl tracking-tight">

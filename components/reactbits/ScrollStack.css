@@ -12,18 +12,19 @@
 
 .scroll-stack-card {
   position: sticky;
-  top: 100px;
   width: 100%;
-  border-radius: 20px;
-  background-color: #08080b;
+  border-radius: 22px;
+  background-color: rgba(9, 9, 13, 0.96);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 2.5rem 2rem;
+  padding: 2.25rem 2rem;
   box-sizing: border-box;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85);
-  transition: transform 0.3s ease, filter 0.3s ease, border-color 0.2s ease;
-  backdrop-filter: blur(20px);
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.8), 0 25px 50px -12px rgba(0, 0, 0, 0.95);
+  transition: border-color 0.2s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
 }
 
 .scroll-stack-card:hover {
-  border-color: rgba(255, 99, 249, 0.35);
+  border-color: rgba(255, 99, 249, 0.4);
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.8), 0 25px 50px -12px rgba(255, 99, 249, 0.2);
 }

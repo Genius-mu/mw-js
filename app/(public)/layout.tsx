@@ -6,7 +6,12 @@ import { Button } from "antd";
 import {
   UserOutlined,
   RocketOutlined,
-  CloseOutlined
+  CloseOutlined,
+  GithubOutlined,
+  TwitterOutlined,
+  LinkedinOutlined,
+  YoutubeOutlined,
+  GlobalOutlined
 } from "@ant-design/icons";
 import { useLearning } from "@/context/LearningContext";
 
@@ -90,17 +95,207 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
         </div>
       )}
 
-      {/* Footer */}
-      <footer className="border-t border-white/10 py-6 px-4 text-center text-xs bg-[#000000] text-white/40">
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <span className="font-bold text-xs text-[#ff63f9]">⚡ JS Learning Hub</span>
-            <span className="text-[11px]">— Master JavaScript in daily micro-lessons</span>
+      {/* pxxl.app Style Multi-Column Footer */}
+      <footer className="border-t border-white/10 pt-16 pb-12 px-4 md:px-8 bg-[#000000] text-white">
+        <div className="max-w-6xl mx-auto">
+          {/* Main Footer Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12">
+            {/* Brand & Social Column (Spans 2 cols) */}
+            <div className="lg:col-span-2 space-y-5">
+              <Link href="/" className="flex items-center gap-2.5 no-underline group w-fit">
+                <div className="w-8 h-8 rounded-xl bg-white/10 text-xl flex items-center justify-center border border-white/15 shadow-[0_0_15px_rgba(255,99,249,0.3)] group-hover:scale-110 transition-transform">
+                  💡
+                </div>
+                <div className="font-extrabold text-base tracking-tight text-white">
+                  JS Learning <span className="text-[#ff63f9]">Hub</span>
+                </div>
+              </Link>
+
+              <p className="text-sm text-white/50 leading-relaxed max-w-sm m-0">
+                Master modern ECMAScript with structured daily micro-habits, interactive in-browser V8 execution, and verified completion credentials.
+              </p>
+
+              {/* Social Icon Boxes matching pxxl.app */}
+              <div className="flex items-center gap-2.5 pt-1">
+                <a
+                  href="https://github.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                  className="w-10 h-10 rounded-xl bg-[#0c0c10] border border-white/10 flex items-center justify-center text-white/70 hover:text-black hover:bg-[#ff63f9] hover:border-[#ff63f9] transition-all no-underline shadow-sm"
+                >
+                  <GithubOutlined className="text-base" />
+                </a>
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Twitter / X"
+                  className="w-10 h-10 rounded-xl bg-[#0c0c10] border border-white/10 flex items-center justify-center text-white/70 hover:text-black hover:bg-[#ff63f9] hover:border-[#ff63f9] transition-all no-underline shadow-sm"
+                >
+                  <TwitterOutlined className="text-base" />
+                </a>
+                <a
+                  href="https://linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="w-10 h-10 rounded-xl bg-[#0c0c10] border border-white/10 flex items-center justify-center text-white/70 hover:text-black hover:bg-[#ff63f9] hover:border-[#ff63f9] transition-all no-underline shadow-sm"
+                >
+                  <LinkedinOutlined className="text-base" />
+                </a>
+                <a
+                  href="https://youtube.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="YouTube"
+                  className="w-10 h-10 rounded-xl bg-[#0c0c10] border border-white/10 flex items-center justify-center text-white/70 hover:text-black hover:bg-[#ff63f9] hover:border-[#ff63f9] transition-all no-underline shadow-sm"
+                >
+                  <YoutubeOutlined className="text-base" />
+                </a>
+                <a
+                  href="https://developer.mozilla.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="MDN Web Docs"
+                  className="w-10 h-10 rounded-xl bg-[#0c0c10] border border-white/10 flex items-center justify-center text-white/70 hover:text-black hover:bg-[#ff63f9] hover:border-[#ff63f9] transition-all no-underline shadow-sm"
+                >
+                  <GlobalOutlined className="text-base" />
+                </a>
+              </div>
+
+              {/* Status Indicator */}
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-[11px] font-mono text-white/60">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>V8 Runtime • ES2026 Systems Online</span>
+              </div>
+            </div>
+
+            {/* Column 2: Curriculum */}
+            <div className="space-y-4">
+              <h4 className="text-xs font-mono font-bold tracking-wider uppercase text-white/40 m-0">
+                Curriculum
+              </h4>
+              <ul className="space-y-2.5 text-sm list-none p-0 m-0">
+                <li>
+                  <a href="#curriculum" className="text-white/60 hover:text-[#ff63f9] transition-colors no-underline">
+                    01. Basics & Data Types
+                  </a>
+                </li>
+                <li>
+                  <a href="#curriculum" className="text-white/60 hover:text-[#ff63f9] transition-colors no-underline">
+                    02. Arrays & Logic
+                  </a>
+                </li>
+                <li>
+                  <a href="#curriculum" className="text-white/60 hover:text-[#ff63f9] transition-colors no-underline">
+                    03. Functions & Scope
+                  </a>
+                </li>
+                <li>
+                  <a href="#curriculum" className="text-white/60 hover:text-[#ff63f9] transition-colors no-underline">
+                    04. Objects & Structures
+                  </a>
+                </li>
+                <li>
+                  <a href="#curriculum" className="text-white/60 hover:text-[#ff63f9] transition-colors no-underline">
+                    05. Loops & Iteration
+                  </a>
+                </li>
+                <li>
+                  <a href="#curriculum" className="text-white/60 hover:text-[#ff63f9] transition-colors no-underline">
+                    06. Modern ES2026 Core
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 3: Platform */}
+            <div className="space-y-4">
+              <h4 className="text-xs font-mono font-bold tracking-wider uppercase text-white/40 m-0">
+                Platform
+              </h4>
+              <ul className="space-y-2.5 text-sm list-none p-0 m-0">
+                <li>
+                  <Link href={`/learn/day/${nextDay}`} className="text-white/60 hover:text-[#ff63f9] transition-colors no-underline">
+                    Daily Habit Tracker
+                  </Link>
+                </li>
+                <li>
+                  <Link href={`/learn/day/${nextDay}`} className="text-white/60 hover:text-[#ff63f9] transition-colors no-underline">
+                    Live In-Browser Terminal
+                  </Link>
+                </li>
+                <li>
+                  <a href="#features" className="text-white/60 hover:text-[#ff63f9] transition-colors no-underline">
+                    200+ Production Projects
+                  </a>
+                </li>
+                <li>
+                  <a href="#architecture" className="text-white/60 hover:text-[#ff63f9] transition-colors no-underline">
+                    JS Architecture Stream
+                  </a>
+                </li>
+                <li>
+                  <Link href="/certificate" className="text-white/60 hover:text-[#ff63f9] transition-colors no-underline">
+                    Verifiable Certificate
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 4: Resources */}
+            <div className="space-y-4">
+              <h4 className="text-xs font-mono font-bold tracking-wider uppercase text-white/40 m-0">
+                Resources
+              </h4>
+              <ul className="space-y-2.5 text-sm list-none p-0 m-0">
+                <li>
+                  <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white/60 hover:text-[#ff63f9] transition-colors no-underline"
+                  >
+                    MDN Documentation
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://tc39.es"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white/60 hover:text-[#ff63f9] transition-colors no-underline"
+                  >
+                    ECMAScript Standards
+                  </a>
+                </li>
+                <li>
+                  <a href="#faq" className="text-white/60 hover:text-[#ff63f9] transition-colors no-underline">
+                    Frequently Asked Questions
+                  </a>
+                </li>
+                <li>
+                  <Link href="/login" className="text-white/60 hover:text-[#ff63f9] transition-colors no-underline">
+                    Developer Sign In
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div className="flex items-center gap-3 text-[11px] text-white/40">
-            <span>Interactive 100+ Days Learning Platform</span>
-            <span>•</span>
-            <span>Next.js & Ant Design</span>
+
+          {/* Bottom Bar Separator */}
+          <div className="border-t border-white/10 pt-8 mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
+            <div className="font-mono">
+              © JS Learning Hub • MMXXIV – MMXXVI. All rights reserved.
+            </div>
+            <div className="flex items-center gap-4 text-white/40">
+              <span>Next.js Turbopack</span>
+              <span>•</span>
+              <span>Ant Design</span>
+              <span>•</span>
+              <span className="text-[#ff63f9]">Built for Developers</span>
+            </div>
           </div>
         </div>
       </footer>

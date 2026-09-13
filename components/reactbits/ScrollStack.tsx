@@ -5,11 +5,25 @@ import "./ScrollStack.css";
 
 export const ScrollStackItem = ({
   children,
-  itemClassName = ""
+  index = 0,
+  itemClassName = "",
+  style = {}
 }: {
   children: React.ReactNode;
+  index?: number;
   itemClassName?: string;
-}) => <div className={`scroll-stack-card ${itemClassName}`.trim()}>{children}</div>;
+  style?: React.CSSProperties;
+}) => (
+  <div
+    className={`scroll-stack-card ${itemClassName}`.trim()}
+    style={{
+      top: `calc(85px + ${index * 26}px)`,
+      ...style
+    }}
+  >
+    {children}
+  </div>
+);
 
 export default function ScrollStack({
   children,

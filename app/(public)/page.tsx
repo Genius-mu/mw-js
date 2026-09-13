@@ -20,6 +20,14 @@ import OptionWheel from "@/components/reactbits/OptionWheel";
 import ScrambledText from "@/components/reactbits/ScrambledText";
 import ScrollStack, { ScrollStackItem } from "@/components/reactbits/ScrollStack";
 import ConnectModules from "@/components/ConnectModules";
+import {
+  BasicsDataTypesVisual,
+  ArraysLogicVisual,
+  FunctionsScopeVisual,
+  ObjectsDataVisual,
+  LoopsIterationVisual,
+  AdvancedES6Visual
+} from "@/components/ModuleShowcase";
 
 export default function LandingPage() {
   const { getNextUncompletedDay, completedDays } = useLearning();
@@ -47,58 +55,158 @@ export default function LandingPage() {
     }
   ];
 
+  const HERO_SCRAMBLE_MATRIX = `// ECMASCRIPT 2026 ENGINE RUNTIME & JAVASCRIPT CORE PLATFORM
+const RUNTIME = new V8Engine({ mode: 'DEVELOPER', asyncContext: true, jit: 'TURBOPAN' });
+async function initializeCurriculum() { return await ModuleLoader.import('/core/javascript'); }
+class ASTCompiler extends RuntimeEnvironment { parse(code) { return tokenize(code, { es2026: true }); } }
+const PROMISE_STREAM = new AsyncIterator({ buffer: 1024, concurrency: 'WORKER_POOL' });
+function benchmark(fn) { const t0 = performance.now(); fn(); return performance.now() - t0; }`;
+
   const scrollStackSteps = [
     {
       number: "01",
+      badge: "HABIT SYSTEM",
       title: "Daily Micro-Learning Habits",
       subtitle: "Focus on one high-yield JavaScript concept every day.",
-      description: "No overwhelming 3-hour videos. Learn syntax rules, edge cases, and best practices in bite-sized, digestible lessons."
+      description: "No overwhelming 3-hour videos. Learn syntax rules, edge cases, and best practices in bite-sized, digestible lessons.",
+      features: ["10-15 Min Daily Habit", "100+ Step-by-Step Concepts", "Verified Retention System"],
+      graphic: (
+        <div className="p-4 rounded-xl bg-[#0e0e14] border border-white/10 space-y-3 shadow-inner">
+          <div className="flex items-center justify-between text-xs pb-2 border-b border-white/10">
+            <span className="font-mono text-[#ff63f9] font-bold">🔥 14-Day Streak</span>
+            <span className="text-white/50 font-mono text-[11px]">Daily 15m Target</span>
+          </div>
+          <div className="space-y-1.5 font-mono text-xs">
+            <div className="flex items-center justify-between p-1.5 rounded bg-white/[0.03] text-white/80">
+              <span>Day 01: Core Syntax</span>
+              <CheckCircleFilled className="text-[#ff63f9] text-xs" />
+            </div>
+            <div className="flex items-center justify-between p-1.5 rounded bg-white/[0.03] text-white/80">
+              <span>Day 02: Scopes & Closures</span>
+              <CheckCircleFilled className="text-[#ff63f9] text-xs" />
+            </div>
+            <div className="flex items-center justify-between p-1.5 rounded bg-[#ff63f9]/10 border border-[#ff63f9]/30 text-white font-semibold">
+              <span>Day 03: Event Loop</span>
+              <span className="text-[10px] text-[#ff63f9] font-bold">Today 🚀</span>
+            </div>
+          </div>
+        </div>
+      )
     },
     {
       number: "02",
+      badge: "LIVE TERMINAL",
       title: "Interactive In-Browser Sandbox",
       subtitle: "Execute code instantly without complex local setups.",
-      description: "Write JavaScript directly inside our terminal, intercept console.log calls, test custom inputs, and review instant error diagnostics."
+      description: "Write JavaScript directly inside our terminal, intercept console.log calls, test custom inputs, and review instant error diagnostics.",
+      features: ["Live V8 In-Browser Runner", "Console Log Interception", "Zero Config Setup"],
+      graphic: (
+        <div className="p-4 rounded-xl bg-[#050508] border border-white/10 space-y-2.5 shadow-inner">
+          <div className="flex items-center justify-between text-xs pb-1.5 border-b border-white/10">
+            <div className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+            </div>
+            <span className="font-mono text-[10px] text-white/40">v8-sandbox.js</span>
+          </div>
+          <pre className="font-mono text-[11px] text-emerald-400 m-0 leading-relaxed bg-black/50 p-2.5 rounded border border-white/5 overflow-x-auto">
+            <code>{`// Real-time In-Browser Run\nconst sum = (a, b) => a + b;\nconsole.log("Avg:", sum(40, 2));`}</code>
+          </pre>
+          <div className="flex items-center justify-between text-[11px] font-mono text-white/60 bg-white/[0.03] px-2 py-1 rounded">
+            <span>➜ Output: Avg: 42</span>
+            <span className="text-emerald-400">0.3ms</span>
+          </div>
+        </div>
+      )
     },
     {
       number: "03",
+      badge: "CODE PROJECTS",
       title: "Two Production Projects Per Day",
       subtitle: "Build real tools and utilities from day one.",
-      description: "Every concept is backed by 2 functional real-world projects so you cement theory through practical application code."
+      description: "Every concept is backed by 2 functional real-world projects so you cement theory through practical application code.",
+      features: ["200+ Production Utilities", "Full Source Code Included", "Real-World Architecture"],
+      graphic: (
+        <div className="p-4 rounded-xl bg-[#0e0e14] border border-white/10 space-y-2.5 shadow-inner">
+          <div className="flex items-center justify-between text-xs pb-1.5 border-b border-white/10">
+            <span className="font-mono text-xs font-bold text-white">2 Hands-on Projects</span>
+            <span className="text-[10px] font-mono text-[#ff63f9]">Ready to Run</span>
+          </div>
+          <div className="space-y-2 font-mono text-xs">
+            <div className="p-2 rounded bg-white/[0.03] border border-white/8 space-y-1">
+              <div className="flex items-center justify-between text-white font-medium text-[11px]">
+                <span>Project 1: Rate Engine</span>
+                <span className="text-[9px] px-1.5 py-0.5 rounded bg-purple-500/20 text-[#ff63f9]">Async API</span>
+              </div>
+              <p className="text-[10px] text-white/50 m-0">Live currency calculator with fetch caching.</p>
+            </div>
+            <div className="p-2 rounded bg-white/[0.03] border border-white/8 space-y-1">
+              <div className="flex items-center justify-between text-white font-medium text-[11px]">
+                <span>Project 2: Event Bus</span>
+                <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400">Patterns</span>
+              </div>
+              <p className="text-[10px] text-white/50 m-0">Custom publish/subscribe reactive channel.</p>
+            </div>
+          </div>
+        </div>
+      )
     },
     {
       number: "04",
+      badge: "CREDENTIAL",
       title: "Verifiable Proof of Mastery",
       subtitle: "Track your progress and claim your official credential.",
-      description: "Save your personal study notes to local storage, track completion metrics in real time, and earn an official completion certificate."
+      description: "Save your personal study notes to local storage, track completion metrics in real time, and earn an official completion certificate.",
+      features: ["Verifiable Certificate", "Persistent Local Notes", "LinkedIn & GitHub Ready"],
+      graphic: (
+        <div className="p-4 rounded-xl bg-[#0e0e14] border border-[#ff63f9]/30 space-y-2.5 shadow-[0_0_25px_rgba(255,99,249,0.12)]">
+          <div className="flex items-center justify-between text-xs pb-1.5 border-b border-white/10">
+            <span className="font-mono text-[10px] font-bold text-[#ff63f9]">OFFICIAL CREDENTIAL</span>
+            <CheckCircleFilled className="text-[#ff63f9] text-sm" />
+          </div>
+          <div className="text-center py-2 space-y-1">
+            <div className="text-sm font-extrabold text-white tracking-wide">
+              JavaScript Mastery
+            </div>
+            <p className="text-[11px] font-mono text-white/60 m-0">
+              Certified ECMAScript Developer
+            </p>
+          </div>
+          <div className="pt-1 border-t border-white/8 flex items-center justify-between text-[10px] font-mono text-white/40">
+            <span>VERIFIED ID: #JS-2026</span>
+            <span className="text-emerald-400">Verifiable</span>
+          </div>
+        </div>
+      )
     }
   ];
 
   return (
     <div className="space-y-28 pb-28">
-      {/* 1. HERO SECTION (pxxl.app style - No Badge, Clean Black Backdrop, ScrambledText Matrix) */}
-      <section className="relative pt-12 md:pt-20 pb-12 px-4 max-w-5xl mx-auto text-center overflow-hidden">
-        {/* Interactive Scrambled Text Hero Background */}
-        <div className="absolute inset-0 pointer-events-auto opacity-30 hover:opacity-50 transition-opacity -z-10 flex flex-col justify-center items-center select-none overflow-hidden">
+      {/* 1. HERO SECTION (pxxl.app style - Pitch Black Normally, Gray Scrambled Text on Hover) */}
+      <section className="relative pt-12 md:pt-20 pb-12 px-4 max-w-5xl mx-auto text-center overflow-hidden group bg-black rounded-3xl">
+        {/* Interactive Scrambled Text Hero Background - Pitch Black Normally, Gray Scramble on Hover */}
+        <div className="absolute inset-0 pointer-events-auto opacity-0 group-hover:opacity-75 transition-opacity duration-500 -z-10 flex flex-col justify-center items-center select-none overflow-hidden p-4">
           <ScrambledText
-            radius={160}
+            radius={180}
             duration={1.2}
             speed={0.5}
             scrambleChars=".:#@$%&*<>~/+=-_[]{}01"
-            className="text-xs font-mono text-[#71717a] max-w-4xl leading-relaxed text-center px-4"
+            className="text-[11px] sm:text-xs font-mono text-zinc-400 max-w-4xl leading-relaxed text-center px-4 tracking-wider"
           >
-            {"CONST JS_HUB = NEW LEARNING_PLATFORM({ STATUS: 'ONLINE', CORE: 'ECMASCRIPT2026' }); FUNCTION EXECUTE_LESSON(ID) { RETURN FETCH_LESSON(ID).THEN(RENDER_PROJECTS); }"}
+            {HERO_SCRAMBLE_MATRIX}
           </ScrambledText>
         </div>
 
-        {/* Soft Ambient Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[250px] bg-[#ff63f9]/5 blur-[140px] rounded-full pointer-events-none -z-10" />
+        {/* Soft Ambient Glow - Only subtle on hover to maintain pitch black normally */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[250px] bg-[#ff63f9]/5 blur-[140px] rounded-full pointer-events-none -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-        {/* Headline - Large, bold pxxl.app typography */}
+        {/* Headline - Large, bold pxxl.app typography with Re-triggering Blur Animation */}
         <div className="mb-6">
           <BlurText
             text="Master Modern JavaScript Core & ES2026"
-            delay={80}
+            delay={70}
             animateBy="words"
             direction="top"
             className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-tight"
@@ -133,29 +241,53 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 2. SCROLLSTACK SECTION (Scroll-Triggered Blur Stacking Animation with Numbers from pxxl.app) */}
+      {/* 2. SCROLLSTACK SECTION (Scroll-Triggered Stacking with Vertical Divider & Visuals) */}
       <section className="max-w-4xl mx-auto px-4">
         <ScrollStack>
           {scrollStackSteps.map((step, idx) => (
-            <ScrollStackItem key={idx}>
-              <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
-                <div className="space-y-2">
-                  <div className="text-xs font-mono font-bold text-[#ff63f9] tracking-wider uppercase">
-                    STEP {step.number}
+            <ScrollStackItem key={idx} index={idx}>
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                {/* Left Side: Step Details & Highlights */}
+                <div className="md:col-span-6 space-y-3">
+                  <div className="text-xs font-mono font-bold text-[#ff63f9] tracking-wider uppercase flex items-center gap-2">
+                    <span>STEP {step.number}</span>
+                    <span className="text-white/20">•</span>
+                    <span className="text-white/50">{step.badge}</span>
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white m-0">
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white m-0 tracking-tight">
                     {step.title}
                   </h3>
                   <div className="text-sm font-medium text-white/80">
                     {step.subtitle}
                   </div>
-                  <p className="text-sm text-white/60 m-0 leading-relaxed max-w-xl pt-2">
+                  <p className="text-sm text-white/60 m-0 leading-relaxed pt-1">
                     {step.description}
                   </p>
+                  {/* Highlight Pills */}
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {step.features.map((feat, fIdx) => (
+                      <span
+                        key={fIdx}
+                        className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 text-white/70"
+                      >
+                        {feat}
+                      </span>
+                    ))}
+                  </div>
                 </div>
 
-                <div className="text-6xl sm:text-8xl font-black text-white/10 font-mono shrink-0 select-none">
-                  {step.number}
+                {/* Vertical Divider Line */}
+                <div className="hidden md:flex md:col-span-1 justify-center self-stretch py-2">
+                  <div className="w-px bg-white/12 h-full" />
+                </div>
+
+                {/* Right Side: Visual Graphic / Code / Interactive Mockup */}
+                <div className="md:col-span-5 relative">
+                  {step.graphic}
+                  {/* Subtle Background Watermark Number */}
+                  <div className="absolute -bottom-4 -right-2 text-7xl sm:text-8xl font-black text-white/[0.04] font-mono select-none pointer-events-none -z-0">
+                    {step.number}
+                  </div>
                 </div>
               </div>
             </ScrollStackItem>
@@ -191,15 +323,15 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 5. JAVASCRIPT MODULES & MICRO-LESSONS (Separated by ONLY Lines, Grid Format, No Gray Boxes) */}
-      <section id="curriculum" className="max-w-5xl mx-auto px-4 space-y-8">
+      {/* 5. JAVASCRIPT MODULES & MICRO-LESSONS (pxxl.app Style Alternating Feature Cards) */}
+      <section id="curriculum" className="max-w-5xl mx-auto px-4 space-y-10">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/10 pb-4">
           <div>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-white m-0 tracking-tight">
               JavaScript Modules & Micro-Lessons
             </h2>
             <p className="text-sm text-white/60 m-0 mt-1">
-              All concepts organized systematically from basics to asynchronous programming.
+              All concepts organized systematically from foundational primitives to modern ECMAScript 2026.
             </p>
           </div>
           <Link href={`/learn/day/${nextDay}`}>
@@ -213,55 +345,108 @@ export default function LandingPage() {
           </Link>
         </div>
 
-        {/* Grid Separated by ONLY Lines */}
-        <div className="border-t border-b border-white/10 divide-y divide-white/10">
-          {MODULES_DATA.map((mod, idx) => (
-            <div key={mod.id} className="py-6 sm:py-8 space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-                <div className="flex items-center gap-3">
-                  <span className="font-mono text-sm font-bold text-[#ff63f9]">0{idx + 1}.</span>
-                  <h3 className="text-lg sm:text-xl font-bold text-white m-0">
-                    {mod.title.replace(/^Module \d+:\s*/, "")}
-                  </h3>
-                </div>
-                <span className="text-xs font-mono text-white/40">
-                  {mod.days.length} Lessons · {mod.days.length * 2} Practical Projects
-                </span>
-              </div>
+        {/* Alternating Modules Stack */}
+        <div className="space-y-8">
+          {MODULES_DATA.map((mod, idx) => {
+            const isEven = idx % 2 === 0;
+            const moduleVisuals = [
+              <BasicsDataTypesVisual key="mod-0" />,
+              <ArraysLogicVisual key="mod-1" />,
+              <FunctionsScopeVisual key="mod-2" />,
+              <ObjectsDataVisual key="mod-3" />,
+              <LoopsIterationVisual key="mod-4" />,
+              <AdvancedES6Visual key="mod-5" />
+            ];
+            const visual = moduleVisuals[idx];
+            const firstDay = mod.days[0];
 
-              <p className="text-sm text-white/60 m-0 leading-relaxed max-w-3xl">
-                {mod.description}
-              </p>
+            return (
+              <div
+                key={mod.id}
+                className="relative rounded-3xl bg-[#08080c] border border-white/10 p-6 sm:p-10 lg:p-12 hover:border-[#ff63f9]/30 transition-all duration-300 shadow-2xl overflow-hidden group"
+              >
+                {/* Soft Ambient Glow */}
+                <div className="absolute -right-20 -top-20 w-80 h-80 bg-[#ff63f9]/5 rounded-full blur-[120px] pointer-events-none group-hover:bg-[#ff63f9]/10 transition-colors" />
 
-              {/* Minimal Line-Divided Lessons List */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 pt-2">
-                {mod.days.map((day) => {
-                  const isCompleted = completedDays.includes(day.id);
-                  return (
-                    <Link
-                      key={day.id}
-                      href={`/learn/day/${day.id}`}
-                      className="no-underline flex items-center justify-between p-2.5 rounded-lg border border-transparent hover:border-white/15 hover:bg-white/[0.03] transition-all group"
-                    >
-                      <div className="flex items-center gap-2.5 truncate">
-                        {isCompleted ? (
-                          <CheckCircleFilled className="text-[#ff63f9] text-sm shrink-0" />
-                        ) : (
-                          <span className="w-5 h-5 rounded-full border border-white/20 text-white/60 font-mono text-[10px] flex items-center justify-center shrink-0">
-                            {day.day}
-                          </span>
-                        )}
-                        <span className="text-xs text-white/80 group-hover:text-white truncate font-medium">
-                          {day.title}
-                        </span>
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                  {/* TEXT CONTENT */}
+                  <div className={`lg:col-span-6 space-y-4 ${isEven ? "lg:order-1" : "lg:order-2"}`}>
+                    <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#ff63f9] tracking-wider uppercase">
+                      <span>MODULE 0{idx + 1}</span>
+                      <span className="text-white/20">•</span>
+                      <span className="text-white/50">{mod.days.length} Lessons</span>
+                      <span className="text-white/20">•</span>
+                      <span className="text-white/50">{mod.days.length * 2} Practical Projects</span>
+                    </div>
+
+                    {/* Big and Bold Heading (Not too bold) */}
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight m-0">
+                      {mod.title.replace(/^Module \d+:\s*/, "")}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-sm sm:text-base text-white/60 leading-relaxed max-w-lg m-0">
+                      {mod.description}
+                    </p>
+
+                    {/* Featured Lessons Grid */}
+                    <div className="space-y-2 pt-1">
+                      <div className="text-[11px] font-mono text-white/40 uppercase tracking-wider">
+                        Curriculum Highlights:
                       </div>
-                      <RightOutlined className="text-[10px] text-white/20 group-hover:text-[#ff63f9] transition-colors shrink-0 ml-2" />
-                    </Link>
-                  );
-                })}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {mod.days.slice(0, 4).map((day) => {
+                          const isCompleted = completedDays.includes(day.id);
+                          return (
+                            <Link
+                              key={day.id}
+                              href={`/learn/day/${day.id}`}
+                              className="no-underline flex items-center justify-between p-2 rounded-lg bg-white/[0.03] border border-white/8 hover:border-white/20 hover:bg-white/[0.06] transition-all group/item"
+                            >
+                              <div className="flex items-center gap-2 truncate">
+                                {isCompleted ? (
+                                  <CheckCircleFilled className="text-[#ff63f9] text-xs shrink-0" />
+                                ) : (
+                                  <span className="w-4 h-4 rounded-full border border-white/20 text-white/50 font-mono text-[9px] flex items-center justify-center shrink-0">
+                                    {day.day}
+                                  </span>
+                                )}
+                                <span className="text-[11px] text-white/80 group-hover/item:text-white truncate">
+                                  {day.title}
+                                </span>
+                              </div>
+                              <RightOutlined className="text-[9px] text-white/20 group-hover/item:text-[#ff63f9] transition-colors shrink-0 ml-1.5" />
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Launch Action */}
+                    <div className="pt-2 flex items-center gap-4">
+                      <Link href={`/learn/day/${firstDay.id}`}>
+                        <Button
+                          type="primary"
+                          className="h-10 px-6 text-xs font-bold bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none rounded-lg shadow-[0_0_15px_rgba(255,99,249,0.3)] flex items-center gap-2"
+                        >
+                          <span>Start Module 0{idx + 1}</span>
+                          <RightOutlined className="text-[10px]" />
+                        </Button>
+                      </Link>
+                      <span className="text-xs font-mono text-white/40">
+                        {mod.days.length} Lessons Available
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* ANIMATION / VISUAL CONTENT */}
+                  <div className={`lg:col-span-6 relative ${isEven ? "lg:order-2" : "lg:order-1"}`}>
+                    {visual}
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 

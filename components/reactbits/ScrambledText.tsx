@@ -79,11 +79,16 @@ export default function ScrambledText({
   return (
     <div ref={rootRef} className={`scrambled-text-block ${className}`} style={style}>
       <p className="m-0 leading-relaxed font-mono select-none">
-        {charList.map((item, i) => (
-          <span key={i} className="scramble-char inline-block transition-colors" data-orig={item.orig}>
-            {item.orig === " " ? "\u00A0" : item.orig}
-          </span>
-        ))}
+        {charList.map((item, i) => {
+          if (item.orig === "\n") {
+            return <br key={i} className="select-none" />;
+          }
+          return (
+            <span key={i} className="scramble-char inline-block transition-colors" data-orig={item.orig}>
+              {item.orig === " " ? "\u00A0" : item.orig}
+            </span>
+          );
+        })}
       </p>
     </div>
   );
