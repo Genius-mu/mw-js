@@ -6,19 +6,24 @@
 .scroll-stack-inner {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 3.5rem;
+  padding-bottom: 3rem;
 }
 
 .scroll-stack-card {
+  position: sticky;
+  top: 100px;
   width: 100%;
-  border-radius: 16px;
-  background-color: #08080c;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1.5rem;
+  border-radius: 20px;
+  background-color: #08080b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 2.5rem 2rem;
   box-sizing: border-box;
-  transition: transform 0.3s ease, border-color 0.2s ease;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85);
+  transition: transform 0.3s ease, filter 0.3s ease, border-color 0.2s ease;
+  backdrop-filter: blur(20px);
 }
 
 .scroll-stack-card:hover {
-  border-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 99, 249, 0.35);
 }

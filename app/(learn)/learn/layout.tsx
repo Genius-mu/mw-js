@@ -162,7 +162,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
               <div className="font-extrabold text-base tracking-tight leading-none text-white">
                 JS Learning <span className="text-[#ff63f9]">Hub</span>
               </div>
-              <p className="text-[10px] text-white/50 m-0 font-medium tracking-wide">100+ DAYS CHALLENGE</p>
+              <p className="text-[10px] text-[#ff63f9] m-0 font-bold tracking-wide">CORE JAVASCRIPT HUB</p>
             </div>
           )}
         </Link>
@@ -171,7 +171,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
           <div className="bg-[#08080c] p-3 rounded-xl border border-white/10 space-y-2">
             <div className="flex items-center justify-between text-xs font-semibold">
               <span className="text-white">Course Completion</span>
-              <span className="text-white font-bold">{progressPercent}%</span>
+              <span className="text-[#ff63f9] font-bold">{progressPercent}%</span>
             </div>
             <Progress percent={progressPercent} strokeColor="#ff63f9" showInfo={false} size="small" />
             <div className="text-[11px] text-white/60 flex justify-between">
@@ -220,10 +220,11 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
         onCollapse={(value) => setCollapsed(value)}
         width={320}
         theme="dark"
-        className="hidden md:block border-r border-white/10"
+        className="hidden md:block border-r border-white/10 fixed top-0 left-0 bottom-0 z-50 h-screen"
         style={{
-          position: "sticky",
+          position: "fixed",
           top: 0,
+          left: 0,
           height: "100vh",
           overflow: "hidden"
         }}
@@ -243,15 +244,15 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
         {SiderContent}
       </Drawer>
 
-      <Layout className="flex-1 flex flex-col min-w-0 bg-[#000000]">
+      <Layout className={`flex-1 flex flex-col min-w-0 bg-[#000000] transition-all ${collapsed ? "md:ml-20" : "md:ml-[320px]"}`}>
         {/* Dashboard Top Header */}
-        <Header className="sticky top-0 z-40 px-4 md:px-6 h-14 flex items-center justify-between border-b bg-[#08080c] border-white/10">
+        <Header className="sticky top-0 z-40 px-4 md:px-6 h-14 flex items-center justify-between border-b bg-[#08080c]/90 backdrop-blur-xl border-white/10">
           <div className="flex items-center gap-3">
             <Button
               type="text"
               icon={<MenuOutlined />}
               onClick={() => setMobileDrawerOpen(true)}
-              className="md:hidden text-white"
+              className="md:hidden text-white flex items-center justify-center"
             />
             <Button
               type="text"
@@ -264,7 +265,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
               <span className="text-white/30">/</span>
               <span className="text-white">Learn Dashboard</span>
               <span className="text-white/30">/</span>
-              <Tag color="rgba(255,255,255,0.15)" className="font-semibold m-0 text-white border-none">Day {currentDayId}</Tag>
+              <Tag color="rgba(255,99,249,0.2)" className="font-semibold m-0 text-[#ff63f9] border-none">Lesson Day {currentDayId}</Tag>
             </div>
           </div>
 

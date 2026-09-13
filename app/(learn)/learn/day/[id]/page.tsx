@@ -678,9 +678,9 @@ FeatureEngine.init();`,
           </div>
 
           <div>
-            <Tag color="rgba(255,255,255,0.15)" className="font-semibold px-2.5 py-0.5 text-[10px] uppercase mb-2 text-white border-none">OFFICIAL CERTIFICATE OF COMPLETION</Tag>
-            <h2 className="text-xl font-bold text-white">100+ Days JavaScript Challenge Completed!</h2>
-            <p className="text-xs text-white/60 max-w-sm mx-auto mt-1">
+            <Tag color="rgba(255,99,249,0.2)" className="font-bold px-2.5 py-0.5 text-xs uppercase mb-2 text-[#ff63f9] border-none">OFFICIAL CERTIFICATE OF COMPLETION</Tag>
+            <h2 className="text-xl font-bold text-white">JavaScript Mastery Curriculum Completed!</h2>
+            <p className="text-xs text-white/70 max-w-sm mx-auto mt-1">
               This certifies that <strong className="text-white">{user?.name || "Student"}</strong> has successfully mastered all micro-concepts and modules in modern JavaScript core concepts and ES6 standards.
             </p>
           </div>
@@ -692,7 +692,7 @@ FeatureEngine.init();`,
             </div>
             <div className="flex justify-between border-b border-white/10 pb-2">
               <span className="text-white/40 font-medium">Curriculum:</span>
-              <span className="font-semibold text-white">100+ Days JavaScript Micro-Learning</span>
+              <span className="font-semibold text-white">JavaScript Micro-Learning Core Modules</span>
             </div>
             <div className="flex justify-between border-b border-white/10 pb-2">
               <span className="text-white/40 font-medium">Total Modules Completed:</span>
