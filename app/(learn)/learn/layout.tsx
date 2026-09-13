@@ -153,18 +153,10 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
     <div className="flex flex-col h-full bg-[#000000]">
       {/* Sider Header */}
       <div className="p-4 border-b border-[#ffffff15]">
-        <Link href="/" className="flex items-center gap-2.5 no-underline mb-4">
-          <div className="w-9 h-9 rounded-lg bg-[#ff63f9] text-black flex items-center justify-center text-lg font-bold">
-            ⚡
+        <Link href="/" className="flex items-center no-underline mb-4">
+          <div className="w-9 h-9 rounded-xl bg-white/10 text-xl flex items-center justify-center border border-white/15 shadow-[0_0_15px_rgba(255,99,249,0.3)] hover:scale-105 transition-transform">
+            💡
           </div>
-          {!collapsed && (
-            <div>
-              <div className="font-extrabold text-base tracking-tight leading-none text-white">
-                JS Learning <span className="text-[#ff63f9]">Hub</span>
-              </div>
-              <p className="text-[10px] text-[#ff63f9] m-0 font-bold tracking-wide">CORE JAVASCRIPT HUB</p>
-            </div>
-          )}
         </Link>
 
         {!collapsed && (

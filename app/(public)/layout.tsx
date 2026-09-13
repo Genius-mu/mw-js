@@ -17,18 +17,14 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
   const nextDay = getNextUncompletedDay();
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#000000] text-[#e2e2e2] relative bg-grid-pattern overflow-x-hidden">
+    <div className="min-h-screen flex flex-col justify-between bg-[#000000] text-[#e2e2e2] relative bg-grid-pattern overflow-x-clip">
       {/* pxxl.app Style Floating Centered Fixed Glass Navigation Header */}
       <div className="fixed top-3 left-0 right-0 z-50 px-4 flex justify-center w-full pointer-events-auto">
         <header className="w-full max-w-4xl bg-[#0a0a0e]/60 backdrop-blur-2xl border border-white/12 rounded-[14px] px-5 py-2.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.65)] flex items-center justify-between gap-4 text-xs transition-all">
-          {/* Brand Logo */}
-          <Link href="/" className="flex items-center gap-2.5 no-underline group">
-            <div className="w-7 h-7 rounded-[9px] bg-[#ff63f9] text-black flex items-center justify-center text-xs font-black shadow-[0_0_12px_rgba(255,99,249,0.4)] group-hover:scale-105 transition-transform">
-              ⚡
-            </div>
-            <div className="font-bold text-xs md:text-sm tracking-tight text-white flex items-center gap-1">
-              <span>JS Learning</span>
-              <span className="text-[#ff63f9]">Hub</span>
+          {/* Brand Logo - Pure Bulb Icon, No Text */}
+          <Link href="/" className="flex items-center no-underline group">
+            <div className="w-8 h-8 rounded-xl bg-white/10 text-xl flex items-center justify-center border border-white/15 shadow-[0_0_15px_rgba(255,99,249,0.3)] group-hover:scale-110 transition-transform">
+              💡
             </div>
           </Link>
 
@@ -48,16 +44,16 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
             </a>
           </nav>
 
-          {/* Right Action Button - Vibrant Purple Sign In */}
+          {/* Right Action Button - White with Purple Glitch Bottom Shadow, turns purple on hover */}
           <div className="flex items-center gap-3">
-            <Link href="/login">
-              <Button
-                type="primary"
-                icon={<UserOutlined />}
-                className="bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none font-bold text-xs h-8 px-4 rounded-[7px] shadow-[0_0_18px_rgba(255,99,249,0.4)]"
+            <Link href="/login" className="no-underline">
+              <button
+                type="button"
+                className="bg-white text-black font-extrabold text-xs h-8 px-4 rounded-[6px] shadow-[0_4px_0_0_#ff63f9] hover:bg-[#ff63f9] hover:text-black hover:shadow-[0_2px_0_0_#ffffff] transition-all transform active:translate-y-1 active:shadow-none flex items-center gap-1.5 cursor-pointer border-none"
               >
-                Sign In
-              </Button>
+                <UserOutlined />
+                <span>Sign In</span>
+              </button>
             </Link>
           </div>
         </header>
