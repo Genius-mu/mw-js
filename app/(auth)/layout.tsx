@@ -21,7 +21,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           </div>
           <div className="text-left">
             <div className="font-extrabold text-xl tracking-tight">
-              <span>JS Learning</span> <span className="text-amber-500">Hub</span>
+              <span>CODA</span>
             </div>
             <p className="text-xs text-slate-400 m-0 font-medium">100+ DAYS OF JAVASCRIPT</p>
           </div>

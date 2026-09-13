@@ -26,11 +26,12 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
       {/* pxxl.app Style Floating Centered Fixed Glass Navigation Header */}
       <div className="fixed top-3 left-0 right-0 z-50 px-4 flex justify-center w-full pointer-events-auto">
         <header className="w-full max-w-4xl bg-[#0a0a0e]/60 backdrop-blur-2xl border border-white/12 rounded-[14px] px-5 py-2.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.65)] flex items-center justify-between gap-4 text-xs transition-all">
-          {/* Brand Logo - Pure Bulb Icon, No Text */}
-          <Link href="/" className="flex items-center no-underline group">
+          {/* Brand Logo - Bulb Icon + CODA */}
+          <Link href="/" className="flex items-center gap-2.5 no-underline group">
             <div className="w-8 h-8 rounded-xl bg-white/10 text-xl flex items-center justify-center border border-white/15 shadow-[0_0_15px_rgba(255,99,249,0.3)] group-hover:scale-110 transition-transform">
               💡
             </div>
+            <span className="font-extrabold text-sm tracking-wider text-white">CODA</span>
           </Link>
 
           {/* Minimal Navigation Links (pxxl.app style) */}
@@ -65,7 +66,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
       </div>
 
       {/* Main Public Content */}
-      <main className="flex-1 pt-16">{children}</main>
+      <main className="flex-1 pt-20 md:pt-24">{children}</main>
 
       {/* Persistent Cookie Notice */}
       {cookieConsent && (
@@ -80,7 +81,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
             </button>
           </div>
           <p className="text-white/60 text-[11px] m-0 leading-relaxed">
-            We store your 100+ Days JS progress & notes locally in your browser.
+            We store your 100+ Days CODA progress & notes locally in your browser.
           </p>
           <div className="flex items-center justify-end pt-0.5">
             <Button
@@ -96,7 +97,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
       )}
 
       {/* Exact pxxl.app Style Footer */}
-      <footer className="border-t border-white/10 pt-16 pb-8 px-6 sm:px-12 lg:px-16 bg-[#000000] text-white relative overflow-hidden">
+      <footer className="border-t border-white/10 pt-20 pb-8 px-6 sm:px-12 lg:px-16 bg-[#000000] text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
           {/* Main Footer Row: Left Brand/Social + Right 3 Columns */}
           <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-16">
@@ -163,7 +164,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
 
               {/* Copyright */}
               <div className="text-xs text-white/40 font-normal">
-                © JS Learning Hub • MMXXIV — MMXXVI
+                © CODA • MMXXIV — MMXXVI
               </div>
             </div>
 
@@ -215,7 +216,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
                     </a>
                   </li>
                   <li>
-                    <a href="mailto:support@jslearninghub.com" className="text-white/50 hover:text-white transition-colors no-underline">
+                    <a href="mailto:support@coda.dev" className="text-white/50 hover:text-white transition-colors no-underline">
                       Contact Us
                     </a>
                   </li>
@@ -248,16 +249,20 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
             </div>
           </div>
 
-          {/* Large Outlined Stroked Watermark Text at the Bottom (matching 'PXXL SPACE' from screenshot) */}
-          <div className="w-full text-center overflow-hidden pointer-events-none select-none pt-16 sm:pt-24 pb-0">
+          {/* Large Outlined Stroked Watermark Text at the Bottom with Dark Overlay Fade (matching PXXL SPACE) */}
+          <div className="relative w-full text-center overflow-hidden pointer-events-none select-none pt-20 sm:pt-28 md:pt-36 pb-0">
             <span
-              className="font-black text-5xl sm:text-7xl md:text-9xl lg:text-[140px] tracking-widest uppercase block leading-none text-transparent whitespace-nowrap"
+              className="font-black text-8xl sm:text-[140px] md:text-[200px] lg:text-[280px] tracking-[0.2em] sm:tracking-[0.25em] uppercase block leading-none text-transparent whitespace-nowrap"
               style={{
-                WebkitTextStroke: "1px rgba(255, 99, 249, 0.18)"
+                WebkitTextStroke: "1.5px rgba(255, 99, 249, 0.4)",
+                maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0) 88%)",
+                WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0) 88%)"
               }}
             >
-              JS LEARNING HUB
+              CODA
             </span>
+            {/* Dark Overlay Gradient to smoothly dissolve the bottom of the letters into black */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none" />
           </div>
         </div>
       </footer>

@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "JS Learning Hub | 100+ Days JavaScript Challenge",
-  description: "Master JavaScript bite-sized micro-concepts with daily video tutorials, documentation guides, interactive exercises, and progress tracking."
+  title: "CODA | 100+ Days JavaScript Challenge",
+  description: "Master JavaScript bite-sized micro-concepts with daily video tutorials, documentation guides, interactive exercises, and progress tracking on CODA."
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

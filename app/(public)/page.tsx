@@ -183,9 +183,9 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
   ];
 
   return (
-    <div className="space-y-28 pb-28">
+    <div className="space-y-36 sm:space-y-44 pb-36">
       {/* 1. HERO SECTION (pxxl.app style - Pitch Black Normally, Gray Scrambled Text on Hover) */}
-      <section className="relative pt-12 md:pt-20 pb-12 px-4 max-w-5xl mx-auto text-center overflow-hidden group bg-black rounded-3xl">
+      <section className="relative pt-20 sm:pt-28 md:pt-36 pb-16 sm:pb-24 md:pb-28 px-6 sm:px-10 max-w-5xl mx-auto text-center overflow-hidden group bg-black rounded-3xl">
         {/* Interactive Scrambled Text Hero Background - Pitch Black Normally, Gray Scramble on Hover */}
         <div className="absolute inset-0 pointer-events-auto opacity-0 group-hover:opacity-75 transition-opacity duration-500 -z-10 flex flex-col justify-center items-center select-none overflow-hidden p-4">
           <ScrambledText
@@ -203,7 +203,7 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[250px] bg-[#ff63f9]/5 blur-[140px] rounded-full pointer-events-none -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
         {/* Headline - Large, bold pxxl.app typography with Re-triggering Blur Animation */}
-        <div className="mb-6">
+        <div className="mb-8">
           <BlurText
             text="Master Modern JavaScript Core & ES2026"
             delay={70}
@@ -214,18 +214,18 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
         </div>
 
         {/* Subtitle */}
-        <p className="text-base sm:text-lg max-w-2xl mx-auto mb-10 font-normal leading-relaxed text-white/70">
+        <p className="text-base sm:text-lg max-w-2xl mx-auto mb-12 font-normal leading-relaxed text-white/70">
           Learn JavaScript step-by-step with structured micro-concepts, interactive MDN documentation guides, live in-browser terminal, and 2 hands-on projects per lesson.
         </p>
 
         {/* Action Buttons */}
-        <div className="flex flex-row items-center justify-center gap-4">
+        <div className="flex flex-row items-center justify-center gap-5">
           <Link href={`/learn/day/${nextDay}`}>
             <Button
               type="primary"
               size="large"
               icon={<RocketOutlined />}
-              className="h-11 px-7 text-sm font-bold bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none rounded-md shadow-[0_0_20px_rgba(255,99,249,0.35)]"
+              className="h-12 px-8 text-sm font-bold bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none rounded-md shadow-[0_0_20px_rgba(255,99,249,0.35)]"
             >
               Start Learning Now
             </Button>
@@ -233,7 +233,7 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
           <a href="#curriculum">
             <Button
               size="large"
-              className="h-11 px-7 text-sm font-bold rounded-md border border-white/20 bg-transparent text-white/80 hover:text-white hover:border-white/40"
+              className="h-12 px-8 text-sm font-bold rounded-md border border-white/20 bg-transparent text-white/80 hover:text-white hover:border-white/40"
             >
               View Curriculum
             </Button>
@@ -301,17 +301,17 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
       </section>
 
       {/* 4. REACTBITS OPTIONWHEEL MODULE SELECTOR */}
-      <section className="max-w-4xl mx-auto px-4 text-center space-y-6">
-        <div className="space-y-2">
+      <section className="max-w-4xl mx-auto px-4 text-center space-y-8">
+        <div className="space-y-3">
           <h2 className="text-2xl sm:text-4xl font-extrabold text-white m-0">
             Interactive Module Navigator
           </h2>
-          <p className="text-sm text-white/60 max-w-md mx-auto m-0">
+          <p className="text-sm text-white/60 max-w-md mx-auto m-0 leading-relaxed">
             Scroll or drag the 3D wheel to preview modules & concepts.
           </p>
         </div>
 
-        <div className="max-w-md mx-auto p-4 rounded-2xl border border-white/10 bg-[#08080b]">
+        <div className="max-w-md mx-auto p-5 rounded-2xl border border-white/10 bg-[#08080b] shadow-2xl">
           <OptionWheel
             items={MODULES_DATA.map((m) => m.title)}
             defaultSelected={selectedModuleIdx}
@@ -324,13 +324,13 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
       </section>
 
       {/* 5. JAVASCRIPT MODULES & MICRO-LESSONS (pxxl.app Style Alternating Feature Cards) */}
-      <section id="curriculum" className="max-w-5xl mx-auto px-4 space-y-10">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-white/10 pb-4">
+      <section id="curriculum" className="max-w-5xl mx-auto px-4 space-y-12 sm:space-y-16">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-b border-white/10 pb-6">
           <div>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-white m-0 tracking-tight">
               JavaScript Modules & Micro-Lessons
             </h2>
-            <p className="text-sm text-white/60 m-0 mt-1">
+            <p className="text-sm text-white/60 m-0 mt-2">
               All concepts organized systematically from foundational primitives to modern ECMAScript 2026.
             </p>
           </div>
@@ -338,7 +338,7 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
             <Button
               type="primary"
               icon={<CodeOutlined />}
-              className="bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none font-bold text-xs h-9 px-4 rounded-md shadow-sm"
+              className="bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none font-bold text-xs h-10 px-5 rounded-md shadow-sm"
             >
               Launch Workspace
             </Button>
@@ -346,7 +346,7 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
         </div>
 
         {/* Alternating Modules Stack */}
-        <div className="space-y-8">
+        <div className="space-y-12 sm:space-y-16">
           {MODULES_DATA.map((mod, idx) => {
             const isEven = idx % 2 === 0;
             const moduleVisuals = [
@@ -363,14 +363,14 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
             return (
               <div
                 key={mod.id}
-                className="relative rounded-3xl bg-[#08080c] border border-white/10 p-6 sm:p-10 lg:p-12 hover:border-[#ff63f9]/30 transition-all duration-300 shadow-2xl overflow-hidden group"
+                className="relative rounded-3xl bg-[#08080c] border border-white/10 p-8 sm:p-12 lg:p-14 hover:border-[#ff63f9]/30 transition-all duration-300 shadow-2xl overflow-hidden group"
               >
                 {/* Soft Ambient Glow */}
                 <div className="absolute -right-20 -top-20 w-80 h-80 bg-[#ff63f9]/5 rounded-full blur-[120px] pointer-events-none group-hover:bg-[#ff63f9]/10 transition-colors" />
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
                   {/* TEXT CONTENT */}
-                  <div className={`lg:col-span-6 space-y-4 ${isEven ? "lg:order-1" : "lg:order-2"}`}>
+                  <div className={`lg:col-span-6 space-y-5 ${isEven ? "lg:order-1" : "lg:order-2"}`}>
                     <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#ff63f9] tracking-wider uppercase">
                       <span>MODULE 0{idx + 1}</span>
                       <span className="text-white/20">•</span>
@@ -379,7 +379,7 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
                       <span className="text-white/50">{mod.days.length * 2} Practical Projects</span>
                     </div>
 
-                    {/* Big and Bold Heading (Not too bold) */}
+                    {/* Big and Bold Heading */}
                     <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight m-0">
                       {mod.title.replace(/^Module \d+:\s*/, "")}
                     </h3>
@@ -390,18 +390,18 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
                     </p>
 
                     {/* Featured Lessons Grid */}
-                    <div className="space-y-2 pt-1">
+                    <div className="space-y-2.5 pt-1">
                       <div className="text-[11px] font-mono text-white/40 uppercase tracking-wider">
                         Curriculum Highlights:
                       </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                         {mod.days.slice(0, 4).map((day) => {
                           const isCompleted = completedDays.includes(day.id);
                           return (
                             <Link
                               key={day.id}
                               href={`/learn/day/${day.id}`}
-                              className="no-underline flex items-center justify-between p-2 rounded-lg bg-white/[0.03] border border-white/8 hover:border-white/20 hover:bg-white/[0.06] transition-all group/item"
+                              className="no-underline flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] border border-white/8 hover:border-white/20 hover:bg-white/[0.06] transition-all group/item"
                             >
                               <div className="flex items-center gap-2 truncate">
                                 {isCompleted ? (
@@ -427,7 +427,7 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
                       <Link href={`/learn/day/${firstDay.id}`}>
                         <Button
                           type="primary"
-                          className="h-10 px-6 text-xs font-bold bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none rounded-lg shadow-[0_0_15px_rgba(255,99,249,0.3)] flex items-center gap-2"
+                          className="h-11 px-7 text-xs font-bold bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none rounded-lg shadow-[0_0_15px_rgba(255,99,249,0.3)] flex items-center gap-2"
                         >
                           <span>Start Module 0{idx + 1}</span>
                           <RightOutlined className="text-[10px]" />
@@ -451,12 +451,12 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
       </section>
 
       {/* 6. RESTRUCTURED MINIMAL FAQ SECTION (Divided by Lines, No Gray/Hash Boxes) */}
-      <section id="faq" className="max-w-4xl mx-auto px-4 space-y-8">
-        <div className="text-center space-y-2">
+      <section id="faq" className="max-w-4xl mx-auto px-4 space-y-10 sm:space-y-12">
+        <div className="text-center space-y-3">
           <h2 className="text-2xl sm:text-4xl font-extrabold text-white m-0">
             Frequently Asked Questions
           </h2>
-          <p className="text-sm text-white/60 max-w-md mx-auto m-0">
+          <p className="text-sm text-white/60 max-w-md mx-auto m-0 leading-relaxed">
             Everything you need to know about the curriculum, sandbox, and certification.
           </p>
         </div>
@@ -466,7 +466,7 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
           {faqList.map((item, idx) => {
             const isOpen = openFaq === idx;
             return (
-              <div key={idx} className="py-5">
+              <div key={idx} className="py-6 sm:py-7">
                 <button
                   onClick={() => setOpenFaq(isOpen ? null : idx)}
                   className="w-full text-left flex items-center justify-between gap-4 text-base sm:text-lg font-bold text-white hover:text-[#ff63f9] transition-colors"
@@ -477,7 +477,7 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
                   </span>
                 </button>
                 {isOpen && (
-                  <p className="text-sm text-white/70 leading-relaxed pt-3 m-0 animate-fadeIn">
+                  <p className="text-sm text-white/70 leading-relaxed pt-3.5 m-0 animate-fadeIn">
                     {item.a}
                   </p>
                 )}
@@ -489,18 +489,18 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
 
       {/* 7. LOWER CTA BANNER */}
       <section className="max-w-4xl mx-auto px-4 text-center">
-        <div className="p-10 md:p-14 rounded-3xl border border-white/15 bg-[#08080b] space-y-4">
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight">
+        <div className="p-12 sm:p-16 md:p-20 rounded-3xl border border-white/15 bg-[#08080b] space-y-6 shadow-2xl">
+          <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight m-0">
             Ready to Master JavaScript?
           </h2>
-          <p className="text-sm sm:text-base text-white/70 max-w-md mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base text-white/70 max-w-md mx-auto leading-relaxed m-0">
             Begin learning modern ECMAScript with hands-on projects and instant in-browser code execution.
           </p>
-          <div className="pt-3">
+          <div className="pt-4">
             <Link href={`/learn/day/${nextDay}`}>
               <Button
                 size="large"
-                className="h-11 px-8 text-sm font-bold bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none rounded-md shadow-[0_0_20px_rgba(255,99,249,0.35)]"
+                className="h-12 px-9 text-sm font-bold bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none rounded-md shadow-[0_0_20px_rgba(255,99,249,0.35)]"
               >
                 Launch Workspace
               </Button>

@@ -41,7 +41,7 @@ export default function LoginPage() {
       title={
         <div className="text-center py-1.5">
           <h2 className="text-lg font-bold m-0 text-white">Student Sign In</h2>
-          <p className="text-xs text-white/60 font-normal m-0 mt-1">Access your 100+ Days JS Learning Dashboard</p>
+          <p className="text-xs text-white/60 font-normal m-0 mt-1">Access your 100+ Days CODA Dashboard</p>
         </div>
       }
     >

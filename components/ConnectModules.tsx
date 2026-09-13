@@ -40,10 +40,10 @@ export default function ConnectModules() {
       {/* Title */}
       <div className="space-y-3">
         <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight m-0">
-          Connect your modules to JS Core.
+          Connect your modules to CODA Core.
         </h2>
         <p className="text-sm sm:text-base text-white/60 max-w-xl mx-auto m-0 leading-relaxed">
-          Structured concepts stream into the high-performance V8 engine. Hover any module to inspect data flow.
+          Structured concepts stream into the high-performance CODA runtime. Hover any module to inspect data flow.
         </p>
       </div>
 
@@ -129,7 +129,7 @@ export default function ConnectModules() {
               <BulbFilled className="text-black text-xl" />
             </div>
             <span className="text-xs font-black tracking-tight text-white leading-tight">
-              JS V8 CORE
+              CODA CORE
             </span>
             <span className="text-[9px] font-mono text-[#ff63f9] mt-0.5 font-bold">
               ECMASCRIPT
