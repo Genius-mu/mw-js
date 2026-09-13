@@ -1,0 +1,11 @@
+.scrambled-text-block {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.scramble-char {
+  will-change: transform, opacity;
+  display: inline-block;
+}

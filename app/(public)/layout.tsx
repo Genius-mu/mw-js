@@ -17,22 +17,22 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
   const nextDay = getNextUncompletedDay();
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#000000] text-[#e2e2e2] relative bg-grid-pattern">
-      {/* pxxl.app Style Minimal Header Navigation Bar */}
-      <header className="sticky top-0 z-50 bg-[#000000]/80 backdrop-blur-xl border-b border-white/10">
-        <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between gap-4 text-xs">
+    <div className="min-h-screen flex flex-col justify-between bg-[#000000] text-[#e2e2e2] relative bg-grid-pattern overflow-x-hidden">
+      {/* pxxl.app Style Floating Centered Glass Navigation Header */}
+      <div className="sticky top-3 z-50 px-4 flex justify-center w-full">
+        <header className="w-full max-w-4xl bg-[#08080c]/80 backdrop-blur-xl border border-white/12 rounded-2xl md:rounded-full px-5 py-2.5 shadow-2xl flex items-center justify-between gap-4 text-xs transition-all">
           {/* Brand Logo */}
           <Link href="/" className="flex items-center gap-2.5 no-underline group">
-            <div className="w-8 h-8 rounded-[9px] bg-white text-black flex items-center justify-center text-xs font-black shadow-sm group-hover:scale-105 transition-transform">
+            <div className="w-7 h-7 rounded-[9px] bg-white text-black flex items-center justify-center text-xs font-black shadow-sm group-hover:scale-105 transition-transform">
               ⚡
             </div>
-            <div className="font-bold text-sm tracking-tight text-white flex items-center gap-1">
+            <div className="font-bold text-xs md:text-sm tracking-tight text-white flex items-center gap-1">
               <span>JS Learning</span>
               <span className="text-[#ff63f9]">Hub</span>
             </div>
           </Link>
 
-          {/* Minimal Essential Navigation Links (pxxl.app style) */}
+          {/* Minimal Navigation Links (pxxl.app style) */}
           <nav className="hidden md:flex items-center gap-6 text-xs font-medium text-white/70">
             <a href="#curriculum" className="no-underline text-white/70 hover:text-white transition-colors">
               Curriculum
@@ -72,8 +72,8 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
               </Link>
             )}
           </div>
-        </div>
-      </header>
+        </header>
+      </div>
 
       {/* Main Public Content */}
       <main className="flex-1">{children}</main>

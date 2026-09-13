@@ -18,6 +18,7 @@ import { useLearning } from "@/context/LearningContext";
 import BlurText from "@/components/reactbits/BlurText";
 import GlassSurface from "@/components/reactbits/GlassSurface";
 import OptionWheel from "@/components/reactbits/OptionWheel";
+import ScrambledText from "@/components/reactbits/ScrambledText";
 
 export default function LandingPage() {
   const { user, getNextUncompletedDay, completedDays } = useLearning();
@@ -27,8 +28,21 @@ export default function LandingPage() {
 
   return (
     <div className="space-y-16 pb-16">
-      {/* HERO SECTION - ReactBits BlurText & Glass Styling */}
-      <section className="relative pt-10 md:pt-16 pb-8 px-4 max-w-4xl mx-auto text-center">
+      {/* HERO SECTION - ReactBits ScrambledText, BlurText & Glass Styling */}
+      <section className="relative pt-8 md:pt-14 pb-8 px-4 max-w-4xl mx-auto text-center overflow-hidden">
+        {/* Interactive Gray Scrambled Text Hero Background (pxxl.app style) */}
+        <div className="absolute inset-0 pointer-events-auto opacity-40 hover:opacity-60 transition-opacity -z-10 flex flex-col justify-center items-center select-none overflow-hidden">
+          <ScrambledText
+            radius={120}
+            duration={1.2}
+            speed={0.5}
+            scrambleChars=".:#@$%&*<>~/+=-_[]{}01"
+            className="text-[11px] font-mono text-[#71717a] max-w-3xl leading-relaxed text-center px-4"
+          >
+            {"CONST JS_HUB = NEW LEARNING_PLATFORM({ DAYS: 102, STATUS: 'ONLINE', CORE: 'ECMASCRIPT2026' }); FUNCTION EXECUTE_DAY(ID) { RETURN FETCH_LESSON(ID).THEN(RENDER_DOCUMENTATION); }"}
+          </ScrambledText>
+        </div>
+
         {/* Soft Ambient Glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] bg-[#ff63f9]/5 blur-[120px] rounded-full pointer-events-none -z-10 animate-glow" />
 
