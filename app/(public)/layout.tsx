@@ -254,9 +254,9 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
             <span
               className="font-black text-8xl sm:text-[140px] md:text-[200px] lg:text-[280px] tracking-[0.2em] sm:tracking-[0.25em] uppercase block leading-none text-transparent whitespace-nowrap"
               style={{
-                WebkitTextStroke: "1.5px rgba(255, 99, 249, 0.4)",
-                maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0) 88%)",
-                WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0) 88%)"
+                WebkitTextStroke: "1.5px rgba(255, 99, 249, 0.52)",
+                maskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 45%, rgba(0,0,0,0) 90%)",
+                WebkitMaskImage: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 45%, rgba(0,0,0,0) 90%)"
               }}
             >
               CODA
