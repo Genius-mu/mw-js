@@ -25,15 +25,16 @@ import {
   CopyOutlined,
   BulbOutlined,
   ExportOutlined,
-  FieldTimeOutlined,
   TrophyOutlined,
   ReloadOutlined,
   RocketOutlined,
   FileTextOutlined,
   SaveOutlined,
-  ShareAltOutlined
+  ShareAltOutlined,
+  FolderOpenOutlined,
+  ThunderboltOutlined
 } from "@ant-design/icons";
-import { CURRICULUM_DATA, LessonDay, YOUTUBE_VIDEO_ID } from "@/lib/curriculum";
+import { CURRICULUM_DATA, LessonDay, LessonProject } from "@/lib/curriculum";
 import { useLearning } from "@/context/LearningContext";
 
 const { TextArea } = Input;
@@ -89,15 +90,8 @@ export default function DayLearningPage() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [userCode]);
 
-  // Format seconds to mm:ss
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
-  };
-
-  const handleCopySnippet = () => {
-    navigator.clipboard.writeText(lesson.codeSnippet);
+  const handleCopySnippet = (text: string) => {
+    navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -153,7 +147,8 @@ export default function DayLearningPage() {
   };
 
   // Safe JavaScript Code Evaluator with console.log interception
-  const handleRunCode = () => {
+  const handleRunCode = (codeToRun?: string) => {
+    const targetCode = codeToRun || userCode;
     const logs: string[] = [];
     const customConsole = {
       log: (...args: any[]) => {
@@ -168,7 +163,7 @@ export default function DayLearningPage() {
     };
 
     try {
-      const runFn = new Function("console", userCode);
+      const runFn = new Function("console", targetCode);
       runFn(customConsole);
       if (logs.length === 0) {
         logs.push("=> Code executed cleanly with 0 console logs.");
@@ -179,12 +174,53 @@ export default function DayLearningPage() {
     }
   };
 
-  const durationSeconds = lesson.videoEndTime - lesson.videoStartTime;
+  // Default projects fallback generator for each lesson day
+  const getProjectsForLesson = (): LessonProject[] => {
+    if (lesson.projects && lesson.projects.length >= 2) {
+      return lesson.projects;
+    }
+
+    return [
+      {
+        title: `Project 1: ${lesson.title} - Real-World Utility`,
+        description: `Build a production-ready utility module using ${lesson.title.toLowerCase()} for data processing and application logic.`,
+        code: `// Project 1: Production Utility
+function executeUtilityModule(inputVal) {
+  console.log("⚡ Executing module for: ${lesson.title}");
+  
+  // Concept execution
+  ${lesson.codeSnippet}
+
+  return { status: "ACTIVE", result: inputVal };
+}
+
+console.log(executeUtilityModule("Test Payload"));`,
+        outcome: `Demonstrates clean practical execution of ${lesson.title} in real-world JS applications.`
+      },
+      {
+        title: `Project 2: Interactive Feature & State Engine`,
+        description: `Construct an interactive feature engine integrating ${lesson.title.toLowerCase()} for modular JavaScript applications.`,
+        code: `// Project 2: Feature Engine
+const FeatureEngine = {
+  name: "${lesson.title} Module",
+  init() {
+    console.log("🚀 Initializing ${lesson.title} Engine...");
+    ${lesson.exercise.solutionCode}
+  }
+};
+
+FeatureEngine.init();`,
+        outcome: `Applies modular code design and state logic using ${lesson.title}.`
+      }
+    ];
+  };
+
+  const currentProjects = getProjectsForLesson();
 
   return (
     <div className="space-y-5 pb-12">
       {/* Header Banner */}
-      <div className="p-5 rounded-2xl border bg-[#08080c] border-white/10">
+      <div className="p-5 rounded-[7px] border bg-[#08080c] border-white/10">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
@@ -207,7 +243,7 @@ export default function DayLearningPage() {
               size="medium"
               icon={isCompleted ? <CheckCircleFilled className="text-white" /> : <CheckCircleOutlined />}
               onClick={handleToggleComplete}
-              className={!isCompleted ? "bg-white text-black hover:bg-white/90 border-none font-semibold text-xs rounded-[9px]" : "font-semibold border-white/10 text-white/80 rounded-[9px] text-xs"}
+              className={!isCompleted ? "bg-white text-black hover:bg-white/90 border-none font-semibold text-xs rounded-[7px]" : "font-semibold border-white/10 text-white/80 rounded-[7px] text-xs"}
             >
               {isCompleted ? "Marked Completed" : "Mark as Completed"}
             </Button>
@@ -215,36 +251,49 @@ export default function DayLearningPage() {
         </div>
       </div>
 
-      {/* Main Grid: Video + Sidebar Info */}
+      {/* Main Grid: Concept Blueprint + Sidebar Specs */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-        {/* Video Player (Col-span 2) */}
+        {/* Concept Deep Dive Card (Col-span 2) */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="rounded-2xl border overflow-hidden bg-[#08080c] border-white/10">
-            {/* Embed Video Iframe */}
-            <div className="relative w-full aspect-video bg-black">
-              <iframe
-                className="w-full h-full border-0"
-                src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?start=${lesson.videoStartTime}&end=${lesson.videoEndTime}&autoplay=0&rel=0&modestbranding=1`}
-                title={lesson.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+          <div className="p-6 rounded-[7px] border bg-[#08080c] border-white/10 space-y-4 relative overflow-hidden">
+            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <div className="flex items-center gap-2">
+                <ThunderboltOutlined className="text-[#ff63f9] text-base" />
+                <span className="font-bold text-sm text-white">Concept Architecture & Code Blueprint</span>
+              </div>
+              <Tag className="bg-white/10 text-white/90 border-none text-[10px]">ES2026 Core</Tag>
             </div>
 
-            {/* Video Control & Timestamp Footer */}
-            <div className="p-3.5 flex flex-wrap items-center justify-between gap-3 bg-[#000000] border-t border-white/10 text-xs text-white/80">
-              <div className="flex items-center gap-2 font-medium text-[11px]">
-                <FieldTimeOutlined className="text-white/60 text-xs" />
-                <span>Timestamp: {formatTime(lesson.videoStartTime)} - {formatTime(lesson.videoEndTime)} ({durationSeconds} seconds)</span>
-              </div>
+            <p className="text-xs text-white/80 leading-relaxed m-0">
+              {lesson.description} Below is the standard syntax structure used in modern JavaScript development:
+            </p>
 
+            {/* Code Snippet Box */}
+            <div className="relative group">
+              <pre className="p-4 rounded-[7px] bg-[#000000] text-white/90 font-mono text-xs overflow-x-auto border border-white/10 leading-relaxed">
+                <code>{lesson.codeSnippet}</code>
+              </pre>
+              <Button
+                size="small"
+                icon={<CopyOutlined />}
+                onClick={() => handleCopySnippet(lesson.codeSnippet)}
+                className="absolute top-3 right-3 text-[10px] font-medium bg-white/10 hover:bg-white/20 text-white border-none rounded-[5px]"
+              >
+                {copied ? "Copied" : "Copy"}
+              </Button>
+            </div>
+
+            <div className="flex items-center justify-between pt-1 text-xs text-white/60">
+              <span className="flex items-center gap-1.5 text-[11px]">
+                <BulbOutlined className="text-[#ff63f9]" /> Key takeaway: {lesson.summaryNotes[0]}
+              </span>
               <a
-                href={`https://www.youtube.com/watch?v=${YOUTUBE_VIDEO_ID}&t=${lesson.videoStartTime}s`}
+                href={lesson.docsLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="no-underline text-white/80 hover:text-white font-medium text-[11px] flex items-center gap-1"
+                className="no-underline text-white hover:underline text-[11px] font-medium flex items-center gap-1"
               >
-                Watch on YouTube <ExportOutlined />
+                MDN Documentation <ExportOutlined />
               </a>
             </div>
           </div>
@@ -252,7 +301,7 @@ export default function DayLearningPage() {
 
         {/* Quick Lesson Specs Sidebar (Col-span 1) */}
         <div className="space-y-4">
-          <div className="p-5 rounded-2xl border bg-[#08080c] border-white/10">
+          <div className="p-5 rounded-[7px] border bg-[#08080c] border-white/10">
             <span className="font-bold text-xs flex items-center gap-2 text-white mb-3.5"><BookOutlined /> Lesson Specs</span>
             <div className="space-y-3 text-xs">
               <div>
@@ -272,9 +321,9 @@ export default function DayLearningPage() {
                     href={lesson.docsLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="no-underline inline-flex items-center gap-1.5 px-3 py-1 rounded-[9px] bg-white/10 text-white font-medium text-xs hover:bg-white/20 transition-colors"
+                    className="no-underline inline-flex items-center gap-1.5 px-3 py-1 rounded-[7px] bg-white/10 text-white font-medium text-xs hover:bg-white/20 transition-colors"
                   >
-                    MDN Documentation <ExportOutlined />
+                    MDN Docs <ExportOutlined />
                   </a>
                 </div>
               </div>
@@ -285,7 +334,7 @@ export default function DayLearningPage() {
                   type="primary"
                   icon={<RocketOutlined />}
                   onClick={handleNextDay}
-                  className="bg-white text-black hover:bg-white/90 border-none font-semibold h-9 text-xs rounded-[9px] shadow-sm"
+                  className="bg-white text-black hover:bg-white/90 border-none font-semibold h-9 text-xs rounded-[7px] shadow-sm"
                 >
                   {dayId < totalDays ? "Complete & Go to Next Day" : "Claim Certificate 🎉"}
                 </Button>
@@ -295,80 +344,75 @@ export default function DayLearningPage() {
         </div>
       </div>
 
-      {/* Tabs: Documentation, Interactive Code Practice & Personal Notes */}
-      <div className="p-5 rounded-2xl border bg-[#08080c] border-white/10">
-        <Tabs
-          defaultActiveKey="docs"
-          items={[
-            {
-              key: "docs",
-              label: (
-                <span className="font-medium text-xs flex items-center gap-2 text-white">
-                  <BookOutlined className="text-white/60" /> Lesson Documentation & Notes
-                </span>
-              ),
-              children: (
-                <div className="space-y-5 pt-2">
-                  {/* Summary Notes */}
-                  <div>
-                    <h3 className="text-sm font-bold mb-2 flex items-center gap-2 text-white">
-                      <BulbOutlined /> Key Concept Takeaways
-                    </h3>
-                    <ul className="space-y-1.5 text-xs list-disc pl-5 text-white/80">
-                      {lesson.summaryNotes.map((note, i) => (
-                        <li key={i} className="text-white/70">
-                          {note}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+      {/* 2 REAL-WORLD PROJECTS SECTION */}
+      <div className="p-6 rounded-[7px] border bg-[#08080c] border-white/10 space-y-4">
+        <div className="flex items-center justify-between border-b border-white/10 pb-3">
+          <div>
+            <h2 className="text-base font-bold text-white flex items-center gap-2 m-0">
+              <FolderOpenOutlined className="text-[#ff63f9]" /> Real-World Hands-On Projects (2 Projects for Day {lesson.day})
+            </h2>
+            <p className="text-xs text-white/50 m-0 mt-0.5">
+              Practice building full application modules using today's core concept.
+            </p>
+          </div>
+          <Tag color="rgba(255, 99, 249, 0.15)" className="text-[#ff63f9] border-none font-semibold text-xs">
+            2 Practical Projects
+          </Tag>
+        </div>
 
-                  {/* Code Snippet Box */}
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-sm font-bold m-0 flex items-center gap-2 text-white">
-                        <CodeOutlined /> Syntax & Code Example
-                      </h3>
-                      <Button
-                        size="small"
-                        icon={<CopyOutlined />}
-                        onClick={handleCopySnippet}
-                        className="text-[11px] font-medium bg-[#000000] text-white/80 border border-white/10 rounded-[7px]"
-                      >
-                        {copied ? "Copied!" : "Copy Snippet"}
-                      </Button>
-                    </div>
-                    <pre className="p-3.5 rounded-xl bg-[#000000] text-white/90 font-mono text-xs overflow-x-auto border border-white/10 leading-relaxed">
-                      <code>{lesson.codeSnippet}</code>
-                    </pre>
-                  </div>
-
-                  {/* Documentation Banner */}
-                  <Alert
-                    type="info"
-                    showIcon
-                    icon={<BookOutlined />}
-                    message={<span className="font-semibold text-xs text-white">Official MDN Documentation Guide</span>}
-                    description={
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mt-1">
-                        <span className="text-[11px] text-white/60">
-                          Deepen your knowledge by exploring full documentation, parameters, and code examples.
-                        </span>
-                        <a
-                          href={lesson.docsLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="no-underline inline-flex items-center gap-1 px-3 py-1 rounded-[9px] bg-white text-black font-semibold text-xs hover:bg-white/90 transition-colors shrink-0 shadow-sm"
-                        >
-                          Open MDN Documentation <ExportOutlined />
-                        </a>
-                      </div>
-                    }
-                    className="bg-[#000000] border-white/10"
-                  />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {currentProjects.map((proj, idx) => (
+            <div key={idx} className="p-4 rounded-[7px] bg-[#000000] border border-white/10 space-y-3 flex flex-col justify-between">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-xs text-white">{proj.title}</span>
+                  <Tag className="bg-white/10 text-white text-[9px] border-none">Project #{idx + 1}</Tag>
                 </div>
-              )
-            },
+                <p className="text-[11px] text-white/70 leading-relaxed m-0">{proj.description}</p>
+
+                <div className="relative">
+                  <pre className="p-3 rounded-[5px] bg-[#08080c] text-white/90 font-mono text-[11px] overflow-x-auto border border-white/10 max-h-40">
+                    <code>{proj.code}</code>
+                  </pre>
+                </div>
+
+                <div className="text-[11px] text-white/50 bg-white/5 p-2 rounded-[5px]">
+                  💡 <strong>Outcome:</strong> {proj.outcome}
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 pt-2 border-t border-white/10">
+                <Button
+                  size="small"
+                  type="primary"
+                  icon={<PlayCircleOutlined />}
+                  onClick={() => {
+                    setUserCode(proj.code);
+                    handleRunCode(proj.code);
+                  }}
+                  className="bg-white text-black hover:bg-white/90 border-none font-semibold text-[11px] rounded-[5px]"
+                >
+                  Run & Test Project #{idx + 1}
+                </Button>
+                <Button
+                  size="small"
+                  icon={<CopyOutlined />}
+                  onClick={() => handleCopySnippet(proj.code)}
+                  className="bg-[#08080c] text-white/80 border border-white/10 text-[11px] rounded-[5px]"
+                >
+                  Copy Code
+                </Button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Tabs: Documentation, Interactive Code Practice & Personal Notes */}
+      <div className="p-5 rounded-[7px] border bg-[#08080c] border-white/10">
+        <Tabs
+          defaultActiveKey="sandbox"
+          items={[
             {
               key: "sandbox",
               label: (
@@ -383,7 +427,7 @@ export default function DayLearningPage() {
                     type="warning"
                     showIcon
                     icon={<TrophyOutlined />}
-                    message={<span className="font-semibold text-xs text-white">Micro-Exercise</span>}
+                    message={<span className="font-semibold text-xs text-white">Micro-Exercise Challenge</span>}
                     description={<p className="text-xs m-0 mt-1 text-white/70">{lesson.exercise.prompt}</p>}
                     className="bg-[#000000] border-white/10"
                   />
@@ -402,17 +446,17 @@ export default function DayLearningPage() {
                             size="small"
                             icon={<ReloadOutlined />}
                             onClick={() => setUserCode(lesson.exercise.starterCode)}
-                            className="text-[11px] bg-[#000000] text-white/80 border border-white/10 rounded-[7px]"
+                            className="text-[11px] bg-[#000000] text-white/80 border border-white/10 rounded-[5px]"
                           >
-                            Reset Code
+                            Reset
                           </Button>
                           <Button
                             size="small"
                             icon={<BulbOutlined />}
                             onClick={() => setShowHint(!showHint)}
-                            className="text-[11px] bg-[#000000] text-white/80 border border-white/10 rounded-[7px]"
+                            className="text-[11px] bg-[#000000] text-white/80 border border-white/10 rounded-[5px]"
                           >
-                            {showHint ? "Hide Hint" : "Show Hint"}
+                            {showHint ? "Hide Hint" : "Hint"}
                           </Button>
                         </div>
                       </div>
@@ -420,7 +464,7 @@ export default function DayLearningPage() {
                       <textarea
                         value={userCode}
                         onChange={(e) => setUserCode(e.target.value)}
-                        className="w-full h-52 p-3 rounded-xl bg-[#000000] text-white font-mono text-xs border border-white/10 focus:outline-none focus:ring-1 focus:ring-white/30 resize-none leading-relaxed"
+                        className="w-full h-56 p-3 rounded-[7px] bg-[#000000] text-white font-mono text-xs border border-white/10 focus:outline-none focus:ring-1 focus:ring-white/30 resize-none leading-relaxed"
                         placeholder="Write your JavaScript code here..."
                       />
 
@@ -436,15 +480,15 @@ export default function DayLearningPage() {
                         <Button
                           type="primary"
                           icon={<PlayCircleOutlined />}
-                          onClick={handleRunCode}
-                          className="bg-white text-black hover:bg-white/90 border-none font-semibold h-8 px-4 text-xs rounded-[9px] shadow-sm"
+                          onClick={() => handleRunCode()}
+                          className="bg-white text-black hover:bg-white/90 border-none font-semibold h-8 px-4 text-xs rounded-[7px] shadow-sm"
                         >
                           Run Code & Test Output
                         </Button>
                         <Button
                           icon={<CodeOutlined />}
                           onClick={() => setSolutionModalOpen(true)}
-                          className="text-xs font-medium bg-[#000000] text-white/80 border border-white/10 rounded-[9px] h-8"
+                          className="text-xs font-medium bg-[#000000] text-white/80 border border-white/10 rounded-[7px] h-8"
                         >
                           View Solution
                         </Button>
@@ -454,9 +498,9 @@ export default function DayLearningPage() {
                     {/* Terminal Console Output */}
                     <div className="space-y-2">
                       <span className="text-xs font-semibold text-white">Terminal Output (console.log)</span>
-                      <div className="w-full h-52 p-3 rounded-xl bg-[#000000] text-white/90 font-mono text-xs border border-white/10 overflow-y-auto space-y-1">
+                      <div className="w-full h-56 p-3 rounded-[7px] bg-[#000000] text-white/90 font-mono text-xs border border-white/10 overflow-y-auto space-y-1">
                         {consoleOutput.length === 0 ? (
-                          <span className="text-white/30 italic">Click "Run Code" or press Ctrl+Enter to view console output here...</span>
+                          <span className="text-white/30 italic">Click "Run Code" or press Ctrl+Enter to view console output...</span>
                         ) : (
                           consoleOutput.map((line, idx) => (
                             <div
@@ -480,6 +524,53 @@ export default function DayLearningPage() {
               )
             },
             {
+              key: "docs",
+              label: (
+                <span className="font-medium text-xs flex items-center gap-2 text-white">
+                  <BookOutlined className="text-white/60" /> Lesson Takeaways & Notes
+                </span>
+              ),
+              children: (
+                <div className="space-y-5 pt-2">
+                  <div>
+                    <h3 className="text-sm font-bold mb-2 flex items-center gap-2 text-white">
+                      <BulbOutlined /> Key Concept Takeaways
+                    </h3>
+                    <ul className="space-y-1.5 text-xs list-disc pl-5 text-white/80">
+                      {lesson.summaryNotes.map((note, i) => (
+                        <li key={i} className="text-white/70">
+                          {note}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <Alert
+                    type="info"
+                    showIcon
+                    icon={<BookOutlined />}
+                    message={<span className="font-semibold text-xs text-white">Official MDN Documentation Guide</span>}
+                    description={
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mt-1">
+                        <span className="text-[11px] text-white/60">
+                          Deepen your knowledge by exploring full documentation, parameters, and code examples.
+                        </span>
+                        <a
+                          href={lesson.docsLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="no-underline inline-flex items-center gap-1 px-3 py-1 rounded-[7px] bg-white text-black font-semibold text-xs hover:bg-white/90 transition-colors shrink-0 shadow-sm"
+                        >
+                          Open MDN Documentation <ExportOutlined />
+                        </a>
+                      </div>
+                    }
+                    className="bg-[#000000] border-white/10"
+                  />
+                </div>
+              )
+            },
+            {
               key: "notes",
               label: (
                 <span className="font-medium text-xs flex items-center gap-2 text-white">
@@ -499,7 +590,7 @@ export default function DayLearningPage() {
                       type="primary"
                       icon={<SaveOutlined />}
                       onClick={handleSaveNote}
-                      className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs h-8 rounded-[9px] shadow-sm"
+                      className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs h-8 rounded-[7px] shadow-sm"
                     >
                       {noteSaved ? "Saved!" : "Save Notes"}
                     </Button>
@@ -510,7 +601,7 @@ export default function DayLearningPage() {
                     value={noteText}
                     onChange={(e) => setNoteText(e.target.value)}
                     placeholder="Write your study notes here..."
-                    className="font-sans text-xs rounded-xl p-3 bg-[#000000] text-white border-white/10"
+                    className="font-sans text-xs rounded-[7px] p-3 bg-[#000000] text-white border-white/10"
                   />
                 </div>
               )
@@ -520,13 +611,13 @@ export default function DayLearningPage() {
       </div>
 
       {/* Navigation Footer */}
-      <div className="p-3.5 rounded-2xl border flex items-center justify-between gap-4 bg-[#08080c] border-white/10">
+      <div className="p-3.5 rounded-[7px] border flex items-center justify-between gap-4 bg-[#08080c] border-white/10">
         <Button
           size="medium"
           icon={<LeftOutlined />}
           disabled={dayId <= 1}
           onClick={handlePrevDay}
-          className="font-medium bg-[#000000] text-white/80 border border-white/10 rounded-[9px] text-xs disabled:opacity-30"
+          className="font-medium bg-[#000000] text-white/80 border border-white/10 rounded-[7px] text-xs disabled:opacity-30"
         >
           Previous Day
         </Button>
@@ -540,7 +631,7 @@ export default function DayLearningPage() {
           size="medium"
           icon={<RightOutlined />}
           onClick={handleNextDay}
-          className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs rounded-[9px] shadow-sm"
+          className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs rounded-[7px] shadow-sm"
         >
           {dayId < totalDays ? "Next Day" : "Claim Certificate 🎉"}
         </Button>
@@ -581,7 +672,7 @@ export default function DayLearningPage() {
         width={600}
         centered
       >
-        <div className="text-center py-5 px-3 space-y-5 bg-[#08080c] text-white rounded-2xl border border-white/10">
+        <div className="text-center py-5 px-3 space-y-5 bg-[#08080c] text-white rounded-[7px] border border-white/10">
           <div className="w-16 h-16 mx-auto rounded-full bg-white/15 text-white flex items-center justify-center text-3xl">
             🏆
           </div>
@@ -590,7 +681,7 @@ export default function DayLearningPage() {
             <Tag color="rgba(255,255,255,0.15)" className="font-semibold px-2.5 py-0.5 text-[10px] uppercase mb-2 text-white border-none">OFFICIAL CERTIFICATE OF COMPLETION</Tag>
             <h2 className="text-xl font-bold text-white">100+ Days JavaScript Challenge Completed!</h2>
             <p className="text-xs text-white/60 max-w-sm mx-auto mt-1">
-              This certifies that <strong className="text-white">{user?.name || "Student"}</strong> has successfully mastered all 43+ micro-concepts and 6 modules in modern JavaScript core concepts and ES6 standards.
+              This certifies that <strong className="text-white">{user?.name || "Student"}</strong> has successfully mastered all micro-concepts and modules in modern JavaScript core concepts and ES6 standards.
             </p>
           </div>
 
@@ -625,11 +716,11 @@ export default function DayLearningPage() {
                   placement: "bottomRight"
                 });
               }}
-              className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs rounded-[9px] h-9 px-4 shadow-sm"
+              className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs rounded-[7px] h-9 px-4 shadow-sm"
             >
               Share Certificate
             </Button>
-            <Button size="medium" onClick={() => setCertModalOpen(false)} className="bg-[#000000] text-white/80 border border-white/10 rounded-[9px] text-xs h-9 px-4">
+            <Button size="medium" onClick={() => setCertModalOpen(false)} className="bg-[#000000] text-white/80 border border-white/10 rounded-[7px] text-xs h-9 px-4">
               Close
             </Button>
           </div>

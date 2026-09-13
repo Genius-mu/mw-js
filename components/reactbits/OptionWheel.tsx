@@ -144,6 +144,12 @@ export default function OptionWheel({
     applyTarget(index, true);
   };
 
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? 1 : -1;
+    applyTarget(targetRef.current + delta, true);
+  };
+
   useEffect(() => {
     applyTarget(targetRef.current, false);
   }, [items, applyTarget]);
@@ -153,6 +159,7 @@ export default function OptionWheel({
       ref={rootRef}
       role="listbox"
       tabIndex={0}
+      onWheel={handleWheel}
       className={`option-wheel ${side === "right" ? "option-wheel--right" : ""} ${isDragging ? "option-wheel--dragging" : ""} ${className}`}
       style={
         {

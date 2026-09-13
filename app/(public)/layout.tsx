@@ -18,9 +18,9 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
 
   return (
     <div className="min-h-screen flex flex-col justify-between bg-[#000000] text-[#e2e2e2] relative bg-grid-pattern overflow-x-hidden">
-      {/* pxxl.app Style Floating Centered Glass Navigation Header */}
-      <div className="sticky top-3 z-50 px-4 flex justify-center w-full">
-        <header className="w-full max-w-4xl bg-[#08080c]/80 backdrop-blur-xl border border-white/12 rounded-2xl md:rounded-full px-5 py-2.5 shadow-2xl flex items-center justify-between gap-4 text-xs transition-all">
+      {/* pxxl.app Style Floating Centered Fixed Glass Navigation Header */}
+      <div className="fixed top-3 left-0 right-0 z-50 px-4 flex justify-center w-full pointer-events-auto">
+        <header className="w-full max-w-4xl bg-[#08080c]/85 backdrop-blur-xl border border-white/12 rounded-[7px] px-5 py-2.5 shadow-2xl flex items-center justify-between gap-4 text-xs transition-all">
           {/* Brand Logo */}
           <Link href="/" className="flex items-center gap-2.5 no-underline group">
             <div className="w-7 h-7 rounded-[9px] bg-white text-black flex items-center justify-center text-xs font-black shadow-sm group-hover:scale-105 transition-transform">
@@ -40,43 +40,31 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
             <a href="#features" className="no-underline text-white/70 hover:text-white transition-colors">
               Features
             </a>
-            <a href="#docs" className="no-underline text-white/70 hover:text-white transition-colors">
-              Docs
+            <a href="#architecture" className="no-underline text-white/70 hover:text-white transition-colors">
+              Architecture
             </a>
             <span className="inline-flex items-center gap-1 text-[#ff63f9] font-semibold">
               Pro <span className="text-[9px] bg-[#ff63f9]/20 text-[#ff63f9] px-1.5 py-0.5 rounded-[5px] font-mono">v1.0</span>
             </span>
           </nav>
 
-          {/* Right Action Button (Crisp White, 9px Radius) */}
+          {/* Right Action Button - Vibrant Purple Sign In */}
           <div className="flex items-center gap-3">
-            {user ? (
-              <Link href={`/learn/day/${nextDay}`}>
-                <Button
-                  type="primary"
-                  icon={<RocketOutlined />}
-                  className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs h-8 px-4 rounded-[9px] shadow-sm"
-                >
-                  Resume Day {nextDay}
-                </Button>
-              </Link>
-            ) : (
-              <Link href="/login">
-                <Button
-                  type="primary"
-                  icon={<UserOutlined />}
-                  className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs h-8 px-4 rounded-[9px] shadow-sm"
-                >
-                  Get JS Hub Pro
-                </Button>
-              </Link>
-            )}
+            <Link href="/login">
+              <Button
+                type="primary"
+                icon={<UserOutlined />}
+                className="bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none font-bold text-xs h-8 px-4 rounded-[7px] shadow-[0_0_15px_rgba(255,99,249,0.4)]"
+              >
+                Sign In
+              </Button>
+            </Link>
           </div>
         </header>
       </div>
 
       {/* Main Public Content */}
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 pt-16">{children}</main>
 
       {/* Persistent Cookie Notice */}
       {cookieConsent && (

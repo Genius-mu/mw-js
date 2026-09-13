@@ -1,3 +1,10 @@
+export interface LessonProject {
+  title: string;
+  description: string;
+  code: string;
+  outcome: string;
+}
+
 export interface LessonDay {
   id: number;
   day: number;
@@ -5,11 +12,12 @@ export interface LessonDay {
   module: string;
   moduleId: string;
   description: string;
-  videoStartTime: number; // in seconds
-  videoEndTime: number; // in seconds
   docsLink: string;
   codeSnippet: string;
   summaryNotes: string[];
+  projects?: LessonProject[];
+  videoStartTime?: number;
+  videoEndTime?: number;
   exercise: {
     prompt: string;
     starterCode: string;
@@ -25,8 +33,6 @@ export interface ModuleGroup {
   icon: string;
   days: LessonDay[];
 }
-
-export const YOUTUBE_VIDEO_ID = "PkZNo7MFNFg"; // Interactive JavaScript Video Course
 
 export const CURRICULUM_DATA: LessonDay[] = [
   // MODULE 1: Basics & Data Types
