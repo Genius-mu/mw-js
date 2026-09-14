@@ -102,13 +102,13 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
           {/* Main Footer Row: Left Brand/Social + Right 3 Columns */}
           <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-16">
             {/* Left Side: Single-line text, 4 social icon boxes, copyright */}
-            <div className="space-y-6 max-w-md">
-              <p className="text-sm text-white/60 m-0 leading-relaxed font-normal">
+            <div className="max-w-md">
+              <p className="text-sm text-white/60 mb-8 leading-relaxed font-normal">
                 Develop with your favorite tools. Master modern JavaScript, instantly.
               </p>
 
               {/* 4 Social Media Boxes exactly matching pxxl.app */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 mb-8">
                 {/* Facebook */}
                 <a
                   href="https://facebook.com"
@@ -171,11 +171,11 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
             {/* Right Side: Exactly 3 Columns (Links, Support, Legal) */}
             <div className="grid grid-cols-3 gap-8 sm:gap-14 lg:gap-20">
               {/* Column 1: Links */}
-              <div className="space-y-4">
-                <h4 className="text-sm font-bold text-white m-0 tracking-wide">
+              <div>
+                <h4 className="text-sm font-bold text-white mb-6 tracking-wide">
                   Links
                 </h4>
-                <ul className="space-y-3 text-sm list-none p-0 m-0">
+                <ul className="space-y-3.5 text-sm list-none p-0 m-0">
                   <li>
                     <a href="#curriculum" className="text-white/50 hover:text-white transition-colors no-underline">
                       Curriculum
@@ -205,11 +205,11 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
               </div>
 
               {/* Column 2: Support */}
-              <div className="space-y-4">
-                <h4 className="text-sm font-bold text-white m-0 tracking-wide">
+              <div>
+                <h4 className="text-sm font-bold text-white mb-6 tracking-wide">
                   Support
                 </h4>
-                <ul className="space-y-3 text-sm list-none p-0 m-0">
+                <ul className="space-y-3.5 text-sm list-none p-0 m-0">
                   <li>
                     <a href="#faq" className="text-white/50 hover:text-white transition-colors no-underline">
                       About Us
@@ -229,11 +229,11 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
               </div>
 
               {/* Column 3: Legal */}
-              <div className="space-y-4">
-                <h4 className="text-sm font-bold text-white m-0 tracking-wide">
+              <div>
+                <h4 className="text-sm font-bold text-white mb-6 tracking-wide">
                   Legal
                 </h4>
-                <ul className="space-y-3 text-sm list-none p-0 m-0">
+                <ul className="space-y-3.5 text-sm list-none p-0 m-0">
                   <li>
                     <Link href="/terms" className="text-white/50 hover:text-white transition-colors no-underline">
                       Terms &amp; Conditions

@@ -19,6 +19,7 @@ import BlurText from "@/components/reactbits/BlurText";
 import OptionWheel from "@/components/reactbits/OptionWheel";
 import ScrambledText from "@/components/reactbits/ScrambledText";
 import ScrollStack, { ScrollStackItem } from "@/components/reactbits/ScrollStack";
+import ScrollBlurSlide from "@/components/reactbits/ScrollBlurSlide";
 import ConnectModules from "@/components/ConnectModules";
 import {
   BasicsDataTypesVisual,
@@ -243,112 +244,123 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
 
       {/* 2. SCROLLSTACK SECTION (Scroll-Triggered Stacking with Vertical Divider & Visuals) */}
       <section className="max-w-4xl mx-auto px-4">
-        <ScrollStack>
-          {scrollStackSteps.map((step, idx) => (
-            <ScrollStackItem key={idx} index={idx}>
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                {/* Left Side: Step Details & Highlights */}
-                <div className="md:col-span-6 space-y-3">
-                  <div className="text-xs font-mono font-bold text-[#ff63f9] tracking-wider uppercase flex items-center gap-2">
-                    <span>STEP {step.number}</span>
-                    <span className="text-white/20">•</span>
-                    <span className="text-white/50">{step.badge}</span>
+        <ScrollBlurSlide>
+          <ScrollStack>
+            {scrollStackSteps.map((step, idx) => (
+              <ScrollStackItem key={idx} index={idx}>
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                  {/* Left Side: Step Details & Highlights */}
+                  <div className="md:col-span-6 space-y-3">
+                    <div className="text-xs font-mono font-bold text-[#ff63f9] tracking-wider uppercase flex items-center gap-2">
+                      <span>STEP {step.number}</span>
+                      <span className="text-white/20">•</span>
+                      <span className="text-white/50">{step.badge}</span>
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-white m-0 tracking-tight">
+                      {step.title}
+                    </h3>
+                    <div className="text-sm font-medium text-white/80">
+                      {step.subtitle}
+                    </div>
+                    <p className="text-sm text-white/60 m-0 leading-relaxed pt-1">
+                      {step.description}
+                    </p>
+                    {/* Highlight Pills */}
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {step.features.map((feat, fIdx) => (
+                        <span
+                          key={fIdx}
+                          className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 text-white/70"
+                        >
+                          {feat}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white m-0 tracking-tight">
-                    {step.title}
-                  </h3>
-                  <div className="text-sm font-medium text-white/80">
-                    {step.subtitle}
-                  </div>
-                  <p className="text-sm text-white/60 m-0 leading-relaxed pt-1">
-                    {step.description}
-                  </p>
-                  {/* Highlight Pills */}
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {step.features.map((feat, fIdx) => (
-                      <span
-                        key={fIdx}
-                        className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 text-white/70"
-                      >
-                        {feat}
-                      </span>
-                    ))}
-                  </div>
-                </div>
 
-                {/* Vertical Divider Line */}
-                <div className="hidden md:flex md:col-span-1 justify-center self-stretch py-2">
-                  <div className="w-px bg-white/12 h-full" />
-                </div>
+                  {/* Vertical Divider Line */}
+                  <div className="hidden md:flex md:col-span-1 justify-center self-stretch py-2">
+                    <div className="w-px bg-white/12 h-full" />
+                  </div>
 
-                {/* Right Side: Visual Graphic / Code / Interactive Mockup */}
-                <div className="md:col-span-5 relative">
-                  {step.graphic}
-                  {/* Subtle Background Watermark Number */}
-                  <div className="absolute -bottom-4 -right-2 text-7xl sm:text-8xl font-black text-white/[0.04] font-mono select-none pointer-events-none -z-0">
-                    {step.number}
+                  {/* Right Side: Visual Graphic / Code / Interactive Mockup */}
+                  <div className="md:col-span-5 relative">
+                    {step.graphic}
+                    {/* Subtle Background Watermark Number */}
+                    <div className="absolute -bottom-4 -right-2 text-7xl sm:text-8xl font-black text-white/[0.04] font-mono select-none pointer-events-none -z-0">
+                      {step.number}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </ScrollStackItem>
-          ))}
-        </ScrollStack>
+              </ScrollStackItem>
+            ))}
+          </ScrollStack>
+        </ScrollBlurSlide>
       </section>
 
       {/* 3. CONNECT MODULES SECTION (pxxl.app 'Connect your tools to pxxl' Animated Architecture) */}
       <section id="architecture">
-        <ConnectModules />
+        <ScrollBlurSlide>
+          <ConnectModules />
+        </ScrollBlurSlide>
       </section>
 
-      {/* 4. REACTBITS OPTIONWHEEL MODULE SELECTOR */}
-      <section className="max-w-4xl mx-auto px-4 text-center space-y-8">
-        <div className="space-y-3">
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-white m-0">
-            Interactive Module Navigator
-          </h2>
-          <p className="text-sm text-white/60 max-w-md mx-auto m-0 leading-relaxed">
-            Scroll or drag the 3D wheel to preview modules & concepts.
-          </p>
-        </div>
-
-        <div className="max-w-md mx-auto p-5 rounded-2xl border border-white/10 bg-[#08080b] shadow-2xl">
-          <OptionWheel
-            items={MODULES_DATA.map((m) => m.title)}
-            defaultSelected={selectedModuleIdx}
-            onChange={(idx) => setSelectedModuleIdx(idx)}
-            fontSize={1.15}
-            spacing={1.35}
-            inset={20}
-          />
-        </div>
-      </section>
-
-      {/* 5. JAVASCRIPT MODULES & MICRO-LESSONS (pxxl.app Style Alternating Feature Cards) */}
-      <section id="curriculum" className="max-w-5xl mx-auto px-4 space-y-12 sm:space-y-16">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-b border-white/10 pb-6">
-          <div>
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-white m-0 tracking-tight">
-              JavaScript Modules & Micro-Lessons
+      {/* 4. CURRICULUM SLICK GRID BAR & INTERACTIVE DISPLAY (Directly matching pxxl.app format) */}
+      <section id="curriculum" className="max-w-6xl mx-auto px-4 space-y-8">
+        <ScrollBlurSlide>
+          <div className="text-center space-y-3 max-w-2xl mx-auto mb-8">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white m-0 tracking-tight">
+              JavaScript Modules & Core Curriculum
             </h2>
-            <p className="text-sm text-white/60 m-0 mt-2">
+            <p className="text-sm sm:text-base text-white/60 m-0 leading-relaxed">
               All concepts organized systematically from foundational primitives to modern ECMAScript 2026.
             </p>
           </div>
-          <Link href={`/learn/day/${nextDay}`}>
-            <Button
-              type="primary"
-              icon={<CodeOutlined />}
-              className="bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none font-bold text-xs h-10 px-5 rounded-md shadow-sm"
-            >
-              Launch Workspace
-            </Button>
-          </Link>
-        </div>
 
-        {/* Alternating Modules Stack */}
-        <div className="space-y-12 sm:space-y-16">
-          {MODULES_DATA.map((mod, idx) => {
-            const isEven = idx % 2 === 0;
+          {/* Slick Horizontal Grid Bar (matching pxxl.app stats grid bar from user's image) */}
+          <div className="w-full border-t border-b border-white/10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 divide-x divide-y lg:divide-y-0 divide-white/10 bg-[#08080c]/60 backdrop-blur-xl">
+            {MODULES_DATA.map((mod, idx) => {
+              const isSelected = selectedModuleIdx === idx;
+              const shortTitles = [
+                "SYNTAX & TYPES",
+                "ARRAYS & LOGIC",
+                "FUNCTIONS & SCOPE",
+                "OBJECTS & DATA",
+                "LOOPS & DOM",
+                "ASYNC & ES2026"
+              ];
+              return (
+                <button
+                  key={mod.id}
+                  onClick={() => setSelectedModuleIdx(idx)}
+                  className={`py-6 px-3 text-center cursor-pointer transition-all border-none relative group ${
+                    isSelected
+                      ? "bg-white/[0.08]"
+                      : "bg-transparent hover:bg-white/[0.04]"
+                  }`}
+                >
+                  {/* Top active indicator line */}
+                  {isSelected && (
+                    <div className="absolute top-0 left-0 right-0 h-0.5 bg-[#ff63f9] shadow-[0_0_12px_#ff63f9]" />
+                  )}
+                  <div
+                    className={`font-mono text-xl sm:text-2xl font-black tracking-tight transition-colors ${
+                      isSelected ? "text-[#ff63f9]" : "text-white group-hover:text-white/90"
+                    }`}
+                  >
+                    MOD 0{idx + 1}
+                  </div>
+                  <div className="text-[10px] sm:text-[11px] font-mono tracking-wider uppercase text-white/50 mt-1 truncate">
+                    {shortTitles[idx] || `MODULE 0${idx + 1}`}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Content Area Directly Below Bar (matching pxxl.app screenshot layout) */}
+          {(() => {
+            const currentMod = MODULES_DATA[selectedModuleIdx] || MODULES_DATA[0];
             const moduleVisuals = [
               <BasicsDataTypesVisual key="mod-0" />,
               <ArraysLogicVisual key="mod-1" />,
@@ -357,156 +369,174 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
               <LoopsIterationVisual key="mod-4" />,
               <AdvancedES6Visual key="mod-5" />
             ];
-            const visual = moduleVisuals[idx];
-            const firstDay = mod.days[0];
+            const currentVisual = moduleVisuals[selectedModuleIdx] || moduleVisuals[0];
+            const firstDay = currentMod.days[0];
 
             return (
-              <div
-                key={mod.id}
-                className="relative rounded-3xl bg-[#08080c] border border-white/10 p-8 sm:p-12 lg:p-14 hover:border-[#ff63f9]/30 transition-all duration-300 shadow-2xl overflow-hidden group"
-              >
-                {/* Soft Ambient Glow */}
-                <div className="absolute -right-20 -top-20 w-80 h-80 bg-[#ff63f9]/5 rounded-full blur-[120px] pointer-events-none group-hover:bg-[#ff63f9]/10 transition-colors" />
-
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-                  {/* TEXT CONTENT */}
-                  <div className={`lg:col-span-6 space-y-5 ${isEven ? "lg:order-1" : "lg:order-2"}`}>
-                    <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#ff63f9] tracking-wider uppercase">
-                      <span>MODULE 0{idx + 1}</span>
-                      <span className="text-white/20">•</span>
-                      <span className="text-white/50">{mod.days.length} Lessons</span>
-                      <span className="text-white/20">•</span>
-                      <span className="text-white/50">{mod.days.length * 2} Practical Projects</span>
-                    </div>
-
-                    {/* Big and Bold Heading */}
-                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight m-0">
-                      {mod.title.replace(/^Module \d+:\s*/, "")}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-sm sm:text-base text-white/60 leading-relaxed max-w-lg m-0">
-                      {mod.description}
-                    </p>
-
-                    {/* Featured Lessons Grid */}
-                    <div className="space-y-2.5 pt-1">
-                      <div className="text-[11px] font-mono text-white/40 uppercase tracking-wider">
-                        Curriculum Highlights:
-                      </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                        {mod.days.slice(0, 4).map((day) => {
-                          const isCompleted = completedDays.includes(day.id);
-                          return (
-                            <Link
-                              key={day.id}
-                              href={`/learn/day/${day.id}`}
-                              className="no-underline flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] border border-white/8 hover:border-white/20 hover:bg-white/[0.06] transition-all group/item"
-                            >
-                              <div className="flex items-center gap-2 truncate">
-                                {isCompleted ? (
-                                  <CheckCircleFilled className="text-[#ff63f9] text-xs shrink-0" />
-                                ) : (
-                                  <span className="w-4 h-4 rounded-full border border-white/20 text-white/50 font-mono text-[9px] flex items-center justify-center shrink-0">
-                                    {day.day}
-                                  </span>
-                                )}
-                                <span className="text-[11px] text-white/80 group-hover/item:text-white truncate">
-                                  {day.title}
-                                </span>
-                              </div>
-                              <RightOutlined className="text-[9px] text-white/20 group-hover/item:text-[#ff63f9] transition-colors shrink-0 ml-1.5" />
-                            </Link>
-                          );
-                        })}
-                      </div>
-                    </div>
-
-                    {/* Launch Action */}
-                    <div className="pt-2 flex items-center gap-4">
-                      <Link href={`/learn/day/${firstDay.id}`}>
-                        <Button
-                          type="primary"
-                          className="h-11 px-7 text-xs font-bold bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none rounded-lg shadow-[0_0_15px_rgba(255,99,249,0.3)] flex items-center gap-2"
-                        >
-                          <span>Start Module 0{idx + 1}</span>
-                          <RightOutlined className="text-[10px]" />
-                        </Button>
-                      </Link>
-                      <span className="text-xs font-mono text-white/40">
-                        {mod.days.length} Lessons Available
-                      </span>
-                    </div>
+              <div className="pt-10 pb-4 space-y-10">
+                {/* Center Heading with Purple Glow Highlight & Playful Handwritten Annotation */}
+                <div className="relative text-center max-w-3xl mx-auto px-4 space-y-4">
+                  {/* Handwritten Note with arrow */}
+                  <div className="hidden md:flex items-center gap-1.5 absolute -top-7 right-0 text-white/60 font-mono text-xs select-none">
+                    <span>Lowkey faster than 3hr videos</span>
+                    <svg className="w-5 h-5 text-[#ff63f9] -rotate-45 transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M7 10l5 5 5-5" />
+                    </svg>
                   </div>
 
-                  {/* ANIMATION / VISUAL CONTENT */}
-                  <div className={`lg:col-span-6 relative ${isEven ? "lg:order-2" : "lg:order-1"}`}>
-                    {visual}
+                  <h3 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight m-0">
+                    Master {currentMod.title.replace(/^Module \d+:\s*/, "")} on{" "}
+                    <span className="relative inline-block text-[#ff63f9]">
+                      <span className="absolute -inset-2 bg-[#ff63f9]/25 blur-xl rounded-full -z-10 pointer-events-none" />
+                      CODA.
+                    </span>
+                  </h3>
+
+                  <p className="text-sm sm:text-base text-white/60 max-w-xl mx-auto leading-relaxed m-0">
+                    {currentMod.description}
+                  </p>
+
+                  {/* Action Button matching pxxl.app 'Search domains' button style */}
+                  <div className="pt-2 flex justify-center">
+                    <Link href={`/learn/day/${firstDay.id}`} className="no-underline">
+                      <button
+                        type="button"
+                        className="bg-white text-black font-extrabold text-xs sm:text-sm h-11 px-7 rounded-[8px] shadow-[0_4px_0_0_#ff63f9] hover:bg-[#ff63f9] hover:text-black transition-all transform active:translate-y-1 flex items-center gap-2 cursor-pointer border-none"
+                      >
+                        <span>Explore Module 0{selectedModuleIdx + 1}</span>
+                        <span className="font-bold">↗</span>
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+
+                {/* Interactive Showcase & Lessons Matrix */}
+                <div className="rounded-3xl bg-[#08080c] border border-white/10 p-6 sm:p-10 shadow-2xl overflow-hidden relative group">
+                  <div className="absolute -right-20 -top-20 w-80 h-80 bg-[#ff63f9]/5 rounded-full blur-[120px] pointer-events-none" />
+
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    {/* Left Side: Curriculum highlights for this module */}
+                    <div className="lg:col-span-5 space-y-4">
+                      <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#ff63f9] tracking-wider uppercase">
+                        <span>TRACK BREAKDOWN</span>
+                        <span className="text-white/20">•</span>
+                        <span className="text-white/50">{currentMod.days.length} Lessons</span>
+                        <span className="text-white/20">•</span>
+                        <span className="text-white/50">{currentMod.days.length * 2} Projects</span>
+                      </div>
+
+                      <div className="space-y-2">
+                        <div className="text-[11px] font-mono text-white/40 uppercase tracking-wider">
+                          Featured Lessons in this Track:
+                        </div>
+                        <div className="space-y-2">
+                          {currentMod.days.slice(0, 4).map((day) => {
+                            const isCompleted = completedDays.includes(day.id);
+                            return (
+                              <Link
+                                key={day.id}
+                                href={`/learn/day/${day.id}`}
+                                className="no-underline flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] border border-white/8 hover:border-white/20 hover:bg-white/[0.06] transition-all group/item"
+                              >
+                                <div className="flex items-center gap-2.5 truncate">
+                                  {isCompleted ? (
+                                    <CheckCircleFilled className="text-[#ff63f9] text-xs shrink-0" />
+                                  ) : (
+                                    <span className="w-4 h-4 rounded-full border border-white/20 text-white/50 font-mono text-[9px] flex items-center justify-center shrink-0">
+                                      {day.day}
+                                    </span>
+                                  )}
+                                  <span className="text-xs text-white/80 group-hover/item:text-white truncate">
+                                    {day.title}
+                                  </span>
+                                </div>
+                                <RightOutlined className="text-[9px] text-white/20 group-hover/item:text-[#ff63f9] transition-colors shrink-0 ml-1.5" />
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Right Side: Interactive Visual Component for that module */}
+                    <div className="lg:col-span-7 relative">
+                      {currentVisual}
+                    </div>
                   </div>
                 </div>
               </div>
             );
-          })}
-        </div>
+          })()}
+        </ScrollBlurSlide>
       </section>
 
-      {/* 6. RESTRUCTURED MINIMAL FAQ SECTION (Divided by Lines, No Gray/Hash Boxes) */}
+      {/* 5. RESTRUCTURED MINIMAL FAQ SECTION (With Smooth Slide Down / Slide Up) */}
       <section id="faq" className="max-w-4xl mx-auto px-4 space-y-10 sm:space-y-12">
-        <div className="text-center space-y-3">
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-white m-0">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-sm text-white/60 max-w-md mx-auto m-0 leading-relaxed">
-            Everything you need to know about the curriculum, sandbox, and certification.
-          </p>
-        </div>
+        <ScrollBlurSlide>
+          <div className="text-center space-y-3 mb-8">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-white m-0">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-sm text-white/60 max-w-md mx-auto m-0 leading-relaxed">
+              Everything you need to know about the curriculum, sandbox, and certification.
+            </p>
+          </div>
 
-        {/* Clean Line-Separated Accordion */}
-        <div className="border-t border-b border-white/10 divide-y divide-white/10">
-          {faqList.map((item, idx) => {
-            const isOpen = openFaq === idx;
-            return (
-              <div key={idx} className="py-6 sm:py-7">
-                <button
-                  onClick={() => setOpenFaq(isOpen ? null : idx)}
-                  className="w-full text-left flex items-center justify-between gap-4 text-base sm:text-lg font-bold text-white hover:text-[#ff63f9] transition-colors"
-                >
-                  <span>{item.q}</span>
-                  <span className="text-sm text-white/40">
-                    {isOpen ? <MinusOutlined /> : <PlusOutlined />}
-                  </span>
-                </button>
-                {isOpen && (
-                  <p className="text-sm text-white/70 leading-relaxed pt-3.5 m-0 animate-fadeIn">
-                    {item.a}
-                  </p>
-                )}
-              </div>
-            );
-          })}
-        </div>
+          {/* Clean Line-Separated Accordion with Slide Down & Slide Up */}
+          <div className="border-t border-b border-white/10 divide-y divide-white/10">
+            {faqList.map((item, idx) => {
+              const isOpen = openFaq === idx;
+              return (
+                <div key={idx} className="py-6 sm:py-7">
+                  <button
+                    onClick={() => setOpenFaq(isOpen ? null : idx)}
+                    className="w-full text-left flex items-center justify-between gap-4 text-base sm:text-lg font-bold text-white hover:text-[#ff63f9] transition-colors cursor-pointer bg-transparent border-none p-0"
+                  >
+                    <span>{item.q}</span>
+                    <span className="text-sm text-white/40 transition-transform duration-300">
+                      {isOpen ? <MinusOutlined /> : <PlusOutlined />}
+                    </span>
+                  </button>
+                  <div
+                    className={`grid transition-all duration-300 ease-in-out ${
+                      isOpen ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0 mt-0"
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <p className="text-sm sm:text-base text-white/70 leading-relaxed m-0 pb-1">
+                        {item.a}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </ScrollBlurSlide>
       </section>
 
-      {/* 7. LOWER CTA BANNER */}
+      {/* 6. LOWER CTA BANNER */}
       <section className="max-w-4xl mx-auto px-4 text-center">
-        <div className="p-12 sm:p-16 md:p-20 rounded-3xl border border-white/15 bg-[#08080b] space-y-6 shadow-2xl">
-          <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight m-0">
-            Ready to Master JavaScript?
-          </h2>
-          <p className="text-sm sm:text-base text-white/70 max-w-md mx-auto leading-relaxed m-0">
-            Begin learning modern ECMAScript with hands-on projects and instant in-browser code execution.
-          </p>
-          <div className="pt-4">
-            <Link href={`/learn/day/${nextDay}`}>
-              <Button
-                size="large"
-                className="h-12 px-9 text-sm font-bold bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none rounded-md shadow-[0_0_20px_rgba(255,99,249,0.35)]"
-              >
-                Launch Workspace
-              </Button>
-            </Link>
+        <ScrollBlurSlide>
+          <div className="p-12 sm:p-16 md:p-20 rounded-3xl border border-white/15 bg-[#08080b] space-y-6 shadow-2xl">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight m-0">
+              Ready to Master JavaScript?
+            </h2>
+            <p className="text-sm sm:text-base text-white/70 max-w-md mx-auto leading-relaxed m-0">
+              Begin learning modern ECMAScript with hands-on projects and instant in-browser code execution.
+            </p>
+            <div className="pt-4">
+              <Link href={`/learn/day/${nextDay}`}>
+                <Button
+                  size="large"
+                  className="h-12 px-9 text-sm font-bold bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none rounded-md shadow-[0_0_20px_rgba(255,99,249,0.35)]"
+                >
+                  Launch Workspace
+                </Button>
+              </Link>
+            </div>
           </div>
-        </div>
+        </ScrollBlurSlide>
       </section>
     </div>
   );
