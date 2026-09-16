@@ -11,7 +11,9 @@ import {
   TwitterOutlined,
   LinkedinOutlined,
   YoutubeOutlined,
-  GlobalOutlined
+  GlobalOutlined,
+  BulbOutlined,
+  InfoCircleOutlined
 } from "@ant-design/icons";
 import { useLearning } from "@/context/LearningContext";
 import GlassSurface from "@/components/reactbits/GlassSurface";
@@ -30,8 +32,8 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
         <header className="w-full max-w-4xl bg-[#0a0a0e]/80 backdrop-blur-2xl border border-white/12 rounded-[14px] px-3.5 sm:px-5 py-2 sm:py-2.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.65)] flex items-center justify-between gap-2 sm:gap-4 text-xs transition-all">
           {/* Brand Logo - Bulb Icon + CODA */}
           <Link href="/" className="flex items-center gap-2.5 no-underline group">
-            <div className="w-8 h-8 rounded-xl bg-white/10 text-xl flex items-center justify-center border border-white/15 shadow-[0_0_15px_rgba(255,99,249,0.3)] group-hover:scale-110 transition-transform">
-              💡
+            <div className="w-8 h-8 rounded-xl bg-white/10 text-base flex items-center justify-center border border-white/15 shadow-[0_0_15px_rgba(255,99,249,0.3)] group-hover:scale-110 transition-transform">
+              <BulbOutlined className="text-[#ff63f9]" />
             </div>
             <span className="font-extrabold text-sm tracking-wider text-white">CODA</span>
           </Link>
@@ -80,7 +82,9 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
         <div className="fixed bottom-4 left-4 z-50 max-w-xs">
           <GlassSurface borderRadius={14} className="p-3.5 text-xs space-y-2 shadow-xl">
             <div className="flex items-center justify-between gap-2">
-              <span className="font-semibold text-white text-xs">🍪 Storage Notice</span>
+              <span className="font-semibold text-white text-xs flex items-center gap-1.5">
+                <InfoCircleOutlined className="text-[#ff63f9]" /> Storage Notice
+              </span>
               <button
                 onClick={() => setCookieConsent(false)}
                 className="text-white/40 hover:text-white bg-transparent border-none cursor-pointer p-0"

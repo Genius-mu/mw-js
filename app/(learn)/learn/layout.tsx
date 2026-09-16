@@ -30,8 +30,16 @@ import {
   FunctionOutlined,
   AppstoreOutlined,
   SyncOutlined,
-  MenuOutlined
+  MenuOutlined,
+  BulbOutlined
 } from "@ant-design/icons";
+
+// ... inside SiderContent ...
+        <Link href="/" className="flex items-center no-underline mb-4">
+          <div className="w-9 h-9 rounded-xl bg-white/10 text-base flex items-center justify-center border border-white/15 shadow-[0_0_15px_rgba(255,99,249,0.3)] hover:scale-105 transition-transform">
+            <BulbOutlined className="text-[#ff63f9]" />
+          </div>
+        </Link>
 import { MODULES_DATA } from "@/lib/curriculum";
 import { useLearning } from "@/context/LearningContext";
 
