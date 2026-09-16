@@ -34,7 +34,7 @@ import {
   FolderOpenOutlined,
   ThunderboltOutlined
 } from "@ant-design/icons";
-import { CURRICULUM_DATA, LessonDay, LessonProject } from "@/lib/curriculum";
+import { CURRICULUM_DATA, LessonDay, LessonProject, getComprehensiveExplanation } from "@/lib/curriculum";
 import { useLearning } from "@/context/LearningContext";
 import SpecularButton from "@/components/reactbits/SpecularButton";
 import { CodeEditor, CodeBlock } from "@/components/CodeEditor";
