@@ -264,8 +264,8 @@ export default function DayLearningPage() {
             {isCompleted ? "Marked Completed" : "Mark as Completed"}
           </SpecularButton>
         </div>
-        <p className="text-sm sm:text-base text-white/80 leading-relaxed font-normal m-0 pt-1">
-          {lesson.description} {lesson.summaryNotes.join(" ")}
+        <p className="text-sm sm:text-base text-white/85 leading-relaxed font-normal m-0 pt-1">
+          {getComprehensiveExplanation(lesson)}
         </p>
       </div>
 
