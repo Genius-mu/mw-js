@@ -162,7 +162,7 @@ export default function DayLearningPage() {
     } else {
       markDayCompleted(lesson.id);
       notification.success({
-        message: `Day ${lesson.day} Completed! 🎉`,
+        message: `Day ${lesson.day} Completed!`,
         description: `Great job! You mastered "${lesson.title}".`,
         placement: "bottomRight"
       });
@@ -471,7 +471,7 @@ export default function DayLearningPage() {
           icon={<RightOutlined />}
           onClick={handleNextDay}
         >
-          {dayId < totalDays ? "Next Day" : "Claim Certificate 🎉"}
+          {dayId < totalDays ? "Next Day" : "Claim Certificate"}
         </SpecularButton>
       </div>
 
@@ -509,8 +509,8 @@ export default function DayLearningPage() {
         centered
       >
         <div className="text-center py-5 px-3 space-y-5 bg-[#08080c] text-white rounded-[7px] border border-white/10">
-          <div className="w-16 h-16 mx-auto rounded-full bg-white/15 text-white flex items-center justify-center text-3xl">
-            🏆
+          <div className="w-16 h-16 mx-auto rounded-full bg-white/10 text-[#ff63f9] flex items-center justify-center text-3xl border border-white/10 shadow-[0_0_20px_rgba(255,99,249,0.3)]">
+            <TrophyOutlined />
           </div>
 
           <div>
