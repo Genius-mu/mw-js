@@ -163,6 +163,8 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
                 </a>
               </div>
 
+
+
               {/* Copyright */}
               <div className="text-xs text-white/40 font-normal">
                 © CODA • MMXXIV — MMXXVI

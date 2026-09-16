@@ -37,6 +37,7 @@ import {
 import { CURRICULUM_DATA, LessonDay, LessonProject } from "@/lib/curriculum";
 import { useLearning } from "@/context/LearningContext";
 import SpecularButton from "@/components/reactbits/SpecularButton";
+import { CodeEditor, CodeBlock } from "@/components/CodeEditor";
 
 const { TextArea } = Input;
 
@@ -305,14 +306,12 @@ export default function DayLearningPage() {
 
             {/* Code Snippet Box */}
             <div className="relative group">
-              <pre className="p-4 rounded-xl bg-[#000000] text-white/90 font-mono text-xs sm:text-sm overflow-x-auto border border-white/10 leading-relaxed">
-                <code>{lesson.codeSnippet}</code>
-              </pre>
+              <CodeBlock code={lesson.codeSnippet} />
               <Button
                 size="small"
                 icon={<CopyOutlined />}
                 onClick={() => handleCopySnippet(lesson.codeSnippet, "main-snippet")}
-                className="absolute top-3.5 right-3.5 text-[11px] font-medium bg-white/10 hover:bg-white/20 text-white border-none rounded-md cursor-pointer px-2.5 py-0.5"
+                className="absolute top-3.5 right-3.5 text-[11px] font-medium bg-white/10 hover:bg-white/20 text-white border-none rounded-md cursor-pointer px-2.5 py-0.5 z-10"
               >
                 {copiedId === "main-snippet" ? "Copied!" : "Copy"}
               </Button>
@@ -392,9 +391,7 @@ export default function DayLearningPage() {
                 <p className="text-xs text-white/70 leading-relaxed m-0">{proj.description}</p>
 
                 <div className="relative pt-1">
-                  <pre className="p-4 rounded-lg bg-[#08080c] text-white/90 font-mono text-xs overflow-x-auto border border-white/10 max-h-48 leading-relaxed">
-                    <code>{proj.code}</code>
-                  </pre>
+                  <CodeBlock code={proj.code} className="max-h-48" />
                 </div>
 
                 <div className="text-xs text-white/60 bg-white/[0.04] p-3 rounded-lg border border-white/5">
@@ -467,44 +464,13 @@ export default function DayLearningPage() {
                     {/* Code Editor Area */}
                     <div className="space-y-3 flex flex-col">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-white flex items-center gap-2">
-                          <span>JavaScript Editor</span>
-                          <span className="text-[10px] text-white/70 font-mono bg-white/10 px-2 py-0.5 rounded-md">Ctrl + Enter to run</span>
-                        </span>
-                        <div className="flex items-center gap-2">
-                          <Button
-                            size="small"
-                            icon={<ReloadOutlined />}
-                            onClick={() => setUserCode(lesson.exercise.starterCode)}
-                            className="text-xs bg-[#000000] hover:bg-white/10 text-white/80 border border-white/10 rounded-lg cursor-pointer px-3 py-1 h-auto"
-                          >
-                            Reset
-                          </Button>
-                          <Button
-                            size="small"
-                            icon={<BulbOutlined />}
-                            onClick={() => setShowHint(!showHint)}
-                            className="text-xs bg-[#000000] hover:bg-white/10 text-white/80 border border-white/10 rounded-lg cursor-pointer px-3 py-1 h-auto"
-                          >
-                            {showHint ? "Hide Hint" : "Hint"}
-                          </Button>
-                        </div>
+                        <span className="text-xs font-bold text-white">JavaScript Editor</span>
                       </div>
 
-                      <textarea
+                      <CodeEditor
                         value={userCode}
-                        onChange={(e) => setUserCode(e.target.value)}
-                        className="w-full h-64 sm:h-72 p-4 rounded-xl bg-[#000000] text-white font-mono text-xs sm:text-sm border border-white/10 focus:outline-none focus:ring-1 focus:ring-[#ff63f9]/50 resize-none leading-relaxed"
-                        placeholder="Write your JavaScript code here..."
+                        onChange={(val) => setUserCode(val)}
                       />
-
-                      {showHint && (
-                        <Alert
-                          type="info"
-                          message={<span className="text-xs font-medium text-white/90">Hint: {lesson.exercise.hint}</span>}
-                          className="py-2 px-3.5 bg-[#000000] border-white/10 rounded-lg"
-                        />
-                      )}
 
                       <div className="flex flex-wrap items-center gap-3 pt-2">
                         <SpecularButton
@@ -538,10 +504,9 @@ export default function DayLearningPage() {
 
                     {/* Terminal Console Output */}
                     <div className="space-y-3 flex flex-col">
-                      <span className="text-xs font-bold text-white flex items-center justify-between">
-                        <span>Terminal Output (console.log)</span>
-                        <span className="text-[10px] text-white/40 font-mono">Output Log</span>
-                      </span>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold text-white">Terminal Output (console.log)</span>
+                      </div>
                       <div className="w-full h-64 sm:h-72 p-4 rounded-xl bg-[#000000] text-white/90 font-mono text-xs sm:text-sm border border-white/10 overflow-y-auto space-y-1.5 leading-relaxed">
                         {consoleOutput.length === 0 ? (
                           <span className="text-white/30 italic">Click "Run Code" or press Ctrl+Enter to view console output...</span>
@@ -697,9 +662,7 @@ export default function DayLearningPage() {
           </Button>
         ]}
       >
-        <pre className="p-3 rounded-lg bg-[#000000] text-white/90 font-mono text-xs overflow-x-auto border border-white/10">
-          <code>{lesson.exercise.solutionCode}</code>
-        </pre>
+        <CodeBlock code={lesson.exercise.solutionCode} />
       </Modal>
 
       {/* Certificate of Completion Modal */}
