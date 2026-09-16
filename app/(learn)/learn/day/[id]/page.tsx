@@ -36,7 +36,6 @@ import {
 } from "@ant-design/icons";
 import { CURRICULUM_DATA, LessonDay, LessonProject } from "@/lib/curriculum";
 import { useLearning } from "@/context/LearningContext";
-import GlassSurface from "@/components/reactbits/GlassSurface";
 import SpecularButton from "@/components/reactbits/SpecularButton";
 
 const { TextArea } = Input;
@@ -63,7 +62,7 @@ export default function DayLearningPage() {
   // Code runner state
   const [userCode, setUserCode] = useState(lesson.exercise.starterCode);
   const [consoleOutput, setConsoleOutput] = useState<string[]>([]);
-  const [copied, setCopied] = useState(false);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
   const [showHint, setShowHint] = useState(false);
   const [solutionModalOpen, setSolutionModalOpen] = useState(false);
   const [certModalOpen, setCertModalOpen] = useState(false);
@@ -92,10 +91,52 @@ export default function DayLearningPage() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [userCode]);
 
-  const handleCopySnippet = (text: string) => {
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopySnippet = (text: string, id: string = "main") => {
+    const performCopy = () => {
+      setCopiedId(id);
+      notification.success({
+        message: "Code Copied!",
+        description: "Snippet copied to your clipboard.",
+        placement: "bottomRight",
+        duration: 2
+      });
+      setTimeout(() => setCopiedId(null), 2000);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text)
+        .then(performCopy)
+        .catch(() => fallbackCopy(text, id));
+    } else {
+      fallbackCopy(text, id);
+    }
+  };
+
+  const fallbackCopy = (text: string, id: string) => {
+    try {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-9999px";
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textArea);
+      setCopiedId(id);
+      notification.success({
+        message: "Code Copied!",
+        description: "Snippet copied to your clipboard.",
+        placement: "bottomRight",
+        duration: 2
+      });
+      setTimeout(() => setCopiedId(null), 2000);
+    } catch {
+      notification.error({
+        message: "Copy Failed",
+        description: "Unable to copy code snippet.",
+        placement: "bottomRight"
+      });
+    }
   };
 
   const handleSaveNote = () => {
@@ -103,7 +144,7 @@ export default function DayLearningPage() {
     setNoteSaved(true);
     notification.success({
       message: "Note Saved",
-      description: `Personal study notes for Day ${lesson.day} saved to local storage.`,
+      description: `Personal study notes for Day ${lesson.day} saved.`,
       placement: "bottomRight"
     });
     setTimeout(() => setNoteSaved(false), 2000);
@@ -121,7 +162,7 @@ export default function DayLearningPage() {
       markDayCompleted(lesson.id);
       notification.success({
         message: `Day ${lesson.day} Completed! 🎉`,
-        description: `Great job! You mastered "${lesson.title}". Proceed to the next lesson!`,
+        description: `Great job! You mastered "${lesson.title}".`,
         placement: "bottomRight"
       });
 
@@ -184,35 +225,16 @@ export default function DayLearningPage() {
 
     return [
       {
-        title: `Project 1: ${lesson.title} - Real-World Utility`,
-        description: `Build a production-ready utility module using ${lesson.title.toLowerCase()} for data processing and application logic.`,
-        code: `// Project 1: Production Utility
-function executeUtilityModule(inputVal) {
-  console.log("⚡ Executing module for: ${lesson.title}");
-  
-  // Concept execution
-  ${lesson.codeSnippet}
-
-  return { status: "ACTIVE", result: inputVal };
-}
-
-console.log(executeUtilityModule("Test Payload"));`,
-        outcome: `Demonstrates clean practical execution of ${lesson.title} in real-world JS applications.`
+        title: `Project 1: ${lesson.title}`,
+        description: `Practical application of ${lesson.title.toLowerCase()}.`,
+        code: `// Practical Example: ${lesson.title}\n${lesson.codeSnippet}`,
+        outcome: `Hands-on usage of ${lesson.title}.`
       },
       {
-        title: `Project 2: Interactive Feature & State Engine`,
-        description: `Construct an interactive feature engine integrating ${lesson.title.toLowerCase()} for modular JavaScript applications.`,
-        code: `// Project 2: Feature Engine
-const FeatureEngine = {
-  name: "${lesson.title} Module",
-  init() {
-    console.log("🚀 Initializing ${lesson.title} Engine...");
-    ${lesson.exercise.solutionCode}
-  }
-};
-
-FeatureEngine.init();`,
-        outcome: `Applies modular code design and state logic using ${lesson.title}.`
+        title: `Project 2: Solution Implementation`,
+        description: `Implementation for ${lesson.title.toLowerCase()} exercise.`,
+        code: `// Practical Solution\n${lesson.exercise.solutionCode}`,
+        outcome: `Applies core concepts to exercise logic.`
       }
     ];
   };
@@ -220,29 +242,29 @@ FeatureEngine.init();`,
   const currentProjects = getProjectsForLesson();
 
   return (
-    <div className="space-y-5 pb-12">
-      {/* Header Banner wrapped in GlassSurface */}
-      <GlassSurface borderRadius={16} className="p-5">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-2 mb-1.5">
-              <Tag color="rgba(255, 255, 255, 0.15)" className="font-semibold m-0 text-white border-none text-[10px]">{lesson.module}</Tag>
-              <Tag color={isCompleted ? "rgba(255, 255, 255, 0.15)" : "#000000"} className="font-semibold m-0 border border-white/10 text-white/80 text-[10px]">
-                {isCompleted ? <span className="flex items-center gap-1 text-white"><CheckCircleFilled /> Completed</span> : "In Progress"}
+    <div className="space-y-8 sm:space-y-10 pb-16">
+      {/* Header Banner */}
+      <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-6 sm:p-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-2 mb-2">
+              <Tag color="rgba(255, 255, 255, 0.15)" className="font-semibold m-0 text-white border-none text-[11px] px-2.5 py-0.5">{lesson.module}</Tag>
+              <Tag color={isCompleted ? "rgba(255, 255, 255, 0.15)" : "#000000"} className="font-semibold m-0 border border-white/10 text-white/80 text-[11px] px-2.5 py-0.5">
+                {isCompleted ? <span className="flex items-center gap-1.5 text-white"><CheckCircleFilled /> Completed</span> : "In Progress"}
               </Tag>
             </div>
-            <h1 className="text-xl md:text-2xl font-bold tracking-tight m-0 text-white">
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight m-0 text-white leading-tight">
               Day {lesson.day}: {lesson.title}
             </h1>
-            <p className="text-xs mt-1 m-0 text-white/60">
+            <p className="text-sm mt-1 m-0 text-white/70 leading-relaxed max-w-2xl">
               {lesson.description}
             </p>
           </div>
 
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex items-center gap-3 shrink-0 pt-2 md:pt-0">
             <SpecularButton
               size="md"
-              radius={10}
+              radius={12}
               tint={isCompleted ? "#181824" : "#ff63f9"}
               tintOpacity={0.9}
               lineColor="#ffffff"
@@ -255,89 +277,92 @@ FeatureEngine.init();`,
             </SpecularButton>
           </div>
         </div>
-      </GlassSurface>
+      </div>
 
       {/* Main Grid: Concept Blueprint + Sidebar Specs */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Concept Deep Dive Card (Col-span 2) */}
         <div className="lg:col-span-2">
-          <GlassSurface borderRadius={16} className="p-6 space-y-4 relative overflow-hidden">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
-              <div className="flex items-center gap-2">
-                <ThunderboltOutlined className="text-[#ff63f9] text-base" />
-                <span className="font-bold text-sm text-white">Concept Architecture & Code Blueprint</span>
+          <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-6 sm:p-8 space-y-6 relative overflow-hidden">
+            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+              <div className="flex items-center gap-2.5">
+                <ThunderboltOutlined className="text-[#ff63f9] text-lg" />
+                <span className="font-extrabold text-base text-white">Concept Architecture & Code Blueprint</span>
               </div>
-              <Tag className="bg-white/10 text-white/90 border-none text-[10px]">ES2026 Core</Tag>
+              <Tag className="bg-white/10 text-white/90 border-none text-[11px] px-2 py-0.5 font-mono">ES2026 Core</Tag>
             </div>
 
-            <p className="text-xs text-white/80 leading-relaxed m-0">
+            <p className="text-sm text-white/80 leading-relaxed m-0">
               {lesson.description} Below is the standard syntax structure used in modern JavaScript development:
             </p>
 
             {/* Code Snippet Box */}
             <div className="relative group">
-              <pre className="p-4 rounded-[7px] bg-[#000000] text-white/90 font-mono text-xs overflow-x-auto border border-white/10 leading-relaxed">
+              <pre className="p-5 rounded-xl bg-[#000000] text-white/90 font-mono text-xs sm:text-sm overflow-x-auto border border-white/10 leading-relaxed">
                 <code>{lesson.codeSnippet}</code>
               </pre>
               <Button
                 size="small"
                 icon={<CopyOutlined />}
                 onClick={() => handleCopySnippet(lesson.codeSnippet)}
-                className="absolute top-3 right-3 text-[10px] font-medium bg-white/10 hover:bg-white/20 text-white border-none rounded-[5px] cursor-pointer"
+                className="absolute top-4 right-4 text-[11px] font-medium bg-white/10 hover:bg-white/20 text-white border-none rounded-md cursor-pointer px-3 py-1"
               >
                 {copied ? "Copied" : "Copy"}
               </Button>
             </div>
 
-            <div className="flex items-center justify-between pt-1 text-xs text-white/60">
-              <span className="flex items-center gap-1.5 text-[11px]">
-                <BulbOutlined className="text-[#ff63f9]" /> Key takeaway: {lesson.summaryNotes[0]}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2 text-xs text-white/60 border-t border-white/10">
+              <span className="flex items-center gap-2 text-xs text-white/80">
+                <BulbOutlined className="text-[#ff63f9] text-sm shrink-0" />
+                <span><strong>Key takeaway:</strong> {lesson.summaryNotes[0]}</span>
               </span>
               <a
                 href={lesson.docsLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="no-underline text-white hover:underline text-[11px] font-medium flex items-center gap-1"
+                className="no-underline text-white hover:text-[#ff63f9] transition-colors text-xs font-semibold flex items-center gap-1.5 shrink-0"
               >
                 MDN Documentation <ExportOutlined />
               </a>
             </div>
-          </GlassSurface>
+          </div>
         </div>
 
         {/* Quick Lesson Specs Sidebar (Col-span 1) */}
         <div>
-          <GlassSurface borderRadius={16} className="p-5">
-            <span className="font-bold text-xs flex items-center gap-2 text-white mb-3.5"><BookOutlined /> Lesson Specs</span>
-            <div className="space-y-3 text-xs">
+          <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-6 sm:p-7 space-y-6">
+            <span className="font-extrabold text-sm flex items-center gap-2.5 text-white border-b border-white/10 pb-3">
+              <BookOutlined className="text-[#ff63f9]" /> Lesson Specs
+            </span>
+            <div className="space-y-4 text-xs">
               <div>
-                <span className="text-white/40 font-medium text-[11px]">Lesson Concept:</span>
-                <div className="font-semibold text-xs text-white mt-0.5">{lesson.title}</div>
+                <span className="text-white/40 font-semibold uppercase text-[10px] tracking-wider">Lesson Concept:</span>
+                <div className="font-bold text-sm text-white mt-1">{lesson.title}</div>
               </div>
 
               <div>
-                <span className="text-white/40 font-medium text-[11px]">Module Group:</span>
-                <div className="font-medium text-xs text-white/80 mt-0.5">{lesson.module}</div>
+                <span className="text-white/40 font-semibold uppercase text-[10px] tracking-wider">Module Group:</span>
+                <div className="font-medium text-xs text-white/80 mt-1">{lesson.module}</div>
               </div>
 
               <div>
-                <span className="text-white/40 font-medium text-[11px]">Documentation Reference:</span>
-                <div className="mt-1">
+                <span className="text-white/40 font-semibold uppercase text-[10px] tracking-wider">Documentation Reference:</span>
+                <div className="mt-2">
                   <a
                     href={lesson.docsLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="no-underline inline-flex items-center gap-1.5 px-3 py-1 rounded-[7px] bg-white/10 text-white font-medium text-xs hover:bg-white/20 transition-colors"
+                    className="no-underline inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white/10 text-white font-semibold text-xs hover:bg-white/20 transition-colors border border-white/10"
                   >
                     MDN Docs <ExportOutlined />
                   </a>
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-white/10">
+              <div className="pt-3 border-t border-white/10">
                 <SpecularButton
                   size="md"
-                  radius={10}
+                  radius={12}
                   tint="#ff63f9"
                   tintOpacity={0.9}
                   lineColor="#ffffff"
@@ -351,51 +376,51 @@ FeatureEngine.init();`,
                 </SpecularButton>
               </div>
             </div>
-          </GlassSurface>
+          </div>
         </div>
       </div>
 
-      {/* 2 REAL-WORLD PROJECTS SECTION wrapped in GlassSurface */}
-      <GlassSurface borderRadius={18} className="p-6 space-y-4">
-        <div className="flex items-center justify-between border-b border-white/10 pb-3">
+      {/* 2 REAL-WORLD PROJECTS SECTION */}
+      <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-6 sm:p-8 space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
           <div>
-            <h2 className="text-base font-bold text-white flex items-center gap-2 m-0">
+            <h2 className="text-lg font-extrabold text-white flex items-center gap-2.5 m-0">
               <FolderOpenOutlined className="text-[#ff63f9]" /> Real-World Hands-On Projects (2 Projects for Day {lesson.day})
             </h2>
-            <p className="text-xs text-white/50 m-0 mt-0.5">
+            <p className="text-xs text-white/60 m-0 mt-1 leading-relaxed">
               Practice building full application modules using today's core concept.
             </p>
           </div>
-          <Tag color="rgba(255, 99, 249, 0.15)" className="text-[#ff63f9] border-none font-semibold text-xs">
+          <Tag color="rgba(255, 99, 249, 0.15)" className="text-[#ff63f9] border-none font-bold text-xs px-3 py-1 self-start sm:self-auto">
             2 Practical Projects
           </Tag>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {currentProjects.map((proj, idx) => (
-            <GlassSurface key={idx} borderRadius={12} className="p-4 space-y-3 flex flex-col justify-between">
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-xs text-white">{proj.title}</span>
-                  <Tag className="bg-white/10 text-white text-[9px] border-none">Project #{idx + 1}</Tag>
+            <div key={idx} className="bg-[#080810] border border-white/10 rounded-xl p-5 sm:p-6 space-y-4 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="font-bold text-sm text-white">{proj.title}</span>
+                  <Tag className="bg-white/10 text-white text-[10px] border-none px-2 py-0.5">Project #{idx + 1}</Tag>
                 </div>
-                <p className="text-[11px] text-white/70 leading-relaxed m-0">{proj.description}</p>
+                <p className="text-xs text-white/70 leading-relaxed m-0">{proj.description}</p>
 
-                <div className="relative">
-                  <pre className="p-3 rounded-[5px] bg-[#08080c] text-white/90 font-mono text-[11px] overflow-x-auto border border-white/10 max-h-40">
+                <div className="relative pt-1">
+                  <pre className="p-4 rounded-lg bg-[#08080c] text-white/90 font-mono text-xs overflow-x-auto border border-white/10 max-h-48 leading-relaxed">
                     <code>{proj.code}</code>
                   </pre>
                 </div>
 
-                <div className="text-[11px] text-white/50 bg-white/5 p-2 rounded-[5px]">
+                <div className="text-xs text-white/60 bg-white/[0.04] p-3 rounded-lg border border-white/5">
                   💡 <strong>Outcome:</strong> {proj.outcome}
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 pt-2 border-t border-white/10">
+              <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-white/10">
                 <SpecularButton
                   size="sm"
-                  radius={8}
+                  radius={10}
                   tint="#ff63f9"
                   tintOpacity={0.85}
                   lineColor="#ffffff"
@@ -411,7 +436,7 @@ FeatureEngine.init();`,
                 </SpecularButton>
                 <SpecularButton
                   size="sm"
-                  radius={8}
+                  radius={10}
                   tint="#181824"
                   tintOpacity={0.8}
                   lineColor="#ffffff"
@@ -423,50 +448,50 @@ FeatureEngine.init();`,
                   Copy Code
                 </SpecularButton>
               </div>
-            </GlassSurface>
+            </div>
           ))}
         </div>
-      </GlassSurface>
+      </div>
 
-      {/* Tabs: Documentation, Interactive Code Practice & Personal Notes wrapped in GlassSurface */}
-      <GlassSurface borderRadius={18} className="p-5">
+      {/* Tabs: Documentation, Interactive Code Practice & Personal Notes */}
+      <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-6 sm:p-8 space-y-6">
         <Tabs
           defaultActiveKey="sandbox"
           items={[
             {
               key: "sandbox",
               label: (
-                <span className="font-medium text-xs flex items-center gap-2 text-white">
-                  <CodeOutlined className="text-white/60" /> Interactive Exercise & Sandbox
+                <span className="font-semibold text-xs sm:text-sm flex items-center gap-2.5 text-white py-1">
+                  <CodeOutlined className="text-[#ff63f9]" /> Interactive Exercise & Sandbox
                 </span>
               ),
               children: (
-                <div className="space-y-5 pt-2">
+                <div className="space-y-6 pt-4">
                   {/* Exercise Prompt */}
                   <Alert
                     type="warning"
                     showIcon
-                    icon={<TrophyOutlined />}
-                    message={<span className="font-semibold text-xs text-white">Micro-Exercise Challenge</span>}
-                    description={<p className="text-xs m-0 mt-1 text-white/70">{lesson.exercise.prompt}</p>}
-                    className="bg-[#000000] border-white/10"
+                    icon={<TrophyOutlined className="text-[#ff63f9] text-base" />}
+                    message={<span className="font-bold text-xs sm:text-sm text-white">Micro-Exercise Challenge</span>}
+                    description={<p className="text-xs sm:text-sm m-0 mt-1.5 text-white/80 leading-relaxed">{lesson.exercise.prompt}</p>}
+                    className="bg-[#000000] border-white/10 p-4 sm:p-5 rounded-xl"
                   />
 
                   {/* Code Textarea & Console Output Grid */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
                     {/* Code Editor Area */}
-                    <div className="space-y-2">
+                    <div className="space-y-3 flex flex-col">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-semibold text-white flex items-center gap-1.5">
+                        <span className="text-xs font-bold text-white flex items-center gap-2">
                           <span>JavaScript Editor</span>
-                          <span className="text-[9px] text-white/70 font-mono bg-white/10 px-1.5 py-0.5 rounded">Ctrl + Enter to run</span>
+                          <span className="text-[10px] text-white/70 font-mono bg-white/10 px-2 py-0.5 rounded-md">Ctrl + Enter to run</span>
                         </span>
                         <div className="flex items-center gap-2">
                           <Button
                             size="small"
                             icon={<ReloadOutlined />}
                             onClick={() => setUserCode(lesson.exercise.starterCode)}
-                            className="text-[11px] bg-[#000000] text-white/80 border border-white/10 rounded-[5px] cursor-pointer"
+                            className="text-xs bg-[#000000] hover:bg-white/10 text-white/80 border border-white/10 rounded-lg cursor-pointer px-3 py-1 h-auto"
                           >
                             Reset
                           </Button>
@@ -474,7 +499,7 @@ FeatureEngine.init();`,
                             size="small"
                             icon={<BulbOutlined />}
                             onClick={() => setShowHint(!showHint)}
-                            className="text-[11px] bg-[#000000] text-white/80 border border-white/10 rounded-[5px] cursor-pointer"
+                            className="text-xs bg-[#000000] hover:bg-white/10 text-white/80 border border-white/10 rounded-lg cursor-pointer px-3 py-1 h-auto"
                           >
                             {showHint ? "Hide Hint" : "Hint"}
                           </Button>
@@ -484,22 +509,22 @@ FeatureEngine.init();`,
                       <textarea
                         value={userCode}
                         onChange={(e) => setUserCode(e.target.value)}
-                        className="w-full h-56 p-3 rounded-[7px] bg-[#000000] text-white font-mono text-xs border border-white/10 focus:outline-none focus:ring-1 focus:ring-white/30 resize-none leading-relaxed"
+                        className="w-full h-64 sm:h-72 p-4 rounded-xl bg-[#000000] text-white font-mono text-xs sm:text-sm border border-white/10 focus:outline-none focus:ring-1 focus:ring-[#ff63f9]/50 resize-none leading-relaxed"
                         placeholder="Write your JavaScript code here..."
                       />
 
                       {showHint && (
                         <Alert
                           type="info"
-                          message={<span className="text-[11px] font-normal text-white/80">Hint: {lesson.exercise.hint}</span>}
-                          className="py-1 px-3 bg-[#000000] border-white/10"
+                          message={<span className="text-xs font-medium text-white/90">Hint: {lesson.exercise.hint}</span>}
+                          className="py-2 px-3.5 bg-[#000000] border-white/10 rounded-lg"
                         />
                       )}
 
-                      <div className="flex items-center gap-2.5">
+                      <div className="flex flex-wrap items-center gap-3 pt-2">
                         <SpecularButton
                           size="md"
-                          radius={10}
+                          radius={12}
                           tint="#ff63f9"
                           tintOpacity={0.9}
                           lineColor="#ffffff"
@@ -512,7 +537,7 @@ FeatureEngine.init();`,
                         </SpecularButton>
                         <SpecularButton
                           size="md"
-                          radius={10}
+                          radius={12}
                           tint="#181824"
                           tintOpacity={0.8}
                           lineColor="#ffffff"
@@ -527,9 +552,12 @@ FeatureEngine.init();`,
                     </div>
 
                     {/* Terminal Console Output */}
-                    <div className="space-y-2">
-                      <span className="text-xs font-semibold text-white">Terminal Output (console.log)</span>
-                      <div className="w-full h-56 p-3 rounded-[7px] bg-[#000000] text-white/90 font-mono text-xs border border-white/10 overflow-y-auto space-y-1">
+                    <div className="space-y-3 flex flex-col">
+                      <span className="text-xs font-bold text-white flex items-center justify-between">
+                        <span>Terminal Output (console.log)</span>
+                        <span className="text-[10px] text-white/40 font-mono">Output Log</span>
+                      </span>
+                      <div className="w-full h-64 sm:h-72 p-4 rounded-xl bg-[#000000] text-white/90 font-mono text-xs sm:text-sm border border-white/10 overflow-y-auto space-y-1.5 leading-relaxed">
                         {consoleOutput.length === 0 ? (
                           <span className="text-white/30 italic">Click "Run Code" or press Ctrl+Enter to view console output...</span>
                         ) : (
@@ -557,17 +585,17 @@ FeatureEngine.init();`,
             {
               key: "docs",
               label: (
-                <span className="font-medium text-xs flex items-center gap-2 text-white">
+                <span className="font-semibold text-xs sm:text-sm flex items-center gap-2.5 text-white py-1">
                   <BookOutlined className="text-white/60" /> Lesson Takeaways & Notes
                 </span>
               ),
               children: (
-                <div className="space-y-5 pt-2">
+                <div className="space-y-6 pt-4">
                   <div>
-                    <h3 className="text-sm font-bold mb-2 flex items-center gap-2 text-white">
-                      <BulbOutlined /> Key Concept Takeaways
+                    <h3 className="text-sm sm:text-base font-bold mb-3 flex items-center gap-2.5 text-white">
+                      <BulbOutlined className="text-[#ff63f9]" /> Key Concept Takeaways
                     </h3>
-                    <ul className="space-y-1.5 text-xs list-disc pl-5 text-white/80">
+                    <ul className="space-y-2 text-xs sm:text-sm list-disc pl-5 text-white/80 leading-relaxed">
                       {lesson.summaryNotes.map((note, i) => (
                         <li key={i} className="text-white/70">
                           {note}
@@ -579,24 +607,24 @@ FeatureEngine.init();`,
                   <Alert
                     type="info"
                     showIcon
-                    icon={<BookOutlined />}
-                    message={<span className="font-semibold text-xs text-white">Official MDN Documentation Guide</span>}
+                    icon={<BookOutlined className="text-[#ff63f9]" />}
+                    message={<span className="font-bold text-xs sm:text-sm text-white">Official MDN Documentation Guide</span>}
                     description={
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mt-1">
-                        <span className="text-[11px] text-white/60">
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-2">
+                        <span className="text-xs text-white/70 leading-relaxed">
                           Deepen your knowledge by exploring full documentation, parameters, and code examples.
                         </span>
                         <a
                           href={lesson.docsLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="no-underline inline-flex items-center gap-1 px-3 py-1 rounded-[7px] bg-white text-black font-semibold text-xs hover:bg-white/90 transition-colors shrink-0 shadow-sm"
+                          className="no-underline inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-black font-semibold text-xs hover:bg-white/90 transition-colors shrink-0 shadow-sm"
                         >
                           Open MDN Documentation <ExportOutlined />
                         </a>
                       </div>
                     }
-                    className="bg-[#000000] border-white/10"
+                    className="bg-[#000000] border-white/10 p-4 sm:p-5 rounded-xl"
                   />
                 </div>
               )
@@ -604,22 +632,22 @@ FeatureEngine.init();`,
             {
               key: "notes",
               label: (
-                <span className="font-medium text-xs flex items-center gap-2 text-white">
+                <span className="font-semibold text-xs sm:text-sm flex items-center gap-2.5 text-white py-1">
                   <FileTextOutlined className="text-white/60" /> Personal Study Notes
                 </span>
               ),
               children: (
-                <div className="space-y-4 pt-2">
-                  <div className="flex items-center justify-between">
+                <div className="space-y-5 pt-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
-                      <h3 className="text-sm font-bold m-0 flex items-center gap-2 text-white">
-                        <FileTextOutlined /> Personal Notes for Day {lesson.day}
+                      <h3 className="text-sm sm:text-base font-bold m-0 flex items-center gap-2 text-white">
+                        <FileTextOutlined className="text-[#ff63f9]" /> Personal Notes for Day {lesson.day}
                       </h3>
-                      <p className="text-[11px] text-white/50 m-0">Write down key observations or code snippets. Saved to browser localStorage.</p>
+                      <p className="text-xs text-white/50 m-0 mt-1">Write down key observations or code snippets. Saved automatically to your browser.</p>
                     </div>
                     <SpecularButton
                       size="sm"
-                      radius={8}
+                      radius={10}
                       tint="#ff63f9"
                       tintOpacity={0.9}
                       lineColor="#ffffff"
@@ -633,25 +661,25 @@ FeatureEngine.init();`,
                   </div>
 
                   <TextArea
-                    rows={7}
+                    rows={8}
                     value={noteText}
                     onChange={(e) => setNoteText(e.target.value)}
                     placeholder="Write your study notes here..."
-                    className="font-sans text-xs rounded-[7px] p-3 bg-[#000000] text-white border-white/10"
+                    className="font-sans text-xs sm:text-sm rounded-xl p-4 bg-[#000000] text-white border-white/10 focus:ring-1 focus:ring-[#ff63f9]/50"
                   />
                 </div>
               )
             }
           ]}
         />
-      </GlassSurface>
+      </div>
 
-      {/* Navigation Footer wrapped in GlassSurface */}
-      <GlassSurface borderRadius={14} className="p-3.5">
+      {/* Navigation Footer */}
+      <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-4 sm:p-6">
         <div className="flex items-center justify-between gap-4">
           <SpecularButton
             size="md"
-            radius={10}
+            radius={12}
             disabled={dayId <= 1}
             tint="#181824"
             tintOpacity={0.8}
@@ -664,13 +692,13 @@ FeatureEngine.init();`,
             Previous Day
           </SpecularButton>
 
-          <div className="text-xs text-white/50 font-medium hidden sm:block">
+          <div className="text-xs sm:text-sm text-white/60 font-semibold hidden sm:block">
             Day {dayId} of {totalDays}
           </div>
 
           <SpecularButton
             size="md"
-            radius={10}
+            radius={12}
             tint="#ff63f9"
             tintOpacity={0.9}
             lineColor="#ffffff"
@@ -682,7 +710,7 @@ FeatureEngine.init();`,
             {dayId < totalDays ? "Next Day" : "Claim Certificate 🎉"}
           </SpecularButton>
         </div>
-      </GlassSurface>
+      </div>
 
       {/* Solution Modal */}
       <Modal
