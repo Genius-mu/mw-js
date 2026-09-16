@@ -241,24 +241,28 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
         {/* Dashboard Top Header */}
         <Header className="sticky top-0 z-40 px-4 md:px-6 h-14 flex items-center justify-between border-b bg-[#08080c]/90 backdrop-blur-xl border-white/10">
           <div className="flex items-center gap-3">
+            {/* Single Unified Hamburger Button */}
             <Button
               type="text"
-              icon={<MenuOutlined />}
-              onClick={() => setMobileDrawerOpen(true)}
-              className="md:hidden text-white flex items-center justify-center"
+              icon={<MenuOutlined className="text-[#ff63f9] text-base" />}
+              onClick={() => {
+                if (window.innerWidth < 768) {
+                  setMobileDrawerOpen(true);
+                } else {
+                  setCollapsed(!collapsed);
+                }
+              }}
+              className="text-white hover:text-[#ff63f9] hover:bg-white/10 flex items-center justify-center rounded-lg border border-white/10 h-9 w-9 p-0 transition-all cursor-pointer"
             />
-            <Button
-              type="text"
-              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-              onClick={() => setCollapsed(!collapsed)}
-              className="hidden md:flex items-center text-white"
-            />
-            <div className="hidden sm:flex items-center gap-2 text-xs font-semibold">
-              <Link href="/" className="no-underline text-white/70 hover:text-white">Home</Link>
-              <span className="text-white/30">/</span>
-              <span className="text-white">Learn Dashboard</span>
-              <span className="text-white/30">/</span>
-              <Tag color="rgba(255,99,249,0.2)" className="font-semibold m-0 text-[#ff63f9] border-none">Lesson Day {currentDayId}</Tag>
+            <div className="flex items-center gap-2 text-xs font-semibold">
+              <Link href="/" className="hidden sm:inline no-underline text-white/70 hover:text-white transition-colors">Home</Link>
+              <span className="hidden sm:inline text-white/30">/</span>
+              <span className="hidden sm:inline text-white/90">Learn Dashboard</span>
+              <span className="hidden sm:inline text-white/30">/</span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#ff63f9]/15 text-[#ff63f9] border border-[#ff63f9]/30 shadow-[0_0_12px_rgba(255,99,249,0.25)]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#ff63f9] animate-pulse" />
+                Lesson Day {currentDayId}
+              </span>
             </div>
           </div>
 
