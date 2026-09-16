@@ -14,7 +14,7 @@ interface ScrambledTextProps {
 }
 
 export default function ScrambledText({
-  radius = 120,
+  radius = 180,
   duration = 1.0,
   speed = 0.5,
   scrambleChars = ".:#@$%&*<>~/+=-_[]{}",
@@ -48,9 +48,16 @@ export default function ScrambledText({
         const dist = Math.hypot(e.clientX - centerX, e.clientY - centerY);
 
         if (dist < radius) {
+          const proximity = 1 - dist / radius; // 0 (at radius) to 1 (at center)
+          const targetOpacity = Math.min(1.0, 0.2 + proximity * 0.8);
+          
+          charEl.style.opacity = targetOpacity.toFixed(2);
+          charEl.style.color = proximity > 0.5 ? "#ffffff" : "#9ca3af";
+          charEl.style.textShadow = proximity > 0.6 ? "0 0 10px rgba(255, 99, 249, 0.6)" : "none";
+
           if (!timers.has(idx)) {
             let step = 0;
-            const maxSteps = Math.floor(10 * (1 - dist / radius)) + 5;
+            const maxSteps = Math.floor(10 * proximity) + 4;
             const interval = setInterval(() => {
               step++;
               if (step < maxSteps) {
@@ -64,6 +71,10 @@ export default function ScrambledText({
             }, Math.max(30, 80 * speed));
             timers.set(idx, interval);
           }
+        } else {
+          charEl.style.opacity = "0.15";
+          charEl.style.color = "#6b7280";
+          charEl.style.textShadow = "none";
         }
       });
     };
@@ -84,7 +95,7 @@ export default function ScrambledText({
             return <br key={i} className="select-none" />;
           }
           return (
-            <span key={i} className="scramble-char inline-block transition-colors" data-orig={item.orig}>
+            <span key={i} className="scramble-char" data-orig={item.orig}>
               {item.orig === " " ? "\u00A0" : item.orig}
             </span>
           );
