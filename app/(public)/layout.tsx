@@ -15,6 +15,7 @@ import {
 } from "@ant-design/icons";
 import { useLearning } from "@/context/LearningContext";
 import GlassSurface from "@/components/reactbits/GlassSurface";
+import SpecularButton from "@/components/reactbits/SpecularButton";
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   const { user, getNextUncompletedDay } = useLearning();

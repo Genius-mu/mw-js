@@ -404,16 +404,20 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
                     {currentMod.description}
                   </p>
 
-                  {/* Action Button matching pxxl.app 'Search domains' button style */}
+                  {/* Action Button using SpecularButton */}
                   <div className="pt-2 flex justify-center">
                     <Link href={`/learn/day/${firstDay.id}`} className="no-underline">
-                      <button
-                        type="button"
-                        className="bg-white text-black font-extrabold text-xs sm:text-sm h-11 px-7 rounded-[8px] shadow-[0_4px_0_0_#ff63f9] hover:bg-[#ff63f9] hover:text-black transition-all transform active:translate-y-1 flex items-center gap-2 cursor-pointer border-none"
+                      <SpecularButton
+                        size="md"
+                        radius={12}
+                        tint="#ff63f9"
+                        tintOpacity={0.85}
+                        lineColor="#ffffff"
+                        baseColor="#ff63f9"
+                        textColor="#000000"
                       >
-                        <span>Explore Module 0{selectedModuleIdx + 1}</span>
-                        <span className="font-bold">↗</span>
-                      </button>
+                        Explore Module 0{selectedModuleIdx + 1} ↗
+                      </SpecularButton>
                     </Link>
                   </div>
                 </div>
@@ -533,14 +537,20 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
             <p className="text-sm sm:text-base text-white/70 max-w-md mx-auto leading-relaxed m-0">
               Begin learning modern ECMAScript with hands-on projects and instant in-browser code execution.
             </p>
-            <div className="pt-4">
-              <Link href={`/learn/day/${nextDay}`}>
-                <Button
-                  size="large"
-                  className="h-12 px-9 text-sm font-bold bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none rounded-md shadow-[0_0_20px_rgba(255,99,249,0.35)] cursor-pointer"
+            <div className="pt-4 flex justify-center">
+              <Link href={`/learn/day/${nextDay}`} className="no-underline">
+                <SpecularButton
+                  size="lg"
+                  radius={14}
+                  tint="#ff63f9"
+                  tintOpacity={0.9}
+                  lineColor="#ffffff"
+                  baseColor="#ff63f9"
+                  textColor="#000000"
+                  icon={<RocketOutlined />}
                 >
                   Launch Workspace
-                </Button>
+                </SpecularButton>
               </Link>
             </div>
           </GlassSurface>
