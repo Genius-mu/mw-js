@@ -11,7 +11,8 @@ import {
   ThunderboltOutlined,
   RightOutlined,
   PlusOutlined,
-  MinusOutlined
+  MinusOutlined,
+  FireOutlined
 } from "@ant-design/icons";
 import { MODULES_DATA } from "@/lib/curriculum";
 import { useLearning } from "@/context/LearningContext";
@@ -68,7 +69,9 @@ export default function LandingPage() {
       graphic: (
         <div className="p-4 rounded-xl bg-[#0e0e14] border border-white/10 space-y-3 shadow-inner">
           <div className="flex items-center justify-between text-xs pb-2 border-b border-white/10">
-            <span className="font-mono text-[#ff63f9] font-bold">🔥 14-Day Streak</span>
+            <span className="font-mono text-[#ff63f9] font-bold flex items-center gap-1">
+              <FireOutlined className="text-[#ff63f9]" /> 14-Day Streak
+            </span>
             <span className="text-white/50 font-mono text-[11px]">Daily 15m Target</span>
           </div>
           <div className="space-y-1.5 font-mono text-xs">
@@ -82,7 +85,9 @@ export default function LandingPage() {
             </div>
             <div className="flex items-center justify-between p-1.5 rounded bg-[#ff63f9]/10 border border-[#ff63f9]/30 text-white font-semibold">
               <span>Day 03: Event Loop</span>
-              <span className="text-[10px] text-[#ff63f9] font-bold">Today 🚀</span>
+              <span className="text-[10px] text-[#ff63f9] font-bold flex items-center gap-1">
+                Today <RocketOutlined />
+              </span>
             </div>
           </div>
         </div>
