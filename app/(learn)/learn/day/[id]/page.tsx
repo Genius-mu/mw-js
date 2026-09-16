@@ -391,19 +391,14 @@ export default function DayLearningPage() {
           >
             Run & Test Project #1
           </SpecularButton>
-          <SpecularButton
-            size="sm"
-            radius={10}
-            tint="#181824"
-            tintOpacity={0.8}
-            lineColor="#ffffff"
-            baseColor="#333344"
-            textColor="#ffffff"
-            icon={<CopyOutlined />}
+          <button
+            type="button"
             onClick={() => handleCopySnippet(currentProjects[0].code, "proj-0")}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-white/90 bg-[#12121e] hover:bg-[#ff63f9]/15 border border-white/15 hover:border-[#ff63f9]/50 hover:text-[#ff63f9] shadow-sm hover:shadow-[0_0_15px_rgba(255,99,249,0.25)] transition-all cursor-pointer active:scale-95"
           >
-            {copiedId === "proj-0" ? "Copied!" : "Copy Code"}
-          </SpecularButton>
+            <CopyOutlined className={copiedId === "proj-0" ? "text-emerald-400 text-sm" : "text-[#ff63f9] text-sm"} />
+            <span>{copiedId === "proj-0" ? "Copied!" : "Copy Code"}</span>
+          </button>
         </div>
       </div>
 
@@ -433,19 +428,14 @@ export default function DayLearningPage() {
           >
             Run & Test Project #2
           </SpecularButton>
-          <SpecularButton
-            size="sm"
-            radius={10}
-            tint="#181824"
-            tintOpacity={0.8}
-            lineColor="#ffffff"
-            baseColor="#333344"
-            textColor="#ffffff"
-            icon={<CopyOutlined />}
+          <button
+            type="button"
             onClick={() => handleCopySnippet(currentProjects[1].code, "proj-1")}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-white/90 bg-[#12121e] hover:bg-[#ff63f9]/15 border border-white/15 hover:border-[#ff63f9]/50 hover:text-[#ff63f9] shadow-sm hover:shadow-[0_0_15px_rgba(255,99,249,0.25)] transition-all cursor-pointer active:scale-95"
           >
-            {copiedId === "proj-1" ? "Copied!" : "Copy Code"}
-          </SpecularButton>
+            <CopyOutlined className={copiedId === "proj-1" ? "text-emerald-400 text-sm" : "text-[#ff63f9] text-sm"} />
+            <span>{copiedId === "proj-1" ? "Copied!" : "Copy Code"}</span>
+          </button>
         </div>
       </div>
 
