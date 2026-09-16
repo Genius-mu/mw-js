@@ -17,7 +17,6 @@ import { MODULES_DATA } from "@/lib/curriculum";
 import { useLearning } from "@/context/LearningContext";
 import BlurText from "@/components/reactbits/BlurText";
 import OptionWheel from "@/components/reactbits/OptionWheel";
-import ScrambledText from "@/components/reactbits/ScrambledText";
 import ScrollStack, { ScrollStackItem } from "@/components/reactbits/ScrollStack";
 import ScrollBlurSlide from "@/components/reactbits/ScrollBlurSlide";
 import ConnectModules from "@/components/ConnectModules";
@@ -57,15 +56,6 @@ export default function LandingPage() {
       a: "Upon completing all modules and micro-lessons, the platform automatically generates your verifiable completion certificate with your name and skills breakdown."
     }
   ];
-
-  const HERO_SCRAMBLE_MATRIX = `// ECMASCRIPT 2026 V8 RUNTIME ENGINE & JAVASCRIPT CORE PLATFORM
-const RUNTIME = new V8Engine({ mode: 'DEVELOPER', asyncContext: true, jit: 'TURBOPAN' });
-async function initializeCurriculum() { return await ModuleLoader.import('/core/javascript'); }
-class ASTCompiler extends RuntimeEnvironment { parse(code) { return tokenize(code, { es2026: true }); } }
-const PROMISE_STREAM = new AsyncIterator({ buffer: 1024, concurrency: 'WORKER_POOL' });
-function benchmark(fn) { const t0 = performance.now(); fn(); return performance.now() - t0; }
-const MEMORY_HEAP = new WebAssembly.Memory({ initial: 256, maximum: 65536 });
-export const VECTOR_MAP = new Map([['type', 'primitive'], ['alloc', 'heap']]);`;
 
   const scrollStackSteps = [
     {
@@ -188,40 +178,27 @@ export const VECTOR_MAP = new Map([['type', 'primitive'], ['alloc', 'heap']]);`;
   ];
 
   return (
-    <div className="space-y-36 sm:space-y-44 pb-36">
-      {/* 1. HERO SECTION (No Card Container - Pure Floating Text with Blended Scramble Matrix Background) */}
-      <section className="relative pt-20 sm:pt-28 md:pt-36 pb-16 sm:pb-24 px-6 sm:px-10 max-w-6xl mx-auto text-center overflow-hidden">
-        {/* Interactive Scrambled Text Throughout Hero Section Background - Blended into background by default, reveals & scrambles on hovered field */}
-        <div className="absolute inset-0 pointer-events-auto opacity-100 z-0 flex flex-col justify-center items-center select-none overflow-hidden p-4">
-          <ScrambledText
-            radius={200}
-            duration={1.2}
-            speed={0.4}
-            scrambleChars=".:#@$%&*<>~/+=-_[]{}01"
-            className="text-xs sm:text-sm font-mono max-w-5xl leading-relaxed text-center px-4 tracking-widest"
-          >
-            {HERO_SCRAMBLE_MATRIX}
-          </ScrambledText>
-        </div>
-
+    <div className="space-y-20 sm:space-y-36 pb-20 sm:pb-36">
+      {/* 1. HERO SECTION (Clean Typography without Scrambled Background) */}
+      <section className="relative pt-16 sm:pt-28 md:pt-36 pb-12 sm:pb-24 px-4 sm:px-10 max-w-6xl mx-auto text-center overflow-hidden">
         {/* Headline - Large, bold typography */}
-        <div className="relative z-10 mb-8">
+        <div className="relative z-10 mb-6 sm:mb-8">
           <BlurText
             text="Master Modern JavaScript Core & ES2026"
             delay={70}
             animateBy="words"
             direction="top"
-            className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-tight"
+            className="text-3xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-tight px-2"
           />
         </div>
 
-        <p className="relative z-10 text-base sm:text-lg max-w-2xl mx-auto mb-12 font-normal leading-relaxed text-white/80">
+        <p className="relative z-10 text-sm sm:text-lg max-w-2xl mx-auto mb-8 sm:mb-12 font-normal leading-relaxed text-white/80 px-2">
           Learn JavaScript step-by-step with structured micro-concepts, live in-browser terminal, and 2 hands-on projects per lesson.
         </p>
 
         {/* Action Buttons using SpecularButton */}
-        <div className="relative z-10 flex flex-row items-center justify-center gap-5">
-          <Link href={`/learn/day/${nextDay}`} className="no-underline">
+        <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 w-full max-w-xs sm:max-w-none mx-auto">
+          <Link href={`/learn/day/${nextDay}`} className="no-underline w-full sm:w-auto">
             <SpecularButton
               size="lg"
               radius={14}
@@ -235,7 +212,7 @@ export const VECTOR_MAP = new Map([['type', 'primitive'], ['alloc', 'heap']]);`;
               Start Learning Now
             </SpecularButton>
           </Link>
-          <a href="#curriculum" className="no-underline">
+          <a href="#curriculum" className="no-underline w-full sm:w-auto">
             <SpecularButton
               size="lg"
               radius={14}
