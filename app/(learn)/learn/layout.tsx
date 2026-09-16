@@ -35,6 +35,8 @@ import {
 import { MODULES_DATA } from "@/lib/curriculum";
 import { useLearning } from "@/context/LearningContext";
 
+import GlassSurface from "@/components/reactbits/GlassSurface";
+
 const { Header, Sider, Content } = Layout;
 
 export default function LearnLayout({ children }: { children: React.ReactNode }) {
@@ -160,7 +162,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
         </Link>
 
         {!collapsed && (
-          <div className="bg-[#08080c] p-3 rounded-xl border border-white/10 space-y-2">
+          <GlassSurface borderRadius={12} className="p-3 space-y-2">
             <div className="flex items-center justify-between text-xs font-semibold">
               <span className="text-white">Course Completion</span>
               <span className="text-[#ff63f9] font-bold">{progressPercent}%</span>
@@ -170,7 +172,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
               <span>{completedCount} of {totalDays} completed</span>
               <span className="text-white/80 font-medium">Keep going!</span>
             </div>
-          </div>
+          </GlassSurface>
         )}
       </div>
 

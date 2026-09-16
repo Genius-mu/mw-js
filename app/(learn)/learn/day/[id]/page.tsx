@@ -36,6 +36,7 @@ import {
 } from "@ant-design/icons";
 import { CURRICULUM_DATA, LessonDay, LessonProject } from "@/lib/curriculum";
 import { useLearning } from "@/context/LearningContext";
+import GlassSurface from "@/components/reactbits/GlassSurface";
 
 const { TextArea } = Input;
 
@@ -219,8 +220,8 @@ FeatureEngine.init();`,
 
   return (
     <div className="space-y-5 pb-12">
-      {/* Header Banner */}
-      <div className="p-5 rounded-[7px] border bg-[#08080c] border-white/10">
+      {/* Header Banner wrapped in GlassSurface */}
+      <GlassSurface borderRadius={16} className="p-5">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
@@ -243,19 +244,19 @@ FeatureEngine.init();`,
               size="medium"
               icon={isCompleted ? <CheckCircleFilled className="text-white" /> : <CheckCircleOutlined />}
               onClick={handleToggleComplete}
-              className={!isCompleted ? "bg-white text-black hover:bg-white/90 border-none font-semibold text-xs rounded-[7px]" : "font-semibold border-white/10 text-white/80 rounded-[7px] text-xs"}
+              className={!isCompleted ? "bg-white text-black hover:bg-white/90 border-none font-semibold text-xs rounded-[7px] cursor-pointer" : "font-semibold border-white/10 text-white/80 rounded-[7px] text-xs cursor-pointer"}
             >
               {isCompleted ? "Marked Completed" : "Mark as Completed"}
             </Button>
           </div>
         </div>
-      </div>
+      </GlassSurface>
 
       {/* Main Grid: Concept Blueprint + Sidebar Specs */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
         {/* Concept Deep Dive Card (Col-span 2) */}
-        <div className="lg:col-span-2 space-y-4">
-          <div className="p-6 rounded-[7px] border bg-[#08080c] border-white/10 space-y-4 relative overflow-hidden">
+        <div className="lg:col-span-2">
+          <GlassSurface borderRadius={16} className="p-6 space-y-4 relative overflow-hidden">
             <div className="flex items-center justify-between border-b border-white/10 pb-3">
               <div className="flex items-center gap-2">
                 <ThunderboltOutlined className="text-[#ff63f9] text-base" />
@@ -277,7 +278,7 @@ FeatureEngine.init();`,
                 size="small"
                 icon={<CopyOutlined />}
                 onClick={() => handleCopySnippet(lesson.codeSnippet)}
-                className="absolute top-3 right-3 text-[10px] font-medium bg-white/10 hover:bg-white/20 text-white border-none rounded-[5px]"
+                className="absolute top-3 right-3 text-[10px] font-medium bg-white/10 hover:bg-white/20 text-white border-none rounded-[5px] cursor-pointer"
               >
                 {copied ? "Copied" : "Copy"}
               </Button>
@@ -296,12 +297,12 @@ FeatureEngine.init();`,
                 MDN Documentation <ExportOutlined />
               </a>
             </div>
-          </div>
+          </GlassSurface>
         </div>
 
         {/* Quick Lesson Specs Sidebar (Col-span 1) */}
-        <div className="space-y-4">
-          <div className="p-5 rounded-[7px] border bg-[#08080c] border-white/10">
+        <div>
+          <GlassSurface borderRadius={16} className="p-5">
             <span className="font-bold text-xs flex items-center gap-2 text-white mb-3.5"><BookOutlined /> Lesson Specs</span>
             <div className="space-y-3 text-xs">
               <div>
@@ -334,18 +335,18 @@ FeatureEngine.init();`,
                   type="primary"
                   icon={<RocketOutlined />}
                   onClick={handleNextDay}
-                  className="bg-white text-black hover:bg-white/90 border-none font-semibold h-9 text-xs rounded-[7px] shadow-sm"
+                  className="bg-white text-black hover:bg-white/90 border-none font-semibold h-9 text-xs rounded-[7px] shadow-sm cursor-pointer"
                 >
                   {dayId < totalDays ? "Complete & Go to Next Day" : "Claim Certificate 🎉"}
                 </Button>
               </div>
             </div>
-          </div>
+          </GlassSurface>
         </div>
       </div>
 
-      {/* 2 REAL-WORLD PROJECTS SECTION */}
-      <div className="p-6 rounded-[7px] border bg-[#08080c] border-white/10 space-y-4">
+      {/* 2 REAL-WORLD PROJECTS SECTION wrapped in GlassSurface */}
+      <GlassSurface borderRadius={18} className="p-6 space-y-4">
         <div className="flex items-center justify-between border-b border-white/10 pb-3">
           <div>
             <h2 className="text-base font-bold text-white flex items-center gap-2 m-0">
@@ -362,7 +363,7 @@ FeatureEngine.init();`,
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {currentProjects.map((proj, idx) => (
-            <div key={idx} className="p-4 rounded-[7px] bg-[#000000] border border-white/10 space-y-3 flex flex-col justify-between">
+            <GlassSurface key={idx} borderRadius={12} className="p-4 space-y-3 flex flex-col justify-between">
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="font-bold text-xs text-white">{proj.title}</span>
@@ -390,7 +391,7 @@ FeatureEngine.init();`,
                     setUserCode(proj.code);
                     handleRunCode(proj.code);
                   }}
-                  className="bg-white text-black hover:bg-white/90 border-none font-semibold text-[11px] rounded-[5px]"
+                  className="bg-white text-black hover:bg-white/90 border-none font-semibold text-[11px] rounded-[5px] cursor-pointer"
                 >
                   Run & Test Project #{idx + 1}
                 </Button>
@@ -398,18 +399,18 @@ FeatureEngine.init();`,
                   size="small"
                   icon={<CopyOutlined />}
                   onClick={() => handleCopySnippet(proj.code)}
-                  className="bg-[#08080c] text-white/80 border border-white/10 text-[11px] rounded-[5px]"
+                  className="bg-[#08080c] text-white/80 border border-white/10 text-[11px] rounded-[5px] cursor-pointer"
                 >
                   Copy Code
                 </Button>
               </div>
-            </div>
+            </GlassSurface>
           ))}
         </div>
-      </div>
+      </GlassSurface>
 
-      {/* Tabs: Documentation, Interactive Code Practice & Personal Notes */}
-      <div className="p-5 rounded-[7px] border bg-[#08080c] border-white/10">
+      {/* Tabs: Documentation, Interactive Code Practice & Personal Notes wrapped in GlassSurface */}
+      <GlassSurface borderRadius={18} className="p-5">
         <Tabs
           defaultActiveKey="sandbox"
           items={[
@@ -446,7 +447,7 @@ FeatureEngine.init();`,
                             size="small"
                             icon={<ReloadOutlined />}
                             onClick={() => setUserCode(lesson.exercise.starterCode)}
-                            className="text-[11px] bg-[#000000] text-white/80 border border-white/10 rounded-[5px]"
+                            className="text-[11px] bg-[#000000] text-white/80 border border-white/10 rounded-[5px] cursor-pointer"
                           >
                             Reset
                           </Button>
@@ -454,7 +455,7 @@ FeatureEngine.init();`,
                             size="small"
                             icon={<BulbOutlined />}
                             onClick={() => setShowHint(!showHint)}
-                            className="text-[11px] bg-[#000000] text-white/80 border border-white/10 rounded-[5px]"
+                            className="text-[11px] bg-[#000000] text-white/80 border border-white/10 rounded-[5px] cursor-pointer"
                           >
                             {showHint ? "Hide Hint" : "Hint"}
                           </Button>
@@ -481,14 +482,14 @@ FeatureEngine.init();`,
                           type="primary"
                           icon={<PlayCircleOutlined />}
                           onClick={() => handleRunCode()}
-                          className="bg-white text-black hover:bg-white/90 border-none font-semibold h-8 px-4 text-xs rounded-[7px] shadow-sm"
+                          className="bg-white text-black hover:bg-white/90 border-none font-semibold h-8 px-4 text-xs rounded-[7px] shadow-sm cursor-pointer"
                         >
                           Run Code & Test Output
                         </Button>
                         <Button
                           icon={<CodeOutlined />}
                           onClick={() => setSolutionModalOpen(true)}
-                          className="text-xs font-medium bg-[#000000] text-white/80 border border-white/10 rounded-[7px] h-8"
+                          className="text-xs font-medium bg-[#000000] text-white/80 border border-white/10 rounded-[7px] h-8 cursor-pointer"
                         >
                           View Solution
                         </Button>
@@ -590,7 +591,7 @@ FeatureEngine.init();`,
                       type="primary"
                       icon={<SaveOutlined />}
                       onClick={handleSaveNote}
-                      className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs h-8 rounded-[7px] shadow-sm"
+                      className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs h-8 rounded-[7px] shadow-sm cursor-pointer"
                     >
                       {noteSaved ? "Saved!" : "Save Notes"}
                     </Button>
@@ -608,34 +609,36 @@ FeatureEngine.init();`,
             }
           ]}
         />
-      </div>
+      </GlassSurface>
 
-      {/* Navigation Footer */}
-      <div className="p-3.5 rounded-[7px] border flex items-center justify-between gap-4 bg-[#08080c] border-white/10">
-        <Button
-          size="medium"
-          icon={<LeftOutlined />}
-          disabled={dayId <= 1}
-          onClick={handlePrevDay}
-          className="font-medium bg-[#000000] text-white/80 border border-white/10 rounded-[7px] text-xs disabled:opacity-30"
-        >
-          Previous Day
-        </Button>
+      {/* Navigation Footer wrapped in GlassSurface */}
+      <GlassSurface borderRadius={14} className="p-3.5">
+        <div className="flex items-center justify-between gap-4">
+          <Button
+            size="medium"
+            icon={<LeftOutlined />}
+            disabled={dayId <= 1}
+            onClick={handlePrevDay}
+            className="font-medium bg-[#000000] text-white/80 border border-white/10 rounded-[7px] text-xs disabled:opacity-30 cursor-pointer"
+          >
+            Previous Day
+          </Button>
 
-        <div className="text-xs text-white/50 font-medium hidden sm:block">
-          Day {dayId} of {totalDays}
+          <div className="text-xs text-white/50 font-medium hidden sm:block">
+            Day {dayId} of {totalDays}
+          </div>
+
+          <Button
+            type="primary"
+            size="medium"
+            icon={<RightOutlined />}
+            onClick={handleNextDay}
+            className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs rounded-[7px] shadow-sm cursor-pointer"
+          >
+            {dayId < totalDays ? "Next Day" : "Claim Certificate 🎉"}
+          </Button>
         </div>
-
-        <Button
-          type="primary"
-          size="medium"
-          icon={<RightOutlined />}
-          onClick={handleNextDay}
-          className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs rounded-[7px] shadow-sm"
-        >
-          {dayId < totalDays ? "Next Day" : "Claim Certificate 🎉"}
-        </Button>
-      </div>
+      </GlassSurface>
 
       {/* Solution Modal */}
       <Modal

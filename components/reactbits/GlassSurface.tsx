@@ -3,11 +3,11 @@
 import React, { useEffect, useState, useRef, useId } from "react";
 import "./GlassSurface.css";
 
-interface GlassSurfaceProps {
+export interface GlassSurfaceProps {
   children?: React.ReactNode;
   width?: number | string;
   height?: number | string;
-  borderRadius?: number;
+  borderRadius?: number | string;
   borderWidth?: number;
   brightness?: number;
   opacity?: number;
@@ -22,8 +22,11 @@ interface GlassSurfaceProps {
   xChannel?: string;
   yChannel?: string;
   mixBlendMode?: string;
+  interactive?: boolean;
+  glowColor?: string;
   className?: string;
   style?: React.CSSProperties;
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 const GlassSurface: React.FC<GlassSurfaceProps> = ({
@@ -45,8 +48,11 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
   xChannel = "R",
   yChannel = "G",
   mixBlendMode = "difference",
+  interactive = true,
+  glowColor,
   className = "",
-  style = {}
+  style = {},
+  onClick
 }) => {
   const rawId = useId();
   const uniqueId = rawId.replace(/:/g, "-");
@@ -63,10 +69,20 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
   const blueChannelRef = useRef<SVGFEDisplacementMapElement>(null);
   const gaussianBlurRef = useRef<SVGFEGaussianBlurElement>(null);
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!interactive || !containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    containerRef.current.style.setProperty("--mouse-x", `${x}px`);
+    containerRef.current.style.setProperty("--mouse-y", `${y}px`);
+  };
+
   const generateDisplacementMap = () => {
     const rect = containerRef.current?.getBoundingClientRect();
     const actualWidth = rect?.width || 400;
     const actualHeight = rect?.height || 200;
+    const numRadius = typeof borderRadius === "number" ? borderRadius : parseInt(borderRadius as string, 10) || 20;
     const edgeSize = Math.min(actualWidth, actualHeight) * (borderWidth * 0.5);
 
     const svgContent = `
@@ -82,9 +98,9 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
           </linearGradient>
         </defs>
         <rect x="0" y="0" width="${actualWidth}" height="${actualHeight}" fill="black"></rect>
-        <rect x="0" y="0" width="${actualWidth}" height="${actualHeight}" rx="${borderRadius}" fill="url(#${redGradId})" />
-        <rect x="0" y="0" width="${actualWidth}" height="${actualHeight}" rx="${borderRadius}" fill="url(#${blueGradId})" style="mix-blend-mode: ${mixBlendMode}" />
-        <rect x="${edgeSize}" y="${edgeSize}" width="${actualWidth - edgeSize * 2}" height="${actualHeight - edgeSize * 2}" rx="${borderRadius}" fill="hsl(0 0% ${brightness}% / ${opacity})" style="filter:blur(${blur}px)" />
+        <rect x="0" y="0" width="${actualWidth}" height="${actualHeight}" rx="${numRadius}" fill="url(#${redGradId})" />
+        <rect x="0" y="0" width="${actualWidth}" height="${actualHeight}" rx="${numRadius}" fill="url(#${blueGradId})" style="mix-blend-mode: ${mixBlendMode}" />
+        <rect x="${edgeSize}" y="${edgeSize}" width="${actualWidth - edgeSize * 2}" height="${actualHeight - edgeSize * 2}" rx="${numRadius}" fill="hsl(0 0% ${brightness}% / ${opacity})" style="filter:blur(${blur}px)" />
       </svg>
     `;
 
@@ -168,21 +184,28 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     return div.style.backdropFilter !== "";
   };
 
+  const numRadius = typeof borderRadius === "number" ? `${borderRadius}px` : borderRadius;
+
   const containerStyle: React.CSSProperties = {
     ...style,
     width: typeof width === "number" ? `${width}px` : width,
     height: typeof height === "number" ? `${height}px` : height,
-    borderRadius: `${borderRadius}px`,
+    borderRadius: numRadius,
     // @ts-ignore
     "--glass-frost": backgroundOpacity,
     "--glass-saturation": saturation,
-    "--filter-id": `url(#${filterId})`
+    "--filter-id": `url(#${filterId})`,
+    ...(glowColor ? { "--glass-glow": glowColor } : {})
   };
 
   return (
     <div
       ref={containerRef}
-      className={`glass-surface ${svgSupported ? "glass-surface--svg" : "glass-surface--fallback"} ${className}`}
+      onMouseMove={handleMouseMove}
+      onClick={onClick}
+      className={`glass-surface ${interactive ? "glass-surface--interactive" : ""} ${
+        svgSupported ? "glass-surface--svg" : "glass-surface--fallback"
+      } ${className}`}
       style={containerStyle}
     >
       <svg className="glass-surface__filter" xmlns="http://www.w3.org/2000/svg">

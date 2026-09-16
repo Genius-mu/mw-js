@@ -3,15 +3,15 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Card, Form, Input, Button, Divider } from "antd";
+import { Form, Input, Button, Divider } from "antd";
 import { MailOutlined, LockOutlined, UserOutlined, RocketOutlined } from "@ant-design/icons";
 import { useLearning } from "@/context/LearningContext";
+import GlassSurface from "@/components/reactbits/GlassSurface";
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login, getNextUncompletedDay, themeMode } = useLearning();
+  const { login, getNextUncompletedDay } = useLearning();
   const [loading, setLoading] = useState(false);
-  const isDark = themeMode === "dark";
 
   const onFinish = (values: { email: string; name?: string }) => {
     setLoading(true);
@@ -34,17 +34,12 @@ export default function LoginPage() {
   };
 
   return (
-    <Card
-      className={`shadow-none border rounded-2xl ${
-        isDark ? "bg-[#08080c] border-white/10" : "bg-[#faf5ff] border-[#e9d5ff]"
-      }`}
-      title={
-        <div className="text-center py-1.5">
-          <h2 className="text-lg font-bold m-0 text-white">Student Sign In</h2>
-          <p className="text-xs text-white/60 font-normal m-0 mt-1">Access your 100+ Days CODA Dashboard</p>
-        </div>
-      }
-    >
+    <GlassSurface borderRadius={24} className="p-6 sm:p-8 shadow-2xl">
+      <div className="text-center pb-4 mb-4 border-b border-white/10">
+        <h2 className="text-xl font-bold m-0 text-white">Student Sign In</h2>
+        <p className="text-xs text-white/60 font-normal m-0 mt-1">Access your 100+ Days CODA Dashboard</p>
+      </div>
+
       <Form name="login_form" layout="vertical" onFinish={onFinish} requiredMark={false} size="large">
         <Form.Item
           name="email"
@@ -79,7 +74,7 @@ export default function LoginPage() {
             loading={loading}
             block
             icon={<RocketOutlined />}
-            className="bg-white/75 text-black hover:bg-white/90 border-none font-medium text-xs h-10 rounded-md"
+            className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs h-10 rounded-md cursor-pointer"
           >
             Sign In & Continue Learning
           </Button>
@@ -95,7 +90,7 @@ export default function LoginPage() {
         size="large"
         onClick={handleDemoLogin}
         loading={loading}
-        className="font-medium text-xs h-10 bg-[#000000] text-white/80 border border-white/10 hover:border-white/30 hover:text-white rounded-md"
+        className="font-semibold text-xs h-10 bg-[#000000] text-white/80 border border-white/10 hover:border-white/30 hover:text-white rounded-md cursor-pointer"
       >
         ⚡ Instant Quick Demo Login
       </Button>
@@ -103,6 +98,6 @@ export default function LoginPage() {
       <div className="text-center mt-5 text-xs text-white/50">
         Back to <Link href="/" className="text-white/80 hover:text-white font-medium no-underline">Home Landing Page</Link>
       </div>
-    </Card>
+    </GlassSurface>
   );
 }

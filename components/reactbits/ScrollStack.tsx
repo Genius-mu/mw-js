@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import GlassSurface from "./GlassSurface";
 import "./ScrollStack.css";
 
 export const ScrollStackItem = ({
@@ -15,13 +16,21 @@ export const ScrollStackItem = ({
   style?: React.CSSProperties;
 }) => (
   <div
-    className={`scroll-stack-card ${itemClassName}`.trim()}
+    className={`scroll-stack-wrapper ${itemClassName}`.trim()}
     style={{
+      position: "sticky",
       top: `calc(85px + ${index * 26}px)`,
+      zIndex: 10 + index,
       ...style
     }}
   >
-    {children}
+    <GlassSurface
+      borderRadius={22}
+      className="scroll-stack-card p-6 sm:p-8"
+      glowColor="#ff63f9"
+    >
+      {children}
+    </GlassSurface>
   </div>
 );
 

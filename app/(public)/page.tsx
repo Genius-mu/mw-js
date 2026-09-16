@@ -21,6 +21,7 @@ import ScrambledText from "@/components/reactbits/ScrambledText";
 import ScrollStack, { ScrollStackItem } from "@/components/reactbits/ScrollStack";
 import ScrollBlurSlide from "@/components/reactbits/ScrollBlurSlide";
 import ConnectModules from "@/components/ConnectModules";
+import GlassSurface from "@/components/reactbits/GlassSurface";
 import {
   BasicsDataTypesVisual,
   ArraysLogicVisual,
@@ -185,61 +186,63 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
 
   return (
     <div className="space-y-36 sm:space-y-44 pb-36">
-      {/* 1. HERO SECTION (pxxl.app style - Pitch Black Normally, Gray Scrambled Text on Hover) */}
-      <section className="relative pt-20 sm:pt-28 md:pt-36 pb-16 sm:pb-24 md:pb-28 px-6 sm:px-10 max-w-5xl mx-auto text-center overflow-hidden group bg-black rounded-3xl">
-        {/* Interactive Scrambled Text Hero Background - Pitch Black Normally, Gray Scramble on Hover */}
-        <div className="absolute inset-0 pointer-events-auto opacity-0 group-hover:opacity-75 transition-opacity duration-500 -z-10 flex flex-col justify-center items-center select-none overflow-hidden p-4">
-          <ScrambledText
-            radius={180}
-            duration={1.2}
-            speed={0.5}
-            scrambleChars=".:#@$%&*<>~/+=-_[]{}01"
-            className="text-[11px] sm:text-xs font-mono text-zinc-400 max-w-4xl leading-relaxed text-center px-4 tracking-wider"
-          >
-            {HERO_SCRAMBLE_MATRIX}
-          </ScrambledText>
-        </div>
-
-        {/* Soft Ambient Glow - Only subtle on hover to maintain pitch black normally */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[250px] bg-[#ff63f9]/5 blur-[140px] rounded-full pointer-events-none -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-
-        {/* Headline - Large, bold pxxl.app typography with Re-triggering Blur Animation */}
-        <div className="mb-8">
-          <BlurText
-            text="Master Modern JavaScript Core & ES2026"
-            delay={70}
-            animateBy="words"
-            direction="top"
-            className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-tight"
-          />
-        </div>
-
-        {/* Subtitle */}
-        <p className="text-base sm:text-lg max-w-2xl mx-auto mb-12 font-normal leading-relaxed text-white/70">
-          Learn JavaScript step-by-step with structured micro-concepts, interactive MDN documentation guides, live in-browser terminal, and 2 hands-on projects per lesson.
-        </p>
-
-        {/* Action Buttons */}
-        <div className="flex flex-row items-center justify-center gap-5">
-          <Link href={`/learn/day/${nextDay}`}>
-            <Button
-              type="primary"
-              size="large"
-              icon={<RocketOutlined />}
-              className="h-12 px-8 text-sm font-bold bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none rounded-md shadow-[0_0_20px_rgba(255,99,249,0.35)]"
+      {/* 1. HERO SECTION (pxxl.app style with Fluid Glass card surface) */}
+      <section className="max-w-5xl mx-auto px-4">
+        <GlassSurface borderRadius={28} className="relative pt-16 sm:pt-24 md:pt-28 pb-14 sm:pb-20 md:pb-24 px-6 sm:px-10 text-center overflow-hidden group">
+          {/* Interactive Scrambled Text Hero Background - Pitch Black Normally, Gray Scramble on Hover */}
+          <div className="absolute inset-0 pointer-events-auto opacity-0 group-hover:opacity-75 transition-opacity duration-500 -z-10 flex flex-col justify-center items-center select-none overflow-hidden p-4">
+            <ScrambledText
+              radius={180}
+              duration={1.2}
+              speed={0.5}
+              scrambleChars=".:#@$%&*<>~/+=-_[]{}01"
+              className="text-[11px] sm:text-xs font-mono text-zinc-400 max-w-4xl leading-relaxed text-center px-4 tracking-wider"
             >
-              Start Learning Now
-            </Button>
-          </Link>
-          <a href="#curriculum">
-            <Button
-              size="large"
-              className="h-12 px-8 text-sm font-bold rounded-md border border-white/20 bg-transparent text-white/80 hover:text-white hover:border-white/40"
-            >
-              View Curriculum
-            </Button>
-          </a>
-        </div>
+              {HERO_SCRAMBLE_MATRIX}
+            </ScrambledText>
+          </div>
+
+          {/* Soft Ambient Glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[250px] bg-[#ff63f9]/5 blur-[140px] rounded-full pointer-events-none -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+          {/* Headline - Large, bold pxxl.app typography with Re-triggering Blur Animation */}
+          <div className="mb-8">
+            <BlurText
+              text="Master Modern JavaScript Core & ES2026"
+              delay={70}
+              animateBy="words"
+              direction="top"
+              className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-tight"
+            />
+          </div>
+
+          {/* Subtitle */}
+          <p className="text-base sm:text-lg max-w-2xl mx-auto mb-12 font-normal leading-relaxed text-white/70">
+            Learn JavaScript step-by-step with structured micro-concepts, interactive MDN documentation guides, live in-browser terminal, and 2 hands-on projects per lesson.
+          </p>
+
+          {/* Action Buttons */}
+          <div className="flex flex-row items-center justify-center gap-5">
+            <Link href={`/learn/day/${nextDay}`}>
+              <Button
+                type="primary"
+                size="large"
+                icon={<RocketOutlined />}
+                className="h-12 px-8 text-sm font-bold bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none rounded-md shadow-[0_0_20px_rgba(255,99,249,0.35)] cursor-pointer"
+              >
+                Start Learning Now
+              </Button>
+            </Link>
+            <a href="#curriculum">
+              <Button
+                size="large"
+                className="h-12 px-8 text-sm font-bold rounded-md border border-white/20 bg-transparent text-white/80 hover:text-white hover:border-white/40 cursor-pointer"
+              >
+                View Curriculum
+              </Button>
+            </a>
+          </div>
+        </GlassSurface>
       </section>
 
       {/* 2. SCROLLSTACK SECTION (Scroll-Triggered Stacking with Vertical Divider & Visuals) */}
@@ -410,8 +413,8 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
                   </div>
                 </div>
 
-                {/* Interactive Showcase & Lessons Matrix */}
-                <div className="rounded-3xl bg-[#08080c] border border-white/10 p-6 sm:p-10 shadow-2xl overflow-hidden relative group">
+                {/* Interactive Showcase & Lessons Matrix wrapped in GlassSurface */}
+                <GlassSurface borderRadius={28} className="p-6 sm:p-10 shadow-2xl overflow-hidden relative group">
                   <div className="absolute -right-20 -top-20 w-80 h-80 bg-[#ff63f9]/5 rounded-full blur-[120px] pointer-events-none" />
 
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -463,14 +466,14 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
                       {currentVisual}
                     </div>
                   </div>
-                </div>
+                </GlassSurface>
               </div>
             );
           })()}
         </ScrollBlurSlide>
       </section>
 
-      {/* 5. RESTRUCTURED MINIMAL FAQ SECTION (With Smooth Slide Down / Slide Up) */}
+      {/* 5. RESTRUCTURED MINIMAL FAQ SECTION */}
       <section id="faq" className="max-w-4xl mx-auto px-4 space-y-10 sm:space-y-12">
         <ScrollBlurSlide>
           <div className="text-center space-y-3 mb-8">
@@ -518,7 +521,7 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
       {/* 6. LOWER CTA BANNER */}
       <section className="max-w-4xl mx-auto px-4 text-center">
         <ScrollBlurSlide>
-          <div className="p-12 sm:p-16 md:p-20 rounded-3xl border border-white/15 bg-[#08080b] space-y-6 shadow-2xl">
+          <GlassSurface borderRadius={28} className="p-12 sm:p-16 md:p-20 space-y-6 shadow-2xl">
             <h2 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight m-0">
               Ready to Master JavaScript?
             </h2>
@@ -529,13 +532,13 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
               <Link href={`/learn/day/${nextDay}`}>
                 <Button
                   size="large"
-                  className="h-12 px-9 text-sm font-bold bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none rounded-md shadow-[0_0_20px_rgba(255,99,249,0.35)]"
+                  className="h-12 px-9 text-sm font-bold bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none rounded-md shadow-[0_0_20px_rgba(255,99,249,0.35)] cursor-pointer"
                 >
                   Launch Workspace
                 </Button>
               </Link>
             </div>
-          </div>
+          </GlassSurface>
         </ScrollBlurSlide>
       </section>
     </div>

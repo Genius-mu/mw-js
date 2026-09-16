@@ -14,6 +14,7 @@ import {
   GlobalOutlined
 } from "@ant-design/icons";
 import { useLearning } from "@/context/LearningContext";
+import GlassSurface from "@/components/reactbits/GlassSurface";
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   const { user, getNextUncompletedDay } = useLearning();
@@ -68,31 +69,33 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
       {/* Main Public Content */}
       <main className="flex-1 pt-20 md:pt-24">{children}</main>
 
-      {/* Persistent Cookie Notice */}
+      {/* Persistent Cookie Notice wrapped in GlassSurface */}
       {cookieConsent && (
-        <div className="fixed bottom-4 left-4 z-50 max-w-xs p-3.5 rounded-xl bg-[#08080c] border border-white/10 shadow-xl text-xs space-y-2">
-          <div className="flex items-center justify-between gap-2">
-            <span className="font-semibold text-white text-xs">🍪 Storage Notice</span>
-            <button
-              onClick={() => setCookieConsent(false)}
-              className="text-white/40 hover:text-white bg-transparent border-none cursor-pointer p-0"
-            >
-              <CloseOutlined className="text-xs" />
-            </button>
-          </div>
-          <p className="text-white/60 text-[11px] m-0 leading-relaxed">
-            We store your 100+ Days CODA progress & notes locally in your browser.
-          </p>
-          <div className="flex items-center justify-end pt-0.5">
-            <Button
-              size="small"
-              type="primary"
-              onClick={() => setCookieConsent(false)}
-              className="bg-white text-black hover:bg-white/90 border-none font-bold text-[11px] h-6 px-2.5 rounded-[9px]"
-            >
-              Got it
-            </Button>
-          </div>
+        <div className="fixed bottom-4 left-4 z-50 max-w-xs">
+          <GlassSurface borderRadius={14} className="p-3.5 text-xs space-y-2 shadow-xl">
+            <div className="flex items-center justify-between gap-2">
+              <span className="font-semibold text-white text-xs">🍪 Storage Notice</span>
+              <button
+                onClick={() => setCookieConsent(false)}
+                className="text-white/40 hover:text-white bg-transparent border-none cursor-pointer p-0"
+              >
+                <CloseOutlined className="text-xs" />
+              </button>
+            </div>
+            <p className="text-white/60 text-[11px] m-0 leading-relaxed">
+              We store your 100+ Days CODA progress & notes locally in your browser.
+            </p>
+            <div className="flex items-center justify-end pt-0.5">
+              <Button
+                size="small"
+                type="primary"
+                onClick={() => setCookieConsent(false)}
+                className="bg-white text-black hover:bg-white/90 border-none font-bold text-[11px] h-6 px-2.5 rounded-[9px] cursor-pointer"
+              >
+                Got it
+              </Button>
+            </div>
+          </GlassSurface>
         </div>
       )}
 

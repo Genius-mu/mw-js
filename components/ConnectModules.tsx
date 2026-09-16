@@ -8,10 +8,10 @@ import {
   AppstoreOutlined,
   SyncOutlined,
   RocketOutlined,
-  ThunderboltOutlined,
   BulbFilled
 } from "@ant-design/icons";
 import { MODULES_DATA } from "@/lib/curriculum";
+import GlassSurface from "@/components/reactbits/GlassSurface";
 
 export default function ConnectModules() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
@@ -47,43 +47,47 @@ export default function ConnectModules() {
         </p>
       </div>
 
-      {/* Interactive Node Architecture Canvas (pxxl.app style) */}
+      {/* Interactive Node Architecture Canvas */}
       <div className="relative w-full max-w-4xl mx-auto flex flex-col items-center pt-4 pb-8">
-        {/* Top Row of 6 Tool/Module Icon Boxes */}
+        {/* Top Row of 6 Tool/Module Icon Boxes wrapped in GlassSurface */}
         <div className="w-full grid grid-cols-3 sm:grid-cols-6 gap-3 sm:gap-4 z-20 relative px-2">
           {MODULES_DATA.map((mod, idx) => {
             const isHovered = hoveredIdx === idx;
             return (
-              <div
+              <GlassSurface
                 key={mod.id}
-                onMouseEnter={() => setHoveredIdx(idx)}
-                onMouseLeave={() => setHoveredIdx(null)}
-                className={`relative group rounded-2xl bg-[#0c0c0f] border transition-all duration-300 p-4 h-20 sm:h-24 flex flex-col items-center justify-center cursor-pointer shadow-xl ${
-                  isHovered
-                    ? "border-[#ff63f9] scale-105 shadow-[0_0_20px_rgba(255,99,249,0.35)]"
-                    : "border-white/10 hover:border-white/30"
+                borderRadius={16}
+                interactive={true}
+                className={`relative group transition-all duration-300 h-20 sm:h-24 ${
+                  isHovered ? "border-[#ff63f9] scale-105" : ""
                 }`}
               >
-                {/* Module Number Tag */}
-                <span className="text-[10px] font-mono text-white/40 mb-1">0{idx + 1}</span>
-
-                {/* Icon */}
-                {icons[idx]}
-
-                {/* Hover Tooltip Box */}
                 <div
-                  className={`absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-lg bg-[#140824] border border-[#ff63f9]/40 text-[#ff63f9] text-[11px] font-bold whitespace-nowrap pointer-events-none transition-all duration-200 z-30 shadow-lg ${
-                    isHovered ? "opacity-100 -translate-y-1" : "opacity-0 translate-y-1"
-                  }`}
+                  onMouseEnter={() => setHoveredIdx(idx)}
+                  onMouseLeave={() => setHoveredIdx(null)}
+                  className="w-full h-full p-3 flex flex-col items-center justify-center cursor-pointer"
                 >
-                  {mod.title.replace(/^Module \d+:\s*/, "")}
+                  {/* Module Number Tag */}
+                  <span className="text-[10px] font-mono text-white/40 mb-1">0{idx + 1}</span>
+
+                  {/* Icon */}
+                  {icons[idx]}
+
+                  {/* Hover Tooltip Box */}
+                  <div
+                    className={`absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-lg bg-[#140824] border border-[#ff63f9]/40 text-[#ff63f9] text-[11px] font-bold whitespace-nowrap pointer-events-none transition-all duration-200 z-30 shadow-lg ${
+                      isHovered ? "opacity-100 -translate-y-1" : "opacity-0 translate-y-1"
+                    }`}
+                  >
+                    {mod.title.replace(/^Module \d+:\s*/, "")}
+                  </div>
                 </div>
-              </div>
+              </GlassSurface>
             );
           })}
         </div>
 
-        {/* Connecting SVG Wires with Dashed Animation & Flowing Purple Pulses */}
+        {/* Connecting SVG Wires */}
         <div className="w-full h-44 -mt-2 -mb-4 relative z-10 hidden sm:block">
           <svg className="w-full h-full" viewBox="0 0 800 180" fill="none" preserveAspectRatio="none">
             {wirePoints.map((pt, i) => {
@@ -122,19 +126,25 @@ export default function ConnectModules() {
           </svg>
         </div>
 
-        {/* Central Bottom Node: JS V8 Core Runtime */}
+        {/* Central Bottom Node: JS V8 Core Runtime wrapped in GlassSurface */}
         <div className="z-20 mt-4 sm:mt-0 relative group">
-          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-[#0a0a0d] border border-[#ff63f9]/40 shadow-[0_0_35px_rgba(255,99,249,0.35)] flex flex-col items-center justify-center text-center p-3 transition-transform duration-300 group-hover:scale-105">
-            <div className="w-10 h-10 rounded-xl bg-[#ff63f9] text-black flex items-center justify-center text-xl font-black shadow-[0_0_15px_rgba(255,99,249,0.5)] mb-1.5">
-              <BulbFilled className="text-black text-xl" />
+          <GlassSurface
+            borderRadius={24}
+            glowColor="#ff63f9"
+            className="w-24 h-24 sm:w-28 sm:h-28 shadow-[0_0_35px_rgba(255,99,249,0.35)] transition-transform duration-300 group-hover:scale-105"
+          >
+            <div className="w-full h-full p-3 flex flex-col items-center justify-center text-center">
+              <div className="w-10 h-10 rounded-xl bg-[#ff63f9] text-black flex items-center justify-center text-xl font-black shadow-[0_0_15px_rgba(255,99,249,0.5)] mb-1.5">
+                <BulbFilled className="text-black text-xl" />
+              </div>
+              <span className="text-xs font-black tracking-tight text-white leading-tight">
+                CODA CORE
+              </span>
+              <span className="text-[9px] font-mono text-[#ff63f9] mt-0.5 font-bold">
+                ECMASCRIPT
+              </span>
             </div>
-            <span className="text-xs font-black tracking-tight text-white leading-tight">
-              CODA CORE
-            </span>
-            <span className="text-[9px] font-mono text-[#ff63f9] mt-0.5 font-bold">
-              ECMASCRIPT
-            </span>
-          </div>
+          </GlassSurface>
         </div>
       </div>
 
