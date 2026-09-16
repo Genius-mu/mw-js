@@ -280,14 +280,14 @@ export default function DayLearningPage() {
         </div>
         <div className="relative group">
           <CodeBlock code={lesson.codeSnippet} />
-          <Button
-            size="small"
-            icon={<CopyOutlined />}
+          <button
+            type="button"
             onClick={() => handleCopySnippet(lesson.codeSnippet, "example-snippet")}
-            className="absolute top-3.5 right-3.5 text-xs font-medium bg-white/10 hover:bg-white/20 text-white border-none rounded-md px-3 py-1 cursor-pointer z-10"
+            className="absolute top-3.5 right-3.5 z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white/90 bg-[#12121e]/90 hover:bg-[#ff63f9]/20 border border-white/15 hover:border-[#ff63f9]/50 hover:text-[#ff63f9] shadow-md hover:shadow-[0_0_15px_rgba(255,99,249,0.3)] backdrop-blur-md transition-all cursor-pointer active:scale-95"
           >
-            {copiedId === "example-snippet" ? "Copied!" : "Copy Code"}
-          </Button>
+            <CopyOutlined className={copiedId === "example-snippet" ? "text-emerald-400" : "text-[#ff63f9]"} />
+            <span>{copiedId === "example-snippet" ? "Copied!" : "Copy Code"}</span>
+          </button>
         </div>
       </div>
 
