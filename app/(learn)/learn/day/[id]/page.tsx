@@ -243,401 +243,246 @@ export default function DayLearningPage() {
   const currentProjects = getProjectsForLesson();
 
   return (
-    <div className="space-y-8 sm:space-y-10 pb-16">
-      {/* Header Banner */}
-      <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-5 sm:p-6">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
-          <div className="space-y-1.5">
-            <div className="flex flex-wrap items-center gap-2.5 mb-2">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#ff63f9]/10 text-[#ff63f9] border border-[#ff63f9]/30 shadow-[0_0_12px_rgba(255,99,249,0.15)]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#ff63f9] animate-pulse" />
-                {lesson.module}
-              </span>
-              <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${
-                isCompleted 
-                  ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30" 
-                  : "bg-amber-500/10 text-amber-400 border border-amber-500/30"
-              }`}>
-                {isCompleted ? <><CheckCircleFilled /> Completed</> : "In Progress"}
-              </span>
-            </div>
-            <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight m-0 text-white leading-tight">
-              Day {lesson.day}: {lesson.title}
-            </h1>
-            <p className="text-xs sm:text-sm mt-1 m-0 text-white/70 leading-relaxed max-w-2xl">
-              {lesson.description}
-            </p>
-          </div>
+    <div className="space-y-6 sm:space-y-8 pb-16 max-w-5xl mx-auto">
+      {/* 1. TOP HEADER BANNER: Title + Detailed Explanatory Paragraph */}
+      <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-6 sm:p-8 space-y-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight m-0 text-white leading-tight">
+            Day {lesson.day}: {lesson.title}
+          </h1>
+          <SpecularButton
+            size="sm"
+            radius={10}
+            tint={isCompleted ? "#181824" : "#ff63f9"}
+            tintOpacity={0.9}
+            lineColor="#ffffff"
+            baseColor={isCompleted ? "#404050" : "#ff63f9"}
+            textColor={isCompleted ? "#ffffff" : "#000000"}
+            icon={isCompleted ? <CheckCircleFilled className="text-white" /> : <CheckCircleOutlined />}
+            onClick={handleToggleComplete}
+          >
+            {isCompleted ? "Marked Completed" : "Mark as Completed"}
+          </SpecularButton>
+        </div>
+        <p className="text-sm sm:text-base text-white/80 leading-relaxed font-normal m-0 pt-1">
+          {lesson.description} {lesson.summaryNotes.join(" ")}
+        </p>
+      </div>
 
-          <div className="flex items-center gap-3 shrink-0 pt-1 md:pt-0">
-            <SpecularButton
-              size="sm"
-              radius={10}
-              tint={isCompleted ? "#181824" : "#ff63f9"}
-              tintOpacity={0.9}
-              lineColor="#ffffff"
-              baseColor={isCompleted ? "#404050" : "#ff63f9"}
-              textColor={isCompleted ? "#ffffff" : "#000000"}
-              icon={isCompleted ? <CheckCircleFilled className="text-white" /> : <CheckCircleOutlined />}
-              onClick={handleToggleComplete}
-            >
-              {isCompleted ? "Marked Completed" : "Mark as Completed"}
-            </SpecularButton>
-          </div>
+      {/* 2. FOUR WELL-STRUCTURED BOXES */}
+
+      {/* BOX 1: Example & Syntax Execution */}
+      <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-6 sm:p-8 space-y-4">
+        <div className="flex items-center justify-between border-b border-white/10 pb-3">
+          <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2.5 m-0">
+            <ThunderboltOutlined className="text-[#ff63f9]" /> Example & Syntax Execution
+          </h2>
+        </div>
+        <div className="relative group">
+          <CodeBlock code={lesson.codeSnippet} />
+          <Button
+            size="small"
+            icon={<CopyOutlined />}
+            onClick={() => handleCopySnippet(lesson.codeSnippet, "example-snippet")}
+            className="absolute top-3.5 right-3.5 text-xs font-medium bg-white/10 hover:bg-white/20 text-white border-none rounded-md px-3 py-1 cursor-pointer z-10"
+          >
+            {copiedId === "example-snippet" ? "Copied!" : "Copy Code"}
+          </Button>
         </div>
       </div>
 
-      {/* Main Grid: Concept Blueprint + Sidebar Specs */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Concept Deep Dive Card (Col-span 2) */}
-        <div className="lg:col-span-2">
-          <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-5 sm:p-6 space-y-5 relative overflow-hidden">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3.5">
-              <div className="flex items-center gap-2.5">
-                <ThunderboltOutlined className="text-[#ff63f9] text-base" />
-                <span className="font-extrabold text-sm sm:text-base text-white">Concept Architecture & Code Blueprint</span>
-              </div>
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-white/10 text-white/90 border border-white/10">ES2026 Core</span>
-            </div>
-
-            <p className="text-xs sm:text-sm text-white/80 leading-relaxed m-0">
-              {lesson.description}
-            </p>
-
-            {/* Code Snippet Box */}
-            <div className="relative group">
-              <CodeBlock code={lesson.codeSnippet} />
-              <Button
-                size="small"
-                icon={<CopyOutlined />}
-                onClick={() => handleCopySnippet(lesson.codeSnippet, "main-snippet")}
-                className="absolute top-3.5 right-3.5 text-[11px] font-medium bg-white/10 hover:bg-white/20 text-white border-none rounded-md cursor-pointer px-2.5 py-0.5 z-10"
-              >
-                {copiedId === "main-snippet" ? "Copied!" : "Copy"}
-              </Button>
-            </div>
-
-            <div className="flex items-center justify-between gap-3 pt-2 text-xs text-white/60 border-t border-white/10">
-              <span className="flex items-center gap-2 text-xs text-white/80">
-                <BulbOutlined className="text-[#ff63f9] text-sm shrink-0" />
-                <span><strong>Key takeaway:</strong> {lesson.summaryNotes[0]}</span>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Quick Lesson Specs Sidebar (Col-span 1) */}
-        <div>
-          <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-5 sm:p-6 space-y-5">
-            <span className="font-extrabold text-sm flex items-center gap-2.5 text-white border-b border-white/10 pb-3">
-              <BookOutlined className="text-[#ff63f9]" /> Lesson Specs
-            </span>
-            <div className="space-y-4 text-xs">
-              <div>
-                <span className="text-white/40 font-semibold uppercase text-[10px] tracking-wider">Lesson Concept:</span>
-                <div className="font-bold text-sm text-white mt-1">{lesson.title}</div>
-              </div>
-
-              <div>
-                <span className="text-white/40 font-semibold uppercase text-[10px] tracking-wider">Module Group:</span>
-                <div className="font-medium text-xs text-white/80 mt-1">{lesson.module}</div>
-              </div>
-
-              <div className="pt-2 border-t border-white/10">
-                <SpecularButton
-                  size="md"
-                  radius={10}
-                  tint="#ff63f9"
-                  tintOpacity={0.9}
-                  lineColor="#ffffff"
-                  baseColor="#ff63f9"
-                  textColor="#000000"
-                  icon={<RocketOutlined />}
-                  onClick={handleNextDay}
-                  className="w-full justify-center"
-                >
-                  {dayId < totalDays ? "Complete & Go to Next Day" : "Claim Certificate 🎉"}
-                </SpecularButton>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 2 REAL-WORLD PROJECTS SECTION */}
-      <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-6 sm:p-8 space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
-          <div>
-            <h2 className="text-lg font-extrabold text-white flex items-center gap-2.5 m-0">
-              <FolderOpenOutlined className="text-[#ff63f9]" /> Real-World Projects (Day {lesson.day})
-            </h2>
-            <p className="text-xs text-white/60 m-0 mt-1 leading-relaxed">
-              Practice today's core concept with hands-on examples.
-            </p>
-          </div>
-          <Tag color="rgba(255, 99, 249, 0.15)" className="text-[#ff63f9] border-none font-bold text-xs px-3 py-1 self-start sm:self-auto">
-            2 Practical Projects
-          </Tag>
+      {/* BOX 2: Interactive Practice Sandbox & Execution */}
+      <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-6 sm:p-8 space-y-4">
+        <div className="border-b border-white/10 pb-3">
+          <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2.5 m-0">
+            <CodeOutlined className="text-[#ff63f9]" /> Interactive Practice Sandbox & Execution
+          </h2>
+          <p className="text-xs sm:text-sm text-white/70 m-0 mt-1.5 leading-relaxed">{lesson.exercise.prompt}</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {currentProjects.map((proj, idx) => (
-            <div key={idx} className="bg-[#080810] border border-white/10 rounded-xl p-5 sm:p-6 space-y-4 flex flex-col justify-between">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="font-bold text-sm text-white">{proj.title}</span>
-                  <Tag className="bg-white/10 text-white text-[10px] border-none px-2 py-0.5">Project #{idx + 1}</Tag>
-                </div>
-                <p className="text-xs text-white/70 leading-relaxed m-0">{proj.description}</p>
-
-                <div className="relative pt-1">
-                  <CodeBlock code={proj.code} className="max-h-48" />
-                </div>
-
-                <div className="text-xs text-white/60 bg-white/[0.04] p-3 rounded-lg border border-white/5">
-                  💡 <strong>Outcome:</strong> {proj.outcome}
-                </div>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-white/10">
-                <SpecularButton
-                  size="sm"
-                  radius={10}
-                  tint="#ff63f9"
-                  tintOpacity={0.85}
-                  lineColor="#ffffff"
-                  baseColor="#ff63f9"
-                  textColor="#000000"
-                  icon={<PlayCircleOutlined />}
-                  onClick={() => {
-                    setUserCode(proj.code);
-                    handleRunCode(proj.code);
-                  }}
-                >
-                  Run & Test Project #{idx + 1}
-                </SpecularButton>
-                <SpecularButton
-                  size="sm"
-                  radius={10}
-                  tint="#181824"
-                  tintOpacity={0.8}
-                  lineColor="#ffffff"
-                  baseColor="#333344"
-                  textColor="#ffffff"
-                  icon={<CopyOutlined />}
-                  onClick={() => handleCopySnippet(proj.code, `proj-${idx}`)}
-                >
-                  {copiedId === `proj-${idx}` ? "Copied!" : "Copy Code"}
-                </SpecularButton>
-              </div>
+          {/* Code Editor Area */}
+          <div className="space-y-3 flex flex-col">
+            <span className="text-xs font-bold text-white">JavaScript Editor</span>
+            <CodeEditor
+              value={userCode}
+              onChange={(val) => setUserCode(val)}
+            />
+            <div className="flex flex-wrap items-center gap-3 pt-1">
+              <SpecularButton
+                size="md"
+                radius={10}
+                tint="#ff63f9"
+                tintOpacity={0.9}
+                lineColor="#ffffff"
+                baseColor="#ff63f9"
+                textColor="#000000"
+                icon={<PlayCircleOutlined />}
+                onClick={() => handleRunCode()}
+              >
+                Run Code & Test Output
+              </SpecularButton>
+              <SpecularButton
+                size="md"
+                radius={10}
+                tint="#181824"
+                tintOpacity={0.8}
+                lineColor="#ffffff"
+                baseColor="#333344"
+                textColor="#ffffff"
+                icon={<CodeOutlined />}
+                onClick={() => setSolutionModalOpen(true)}
+              >
+                View Solution
+              </SpecularButton>
             </div>
-          ))}
+          </div>
+
+          {/* Terminal Console Output */}
+          <div className="space-y-3 flex flex-col">
+            <span className="text-xs font-bold text-white">Terminal Output (console.log)</span>
+            <div className="w-full h-64 sm:h-72 p-4 rounded-xl bg-[#08080d] text-white/90 font-mono text-xs sm:text-sm border border-white/10 overflow-y-auto space-y-1.5 leading-relaxed">
+              {consoleOutput.length === 0 ? (
+                <span className="text-white/30 italic">Click "Run Code" to view console output...</span>
+              ) : (
+                consoleOutput.map((line, idx) => (
+                  <div
+                    key={idx}
+                    className={
+                      line.startsWith("[ERROR]")
+                        ? "text-red-400 font-medium"
+                        : line.startsWith("=>")
+                        ? "text-white/40 italic"
+                        : "text-white/90"
+                    }
+                  >
+                    {line}
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Tabs: Documentation, Interactive Code Practice & Personal Notes */}
-      <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-6 sm:p-8 space-y-6">
-        <Tabs
-          defaultActiveKey="sandbox"
-          items={[
-            {
-              key: "sandbox",
-              label: (
-                <span className="font-semibold text-xs sm:text-sm flex items-center gap-2.5 text-white py-1">
-                  <CodeOutlined className="text-[#ff63f9]" /> Interactive Exercise & Sandbox
-                </span>
-              ),
-              children: (
-                <div className="space-y-6 pt-4">
-                  {/* Exercise Prompt */}
-                  <Alert
-                    type="warning"
-                    showIcon
-                    icon={<TrophyOutlined className="text-[#ff63f9] text-base" />}
-                    message={<span className="font-bold text-xs sm:text-sm text-white">Micro-Exercise Challenge</span>}
-                    description={<p className="text-xs sm:text-sm m-0 mt-1.5 text-white/80 leading-relaxed">{lesson.exercise.prompt}</p>}
-                    className="bg-[#000000] border-white/10 p-4 sm:p-5 rounded-xl"
-                  />
-
-                  {/* Code Textarea & Console Output Grid */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-                    {/* Code Editor Area */}
-                    <div className="space-y-3 flex flex-col">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-white">JavaScript Editor</span>
-                      </div>
-
-                      <CodeEditor
-                        value={userCode}
-                        onChange={(val) => setUserCode(val)}
-                      />
-
-                      <div className="flex flex-wrap items-center gap-3 pt-2">
-                        <SpecularButton
-                          size="md"
-                          radius={12}
-                          tint="#ff63f9"
-                          tintOpacity={0.9}
-                          lineColor="#ffffff"
-                          baseColor="#ff63f9"
-                          textColor="#000000"
-                          icon={<PlayCircleOutlined />}
-                          onClick={() => handleRunCode()}
-                        >
-                          Run Code & Test Output
-                        </SpecularButton>
-                        <SpecularButton
-                          size="md"
-                          radius={12}
-                          tint="#181824"
-                          tintOpacity={0.8}
-                          lineColor="#ffffff"
-                          baseColor="#333344"
-                          textColor="#ffffff"
-                          icon={<CodeOutlined />}
-                          onClick={() => setSolutionModalOpen(true)}
-                        >
-                          View Solution
-                        </SpecularButton>
-                      </div>
-                    </div>
-
-                    {/* Terminal Console Output */}
-                    <div className="space-y-3 flex flex-col">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-white">Terminal Output (console.log)</span>
-                      </div>
-                      <div className="w-full h-64 sm:h-72 p-4 rounded-xl bg-[#000000] text-white/90 font-mono text-xs sm:text-sm border border-white/10 overflow-y-auto space-y-1.5 leading-relaxed">
-                        {consoleOutput.length === 0 ? (
-                          <span className="text-white/30 italic">Click "Run Code" or press Ctrl+Enter to view console output...</span>
-                        ) : (
-                          consoleOutput.map((line, idx) => (
-                            <div
-                              key={idx}
-                              className={
-                                line.startsWith("[ERROR]")
-                                  ? "text-red-400 font-medium"
-                                  : line.startsWith("=>")
-                                  ? "text-white/40 italic"
-                                  : "text-white/90"
-                              }
-                            >
-                              {line}
-                            </div>
-                          ))
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )
-            },
-            {
-              key: "docs",
-              label: (
-                <span className="font-semibold text-xs sm:text-sm flex items-center gap-2.5 text-white py-1">
-                  <BookOutlined className="text-white/60" /> Lesson Takeaways & Notes
-                </span>
-              ),
-              children: (
-                <div className="space-y-6 pt-4">
-                  <div>
-                    <h3 className="text-sm sm:text-base font-bold mb-3 flex items-center gap-2.5 text-white">
-                      <BulbOutlined className="text-[#ff63f9]" /> Key Concept Takeaways
-                    </h3>
-                    <ul className="space-y-2 text-xs sm:text-sm list-disc pl-5 text-white/80 leading-relaxed">
-                      {lesson.summaryNotes.map((note, i) => (
-                        <li key={i} className="text-white/70">
-                          {note}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                </div>
-              )
-            },
-            {
-              key: "notes",
-              label: (
-                <span className="font-semibold text-xs sm:text-sm flex items-center gap-2.5 text-white py-1">
-                  <FileTextOutlined className="text-white/60" /> Personal Study Notes
-                </span>
-              ),
-              children: (
-                <div className="space-y-5 pt-4">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <div>
-                      <h3 className="text-sm sm:text-base font-bold m-0 flex items-center gap-2 text-white">
-                        <FileTextOutlined className="text-[#ff63f9]" /> Personal Notes for Day {lesson.day}
-                      </h3>
-                      <p className="text-xs text-white/50 m-0 mt-1">Write down key observations or code snippets. Saved automatically to your browser.</p>
-                    </div>
-                    <SpecularButton
-                      size="sm"
-                      radius={10}
-                      tint="#ff63f9"
-                      tintOpacity={0.9}
-                      lineColor="#ffffff"
-                      baseColor="#ff63f9"
-                      textColor="#000000"
-                      icon={<SaveOutlined />}
-                      onClick={handleSaveNote}
-                    >
-                      {noteSaved ? "Saved!" : "Save Notes"}
-                    </SpecularButton>
-                  </div>
-
-                  <TextArea
-                    rows={8}
-                    value={noteText}
-                    onChange={(e) => setNoteText(e.target.value)}
-                    placeholder="Write your study notes here..."
-                    className="font-sans text-xs sm:text-sm rounded-xl p-4 bg-[#000000] text-white border-white/10 focus:ring-1 focus:ring-[#ff63f9]/50"
-                  />
-                </div>
-              )
-            }
-          ]}
-        />
-      </div>
-
-      {/* Navigation Footer */}
-      <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-4 sm:p-6">
-        <div className="flex items-center justify-between gap-4">
+      {/* BOX 3: Project 1 & Execution */}
+      <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-6 sm:p-8 space-y-4">
+        <div className="flex items-center justify-between border-b border-white/10 pb-3">
+          <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2.5 m-0">
+            <FolderOpenOutlined className="text-[#ff63f9]" /> {currentProjects[0].title} & Execution
+          </h2>
+        </div>
+        <p className="text-xs sm:text-sm text-white/70 leading-relaxed m-0">{currentProjects[0].description}</p>
+        <CodeBlock code={currentProjects[0].code} />
+        <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-white/10">
           <SpecularButton
-            size="md"
-            radius={12}
-            disabled={dayId <= 1}
+            size="sm"
+            radius={10}
+            tint="#ff63f9"
+            tintOpacity={0.85}
+            lineColor="#ffffff"
+            baseColor="#ff63f9"
+            textColor="#000000"
+            icon={<PlayCircleOutlined />}
+            onClick={() => {
+              setUserCode(currentProjects[0].code);
+              handleRunCode(currentProjects[0].code);
+            }}
+          >
+            Run & Test Project #1
+          </SpecularButton>
+          <SpecularButton
+            size="sm"
+            radius={10}
             tint="#181824"
             tintOpacity={0.8}
             lineColor="#ffffff"
             baseColor="#333344"
             textColor="#ffffff"
-            icon={<LeftOutlined />}
-            onClick={handlePrevDay}
+            icon={<CopyOutlined />}
+            onClick={() => handleCopySnippet(currentProjects[0].code, "proj-0")}
           >
-            Previous Day
+            {copiedId === "proj-0" ? "Copied!" : "Copy Code"}
           </SpecularButton>
+        </div>
+      </div>
 
-          <div className="text-xs sm:text-sm text-white/60 font-semibold hidden sm:block">
-            Day {dayId} of {totalDays}
-          </div>
-
+      {/* BOX 4: Project 2 & Execution */}
+      <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-6 sm:p-8 space-y-4">
+        <div className="flex items-center justify-between border-b border-white/10 pb-3">
+          <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2.5 m-0">
+            <FolderOpenOutlined className="text-[#ff63f9]" /> {currentProjects[1].title} & Execution
+          </h2>
+        </div>
+        <p className="text-xs sm:text-sm text-white/70 leading-relaxed m-0">{currentProjects[1].description}</p>
+        <CodeBlock code={currentProjects[1].code} />
+        <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-white/10">
           <SpecularButton
-            size="md"
-            radius={12}
+            size="sm"
+            radius={10}
             tint="#ff63f9"
-            tintOpacity={0.9}
+            tintOpacity={0.85}
             lineColor="#ffffff"
             baseColor="#ff63f9"
             textColor="#000000"
-            icon={<RightOutlined />}
-            onClick={handleNextDay}
+            icon={<PlayCircleOutlined />}
+            onClick={() => {
+              setUserCode(currentProjects[1].code);
+              handleRunCode(currentProjects[1].code);
+            }}
           >
-            {dayId < totalDays ? "Next Day" : "Claim Certificate 🎉"}
+            Run & Test Project #2
+          </SpecularButton>
+          <SpecularButton
+            size="sm"
+            radius={10}
+            tint="#181824"
+            tintOpacity={0.8}
+            lineColor="#ffffff"
+            baseColor="#333344"
+            textColor="#ffffff"
+            icon={<CopyOutlined />}
+            onClick={() => handleCopySnippet(currentProjects[1].code, "proj-1")}
+          >
+            {copiedId === "proj-1" ? "Copied!" : "Copy Code"}
           </SpecularButton>
         </div>
+      </div>
+
+      {/* 3. NAVIGATION FOOTER */}
+      <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-4 sm:p-6 flex items-center justify-between gap-4">
+        <SpecularButton
+          size="md"
+          radius={10}
+          disabled={dayId <= 1}
+          tint="#181824"
+          tintOpacity={0.8}
+          lineColor="#ffffff"
+          baseColor="#333344"
+          textColor="#ffffff"
+          icon={<LeftOutlined />}
+          onClick={handlePrevDay}
+        >
+          Previous Day
+        </SpecularButton>
+
+        <div className="text-xs sm:text-sm text-white/60 font-semibold hidden sm:block">
+          Day {dayId} of {totalDays}
+        </div>
+
+        <SpecularButton
+          size="md"
+          radius={10}
+          tint="#ff63f9"
+          tintOpacity={0.9}
+          lineColor="#ffffff"
+          baseColor="#ff63f9"
+          textColor="#000000"
+          icon={<RightOutlined />}
+          onClick={handleNextDay}
+        >
+          {dayId < totalDays ? "Next Day" : "Claim Certificate 🎉"}
+        </SpecularButton>
       </div>
 
       {/* Solution Modal */}
