@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { BulbOutlined } from "@ant-design/icons";
 import { useLearning } from "@/context/LearningContext";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
@@ -16,8 +17,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
     >
       <div className="mb-6">
         <Link href="/" className="flex items-center gap-3 no-underline">
-          <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-white text-2xl font-bold border border-white/15 shadow-[0_0_18px_rgba(255,99,249,0.35)]">
-            💡
+          <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center text-white text-xl font-bold border border-white/15 shadow-[0_0_18px_rgba(255,99,249,0.35)]">
+            <BulbOutlined className="text-[#ff63f9]" />
           </div>
           <div className="text-left">
             <div className="font-extrabold text-xl tracking-tight">
