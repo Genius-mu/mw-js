@@ -1550,3 +1550,140 @@ export const MODULES_DATA: ModuleGroup[] = [
     days: CURRICULUM_DATA.filter((d) => d.moduleId === "advanced-es6")
   }
 ];
+
+export function getComprehensiveExplanation(lesson: LessonDay): string {
+  switch (lesson.id) {
+    case 1:
+      return "Comments in JavaScript provide essential inline and block-level documentation to explain code logic, highlight intent, and assist during debugging. Inline single-line comments begin with two forward slashes (//) to annotate specific lines of code, while multi-line block comments start with /* and end with */ to encapsulate multi-paragraph documentation. During execution, the JavaScript engine completely ignores comments during code compilation and tokenization, ensuring zero runtime performance penalty while keeping your codebase maintainable and collaborative.";
+
+    case 2:
+      return "Variables serve as named memory storage containers in JavaScript that hold data values for reference, manipulation, and state management throughout your application. Variable declarations are managed using three distinct keywords: var (function-scoped, hoisted to the top of its scope), let (block-scoped and reassignable), and const (block-scoped and immutable identifier binding). JavaScript categorizes data into 7 primitive types and reference objects: String (textual sequences), Number (integers and floating-point decimals), Boolean (logical true or false), Undefined (declared variables lacking an assigned value), Null (intentional absence of value), Symbol (unique and immutable primitive keys), BigInt (arbitrary precision large integers), and Object (complex key-value reference structures).";
+
+    case 3:
+      return "The assignment operator (=) is used to store values inside variables by evaluating code from right to left. Unlike mathematical equality, the single equals sign takes the fully evaluated expression on its right-hand side and assigns the resulting value into the memory location specified by the variable on its left. Uninitialized variables automatically hold an initial value of undefined until an explicit assignment takes place, and primitive assignments copy raw values directly between variables.";
+
+    case 4:
+      return "Managing variable lifecycle requires understanding uninitialized variable states, strict identifier case sensitivity, and standardized naming conventions. Attempting mathematical calculations on uninitialized variables that hold undefined yields NaN (Not a Number), signaling invalid mathematical operations. Furthermore, JavaScript variable names are strictly case-sensitive, meaning myVar, MyVar, and MYVAR point to entirely distinct memory locations. Developers adhere to standard camelCase formatting (studlyCapVar) to maintain clean, readable, and idiomatic JavaScript code across teams.";
+
+    case 5:
+      return "Arithmetic operators enable basic mathematical computations and numeric variable transformations. Standard binary operators include Addition (+), Subtraction (-), Multiplication (*), and Division (/), following standard operator precedence rules. Additionally, JavaScript provides unary operators: the increment operator (++) increases a numeric variable by 1, while the decrement operator (--) decreases a numeric variable by 1, offering shorthand syntax for updating counter variables.";
+
+    case 6:
+      return "Advanced numeric calculations involve floating-point decimals, the remainder (modulo) operator, and compound assignment shorthand. Floating-point numbers represent fractional decimal values. The remainder operator (%) calculates the integer remainder left over after dividing one number by another, commonly used to test number parity (even vs odd) or constrain values within cyclical boundaries. Compound assignment operators (+=, -=, *=, /=) combine arithmetic evaluation with variable reassignment in a single concise operation.";
+
+    case 7:
+      return "String variables store textual data as sequences of characters enclosed within double quotes (\"), single quotes ('), or backticks (`). Special characters inside strings are escaped using the backslash (\\) symbol—such as \\\" for quotes, \\n for line breaks, \\t for tab indents, and \\\\ for literal backslashes. Text fragments can be concatenated (joined together) using the binary addition operator (+) or appended incrementally using the compound string addition operator (+=).";
+
+    case 8:
+      return "Strings can be inspected and indexed to extract specific character data using zero-indexed bracket notation and the .length property. The .length property returns the total character count of a string. Individual characters are accessed via bracket notation (str[0] for the first character, str[str.length - 1] for the final character). Crucially, JavaScript strings are immutable—individual characters cannot be altered directly via index assignment (str[0] = 'X' fails), requiring full string re-assignment to modify text content.";
+
+    case 9:
+      return "Arrays are ordered collections of data items enclosed in square brackets ([...]), allowing developers to store multiple values within a single variable name. Arrays can contain elements of any data type—including strings, numbers, booleans, objects, and other arrays. Multi-dimensional (nested) arrays contain sub-arrays as elements, establishing matrix-like structures and hierarchical lists for organized data representation.";
+
+    case 10:
+      return "Array elements are accessed and mutated using zero-indexed bracket notation. Unlike strings, JavaScript arrays are mutable—their items can be directly modified by assigning a new value to a specific index (arr[0] = 99). Accessing elements in multi-dimensional arrays involves chaining bracket indices (matrix[row][col]), where the first bracket selects the inner sub-array and the second bracket selects the element within that sub-array.";
+
+    case 11:
+      return "JavaScript provides built-in array modification methods for pushing, popping, shifting, and unshifting elements. The push() method appends one or more items to the end of an array, while pop() removes and returns the last item. To work at the beginning of an array, shift() removes and returns the first element (shifting remaining indices down), whereas unshift() prepends new elements to the front of the array.";
+
+    case 12:
+      return "Boolean values represent logical truth states, consisting exclusively of true or false. Conditional if statements use booleans to control program execution flow—running a specified block of code inside curly braces {} only when the given condition evaluates to true (or a truthy value), and bypassing the block when the condition evaluates to false.";
+
+    case 13:
+      return "Equality operators compare values with key differences in type coercion. The loose equality operator (==) performs implicit type coercion, converting operand data types (e.g. string '3' to number 3) before comparing values. In contrast, the strict equality operator (===) evaluates both value AND data type without coercion, returning false if types differ. Modern JavaScript development strongly recommends default usage of strict equality (===) and strict inequality (!==).";
+
+    case 14:
+      return "Logical operators combine multiple boolean conditions to form complex conditional evaluations. The logical AND operator (&&) requires both the left and right operands to evaluate to true for the overall expression to pass. The logical OR operator (||) requires at least one operand to evaluate to true. Both operators utilize short-circuit evaluation, halting evaluation as soon as the outcome is deterministically known.";
+
+    case 15:
+      return "Chaining conditional logic allows programs to evaluate multiple sequential branches using if, else if, and else statements. The else if statement tests secondary alternative conditions when preceding conditions evaluate to false, while the final else block serves as a default catch-all fallback. Conditions are executed in strict top-to-bottom sequence, making logical ordering essential when checking range thresholds.";
+
+    case 16:
+      return "Switch statements replace verbose if-else if chains when comparing a single expression against multiple fixed values. A switch block evaluates an input against defined case labels using strict equality (===). The break keyword halts switch execution to prevent fall-through into subsequent cases, while the default label provides a fallback case executed when no matching cases are matched.";
+
+    case 17:
+      return "Functions encapsulate reusable blocks of code that perform specific tasks, preventing code duplication across applications. Defined using the function keyword followed by a unique name, parameters, and a code body inside {} blocks, functions are executed (invoked) by writing the function name followed by parentheses (fnName()).";
+
+    case 18:
+      return "Functions can accept dynamic inputs to process data flexibly using parameters and arguments. Parameters are placeholder variables specified inside the function declaration signature (function greet(name)). Arguments are the concrete data values passed into the function when it is invoked (greet('Alice')), mapping sequentially to parameter variables during execution.";
+
+    case 19:
+      return "Scope defines the accessibility and visibility region of variables in JavaScript. Global scope applies to variables declared outside any function, making them accessible everywhere. Local (function) scope restricts variables declared inside a function body so they exist only during function execution. Variable shadowing occurs when a local variable shares the same identifier as a global variable, overriding the global value within that local scope.";
+
+    case 20:
+      return "Functions return calculated values back to their call site using the return keyword. Executing a return statement immediately passes the specified value back to the caller and terminates function execution. Functions that complete execution without encountering an explicit return statement automatically return undefined by default.";
+
+    case 21:
+      return "A Queue is an abstract linear data structure operating on a First-In, First-Out (FIFO) principle, where new elements enter at the back and old elements exit from the front. In JavaScript, queues are implemented using array methods: push() enqueues items at the array tail, while shift() dequeues and returns the item at the array head.";
+
+    case 22:
+      return "Clean conditional function design emphasizes direct boolean returns and early exit guard clauses. Comparison expressions (a === b) evaluate directly to boolean true or false, eliminating redundant if (condition) return true; else return false; blocks. Guard clauses utilize return early patterns to check and exit on invalid inputs or edge cases at the start of a function, keeping core execution logic clean and unnested.";
+
+    case 23:
+      return "JavaScript Objects store collections of related data using key-value pairs enclosed in curly braces ({}). Keys (properties) represent property names, while values hold data or functions. Properties are accessed using dot notation (obj.propName) when keys are valid identifier strings without spaces, or bracket notation (obj['prop name']) when property keys contain spaces, hyphens, or dynamic variable references.";
+
+    case 24:
+      return "Objects are mutable data structures whose property values can be updated, inserted, or removed at runtime. Updating a property uses simple assignment (obj.name = 'New Name'). Assigning a value to a non-existent property name automatically inserts the key-value pair into the object. To remove a property key and its value entirely, use the delete operator (delete obj.oldProp).";
+
+    case 25:
+      return "Objects function as efficient O(1) dictionary lookup tables, serving as performant alternatives to long switch or if-else statements. Property existence on an object is checked using the built-in .hasOwnProperty('key') method, which returns true if the object directly owns the specified key without inspecting prototype inheritance.";
+
+    case 26:
+      return "Complex data modeling involves nesting objects within objects and embedding arrays inside object structures. Traversing nested data requires chaining dot notation, bracket notation, and array index accessors (user.address.street or data[0].tags[1]) to cleanly navigate deep JSON structures.";
+
+    case 27:
+      return "Working with dynamic object databases requires conditional mutations, handling optional nested properties, and safe array initialization. Practiced in the classic Record Collection algorithm, developers check whether property values are empty to perform delete operations, or initialize array properties (obj[id].tracks = obj[id].tracks || []) prior to pushing new items.";
+
+    case 28:
+      return "The while loop repeatedly executes a block of code inside {} as long as a specified boolean condition evaluates to true. Loop control variables must be updated inside the loop body (e.g. incrementing i++ or decrementing i--) to guarantee the condition eventually evaluates to false, preventing catastrophic infinite loop freezes.";
+
+    case 29:
+      return "The for loop provides a structured control header for iterating a specific number of times. Composed of three optional expressions separated by semicolons—initialization (let i = 0), condition (i < 10), and final expression (i++)—for loops allow precise step increments, backward counting (i--), or custom skips (i += 2).";
+
+    case 30:
+      return "Traversing arrays using for loops is a core paradigm for data processing. By initializing a loop counter at i = 0 and testing i < array.length, the loop visits every sequential index from the first element to the last, allowing summation, transformation, and filtering of array data.";
+
+    case 31:
+      return "Nested for loops iterate over multi-dimensional arrays by utilizing an outer loop for rows and an inner loop for sub-array columns. Additionally, do...while loops guarantee that the code block executes AT LEAST ONCE before evaluating the termination condition at the bottom.";
+
+    case 32:
+      return "Math.random() generates pseudo-random floating-point numbers in the range [0, 1) (inclusive of 0, exclusive of 1). Combined with Math.floor() (which rounds decimals down to the nearest integer), developers generate random whole integers within specified ranges using the formula Math.floor(Math.random() * (max - min + 1)) + min.";
+
+    case 33:
+      return "The parseInt() function parses string representations of numbers and converts them into integer values. parseInt() accepts an optional second argument known as the radix (base num system), which explicitly specifies whether to parse numbers in decimal (radix 10), binary (radix 2), hexadecimal (radix 16), or octal (radix 8).";
+
+    case 34:
+      return "The ternary operator (conditional operator) provides a concise one-line shorthand for if-else expressions using the syntax condition ? expressionIfTrue : expressionIfFalse. Ternaries act as inline expressions, making them ideal for conditional assignments and template string interpolations, and can be nested for multi-condition branching.";
+
+    case 35:
+      return "Modern JavaScript variable declaration distinguishes between var, let, and const. While var is function-scoped, let and const enforce strict block scope ({} boundaries). const prevents variable identifier reassignment, though objects and arrays assigned to const remain mutable; complete immutability is enforced using Object.freeze(obj).";
+
+    case 36:
+      return "ES6 arrow functions provide concise syntax for function expressions using () => {}. Single-line arrow functions feature implicit returns, automatically returning the evaluated expression without requiring explicit return keywords. Default parameters ((param = defaultValue)) allow functions to specify fallback values when arguments are omitted.";
+
+    case 37:
+      return "The rest operator (...args) gathers an arbitrary number of incoming function parameters into a true Array instance inside the function body. Conversely, the spread operator (...array) expands array elements or object properties in-place, allowing clean array copying, merging, and passing array elements into function calls.";
+
+    case 38:
+      return "Destructuring assignment provides clean syntax to unpack values from objects and positional elements from arrays directly into distinct variables. Object destructuring (const { name, age } = person) extracts properties by key name, array destructuring (const [a, b] = list) extracts items by index position, and array destructuring facilitates one-line variable swapping ([x, y] = [y, x]).";
+
+    case 39:
+      return "Template literals simplify string formatting using backtick delimiters (`...`) instead of quote marks. Template literals support embedded expression interpolation using ${expression} syntax, allowing clean variable insertion and preserving multi-line text formatting without requiring explicit escape characters like \\n.";
+
+    case 40:
+      return "ES6 introduces object literal enhancements including property value shorthand and concise declarative method syntax. Property shorthand allows writing { name, age } when variable names match key identifiers. Declarative method shorthand permits defining object methods directly (greet() { ... }) without writing the function keyword.";
+
+    case 41:
+      return "ES6 class syntax provides clean syntactic sugar over prototype-based object inheritance. Classes define object structure blueprints, featuring a constructor() method that executes automatically when instantiating new object instances using the new keyword.";
+
+    case 42:
+      return "Getters (get prop()) and setters (set prop(val)) encapsulate object properties within ES6 classes. Getters intercept property read access to execute logic and return computed values, while setters intercept assignment writes to validate or transform incoming values before updating internal backing variables (conventionally prefixed with an underscore, e.g. _property).";
+
+    case 43:
+      return "JavaScript ES6 Modules enable code organization across separate files using export and import statements. Modules use named exports (export const fn = ...) for multiple functions/variables and export default for primary module fallbacks, importing them via import { fn } from './module.js' or import defaultFn from './module.js'.";
+
+    default:
+      return `${lesson.description} ${lesson.summaryNotes.join(" ")}`;
+  }
+}
+
