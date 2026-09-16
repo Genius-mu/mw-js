@@ -26,8 +26,8 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
   return (
     <div className="min-h-screen flex flex-col justify-between bg-[#000000] text-[#e2e2e2] relative bg-grid-pattern overflow-x-clip">
       {/* pxxl.app Style Floating Centered Fixed Glass Navigation Header */}
-      <div className="fixed top-3 left-0 right-0 z-50 px-4 flex justify-center w-full pointer-events-auto">
-        <header className="w-full max-w-4xl bg-[#0a0a0e]/60 backdrop-blur-2xl border border-white/12 rounded-[14px] px-5 py-2.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.65)] flex items-center justify-between gap-4 text-xs transition-all">
+      <div className="fixed top-3 left-0 right-0 z-50 px-3 sm:px-4 flex justify-center w-full pointer-events-auto">
+        <header className="w-full max-w-4xl bg-[#0a0a0e]/80 backdrop-blur-2xl border border-white/12 rounded-[14px] px-3.5 sm:px-5 py-2 sm:py-2.5 shadow-[0_8px_32px_0_rgba(0,0,0,0.65)] flex items-center justify-between gap-2 sm:gap-4 text-xs transition-all">
           {/* Brand Logo - Bulb Icon + CODA */}
           <Link href="/" className="flex items-center gap-2.5 no-underline group">
             <div className="w-8 h-8 rounded-xl bg-white/10 text-xl flex items-center justify-center border border-white/15 shadow-[0_0_15px_rgba(255,99,249,0.3)] group-hover:scale-110 transition-transform">
@@ -106,10 +106,10 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
       )}
 
       {/* Exact pxxl.app Style Footer */}
-      <footer className="border-t border-white/10 pt-20 pb-8 px-6 sm:px-12 lg:px-16 bg-[#000000] text-white relative overflow-hidden">
+      <footer className="border-t border-white/10 pt-12 sm:pt-20 pb-8 px-4 sm:px-12 lg:px-16 bg-[#000000] text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
           {/* Main Footer Row: Left Brand/Social + Right 3 Columns */}
-          <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-16">
+          <div className="flex flex-col lg:flex-row justify-between gap-10 lg:gap-16">
             {/* Left Side: Single-line text, 4 social icon boxes, copyright */}
             <div className="max-w-md">
               <p className="text-sm text-white/60 mb-8 leading-relaxed font-normal">
@@ -172,7 +172,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
             </div>
 
             {/* Right Side: Exactly 3 Columns (Links, Support, Legal) */}
-            <div className="grid grid-cols-3 gap-8 sm:gap-14 lg:gap-20">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-14 lg:gap-20">
               {/* Column 1: Links */}
               <div>
                 <h4 className="text-sm font-bold text-white mb-6 tracking-wide">
