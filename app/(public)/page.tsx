@@ -22,6 +22,7 @@ import ScrollStack, { ScrollStackItem } from "@/components/reactbits/ScrollStack
 import ScrollBlurSlide from "@/components/reactbits/ScrollBlurSlide";
 import ConnectModules from "@/components/ConnectModules";
 import GlassSurface from "@/components/reactbits/GlassSurface";
+import SpecularButton from "@/components/reactbits/SpecularButton";
 import {
   BasicsDataTypesVisual,
   ArraysLogicVisual,
@@ -186,63 +187,67 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
 
   return (
     <div className="space-y-36 sm:space-y-44 pb-36">
-      {/* 1. HERO SECTION (pxxl.app style with Fluid Glass card surface) */}
-      <section className="max-w-5xl mx-auto px-4">
-        <GlassSurface borderRadius={28} className="relative pt-16 sm:pt-24 md:pt-28 pb-14 sm:pb-20 md:pb-24 px-6 sm:px-10 text-center overflow-hidden group">
-          {/* Interactive Scrambled Text Hero Background - Pitch Black Normally, Gray Scramble on Hover */}
-          <div className="absolute inset-0 pointer-events-auto opacity-0 group-hover:opacity-75 transition-opacity duration-500 -z-10 flex flex-col justify-center items-center select-none overflow-hidden p-4">
-            <ScrambledText
-              radius={180}
-              duration={1.2}
-              speed={0.5}
-              scrambleChars=".:#@$%&*<>~/+=-_[]{}01"
-              className="text-[11px] sm:text-xs font-mono text-zinc-400 max-w-4xl leading-relaxed text-center px-4 tracking-wider"
+      {/* 1. HERO SECTION (Clean Dark Layout with SpecularButtons & Everywhere Scrambled Matrix) */}
+      <section className="relative pt-20 sm:pt-28 md:pt-36 pb-16 sm:pb-24 px-6 sm:px-10 max-w-6xl mx-auto text-center overflow-hidden bg-[#000000] rounded-3xl border border-white/10">
+        {/* Interactive Scrambled Text Everywhere in Hero Background */}
+        <div className="absolute inset-0 pointer-events-auto opacity-50 hover:opacity-90 transition-opacity duration-500 z-0 flex flex-col justify-center items-center select-none overflow-hidden p-4">
+          <ScrambledText
+            radius={220}
+            duration={1.2}
+            speed={0.5}
+            scrambleChars=".:#@$%&*<>~/+=-_[]{}01"
+            className="text-[11px] sm:text-xs font-mono text-zinc-300 max-w-5xl leading-relaxed text-center px-4 tracking-wider"
+          >
+            {HERO_SCRAMBLE_MATRIX}
+          </ScrambledText>
+        </div>
+
+        {/* Headline - Large, bold typography */}
+        <div className="relative z-10 mb-8">
+          <BlurText
+            text="Master Modern JavaScript Core & ES2026"
+            delay={70}
+            animateBy="words"
+            direction="top"
+            className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-tight"
+          />
+        </div>
+
+        {/* Subtitle */}
+        <p className="relative z-10 text-base sm:text-lg max-w-2xl mx-auto mb-12 font-normal leading-relaxed text-white/80">
+          Learn JavaScript step-by-step with structured micro-concepts, interactive MDN documentation guides, live in-browser terminal, and 2 hands-on projects per lesson.
+        </p>
+
+        {/* Action Buttons using SpecularButton */}
+        <div className="relative z-10 flex flex-row items-center justify-center gap-5">
+          <Link href={`/learn/day/${nextDay}`} className="no-underline">
+            <SpecularButton
+              size="lg"
+              radius={14}
+              tint="#ff63f9"
+              tintOpacity={0.9}
+              lineColor="#ffffff"
+              baseColor="#ff63f9"
+              textColor="#000000"
+              icon={<RocketOutlined />}
             >
-              {HERO_SCRAMBLE_MATRIX}
-            </ScrambledText>
-          </div>
-
-          {/* Soft Ambient Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[250px] bg-[#ff63f9]/5 blur-[140px] rounded-full pointer-events-none -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-
-          {/* Headline - Large, bold pxxl.app typography with Re-triggering Blur Animation */}
-          <div className="mb-8">
-            <BlurText
-              text="Master Modern JavaScript Core & ES2026"
-              delay={70}
-              animateBy="words"
-              direction="top"
-              className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-tight"
-            />
-          </div>
-
-          {/* Subtitle */}
-          <p className="text-base sm:text-lg max-w-2xl mx-auto mb-12 font-normal leading-relaxed text-white/70">
-            Learn JavaScript step-by-step with structured micro-concepts, interactive MDN documentation guides, live in-browser terminal, and 2 hands-on projects per lesson.
-          </p>
-
-          {/* Action Buttons */}
-          <div className="flex flex-row items-center justify-center gap-5">
-            <Link href={`/learn/day/${nextDay}`}>
-              <Button
-                type="primary"
-                size="large"
-                icon={<RocketOutlined />}
-                className="h-12 px-8 text-sm font-bold bg-[#ff63f9] text-black hover:bg-[#ff63f9]/90 border-none rounded-md shadow-[0_0_20px_rgba(255,99,249,0.35)] cursor-pointer"
-              >
-                Start Learning Now
-              </Button>
-            </Link>
-            <a href="#curriculum">
-              <Button
-                size="large"
-                className="h-12 px-8 text-sm font-bold rounded-md border border-white/20 bg-transparent text-white/80 hover:text-white hover:border-white/40 cursor-pointer"
-              >
-                View Curriculum
-              </Button>
-            </a>
-          </div>
-        </GlassSurface>
+              Start Learning Now
+            </SpecularButton>
+          </Link>
+          <a href="#curriculum" className="no-underline">
+            <SpecularButton
+              size="lg"
+              radius={14}
+              tint="#181824"
+              tintOpacity={0.8}
+              lineColor="#ffffff"
+              baseColor="#525252"
+              textColor="#ffffff"
+            >
+              View Curriculum
+            </SpecularButton>
+          </a>
+        </div>
       </section>
 
       {/* 2. SCROLLSTACK SECTION (Scroll-Triggered Stacking with Vertical Divider & Visuals) */}
