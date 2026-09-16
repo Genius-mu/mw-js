@@ -58,12 +58,14 @@ export default function LandingPage() {
     }
   ];
 
-  const HERO_SCRAMBLE_MATRIX = `// ECMASCRIPT 2026 ENGINE RUNTIME & JAVASCRIPT CORE PLATFORM
+  const HERO_SCRAMBLE_MATRIX = `// ECMASCRIPT 2026 V8 RUNTIME ENGINE & JAVASCRIPT CORE PLATFORM
 const RUNTIME = new V8Engine({ mode: 'DEVELOPER', asyncContext: true, jit: 'TURBOPAN' });
 async function initializeCurriculum() { return await ModuleLoader.import('/core/javascript'); }
 class ASTCompiler extends RuntimeEnvironment { parse(code) { return tokenize(code, { es2026: true }); } }
 const PROMISE_STREAM = new AsyncIterator({ buffer: 1024, concurrency: 'WORKER_POOL' });
-function benchmark(fn) { const t0 = performance.now(); fn(); return performance.now() - t0; }`;
+function benchmark(fn) { const t0 = performance.now(); fn(); return performance.now() - t0; }
+const MEMORY_HEAP = new WebAssembly.Memory({ initial: 256, maximum: 65536 });
+export const VECTOR_MAP = new Map([['type', 'primitive'], ['alloc', 'heap']]);`;
 
   const scrollStackSteps = [
     {
@@ -187,16 +189,16 @@ function benchmark(fn) { const t0 = performance.now(); fn(); return performance.
 
   return (
     <div className="space-y-36 sm:space-y-44 pb-36">
-      {/* 1. HERO SECTION (Clean Dark Layout with SpecularButtons & Everywhere Scrambled Matrix) */}
-      <section className="relative pt-20 sm:pt-28 md:pt-36 pb-16 sm:pb-24 px-6 sm:px-10 max-w-6xl mx-auto text-center overflow-hidden bg-[#000000] rounded-3xl border border-white/10">
-        {/* Interactive Scrambled Text Everywhere in Hero Background */}
-        <div className="absolute inset-0 pointer-events-auto opacity-50 hover:opacity-90 transition-opacity duration-500 z-0 flex flex-col justify-center items-center select-none overflow-hidden p-4">
+      {/* 1. HERO SECTION (No Card Container - Pure Floating Text with Gray Scramble Matrix Background) */}
+      <section className="relative pt-20 sm:pt-28 md:pt-36 pb-16 sm:pb-24 px-6 sm:px-10 max-w-6xl mx-auto text-center overflow-hidden">
+        {/* Interactive Scrambled Text Throughout Hero Section Background in Gray */}
+        <div className="absolute inset-0 pointer-events-auto opacity-75 hover:opacity-100 transition-opacity duration-500 z-0 flex flex-col justify-center items-center select-none overflow-hidden p-4">
           <ScrambledText
-            radius={220}
+            radius={250}
             duration={1.2}
-            speed={0.5}
+            speed={0.4}
             scrambleChars=".:#@$%&*<>~/+=-_[]{}01"
-            className="text-[11px] sm:text-xs font-mono text-zinc-300 max-w-5xl leading-relaxed text-center px-4 tracking-wider"
+            className="text-xs sm:text-sm font-mono text-gray-400 max-w-5xl leading-relaxed text-center px-4 tracking-widest"
           >
             {HERO_SCRAMBLE_MATRIX}
           </ScrambledText>
