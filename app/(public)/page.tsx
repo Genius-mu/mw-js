@@ -215,9 +215,8 @@ export const VECTOR_MAP = new Map([['type', 'primitive'], ['alloc', 'heap']]);`;
           />
         </div>
 
-        {/* Subtitle */}
         <p className="relative z-10 text-base sm:text-lg max-w-2xl mx-auto mb-12 font-normal leading-relaxed text-white/80">
-          Learn JavaScript step-by-step with structured micro-concepts, interactive MDN documentation guides, live in-browser terminal, and 2 hands-on projects per lesson.
+          Learn JavaScript step-by-step with structured micro-concepts, live in-browser terminal, and 2 hands-on projects per lesson.
         </p>
 
         {/* Action Buttons using SpecularButton */}

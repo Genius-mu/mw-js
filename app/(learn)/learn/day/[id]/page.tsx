@@ -244,27 +244,34 @@ export default function DayLearningPage() {
   return (
     <div className="space-y-8 sm:space-y-10 pb-16">
       {/* Header Banner */}
-      <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-6 sm:p-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-5 sm:p-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
           <div className="space-y-1.5">
-            <div className="flex items-center gap-2 mb-2">
-              <Tag color="rgba(255, 255, 255, 0.15)" className="font-semibold m-0 text-white border-none text-[11px] px-2.5 py-0.5">{lesson.module}</Tag>
-              <Tag color={isCompleted ? "rgba(255, 255, 255, 0.15)" : "#000000"} className="font-semibold m-0 border border-white/10 text-white/80 text-[11px] px-2.5 py-0.5">
-                {isCompleted ? <span className="flex items-center gap-1.5 text-white"><CheckCircleFilled /> Completed</span> : "In Progress"}
-              </Tag>
+            <div className="flex flex-wrap items-center gap-2.5 mb-2">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#ff63f9]/10 text-[#ff63f9] border border-[#ff63f9]/30 shadow-[0_0_12px_rgba(255,99,249,0.15)]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#ff63f9] animate-pulse" />
+                {lesson.module}
+              </span>
+              <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${
+                isCompleted 
+                  ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30" 
+                  : "bg-amber-500/10 text-amber-400 border border-amber-500/30"
+              }`}>
+                {isCompleted ? <><CheckCircleFilled /> Completed</> : "In Progress"}
+              </span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight m-0 text-white leading-tight">
+            <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight m-0 text-white leading-tight">
               Day {lesson.day}: {lesson.title}
             </h1>
-            <p className="text-sm mt-1 m-0 text-white/70 leading-relaxed max-w-2xl">
+            <p className="text-xs sm:text-sm mt-1 m-0 text-white/70 leading-relaxed max-w-2xl">
               {lesson.description}
             </p>
           </div>
 
-          <div className="flex items-center gap-3 shrink-0 pt-2 md:pt-0">
+          <div className="flex items-center gap-3 shrink-0 pt-1 md:pt-0">
             <SpecularButton
-              size="md"
-              radius={12}
+              size="sm"
+              radius={10}
               tint={isCompleted ? "#181824" : "#ff63f9"}
               tintOpacity={0.9}
               lineColor="#ffffff"
@@ -280,57 +287,49 @@ export default function DayLearningPage() {
       </div>
 
       {/* Main Grid: Concept Blueprint + Sidebar Specs */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Concept Deep Dive Card (Col-span 2) */}
         <div className="lg:col-span-2">
-          <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-6 sm:p-8 space-y-6 relative overflow-hidden">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-5 sm:p-6 space-y-5 relative overflow-hidden">
+            <div className="flex items-center justify-between border-b border-white/10 pb-3.5">
               <div className="flex items-center gap-2.5">
-                <ThunderboltOutlined className="text-[#ff63f9] text-lg" />
-                <span className="font-extrabold text-base text-white">Concept Architecture & Code Blueprint</span>
+                <ThunderboltOutlined className="text-[#ff63f9] text-base" />
+                <span className="font-extrabold text-sm sm:text-base text-white">Concept Architecture & Code Blueprint</span>
               </div>
-              <Tag className="bg-white/10 text-white/90 border-none text-[11px] px-2 py-0.5 font-mono">ES2026 Core</Tag>
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-white/10 text-white/90 border border-white/10">ES2026 Core</span>
             </div>
 
-            <p className="text-sm text-white/80 leading-relaxed m-0">
+            <p className="text-xs sm:text-sm text-white/80 leading-relaxed m-0">
               {lesson.description}
             </p>
 
             {/* Code Snippet Box */}
             <div className="relative group">
-              <pre className="p-5 rounded-xl bg-[#000000] text-white/90 font-mono text-xs sm:text-sm overflow-x-auto border border-white/10 leading-relaxed">
+              <pre className="p-4 rounded-xl bg-[#000000] text-white/90 font-mono text-xs sm:text-sm overflow-x-auto border border-white/10 leading-relaxed">
                 <code>{lesson.codeSnippet}</code>
               </pre>
               <Button
                 size="small"
                 icon={<CopyOutlined />}
                 onClick={() => handleCopySnippet(lesson.codeSnippet, "main-snippet")}
-                className="absolute top-4 right-4 text-[11px] font-medium bg-white/10 hover:bg-white/20 text-white border-none rounded-md cursor-pointer px-3 py-1"
+                className="absolute top-3.5 right-3.5 text-[11px] font-medium bg-white/10 hover:bg-white/20 text-white border-none rounded-md cursor-pointer px-2.5 py-0.5"
               >
                 {copiedId === "main-snippet" ? "Copied!" : "Copy"}
               </Button>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-2 text-xs text-white/60 border-t border-white/10">
+            <div className="flex items-center justify-between gap-3 pt-2 text-xs text-white/60 border-t border-white/10">
               <span className="flex items-center gap-2 text-xs text-white/80">
                 <BulbOutlined className="text-[#ff63f9] text-sm shrink-0" />
                 <span><strong>Key takeaway:</strong> {lesson.summaryNotes[0]}</span>
               </span>
-              <a
-                href={lesson.docsLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="no-underline text-white hover:text-[#ff63f9] transition-colors text-xs font-semibold flex items-center gap-1.5 shrink-0"
-              >
-                MDN Documentation <ExportOutlined />
-              </a>
             </div>
           </div>
         </div>
 
         {/* Quick Lesson Specs Sidebar (Col-span 1) */}
         <div>
-          <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-6 sm:p-7 space-y-6">
+          <div className="bg-[#0c0c14] border border-white/10 rounded-2xl p-5 sm:p-6 space-y-5">
             <span className="font-extrabold text-sm flex items-center gap-2.5 text-white border-b border-white/10 pb-3">
               <BookOutlined className="text-[#ff63f9]" /> Lesson Specs
             </span>
@@ -345,24 +344,10 @@ export default function DayLearningPage() {
                 <div className="font-medium text-xs text-white/80 mt-1">{lesson.module}</div>
               </div>
 
-              <div>
-                <span className="text-white/40 font-semibold uppercase text-[10px] tracking-wider">Documentation Reference:</span>
-                <div className="mt-2">
-                  <a
-                    href={lesson.docsLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="no-underline inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-white/10 text-white font-semibold text-xs hover:bg-white/20 transition-colors border border-white/10"
-                  >
-                    MDN Docs <ExportOutlined />
-                  </a>
-                </div>
-              </div>
-
-              <div className="pt-3 border-t border-white/10">
+              <div className="pt-2 border-t border-white/10">
                 <SpecularButton
                   size="md"
-                  radius={12}
+                  radius={10}
                   tint="#ff63f9"
                   tintOpacity={0.9}
                   lineColor="#ffffff"
@@ -604,28 +589,6 @@ export default function DayLearningPage() {
                     </ul>
                   </div>
 
-                  <Alert
-                    type="info"
-                    showIcon
-                    icon={<BookOutlined className="text-[#ff63f9]" />}
-                    message={<span className="font-bold text-xs sm:text-sm text-white">Official MDN Documentation Guide</span>}
-                    description={
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-2">
-                        <span className="text-xs text-white/70 leading-relaxed">
-                          Deepen your knowledge by exploring full documentation, parameters, and code examples.
-                        </span>
-                        <a
-                          href={lesson.docsLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="no-underline inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-black font-semibold text-xs hover:bg-white/90 transition-colors shrink-0 shadow-sm"
-                        >
-                          Open MDN Documentation <ExportOutlined />
-                        </a>
-                      </div>
-                    }
-                    className="bg-[#000000] border-white/10 p-4 sm:p-5 rounded-xl"
-                  />
                 </div>
               )
             },

@@ -116,13 +116,11 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
                 Develop with your favorite tools. Master modern JavaScript, instantly.
               </p>
 
-              {/* 4 Social Media Boxes exactly matching pxxl.app */}
+              {/* 4 Social Media Boxes */}
               <div className="flex items-center gap-3 mb-8">
                 {/* Facebook */}
                 <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#"
                   aria-label="Facebook"
                   className="w-10 h-10 rounded-lg bg-[#0c0c10] border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:border-white/30 transition-all no-underline"
                 >
@@ -133,9 +131,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
 
                 {/* Instagram */}
                 <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#"
                   aria-label="Instagram"
                   className="w-10 h-10 rounded-lg bg-[#0c0c10] border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:border-white/30 transition-all no-underline"
                 >
@@ -146,9 +142,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
 
                 {/* TikTok */}
                 <a
-                  href="https://tiktok.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#"
                   aria-label="TikTok"
                   className="w-10 h-10 rounded-lg bg-[#0c0c10] border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:border-white/30 transition-all no-underline"
                 >
@@ -159,9 +153,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
 
                 {/* X (Twitter) */}
                 <a
-                  href="https://x.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#"
                   aria-label="X"
                   className="w-10 h-10 rounded-lg bg-[#0c0c10] border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:border-white/30 transition-all no-underline"
                 >
