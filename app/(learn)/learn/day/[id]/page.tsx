@@ -293,7 +293,7 @@ export default function DayLearningPage() {
             </div>
 
             <p className="text-sm text-white/80 leading-relaxed m-0">
-              {lesson.description} Below is the standard syntax structure used in modern JavaScript development:
+              {lesson.description}
             </p>
 
             {/* Code Snippet Box */}
@@ -304,10 +304,10 @@ export default function DayLearningPage() {
               <Button
                 size="small"
                 icon={<CopyOutlined />}
-                onClick={() => handleCopySnippet(lesson.codeSnippet)}
+                onClick={() => handleCopySnippet(lesson.codeSnippet, "main-snippet")}
                 className="absolute top-4 right-4 text-[11px] font-medium bg-white/10 hover:bg-white/20 text-white border-none rounded-md cursor-pointer px-3 py-1"
               >
-                {copied ? "Copied" : "Copy"}
+                {copiedId === "main-snippet" ? "Copied!" : "Copy"}
               </Button>
             </div>
 
@@ -385,10 +385,10 @@ export default function DayLearningPage() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
           <div>
             <h2 className="text-lg font-extrabold text-white flex items-center gap-2.5 m-0">
-              <FolderOpenOutlined className="text-[#ff63f9]" /> Real-World Hands-On Projects (2 Projects for Day {lesson.day})
+              <FolderOpenOutlined className="text-[#ff63f9]" /> Real-World Projects (Day {lesson.day})
             </h2>
             <p className="text-xs text-white/60 m-0 mt-1 leading-relaxed">
-              Practice building full application modules using today's core concept.
+              Practice today's core concept with hands-on examples.
             </p>
           </div>
           <Tag color="rgba(255, 99, 249, 0.15)" className="text-[#ff63f9] border-none font-bold text-xs px-3 py-1 self-start sm:self-auto">
@@ -443,9 +443,9 @@ export default function DayLearningPage() {
                   baseColor="#333344"
                   textColor="#ffffff"
                   icon={<CopyOutlined />}
-                  onClick={() => handleCopySnippet(proj.code)}
+                  onClick={() => handleCopySnippet(proj.code, `proj-${idx}`)}
                 >
-                  Copy Code
+                  {copiedId === `proj-${idx}` ? "Copied!" : "Copy Code"}
                 </SpecularButton>
               </div>
             </div>
