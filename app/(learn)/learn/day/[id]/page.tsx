@@ -37,6 +37,7 @@ import {
 import { CURRICULUM_DATA, LessonDay, LessonProject } from "@/lib/curriculum";
 import { useLearning } from "@/context/LearningContext";
 import GlassSurface from "@/components/reactbits/GlassSurface";
+import SpecularButton from "@/components/reactbits/SpecularButton";
 
 const { TextArea } = Input;
 
@@ -239,15 +240,19 @@ FeatureEngine.init();`,
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
-            <Button
-              type={isCompleted ? "default" : "primary"}
-              size="medium"
+            <SpecularButton
+              size="md"
+              radius={10}
+              tint={isCompleted ? "#181824" : "#ff63f9"}
+              tintOpacity={0.9}
+              lineColor="#ffffff"
+              baseColor={isCompleted ? "#404050" : "#ff63f9"}
+              textColor={isCompleted ? "#ffffff" : "#000000"}
               icon={isCompleted ? <CheckCircleFilled className="text-white" /> : <CheckCircleOutlined />}
               onClick={handleToggleComplete}
-              className={!isCompleted ? "bg-white text-black hover:bg-white/90 border-none font-semibold text-xs rounded-[7px] cursor-pointer" : "font-semibold border-white/10 text-white/80 rounded-[7px] text-xs cursor-pointer"}
             >
               {isCompleted ? "Marked Completed" : "Mark as Completed"}
-            </Button>
+            </SpecularButton>
           </div>
         </div>
       </GlassSurface>
@@ -330,15 +335,20 @@ FeatureEngine.init();`,
               </div>
 
               <div className="pt-2 border-t border-white/10">
-                <Button
-                  block
-                  type="primary"
+                <SpecularButton
+                  size="md"
+                  radius={10}
+                  tint="#ff63f9"
+                  tintOpacity={0.9}
+                  lineColor="#ffffff"
+                  baseColor="#ff63f9"
+                  textColor="#000000"
                   icon={<RocketOutlined />}
                   onClick={handleNextDay}
-                  className="bg-white text-black hover:bg-white/90 border-none font-semibold h-9 text-xs rounded-[7px] shadow-sm cursor-pointer"
+                  className="w-full justify-center"
                 >
                   {dayId < totalDays ? "Complete & Go to Next Day" : "Claim Certificate 🎉"}
-                </Button>
+                </SpecularButton>
               </div>
             </div>
           </GlassSurface>
@@ -383,26 +393,35 @@ FeatureEngine.init();`,
               </div>
 
               <div className="flex items-center gap-2 pt-2 border-t border-white/10">
-                <Button
-                  size="small"
-                  type="primary"
+                <SpecularButton
+                  size="sm"
+                  radius={8}
+                  tint="#ff63f9"
+                  tintOpacity={0.85}
+                  lineColor="#ffffff"
+                  baseColor="#ff63f9"
+                  textColor="#000000"
                   icon={<PlayCircleOutlined />}
                   onClick={() => {
                     setUserCode(proj.code);
                     handleRunCode(proj.code);
                   }}
-                  className="bg-white text-black hover:bg-white/90 border-none font-semibold text-[11px] rounded-[5px] cursor-pointer"
                 >
                   Run & Test Project #{idx + 1}
-                </Button>
-                <Button
-                  size="small"
+                </SpecularButton>
+                <SpecularButton
+                  size="sm"
+                  radius={8}
+                  tint="#181824"
+                  tintOpacity={0.8}
+                  lineColor="#ffffff"
+                  baseColor="#333344"
+                  textColor="#ffffff"
                   icon={<CopyOutlined />}
                   onClick={() => handleCopySnippet(proj.code)}
-                  className="bg-[#08080c] text-white/80 border border-white/10 text-[11px] rounded-[5px] cursor-pointer"
                 >
                   Copy Code
-                </Button>
+                </SpecularButton>
               </div>
             </GlassSurface>
           ))}
@@ -478,21 +497,32 @@ FeatureEngine.init();`,
                       )}
 
                       <div className="flex items-center gap-2.5">
-                        <Button
-                          type="primary"
+                        <SpecularButton
+                          size="md"
+                          radius={10}
+                          tint="#ff63f9"
+                          tintOpacity={0.9}
+                          lineColor="#ffffff"
+                          baseColor="#ff63f9"
+                          textColor="#000000"
                           icon={<PlayCircleOutlined />}
                           onClick={() => handleRunCode()}
-                          className="bg-white text-black hover:bg-white/90 border-none font-semibold h-8 px-4 text-xs rounded-[7px] shadow-sm cursor-pointer"
                         >
                           Run Code & Test Output
-                        </Button>
-                        <Button
+                        </SpecularButton>
+                        <SpecularButton
+                          size="md"
+                          radius={10}
+                          tint="#181824"
+                          tintOpacity={0.8}
+                          lineColor="#ffffff"
+                          baseColor="#333344"
+                          textColor="#ffffff"
                           icon={<CodeOutlined />}
                           onClick={() => setSolutionModalOpen(true)}
-                          className="text-xs font-medium bg-[#000000] text-white/80 border border-white/10 rounded-[7px] h-8 cursor-pointer"
                         >
                           View Solution
-                        </Button>
+                        </SpecularButton>
                       </div>
                     </div>
 
@@ -587,14 +617,19 @@ FeatureEngine.init();`,
                       </h3>
                       <p className="text-[11px] text-white/50 m-0">Write down key observations or code snippets. Saved to browser localStorage.</p>
                     </div>
-                    <Button
-                      type="primary"
+                    <SpecularButton
+                      size="sm"
+                      radius={8}
+                      tint="#ff63f9"
+                      tintOpacity={0.9}
+                      lineColor="#ffffff"
+                      baseColor="#ff63f9"
+                      textColor="#000000"
                       icon={<SaveOutlined />}
                       onClick={handleSaveNote}
-                      className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs h-8 rounded-[7px] shadow-sm cursor-pointer"
                     >
                       {noteSaved ? "Saved!" : "Save Notes"}
-                    </Button>
+                    </SpecularButton>
                   </div>
 
                   <TextArea
@@ -614,29 +649,38 @@ FeatureEngine.init();`,
       {/* Navigation Footer wrapped in GlassSurface */}
       <GlassSurface borderRadius={14} className="p-3.5">
         <div className="flex items-center justify-between gap-4">
-          <Button
-            size="medium"
-            icon={<LeftOutlined />}
+          <SpecularButton
+            size="md"
+            radius={10}
             disabled={dayId <= 1}
+            tint="#181824"
+            tintOpacity={0.8}
+            lineColor="#ffffff"
+            baseColor="#333344"
+            textColor="#ffffff"
+            icon={<LeftOutlined />}
             onClick={handlePrevDay}
-            className="font-medium bg-[#000000] text-white/80 border border-white/10 rounded-[7px] text-xs disabled:opacity-30 cursor-pointer"
           >
             Previous Day
-          </Button>
+          </SpecularButton>
 
           <div className="text-xs text-white/50 font-medium hidden sm:block">
             Day {dayId} of {totalDays}
           </div>
 
-          <Button
-            type="primary"
-            size="medium"
+          <SpecularButton
+            size="md"
+            radius={10}
+            tint="#ff63f9"
+            tintOpacity={0.9}
+            lineColor="#ffffff"
+            baseColor="#ff63f9"
+            textColor="#000000"
             icon={<RightOutlined />}
             onClick={handleNextDay}
-            className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs rounded-[7px] shadow-sm cursor-pointer"
           >
             {dayId < totalDays ? "Next Day" : "Claim Certificate 🎉"}
-          </Button>
+          </SpecularButton>
         </div>
       </GlassSurface>
 

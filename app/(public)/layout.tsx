@@ -52,16 +52,21 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
             </a>
           </nav>
 
-          {/* Right Action Button - White with Purple Glitch Bottom Shadow, turns purple on hover */}
+          {/* Right Action Button using SpecularButton */}
           <div className="flex items-center gap-3">
             <Link href="/login" className="no-underline">
-              <button
-                type="button"
-                className="bg-white text-black font-extrabold text-xs h-8 px-4 rounded-[6px] shadow-[0_4px_0_0_#ff63f9] hover:bg-[#ff63f9] hover:text-black hover:shadow-[0_2px_0_0_#ffffff] transition-all transform active:translate-y-1 active:shadow-none flex items-center gap-1.5 cursor-pointer border-none"
+              <SpecularButton
+                size="sm"
+                radius={8}
+                tint="#ffffff"
+                tintOpacity={0.9}
+                lineColor="#ff63f9"
+                baseColor="#ffffff"
+                textColor="#000000"
+                icon={<UserOutlined />}
               >
-                <UserOutlined />
-                <span>Sign In</span>
-              </button>
+                Sign In
+              </SpecularButton>
             </Link>
           </div>
         </header>

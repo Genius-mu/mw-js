@@ -3,10 +3,11 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Form, Input, Button, Divider } from "antd";
+import { Form, Input, Divider } from "antd";
 import { MailOutlined, LockOutlined, UserOutlined, RocketOutlined } from "@ant-design/icons";
 import { useLearning } from "@/context/LearningContext";
 import GlassSurface from "@/components/reactbits/GlassSurface";
+import SpecularButton from "@/components/reactbits/SpecularButton";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -68,16 +69,21 @@ export default function LoginPage() {
         </Form.Item>
 
         <Form.Item className="mb-2">
-          <Button
-            type="primary"
-            htmlType="submit"
-            loading={loading}
-            block
+          <SpecularButton
+            type="submit"
+            disabled={loading}
+            size="lg"
+            radius={10}
+            tint="#ff63f9"
+            tintOpacity={0.9}
+            lineColor="#ffffff"
+            baseColor="#ff63f9"
+            textColor="#000000"
             icon={<RocketOutlined />}
-            className="bg-white text-black hover:bg-white/90 border-none font-semibold text-xs h-10 rounded-md cursor-pointer"
+            className="w-full justify-center"
           >
-            Sign In & Continue Learning
-          </Button>
+            {loading ? "Signing In..." : "Sign In & Continue Learning"}
+          </SpecularButton>
         </Form.Item>
       </Form>
 
@@ -85,15 +91,21 @@ export default function LoginPage() {
         OR
       </Divider>
 
-      <Button
-        block
-        size="large"
+      <SpecularButton
+        type="button"
+        disabled={loading}
         onClick={handleDemoLogin}
-        loading={loading}
-        className="font-semibold text-xs h-10 bg-[#000000] text-white/80 border border-white/10 hover:border-white/30 hover:text-white rounded-md cursor-pointer"
+        size="md"
+        radius={10}
+        tint="#181824"
+        tintOpacity={0.8}
+        lineColor="#ff63f9"
+        baseColor="#333344"
+        textColor="#ffffff"
+        className="w-full justify-center"
       >
         ⚡ Instant Quick Demo Login
-      </Button>
+      </SpecularButton>
 
       <div className="text-center mt-5 text-xs text-white/50">
         Back to <Link href="/" className="text-white/80 hover:text-white font-medium no-underline">Home Landing Page</Link>
